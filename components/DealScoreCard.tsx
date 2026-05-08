@@ -230,6 +230,10 @@ export function DealScoreCard({
     result.priceDifference === 0
       ? `At ${benchmarkLabel.toLowerCase()}`
       : `${formatCurrency(priceGap)} ${result.priceDifference > 0 ? "over" : "under"} ${benchmarkLabel.toLowerCase()}`;
+  const offerLabel =
+    result.suggestedOfferLow === result.suggestedOfferHigh
+      ? formatCurrency(result.suggestedOfferLow)
+      : `${formatCurrency(result.suggestedOfferLow)} - ${formatCurrency(result.suggestedOfferHigh)}`;
   const sellerQuestions = product?.sellerQuestions.slice(0, 4) ?? getFallbackQuestions(result);
   const checklistItems = product?.buyingChecklist.slice(0, 4) ?? [
     "Verify ownership before meeting",
@@ -380,7 +384,7 @@ export function DealScoreCard({
             {isRetailMode ? "Target buy range" : "Suggested offer"}
           </p>
           <p className="mt-1 text-3xl font-black text-ink">
-            {formatCurrency(result.suggestedOfferLow)} - {formatCurrency(result.suggestedOfferHigh)}
+            {offerLabel}
           </p>
           <p className="mt-2 text-sm leading-6 text-stone-600">
             {isRetailMode
@@ -477,6 +481,23 @@ export function DealScoreCard({
 
           <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
             <h3 className="flex items-center gap-2 font-bold text-ink">
+              <ClipboardCheck className="h-4 w-4 text-mint" aria-hidden />
+              Next steps before buying
+            </h3>
+            <ol className="mt-3 space-y-2">
+              {result.nextSteps.map((step, index) => (
+                <li key={step} className="flex gap-3 rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-bold text-white">
+                    {index + 1}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
+            <h3 className="flex items-center gap-2 font-bold text-ink">
               <CheckCircle2 className="h-4 w-4 text-mint" aria-hidden />
               Trust signals
             </h3>
@@ -497,16 +518,6 @@ export function DealScoreCard({
               </p>
             )}
           </div>
-
-          {context ? (
-            <AlternativePanel
-              title="Better resale moves"
-              description="Used-side replacement actions if this link is overpriced, risky, or not clearly better than the market."
-              emptyText="No clearly better resale move found in the current mock catalog."
-              alternatives={context.resaleAlternatives}
-              icon={Target}
-            />
-          ) : null}
         </div>
 
         <div className="space-y-4">
@@ -520,22 +531,15 @@ export function DealScoreCard({
             />
           ) : null}
 
-          <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
-            <h3 className="flex items-center gap-2 font-bold text-ink">
-              <ClipboardCheck className="h-4 w-4 text-mint" aria-hidden />
-              Next steps before buying
-            </h3>
-            <ol className="mt-3 space-y-2">
-              {result.nextSteps.map((step, index) => (
-                <li key={step} className="flex gap-3 rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-bold text-white">
-                    {index + 1}
-                  </span>
-                  <span>{step}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
+          {context ? (
+            <AlternativePanel
+              title="Better resale moves"
+              description="Used-side replacement actions if this link is overpriced, risky, or not clearly better than the market."
+              emptyText="No clearly better resale move found in the current mock catalog."
+              alternatives={context.resaleAlternatives}
+              icon={Target}
+            />
+          ) : null}
 
           <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
             <div className="flex items-start justify-between gap-3">

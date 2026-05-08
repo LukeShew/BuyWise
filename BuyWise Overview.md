@@ -466,10 +466,12 @@ Risk level also has its own visual treatment:
 - Medium: amber.
 - High: red.
 
-If link context exists, the result card shows two alternatives panels:
+If link context exists, the result card shows two alternatives panels together in the right-side result column:
 
-- Better resale moves: used-side replacement actions if the pasted link is overpriced, risky, or not clearly better than the market.
 - Better retail moves: new-product fallbacks to check when warranty, returns, or a close retail price may beat the pasted link.
+- Better resale moves: used-side replacement actions if the pasted link is overpriced, risky, or not clearly better than the market.
+
+Next steps now sit in the left-side result column with the score, risk, red flags, and trust signals so the two alternatives panels stay grouped.
 
 Each alternative card shows:
 
@@ -761,6 +763,8 @@ If the asking price is below fair value, the suggested offer range is usually ne
 If the asking price is above fair value, the suggested offer range is based on fair value, usually around 85 percent to 95 percent of fair value, bounded by used low and used high.
 
 If condition is poor, the base offer range is lower.
+
+If the suggested offer low and high are the same number, the UI shows one suggested offer instead of repeating the same number as a range.
 
 ### Negotiation Tip
 
