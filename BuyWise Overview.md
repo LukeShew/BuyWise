@@ -142,8 +142,9 @@ If the user fills any draft field and submits the homepage form, the draft is sa
 The homepage also includes:
 
 - A section explaining what BuyWise returns: trap detection, price verdict, retail/resale alternatives, and buyer next steps.
-- Popular buyer guides with product cards for MacBook Air M1, Sony A6400, and Trek FX 3.
-- An example "Risky purchase" verdict panel with fair used price, offer range, and comparison reminders.
+- An "Example Products" section with four evenly spaced product cards: Sony A6400, MacBook Air M1, Trek FX 3, and Dell UltraSharp U2720Q.
+- A right-aligned Browse all products link in that product section.
+- A horizontal example "Risky purchase" verdict strip below the product cards with fair used price, offer range, and comparison reminders.
 
 The homepage intentionally feels like a practical buyer tool, not a generic SaaS landing page.
 

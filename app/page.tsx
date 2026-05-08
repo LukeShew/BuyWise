@@ -47,7 +47,7 @@ const verdictFeatures = [
 
 export default function LandingPage() {
   const featured = mockProducts.filter((product) =>
-    ["macbook-air-m1-2020", "sony-a6400-2019", "trek-fx-3-2022"].includes(product.id)
+    ["macbook-air-m1-2020", "sony-a6400-2019", "trek-fx-3-2022", "dell-ultrasharp-u2720q-2020"].includes(product.id)
   );
 
   return (
@@ -107,57 +107,60 @@ export default function LandingPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-6 lg:grid-cols-[1fr_360px] lg:items-start">
-          <div>
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="text-sm font-semibold text-mint">Popular buyer guides</p>
-                <h2 className="mt-2 text-3xl font-black text-ink">Useful reference prices</h2>
-              </div>
-              <Link
-                href="/search"
-                prefetch={false}
-                className="focus-ring inline-flex items-center gap-2 rounded-lg font-semibold text-ink hover:text-mint"
-              >
-                <Search className="h-4 w-4" aria-hidden />
-                Browse all products
-              </Link>
+        <div>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold text-mint">Popular buyer guides</p>
+              <h2 className="mt-2 text-3xl font-black text-ink">Example Products</h2>
             </div>
-            <div className="mt-6 grid gap-5 lg:grid-cols-3">
-              {featured.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            <Link
+              href="/search"
+              prefetch={false}
+              className="focus-ring inline-flex items-center gap-2 rounded-lg font-semibold text-ink hover:text-mint sm:ml-auto"
+            >
+              <Search className="h-4 w-4" aria-hidden />
+              Browse all products
+            </Link>
           </div>
 
-          <aside className="rounded-lg border border-stone-200 bg-ink p-5 text-white shadow-soft">
-            <div className="flex items-start gap-3">
-              <Target className="mt-1 h-5 w-5 text-mint" aria-hidden />
-              <div>
-                <p className="text-sm font-semibold text-mint">Example verdict</p>
-                <h3 className="mt-1 text-2xl font-black">Risky purchase</h3>
-              </div>
-            </div>
-            <p className="mt-4 text-sm leading-6 text-stone-200">
-              Cheap enough to be interesting, but the seller has not shown proof. Ask for a working video, serial number, and public meetup before making an offer.
-            </p>
-            <div className="mt-5 grid grid-cols-2 gap-3">
-              <div className="rounded-lg bg-white/10 p-3">
-                <p className="text-xs text-stone-300">Fair used price</p>
-                <p className="mt-1 text-lg font-black">{formatCurrency(525)}</p>
-              </div>
-              <div className="rounded-lg bg-white/10 p-3">
-                <p className="text-xs text-stone-300">Offer range</p>
-                <p className="mt-1 text-lg font-black">$390-$410</p>
-              </div>
-            </div>
-            <div className="mt-5 space-y-2">
-              {["No receipt mentioned", "Check used alternatives", "Compare retail MSRP"].map((item) => (
-                <div key={item} className="flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2 text-sm font-semibold">
-                  <ClipboardCheck className="h-4 w-4 text-mint" aria-hidden />
-                  {item}
+          <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {featured.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+
+          <aside className="mt-6 rounded-lg border border-stone-200 bg-ink p-5 text-white shadow-soft">
+            <div className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr_1fr] lg:items-center">
+              <div className="flex items-start gap-3">
+                <Target className="mt-1 h-5 w-5 shrink-0 text-mint" aria-hidden />
+                <div>
+                  <p className="text-sm font-semibold text-mint">Example verdict</p>
+                  <h3 className="mt-1 text-2xl font-black">Risky purchase</h3>
+                  <p className="mt-3 text-sm leading-6 text-stone-200">
+                    Cheap enough to be interesting, but the seller has not shown proof. Ask for a working video, serial number, and public meetup before making an offer.
+                  </p>
                 </div>
-              ))}
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="rounded-lg bg-white/10 p-3">
+                  <p className="text-xs text-stone-300">Fair used price</p>
+                  <p className="mt-1 text-lg font-black">{formatCurrency(525)}</p>
+                </div>
+                <div className="rounded-lg bg-white/10 p-3">
+                  <p className="text-xs text-stone-300">Offer range</p>
+                  <p className="mt-1 text-lg font-black">$390-$410</p>
+                </div>
+              </div>
+
+              <div className="grid gap-2">
+                {["No receipt mentioned", "Check used alternatives", "Compare retail MSRP"].map((item) => (
+                  <div key={item} className="flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2 text-sm font-semibold">
+                    <ClipboardCheck className="h-4 w-4 shrink-0 text-mint" aria-hidden />
+                    {item}
+                  </div>
+                ))}
+              </div>
             </div>
           </aside>
         </div>

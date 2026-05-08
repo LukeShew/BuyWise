@@ -143,7 +143,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
 endobj
 12 0 obj
-<< /Length 3330 >>
+<< /Length 3449 >>
 stream
 BT /F1 10 Tf 54 738.00 Td (- Listing or product link.) Tj ET
 BT /F1 10 Tf 54 722.00 Td (- Link type: resale listing or retail bargain.) Tj ET
@@ -167,19 +167,19 @@ BT /F1 10 Tf 54 401.00 Td (stored.) Tj ET
 BT /F1 10 Tf 54 378.00 Td (The homepage also includes:) Tj ET
 BT /F1 10 Tf 54 355.00 Td (- A section explaining what BuyWise returns: trap detection, price verdict, retail/resale) Tj ET
 BT /F1 10 Tf 54 339.00 Td (  alternatives, and buyer next steps.) Tj ET
-BT /F1 10 Tf 54 323.00 Td (- Popular buyer guides with product cards for MacBook Air M1, Sony A6400, and Trek FX 3.) Tj ET
-BT /F1 10 Tf 54 307.00 Td (- An example "Risky purchase" verdict panel with fair used price, offer range, and comparison) Tj ET
-BT /F1 10 Tf 54 291.00 Td (  reminders.) Tj ET
-BT /F1 10 Tf 54 269.00 Td (The homepage intentionally feels like a practical buyer tool, not a generic SaaS landing page.) Tj ET
-BT /F2 15 Tf 54 234.00 Td (Full Analyzer Page) Tj ET
-BT /F1 10 Tf 54 204.00 Td (The `/submit` page is the full analyzer step behind the homepage flow. It is no longer a main) Tj ET
-BT /F1 10 Tf 54 187.00 Td (navbar destination because the homepage is the primary Analyze Listing surface.) Tj ET
-BT /F1 10 Tf 54 164.00 Td (Its purpose is to let a user review auto-filled link details, add anything missing, and get a) Tj ET
-BT /F1 10 Tf 54 147.00 Td (practical buyer verdict.) Tj ET
-BT /F1 10 Tf 54 124.00 Td (The page tells the user to paste:) Tj ET
-BT /F1 10 Tf 54 101.00 Td (- Listing or product link.) Tj ET
-BT /F1 10 Tf 54 85.00 Td (- Link price.) Tj ET
-BT /F1 10 Tf 54 69.00 Td (- Product or model.) Tj ET
+BT /F1 10 Tf 54 323.00 Td (- An "Example Products" section with four evenly spaced product cards: Sony A6400, MacBook Air) Tj ET
+BT /F1 10 Tf 54 307.00 Td (  M1, Trek FX 3, and Dell UltraSharp U2720Q.) Tj ET
+BT /F1 10 Tf 54 291.00 Td (- A right-aligned Browse all products link in that product section.) Tj ET
+BT /F1 10 Tf 54 275.00 Td (- A horizontal example "Risky purchase" verdict strip below the product cards with fair used) Tj ET
+BT /F1 10 Tf 54 259.00 Td (  price, offer range, and comparison reminders.) Tj ET
+BT /F1 10 Tf 54 237.00 Td (The homepage intentionally feels like a practical buyer tool, not a generic SaaS landing page.) Tj ET
+BT /F2 15 Tf 54 202.00 Td (Full Analyzer Page) Tj ET
+BT /F1 10 Tf 54 172.00 Td (The `/submit` page is the full analyzer step behind the homepage flow. It is no longer a main) Tj ET
+BT /F1 10 Tf 54 155.00 Td (navbar destination because the homepage is the primary Analyze Listing surface.) Tj ET
+BT /F1 10 Tf 54 132.00 Td (Its purpose is to let a user review auto-filled link details, add anything missing, and get a) Tj ET
+BT /F1 10 Tf 54 115.00 Td (practical buyer verdict.) Tj ET
+BT /F1 10 Tf 54 92.00 Td (The page tells the user to paste:) Tj ET
+BT /F1 10 Tf 54 69.00 Td (- Listing or product link.) Tj ET
 endstream
 endobj
 13 0 obj
@@ -188,664 +188,664 @@ endobj
 14 0 obj
 << /Length 2632 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Link type: resale listing or retail bargain.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- Description or page details.) Tj ET
-BT /F1 10 Tf 54 706.00 Td (- Marketplace/source.) Tj ET
-BT /F1 10 Tf 54 690.00 Td (- Seller replies or extra deal notes.) Tj ET
-BT /F1 10 Tf 54 674.00 Td (- Condition or deal state.) Tj ET
-BT /F1 10 Tf 54 658.00 Td (- Location if available.) Tj ET
-BT /F1 10 Tf 54 636.00 Td (The page returns:) Tj ET
-BT /F1 10 Tf 54 613.00 Td (- A verdict.) Tj ET
-BT /F1 10 Tf 54 597.00 Td (- Red flags.) Tj ET
-BT /F1 10 Tf 54 581.00 Td (- Suggested offer range for resale links or target buy range for retail links.) Tj ET
-BT /F1 10 Tf 54 565.00 Td (- Better resale alternatives when the mock catalog has them.) Tj ET
-BT /F1 10 Tf 54 549.00 Td (- Better retail/MSRP alternatives when the mock catalog has them.) Tj ET
-BT /F1 10 Tf 54 533.00 Td (- Questions to ask.) Tj ET
-BT /F1 10 Tf 54 517.00 Td (- Meetup checklist.) Tj ET
-BT /F1 10 Tf 54 501.00 Td (- Confidence score.) Tj ET
-BT /F1 10 Tf 54 485.00 Td (- Next steps before messaging, meeting, or checking out.) Tj ET
-BT /F1 10 Tf 54 463.00 Td (The top of the page gives three usage tips:) Tj ET
-BT /F1 10 Tf 54 440.00 Td (- Start with the link.) Tj ET
-BT /F1 10 Tf 54 424.00 Td (- Compare both sides.) Tj ET
-BT /F1 10 Tf 54 408.00 Td (- Act only when better.) Tj ET
-BT /F1 10 Tf 54 386.00 Td (These reinforce the main product philosophy: a resale link may lose to buying new, and a retail) Tj ET
-BT /F1 10 Tf 54 369.00 Td (sale may lose to used pricing.) Tj ET
-BT /F2 15 Tf 54 334.00 Td (Listing Analyzer Form) Tj ET
-BT /F1 10 Tf 54 304.00 Td (The main form lives in:) Tj ET
-BT /F3 9 Tf 54 281.00 Td (components/ListingAnalyzerForm.tsx) Tj ET
-BT /F1 10 Tf 54 260.00 Td (The analyzer is a client component for form state and result display. It still uses local/mock) Tj ET
-BT /F1 10 Tf 54 243.00 Td (deal scoring, but it now calls the server-side `/api/extract-link` route to auto-populate fields) Tj ET
-BT /F1 10 Tf 54 226.00 Td (from safe public links. There is no OpenAI API route yet and no paid API usage.) Tj ET
-BT /F1 10 Tf 54 203.00 Td (The analyzer supports these fields:) Tj ET
-BT /F1 10 Tf 54 180.00 Td (- Listing or product link.) Tj ET
-BT /F1 10 Tf 54 164.00 Td (- Link type: resale listing or retail bargain.) Tj ET
-BT /F1 10 Tf 54 148.00 Td (- Product or model.) Tj ET
-BT /F1 10 Tf 54 132.00 Td (- Closest price guide.) Tj ET
-BT /F1 10 Tf 54 116.00 Td (- Link price.) Tj ET
-BT /F1 10 Tf 54 100.00 Td (- Condition or deal state.) Tj ET
-BT /F1 10 Tf 54 84.00 Td (- Marketplace/source.) Tj ET
-BT /F1 10 Tf 54 68.00 Td (- Location.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Link price.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Product or model.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- Link type: resale listing or retail bargain.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- Description or page details.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (- Marketplace/source.) Tj ET
+BT /F1 10 Tf 54 658.00 Td (- Seller replies or extra deal notes.) Tj ET
+BT /F1 10 Tf 54 642.00 Td (- Condition or deal state.) Tj ET
+BT /F1 10 Tf 54 626.00 Td (- Location if available.) Tj ET
+BT /F1 10 Tf 54 604.00 Td (The page returns:) Tj ET
+BT /F1 10 Tf 54 581.00 Td (- A verdict.) Tj ET
+BT /F1 10 Tf 54 565.00 Td (- Red flags.) Tj ET
+BT /F1 10 Tf 54 549.00 Td (- Suggested offer range for resale links or target buy range for retail links.) Tj ET
+BT /F1 10 Tf 54 533.00 Td (- Better resale alternatives when the mock catalog has them.) Tj ET
+BT /F1 10 Tf 54 517.00 Td (- Better retail/MSRP alternatives when the mock catalog has them.) Tj ET
+BT /F1 10 Tf 54 501.00 Td (- Questions to ask.) Tj ET
+BT /F1 10 Tf 54 485.00 Td (- Meetup checklist.) Tj ET
+BT /F1 10 Tf 54 469.00 Td (- Confidence score.) Tj ET
+BT /F1 10 Tf 54 453.00 Td (- Next steps before messaging, meeting, or checking out.) Tj ET
+BT /F1 10 Tf 54 431.00 Td (The top of the page gives three usage tips:) Tj ET
+BT /F1 10 Tf 54 408.00 Td (- Start with the link.) Tj ET
+BT /F1 10 Tf 54 392.00 Td (- Compare both sides.) Tj ET
+BT /F1 10 Tf 54 376.00 Td (- Act only when better.) Tj ET
+BT /F1 10 Tf 54 354.00 Td (These reinforce the main product philosophy: a resale link may lose to buying new, and a retail) Tj ET
+BT /F1 10 Tf 54 337.00 Td (sale may lose to used pricing.) Tj ET
+BT /F2 15 Tf 54 302.00 Td (Listing Analyzer Form) Tj ET
+BT /F1 10 Tf 54 272.00 Td (The main form lives in:) Tj ET
+BT /F3 9 Tf 54 249.00 Td (components/ListingAnalyzerForm.tsx) Tj ET
+BT /F1 10 Tf 54 228.00 Td (The analyzer is a client component for form state and result display. It still uses local/mock) Tj ET
+BT /F1 10 Tf 54 211.00 Td (deal scoring, but it now calls the server-side `/api/extract-link` route to auto-populate fields) Tj ET
+BT /F1 10 Tf 54 194.00 Td (from safe public links. There is no OpenAI API route yet and no paid API usage.) Tj ET
+BT /F1 10 Tf 54 171.00 Td (The analyzer supports these fields:) Tj ET
+BT /F1 10 Tf 54 148.00 Td (- Listing or product link.) Tj ET
+BT /F1 10 Tf 54 132.00 Td (- Link type: resale listing or retail bargain.) Tj ET
+BT /F1 10 Tf 54 116.00 Td (- Product or model.) Tj ET
+BT /F1 10 Tf 54 100.00 Td (- Closest price guide.) Tj ET
+BT /F1 10 Tf 54 84.00 Td (- Link price.) Tj ET
+BT /F1 10 Tf 54 68.00 Td (- Condition or deal state.) Tj ET
 endstream
 endobj
 15 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 14 0 R >>
 endobj
 16 0 obj
-<< /Length 2704 >>
+<< /Length 2610 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Listing text or retail page details.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- Seller replies or extra deal notes.) Tj ET
-BT /F1 10 Tf 54 700.00 Td (When the user pastes a link, the analyzer waits briefly and then tries to read the page. If) Tj ET
-BT /F1 10 Tf 54 683.00 Td (successful, it can fill:) Tj ET
-BT /F1 10 Tf 54 660.00 Td (- Link type.) Tj ET
-BT /F1 10 Tf 54 644.00 Td (- Marketplace/source.) Tj ET
-BT /F1 10 Tf 54 628.00 Td (- Product or model.) Tj ET
-BT /F1 10 Tf 54 612.00 Td (- Link price.) Tj ET
-BT /F1 10 Tf 54 596.00 Td (- Listing text or retail page details.) Tj ET
-BT /F1 10 Tf 54 580.00 Td (- Closest matched mock price guide.) Tj ET
-BT /F1 10 Tf 54 558.00 Td (The user can edit anything that was filled automatically. Auto-fill is treated as a starting) Tj ET
-BT /F1 10 Tf 54 541.00 Td (point, not a final source of truth.) Tj ET
-BT /F1 10 Tf 54 518.00 Td (The supported marketplace values are:) Tj ET
-BT /F1 10 Tf 54 495.00 Td (- Facebook Marketplace.) Tj ET
-BT /F1 10 Tf 54 479.00 Td (- Craigslist.) Tj ET
-BT /F1 10 Tf 54 463.00 Td (- OfferUp.) Tj ET
-BT /F1 10 Tf 54 447.00 Td (- eBay.) Tj ET
-BT /F1 10 Tf 54 431.00 Td (- Local seller.) Tj ET
-BT /F1 10 Tf 54 415.00 Td (- Other.) Tj ET
-BT /F1 10 Tf 54 393.00 Td (Supported condition values are:) Tj ET
-BT /F1 10 Tf 54 370.00 Td (- Like new.) Tj ET
-BT /F1 10 Tf 54 354.00 Td (- Excellent.) Tj ET
-BT /F1 10 Tf 54 338.00 Td (- Good.) Tj ET
-BT /F1 10 Tf 54 322.00 Td (- Fair.) Tj ET
-BT /F1 10 Tf 54 306.00 Td (- Poor.) Tj ET
-BT /F1 10 Tf 54 290.00 Td (- For parts or repair.) Tj ET
-BT /F1 10 Tf 54 268.00 Td (The "Closest price guide" field points to the mock product catalog. The current MVP only has) Tj ET
-BT /F1 10 Tf 54 251.00 Td (mock price guides for cameras, laptops, bikes, and monitors.) Tj ET
-BT /F1 10 Tf 54 228.00 Td (The analyzer tries to find the closest product by matching the entered product name against each) Tj ET
-BT /F1 10 Tf 54 211.00 Td (mock product's brand and model. If it cannot find a match, it falls back to the currently) Tj ET
-BT /F1 10 Tf 54 194.00 Td (selected mock product in the dropdown.) Tj ET
-BT /F1 10 Tf 54 171.00 Td (Link price is required. It must be a positive number. If the user submits an invalid price, the) Tj ET
-BT /F1 10 Tf 54 154.00 Td (form shows an error:) Tj ET
-BT /F1 10 Tf 54 131.00 Td (Enter a valid price before analyzing.) Tj ET
-BT /F1 10 Tf 54 108.00 Td (The form has a loading state while analysis runs. The button changes to "Checking link" with a) Tj ET
-BT /F1 10 Tf 54 91.00 Td (spinner. The current analysis is fast because it is local logic, but the state is already) Tj ET
-BT /F1 10 Tf 54 74.00 Td (structured for future async behavior.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Marketplace/source.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Location.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- Listing text or retail page details.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- Seller replies or extra deal notes.) Tj ET
+BT /F1 10 Tf 54 668.00 Td (When the user pastes a link, the analyzer waits briefly and then tries to read the page. If) Tj ET
+BT /F1 10 Tf 54 651.00 Td (successful, it can fill:) Tj ET
+BT /F1 10 Tf 54 628.00 Td (- Link type.) Tj ET
+BT /F1 10 Tf 54 612.00 Td (- Marketplace/source.) Tj ET
+BT /F1 10 Tf 54 596.00 Td (- Product or model.) Tj ET
+BT /F1 10 Tf 54 580.00 Td (- Link price.) Tj ET
+BT /F1 10 Tf 54 564.00 Td (- Listing text or retail page details.) Tj ET
+BT /F1 10 Tf 54 548.00 Td (- Closest matched mock price guide.) Tj ET
+BT /F1 10 Tf 54 526.00 Td (The user can edit anything that was filled automatically. Auto-fill is treated as a starting) Tj ET
+BT /F1 10 Tf 54 509.00 Td (point, not a final source of truth.) Tj ET
+BT /F1 10 Tf 54 486.00 Td (The supported marketplace values are:) Tj ET
+BT /F1 10 Tf 54 463.00 Td (- Facebook Marketplace.) Tj ET
+BT /F1 10 Tf 54 447.00 Td (- Craigslist.) Tj ET
+BT /F1 10 Tf 54 431.00 Td (- OfferUp.) Tj ET
+BT /F1 10 Tf 54 415.00 Td (- eBay.) Tj ET
+BT /F1 10 Tf 54 399.00 Td (- Local seller.) Tj ET
+BT /F1 10 Tf 54 383.00 Td (- Other.) Tj ET
+BT /F1 10 Tf 54 361.00 Td (Supported condition values are:) Tj ET
+BT /F1 10 Tf 54 338.00 Td (- Like new.) Tj ET
+BT /F1 10 Tf 54 322.00 Td (- Excellent.) Tj ET
+BT /F1 10 Tf 54 306.00 Td (- Good.) Tj ET
+BT /F1 10 Tf 54 290.00 Td (- Fair.) Tj ET
+BT /F1 10 Tf 54 274.00 Td (- Poor.) Tj ET
+BT /F1 10 Tf 54 258.00 Td (- For parts or repair.) Tj ET
+BT /F1 10 Tf 54 236.00 Td (The "Closest price guide" field points to the mock product catalog. The current MVP only has) Tj ET
+BT /F1 10 Tf 54 219.00 Td (mock price guides for cameras, laptops, bikes, and monitors.) Tj ET
+BT /F1 10 Tf 54 196.00 Td (The analyzer tries to find the closest product by matching the entered product name against each) Tj ET
+BT /F1 10 Tf 54 179.00 Td (mock product's brand and model. If it cannot find a match, it falls back to the currently) Tj ET
+BT /F1 10 Tf 54 162.00 Td (selected mock product in the dropdown.) Tj ET
+BT /F1 10 Tf 54 139.00 Td (Link price is required. It must be a positive number. If the user submits an invalid price, the) Tj ET
+BT /F1 10 Tf 54 122.00 Td (form shows an error:) Tj ET
+BT /F1 10 Tf 54 99.00 Td (Enter a valid price before analyzing.) Tj ET
+BT /F1 10 Tf 54 76.00 Td (The form has a loading state while analysis runs. The button changes to "Checking link" with a) Tj ET
 endstream
 endobj
 17 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 16 0 R >>
 endobj
 18 0 obj
-<< /Length 2442 >>
+<< /Length 2503 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (Before a result is generated, the right side of the analyzer shows an empty state that explains) Tj ET
-BT /F1 10 Tf 54 721.00 Td (what to paste:) Tj ET
-BT /F1 10 Tf 54 698.00 Td (- For resale links: seller wording, condition, proof, and pickup notes.) Tj ET
-BT /F1 10 Tf 54 682.00 Td (- For retail links: product name, sale price, retailer, warranty, and deal notes.) Tj ET
-BT /F1 10 Tf 54 666.00 Td (- BuyWise compares the link against used fair value and retail MSRP benchmarks.) Tj ET
-BT /F1 10 Tf 54 644.00 Td (The empty state also shows a buyer rule:) Tj ET
-BT /F1 10 Tf 54 621.00 Td (A low resale price still needs proof. A retail sale still needs comparison against used prices) Tj ET
-BT /F1 10 Tf 54 604.00 Td (and MSRP.) Tj ET
-BT /F2 15 Tf 54 569.00 Td (Link Analysis Helpers) Tj ET
-BT /F1 10 Tf 54 539.00 Td (Link analysis helpers live in:) Tj ET
-BT /F3 9 Tf 54 516.00 Td (lib/linkAnalysis.ts) Tj ET
-BT /F1 10 Tf 54 495.00 Td (This file supports the link-first direction by keeping URL/source inference and mock alternative) Tj ET
-BT /F1 10 Tf 54 478.00 Td (building separate from the server-side extraction route.) Tj ET
-BT /F1 10 Tf 54 455.00 Td (It currently does four jobs:) Tj ET
-BT /F1 10 Tf 54 432.00 Td (- Infer source labels from URL hostnames.) Tj ET
-BT /F1 10 Tf 54 416.00 Td (- Infer whether a URL is resale or retail.) Tj ET
-BT /F1 10 Tf 54 400.00 Td (- Infer marketplace source for supported resale domains.) Tj ET
-BT /F1 10 Tf 54 384.00 Td (- Build mock resale and retail/MSRP alternatives from the existing product catalog.) Tj ET
-BT /F1 10 Tf 54 362.00 Td (Current resale-style domains include:) Tj ET
-BT /F1 10 Tf 54 339.00 Td (- eBay.) Tj ET
-BT /F1 10 Tf 54 323.00 Td (- Craigslist.) Tj ET
-BT /F1 10 Tf 54 307.00 Td (- Facebook.) Tj ET
-BT /F1 10 Tf 54 291.00 Td (- OfferUp.) Tj ET
-BT /F1 10 Tf 54 275.00 Td (- Mercari.) Tj ET
-BT /F1 10 Tf 54 259.00 Td (- Swappa.) Tj ET
-BT /F1 10 Tf 54 243.00 Td (- Depop.) Tj ET
-BT /F1 10 Tf 54 227.00 Td (- Poshmark.) Tj ET
-BT /F1 10 Tf 54 205.00 Td (Current retail-style domains include:) Tj ET
-BT /F1 10 Tf 54 182.00 Td (- Amazon.) Tj ET
-BT /F1 10 Tf 54 166.00 Td (- Best Buy.) Tj ET
-BT /F1 10 Tf 54 150.00 Td (- Walmart.) Tj ET
-BT /F1 10 Tf 54 134.00 Td (- Target.) Tj ET
-BT /F1 10 Tf 54 118.00 Td (- Costco.) Tj ET
-BT /F1 10 Tf 54 102.00 Td (- B&H Photo.) Tj ET
-BT /F1 10 Tf 54 86.00 Td (- Adorama.) Tj ET
-BT /F1 10 Tf 54 70.00 Td (- Apple.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (spinner. The current analysis is fast because it is local logic, but the state is already) Tj ET
+BT /F1 10 Tf 54 721.00 Td (structured for future async behavior.) Tj ET
+BT /F1 10 Tf 54 698.00 Td (Before a result is generated, the right side of the analyzer shows an empty state that explains) Tj ET
+BT /F1 10 Tf 54 681.00 Td (what to paste:) Tj ET
+BT /F1 10 Tf 54 658.00 Td (- For resale links: seller wording, condition, proof, and pickup notes.) Tj ET
+BT /F1 10 Tf 54 642.00 Td (- For retail links: product name, sale price, retailer, warranty, and deal notes.) Tj ET
+BT /F1 10 Tf 54 626.00 Td (- BuyWise compares the link against used fair value and retail MSRP benchmarks.) Tj ET
+BT /F1 10 Tf 54 604.00 Td (The empty state also shows a buyer rule:) Tj ET
+BT /F1 10 Tf 54 581.00 Td (A low resale price still needs proof. A retail sale still needs comparison against used prices) Tj ET
+BT /F1 10 Tf 54 564.00 Td (and MSRP.) Tj ET
+BT /F2 15 Tf 54 529.00 Td (Link Analysis Helpers) Tj ET
+BT /F1 10 Tf 54 499.00 Td (Link analysis helpers live in:) Tj ET
+BT /F3 9 Tf 54 476.00 Td (lib/linkAnalysis.ts) Tj ET
+BT /F1 10 Tf 54 455.00 Td (This file supports the link-first direction by keeping URL/source inference and mock alternative) Tj ET
+BT /F1 10 Tf 54 438.00 Td (building separate from the server-side extraction route.) Tj ET
+BT /F1 10 Tf 54 415.00 Td (It currently does four jobs:) Tj ET
+BT /F1 10 Tf 54 392.00 Td (- Infer source labels from URL hostnames.) Tj ET
+BT /F1 10 Tf 54 376.00 Td (- Infer whether a URL is resale or retail.) Tj ET
+BT /F1 10 Tf 54 360.00 Td (- Infer marketplace source for supported resale domains.) Tj ET
+BT /F1 10 Tf 54 344.00 Td (- Build mock resale and retail/MSRP alternatives from the existing product catalog.) Tj ET
+BT /F1 10 Tf 54 322.00 Td (Current resale-style domains include:) Tj ET
+BT /F1 10 Tf 54 299.00 Td (- eBay.) Tj ET
+BT /F1 10 Tf 54 283.00 Td (- Craigslist.) Tj ET
+BT /F1 10 Tf 54 267.00 Td (- Facebook.) Tj ET
+BT /F1 10 Tf 54 251.00 Td (- OfferUp.) Tj ET
+BT /F1 10 Tf 54 235.00 Td (- Mercari.) Tj ET
+BT /F1 10 Tf 54 219.00 Td (- Swappa.) Tj ET
+BT /F1 10 Tf 54 203.00 Td (- Depop.) Tj ET
+BT /F1 10 Tf 54 187.00 Td (- Poshmark.) Tj ET
+BT /F1 10 Tf 54 165.00 Td (Current retail-style domains include:) Tj ET
+BT /F1 10 Tf 54 142.00 Td (- Amazon.) Tj ET
+BT /F1 10 Tf 54 126.00 Td (- Best Buy.) Tj ET
+BT /F1 10 Tf 54 110.00 Td (- Walmart.) Tj ET
+BT /F1 10 Tf 54 94.00 Td (- Target.) Tj ET
+BT /F1 10 Tf 54 78.00 Td (- Costco.) Tj ET
 endstream
 endobj
 19 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 18 0 R >>
 endobj
 20 0 obj
-<< /Length 2734 >>
+<< /Length 2670 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Dell.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- Lenovo.) Tj ET
-BT /F1 10 Tf 54 706.00 Td (- Canon.) Tj ET
-BT /F1 10 Tf 54 690.00 Td (- Sony.) Tj ET
-BT /F1 10 Tf 54 674.00 Td (- Trek.) Tj ET
-BT /F1 10 Tf 54 658.00 Td (- Specialized.) Tj ET
-BT /F1 10 Tf 54 636.00 Td (The app now has basic server-side page metadata extraction for safe, public links. It tries to) Tj ET
-BT /F1 10 Tf 54 619.00 Td (fetch a readable HTML page and extract title, description, structured product price, JSON-LD) Tj ET
-BT /F1 10 Tf 54 602.00 Td (Product/Offer data, Open Graph/Twitter metadata, and a fallback visible dollar price. It also) Tj ET
-BT /F1 10 Tf 54 585.00 Td (tries to match the extracted title/description against the mock product catalog.) Tj ET
-BT /F1 10 Tf 54 562.00 Td (This is not full marketplace integration. BuyWise does not scrape Facebook Marketplace, does not) Tj ET
-BT /F1 10 Tf 54 545.00 Td (read listing images, does not inspect seller profiles, and does not guarantee every retailer or) Tj ET
-BT /F1 10 Tf 54 528.00 Td (marketplace can be read. Many sites block automated page reads or hide prices in client-side) Tj ET
-BT /F1 10 Tf 54 511.00 Td (scripts. When that happens, BuyWise falls back to manual entry.) Tj ET
-BT /F1 10 Tf 54 488.00 Td (The URL is still used for source/type detection and context even when page reading fails. The) Tj ET
-BT /F1 10 Tf 54 471.00 Td (user can always paste price/model/details manually for the local analyzer.) Tj ET
-BT /F2 15 Tf 54 436.00 Td (Link Extraction API) Tj ET
-BT /F1 10 Tf 54 406.00 Td (The link extraction route lives in:) Tj ET
-BT /F3 9 Tf 54 383.00 Td (app/api/extract-link/route.ts) Tj ET
-BT /F1 10 Tf 54 362.00 Td (It is called by:) Tj ET
-BT /F1 10 Tf 54 339.00 Td (- `components/HomeListingPrompt.tsx`) Tj ET
-BT /F1 10 Tf 54 323.00 Td (- `components/ListingAnalyzerForm.tsx`) Tj ET
-BT /F1 10 Tf 54 301.00 Td (The route accepts a pasted URL and returns a `LinkExtractionResult`.) Tj ET
-BT /F1 10 Tf 54 278.00 Td (It can return:) Tj ET
-BT /F1 10 Tf 54 255.00 Td (- Normalized URL.) Tj ET
-BT /F1 10 Tf 54 239.00 Td (- Source label.) Tj ET
-BT /F1 10 Tf 54 223.00 Td (- Source domain.) Tj ET
-BT /F1 10 Tf 54 207.00 Td (- Inferred mode: resale or retail.) Tj ET
-BT /F1 10 Tf 54 191.00 Td (- Marketplace source when recognized.) Tj ET
-BT /F1 10 Tf 54 175.00 Td (- Page title.) Tj ET
-BT /F1 10 Tf 54 159.00 Td (- Page description.) Tj ET
-BT /F1 10 Tf 54 143.00 Td (- Extracted price.) Tj ET
-BT /F1 10 Tf 54 127.00 Td (- Matched mock-catalog product name.) Tj ET
-BT /F1 10 Tf 54 111.00 Td (- Confidence score.) Tj ET
-BT /F1 10 Tf 54 95.00 Td (- Human-readable message.) Tj ET
-BT /F1 10 Tf 54 79.00 Td (- Warnings when price or product match is missing.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- B&H Photo.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Adorama.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- Apple.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- Dell.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (- Lenovo.) Tj ET
+BT /F1 10 Tf 54 658.00 Td (- Canon.) Tj ET
+BT /F1 10 Tf 54 642.00 Td (- Sony.) Tj ET
+BT /F1 10 Tf 54 626.00 Td (- Trek.) Tj ET
+BT /F1 10 Tf 54 610.00 Td (- Specialized.) Tj ET
+BT /F1 10 Tf 54 588.00 Td (The app now has basic server-side page metadata extraction for safe, public links. It tries to) Tj ET
+BT /F1 10 Tf 54 571.00 Td (fetch a readable HTML page and extract title, description, structured product price, JSON-LD) Tj ET
+BT /F1 10 Tf 54 554.00 Td (Product/Offer data, Open Graph/Twitter metadata, and a fallback visible dollar price. It also) Tj ET
+BT /F1 10 Tf 54 537.00 Td (tries to match the extracted title/description against the mock product catalog.) Tj ET
+BT /F1 10 Tf 54 514.00 Td (This is not full marketplace integration. BuyWise does not scrape Facebook Marketplace, does not) Tj ET
+BT /F1 10 Tf 54 497.00 Td (read listing images, does not inspect seller profiles, and does not guarantee every retailer or) Tj ET
+BT /F1 10 Tf 54 480.00 Td (marketplace can be read. Many sites block automated page reads or hide prices in client-side) Tj ET
+BT /F1 10 Tf 54 463.00 Td (scripts. When that happens, BuyWise falls back to manual entry.) Tj ET
+BT /F1 10 Tf 54 440.00 Td (The URL is still used for source/type detection and context even when page reading fails. The) Tj ET
+BT /F1 10 Tf 54 423.00 Td (user can always paste price/model/details manually for the local analyzer.) Tj ET
+BT /F2 15 Tf 54 388.00 Td (Link Extraction API) Tj ET
+BT /F1 10 Tf 54 358.00 Td (The link extraction route lives in:) Tj ET
+BT /F3 9 Tf 54 335.00 Td (app/api/extract-link/route.ts) Tj ET
+BT /F1 10 Tf 54 314.00 Td (It is called by:) Tj ET
+BT /F1 10 Tf 54 291.00 Td (- `components/HomeListingPrompt.tsx`) Tj ET
+BT /F1 10 Tf 54 275.00 Td (- `components/ListingAnalyzerForm.tsx`) Tj ET
+BT /F1 10 Tf 54 253.00 Td (The route accepts a pasted URL and returns a `LinkExtractionResult`.) Tj ET
+BT /F1 10 Tf 54 230.00 Td (It can return:) Tj ET
+BT /F1 10 Tf 54 207.00 Td (- Normalized URL.) Tj ET
+BT /F1 10 Tf 54 191.00 Td (- Source label.) Tj ET
+BT /F1 10 Tf 54 175.00 Td (- Source domain.) Tj ET
+BT /F1 10 Tf 54 159.00 Td (- Inferred mode: resale or retail.) Tj ET
+BT /F1 10 Tf 54 143.00 Td (- Marketplace source when recognized.) Tj ET
+BT /F1 10 Tf 54 127.00 Td (- Page title.) Tj ET
+BT /F1 10 Tf 54 111.00 Td (- Page description.) Tj ET
+BT /F1 10 Tf 54 95.00 Td (- Extracted price.) Tj ET
+BT /F1 10 Tf 54 79.00 Td (- Matched mock-catalog product name.) Tj ET
 endstream
 endobj
 21 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 20 0 R >>
 endobj
 22 0 obj
-<< /Length 3056 >>
+<< /Length 3001 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Manual fallback flag.) Tj ET
-BT /F1 10 Tf 54 716.00 Td (The route includes safety checks:) Tj ET
-BT /F1 10 Tf 54 693.00 Td (- Only `http` and `https` URLs are accepted.) Tj ET
-BT /F1 10 Tf 54 677.00 Td (- Localhost and private/internal network addresses are blocked.) Tj ET
-BT /F1 10 Tf 54 661.00 Td (- DNS results are checked for private/local addresses before fetching.) Tj ET
-BT /F1 10 Tf 54 645.00 Td (- Fetching has a timeout.) Tj ET
-BT /F1 10 Tf 54 629.00 Td (- HTML reads are limited in size.) Tj ET
-BT /F1 10 Tf 54 613.00 Td (- Facebook Marketplace and Facebook links are not fetched; the user is told to paste details) Tj ET
-BT /F1 10 Tf 54 597.00 Td (  manually.) Tj ET
-BT /F1 10 Tf 54 575.00 Td (Extraction sources currently include:) Tj ET
-BT /F1 10 Tf 54 552.00 Td (- Open Graph title and description.) Tj ET
-BT /F1 10 Tf 54 536.00 Td (- Twitter card title and description.) Tj ET
-BT /F1 10 Tf 54 520.00 Td (- Standard meta description.) Tj ET
-BT /F1 10 Tf 54 504.00 Td (- Product price meta fields.) Tj ET
-BT /F1 10 Tf 54 488.00 Td (- JSON-LD `Product` and `Offer` data.) Tj ET
-BT /F1 10 Tf 54 472.00 Td (- Page `<title>`.) Tj ET
-BT /F1 10 Tf 54 456.00 Td (- Fallback dollar-price text found in the readable HTML.) Tj ET
-BT /F1 10 Tf 54 434.00 Td (This route is intentionally conservative. If it cannot confidently extract useful details, it) Tj ET
-BT /F1 10 Tf 54 417.00 Td (does not invent them. It returns a manual-entry message instead.) Tj ET
-BT /F1 10 Tf 54 394.00 Td (The helper builds a `ListingAnalysisContext` with:) Tj ET
-BT /F1 10 Tf 54 371.00 Td (- Mode: resale or retail.) Tj ET
-BT /F1 10 Tf 54 355.00 Td (- Listing URL.) Tj ET
-BT /F1 10 Tf 54 339.00 Td (- Source label.) Tj ET
-BT /F1 10 Tf 54 323.00 Td (- Source domain.) Tj ET
-BT /F1 10 Tf 54 307.00 Td (- Link price.) Tj ET
-BT /F1 10 Tf 54 291.00 Td (- Benchmark label.) Tj ET
-BT /F1 10 Tf 54 275.00 Td (- Matched product name.) Tj ET
-BT /F1 10 Tf 54 259.00 Td (- Resale alternatives.) Tj ET
-BT /F1 10 Tf 54 243.00 Td (- Retail/MSRP alternatives.) Tj ET
-BT /F1 10 Tf 54 221.00 Td (Resale alternatives are selected from the same mock category when the fair used price is) Tj ET
-BT /F1 10 Tf 54 204.00 Td (meaningfully below the pasted link price. The selected product itself can also appear as a) Tj ET
-BT /F1 10 Tf 54 187.00 Td (resale alternative when its fair used price is much lower than the link price. Each alternative) Tj ET
-BT /F1 10 Tf 54 170.00 Td (now includes a buyer action and expected outcome, not just a price comparison.) Tj ET
-BT /F1 10 Tf 54 147.00 Td (Retail/MSRP alternatives are selected from the same mock category when MSRP is lower than the) Tj ET
-BT /F1 10 Tf 54 130.00 Td (pasted link price. For resale links, the selected product's MSRP can appear as a retail) Tj ET
-BT /F1 10 Tf 54 113.00 Td (benchmark when new MSRP is close enough to the used link price that buying new may be worth) Tj ET
-BT /F1 10 Tf 54 96.00 Td (comparing. Each retail alternative also includes a recommended action and practical outcome.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Confidence score.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Human-readable message.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- Warnings when price or product match is missing.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- Manual fallback flag.) Tj ET
+BT /F1 10 Tf 54 668.00 Td (The route includes safety checks:) Tj ET
+BT /F1 10 Tf 54 645.00 Td (- Only `http` and `https` URLs are accepted.) Tj ET
+BT /F1 10 Tf 54 629.00 Td (- Localhost and private/internal network addresses are blocked.) Tj ET
+BT /F1 10 Tf 54 613.00 Td (- DNS results are checked for private/local addresses before fetching.) Tj ET
+BT /F1 10 Tf 54 597.00 Td (- Fetching has a timeout.) Tj ET
+BT /F1 10 Tf 54 581.00 Td (- HTML reads are limited in size.) Tj ET
+BT /F1 10 Tf 54 565.00 Td (- Facebook Marketplace and Facebook links are not fetched; the user is told to paste details) Tj ET
+BT /F1 10 Tf 54 549.00 Td (  manually.) Tj ET
+BT /F1 10 Tf 54 527.00 Td (Extraction sources currently include:) Tj ET
+BT /F1 10 Tf 54 504.00 Td (- Open Graph title and description.) Tj ET
+BT /F1 10 Tf 54 488.00 Td (- Twitter card title and description.) Tj ET
+BT /F1 10 Tf 54 472.00 Td (- Standard meta description.) Tj ET
+BT /F1 10 Tf 54 456.00 Td (- Product price meta fields.) Tj ET
+BT /F1 10 Tf 54 440.00 Td (- JSON-LD `Product` and `Offer` data.) Tj ET
+BT /F1 10 Tf 54 424.00 Td (- Page `<title>`.) Tj ET
+BT /F1 10 Tf 54 408.00 Td (- Fallback dollar-price text found in the readable HTML.) Tj ET
+BT /F1 10 Tf 54 386.00 Td (This route is intentionally conservative. If it cannot confidently extract useful details, it) Tj ET
+BT /F1 10 Tf 54 369.00 Td (does not invent them. It returns a manual-entry message instead.) Tj ET
+BT /F1 10 Tf 54 346.00 Td (The helper builds a `ListingAnalysisContext` with:) Tj ET
+BT /F1 10 Tf 54 323.00 Td (- Mode: resale or retail.) Tj ET
+BT /F1 10 Tf 54 307.00 Td (- Listing URL.) Tj ET
+BT /F1 10 Tf 54 291.00 Td (- Source label.) Tj ET
+BT /F1 10 Tf 54 275.00 Td (- Source domain.) Tj ET
+BT /F1 10 Tf 54 259.00 Td (- Link price.) Tj ET
+BT /F1 10 Tf 54 243.00 Td (- Benchmark label.) Tj ET
+BT /F1 10 Tf 54 227.00 Td (- Matched product name.) Tj ET
+BT /F1 10 Tf 54 211.00 Td (- Resale alternatives.) Tj ET
+BT /F1 10 Tf 54 195.00 Td (- Retail/MSRP alternatives.) Tj ET
+BT /F1 10 Tf 54 173.00 Td (Resale alternatives are selected from the same mock category when the fair used price is) Tj ET
+BT /F1 10 Tf 54 156.00 Td (meaningfully below the pasted link price. The selected product itself can also appear as a) Tj ET
+BT /F1 10 Tf 54 139.00 Td (resale alternative when its fair used price is much lower than the link price. Each alternative) Tj ET
+BT /F1 10 Tf 54 122.00 Td (now includes a buyer action and expected outcome, not just a price comparison.) Tj ET
+BT /F1 10 Tf 54 99.00 Td (Retail/MSRP alternatives are selected from the same mock category when MSRP is lower than the) Tj ET
+BT /F1 10 Tf 54 82.00 Td (pasted link price. For resale links, the selected product's MSRP can appear as a retail) Tj ET
 endstream
 endobj
 23 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 22 0 R >>
 endobj
 24 0 obj
-<< /Length 2878 >>
+<< /Length 2813 >>
 stream
-BT /F2 15 Tf 54 738.00 Td (Analyzer Result UI) Tj ET
-BT /F1 10 Tf 54 708.00 Td (The analyzer result card lives in:) Tj ET
-BT /F3 9 Tf 54 685.00 Td (components/DealScoreCard.tsx) Tj ET
-BT /F1 10 Tf 54 664.00 Td (The result is designed as a buyer decision panel, not only a scorecard.) Tj ET
-BT /F1 10 Tf 54 641.00 Td (The top of the result shows:) Tj ET
-BT /F1 10 Tf 54 618.00 Td (- Resale listing verdict or retail bargain verdict.) Tj ET
-BT /F1 10 Tf 54 602.00 Td (- Recommendation badge.) Tj ET
-BT /F1 10 Tf 54 586.00 Td (- Save verdict button when there is a matched product and link context.) Tj ET
-BT /F1 10 Tf 54 570.00 Td (- Source label, matched product, and link price when link context exists.) Tj ET
-BT /F1 10 Tf 54 554.00 Td (- Plain-English explanation.) Tj ET
-BT /F1 10 Tf 54 538.00 Td (- Suggested offer range for resale links or target buy range for retail links.) Tj ET
-BT /F1 10 Tf 54 522.00 Td (- Negotiation tip or buy-under guidance.) Tj ET
-BT /F1 10 Tf 54 500.00 Td (The result includes four summary metrics:) Tj ET
-BT /F1 10 Tf 54 477.00 Td (- Deal score, from 0 to 100.) Tj ET
-BT /F1 10 Tf 54 461.00 Td (- Risk level: Low, Medium, or High.) Tj ET
-BT /F1 10 Tf 54 445.00 Td (- Confidence score, from 0 to 100.) Tj ET
-BT /F1 10 Tf 54 429.00 Td (- Benchmark gap, shown as dollars over or under the relevant benchmark.) Tj ET
-BT /F1 10 Tf 54 407.00 Td (The result then shows:) Tj ET
-BT /F1 10 Tf 54 384.00 Td (- Why this might NOT be worth it.) Tj ET
-BT /F1 10 Tf 54 368.00 Td (- Red flags.) Tj ET
-BT /F1 10 Tf 54 352.00 Td (- Trust signals.) Tj ET
-BT /F1 10 Tf 54 336.00 Td (- Better resale moves.) Tj ET
-BT /F1 10 Tf 54 320.00 Td (- Better retail moves.) Tj ET
-BT /F1 10 Tf 54 304.00 Td (- Next steps before buying.) Tj ET
-BT /F1 10 Tf 54 288.00 Td (- Questions to ask.) Tj ET
-BT /F1 10 Tf 54 272.00 Td (- Meetup checklist or before-checkout checklist.) Tj ET
-BT /F1 10 Tf 54 250.00 Td (The "Why this might NOT be worth it" section is always visible. It is meant to build trust by) Tj ET
-BT /F1 10 Tf 54 233.00 Td (clearly explaining the downside before pushing the user toward action. It can include:) Tj ET
-BT /F1 10 Tf 54 210.00 Td (- Red flags found in the pasted text.) Tj ET
-BT /F1 10 Tf 54 194.00 Td (- Price being above the relevant benchmark.) Tj ET
-BT /F1 10 Tf 54 178.00 Td (- Medium or high risk level.) Tj ET
-BT /F1 10 Tf 54 162.00 Td (- Low confidence due to missing proof.) Tj ET
-BT /F1 10 Tf 54 146.00 Td (- Lack of trust signals.) Tj ET
-BT /F1 10 Tf 54 130.00 Td (- Retail being close enough to avoid used-item risk.) Tj ET
-BT /F1 10 Tf 54 114.00 Td (- Used alternatives beating a retail deal.) Tj ET
-BT /F1 10 Tf 54 92.00 Td (If there is no major blocker from the current details, the section says that directly while) Tj ET
-BT /F1 10 Tf 54 75.00 Td (still reminding the user to verify condition, source, and payment/return safety.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (benchmark when new MSRP is close enough to the used link price that buying new may be worth) Tj ET
+BT /F1 10 Tf 54 721.00 Td (comparing. Each retail alternative also includes a recommended action and practical outcome.) Tj ET
+BT /F2 15 Tf 54 686.00 Td (Analyzer Result UI) Tj ET
+BT /F1 10 Tf 54 656.00 Td (The analyzer result card lives in:) Tj ET
+BT /F3 9 Tf 54 633.00 Td (components/DealScoreCard.tsx) Tj ET
+BT /F1 10 Tf 54 612.00 Td (The result is designed as a buyer decision panel, not only a scorecard.) Tj ET
+BT /F1 10 Tf 54 589.00 Td (The top of the result shows:) Tj ET
+BT /F1 10 Tf 54 566.00 Td (- Resale listing verdict or retail bargain verdict.) Tj ET
+BT /F1 10 Tf 54 550.00 Td (- Recommendation badge.) Tj ET
+BT /F1 10 Tf 54 534.00 Td (- Save verdict button when there is a matched product and link context.) Tj ET
+BT /F1 10 Tf 54 518.00 Td (- Source label, matched product, and link price when link context exists.) Tj ET
+BT /F1 10 Tf 54 502.00 Td (- Plain-English explanation.) Tj ET
+BT /F1 10 Tf 54 486.00 Td (- Suggested offer range for resale links or target buy range for retail links.) Tj ET
+BT /F1 10 Tf 54 470.00 Td (- Negotiation tip or buy-under guidance.) Tj ET
+BT /F1 10 Tf 54 448.00 Td (The result includes four summary metrics:) Tj ET
+BT /F1 10 Tf 54 425.00 Td (- Deal score, from 0 to 100.) Tj ET
+BT /F1 10 Tf 54 409.00 Td (- Risk level: Low, Medium, or High.) Tj ET
+BT /F1 10 Tf 54 393.00 Td (- Confidence score, from 0 to 100.) Tj ET
+BT /F1 10 Tf 54 377.00 Td (- Benchmark gap, shown as dollars over or under the relevant benchmark.) Tj ET
+BT /F1 10 Tf 54 355.00 Td (The result then shows:) Tj ET
+BT /F1 10 Tf 54 332.00 Td (- Why this might NOT be worth it.) Tj ET
+BT /F1 10 Tf 54 316.00 Td (- Red flags.) Tj ET
+BT /F1 10 Tf 54 300.00 Td (- Trust signals.) Tj ET
+BT /F1 10 Tf 54 284.00 Td (- Better resale moves.) Tj ET
+BT /F1 10 Tf 54 268.00 Td (- Better retail moves.) Tj ET
+BT /F1 10 Tf 54 252.00 Td (- Next steps before buying.) Tj ET
+BT /F1 10 Tf 54 236.00 Td (- Questions to ask.) Tj ET
+BT /F1 10 Tf 54 220.00 Td (- Meetup checklist or before-checkout checklist.) Tj ET
+BT /F1 10 Tf 54 198.00 Td (The "Why this might NOT be worth it" section is always visible. It is meant to build trust by) Tj ET
+BT /F1 10 Tf 54 181.00 Td (clearly explaining the downside before pushing the user toward action. It can include:) Tj ET
+BT /F1 10 Tf 54 158.00 Td (- Red flags found in the pasted text.) Tj ET
+BT /F1 10 Tf 54 142.00 Td (- Price being above the relevant benchmark.) Tj ET
+BT /F1 10 Tf 54 126.00 Td (- Medium or high risk level.) Tj ET
+BT /F1 10 Tf 54 110.00 Td (- Low confidence due to missing proof.) Tj ET
+BT /F1 10 Tf 54 94.00 Td (- Lack of trust signals.) Tj ET
+BT /F1 10 Tf 54 78.00 Td (- Retail being close enough to avoid used-item risk.) Tj ET
 endstream
 endobj
 25 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 24 0 R >>
 endobj
 26 0 obj
-<< /Length 3007 >>
+<< /Length 3017 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (The "Questions to send" panel includes a Copy button. It copies seller questions to the) Tj ET
-BT /F1 10 Tf 54 721.00 Td (clipboard. When copied, the button temporarily changes to "Copied.") Tj ET
-BT /F1 10 Tf 54 698.00 Td (The "Save verdict" button bookmarks the analyzed link into the Saved tab. It stores the matched) Tj ET
-BT /F1 10 Tf 54 681.00 Td (product, analyzed link price, source, seller location if available, verdict summary, deal score,) Tj ET
-BT /F1 10 Tf 54 664.00 Td (confidence score, source label, original link when present, and the main concern if one exists.) Tj ET
-BT /F1 10 Tf 54 647.00 Td (If Supabase is configured and the user is logged in, it writes to `saved_items`; otherwise it) Tj ET
-BT /F1 10 Tf 54 630.00 Td (uses browser local storage.) Tj ET
-BT /F1 10 Tf 54 607.00 Td (If a matched product exists, the result uses that product's category-specific seller questions) Tj ET
-BT /F1 10 Tf 54 590.00 Td (and buying checklist. If no product is available, it falls back to generic safety questions and) Tj ET
-BT /F1 10 Tf 54 573.00 Td (checklist items.) Tj ET
-BT /F1 10 Tf 54 550.00 Td (Fallback questions for high risk include:) Tj ET
-BT /F1 10 Tf 54 527.00 Td (- Can you send a fresh working video with today's date in the shot?) Tj ET
-BT /F1 10 Tf 54 511.00 Td (- Do you have the receipt or serial number?) Tj ET
-BT /F1 10 Tf 54 495.00 Td (- Can I inspect it in person before any payment?) Tj ET
-BT /F1 10 Tf 54 473.00 Td (Generic fallback questions include:) Tj ET
-BT /F1 10 Tf 54 450.00 Td (- Can you send a short video showing it working?) Tj ET
-BT /F1 10 Tf 54 434.00 Td (- Are there any issues not shown in the listing?) Tj ET
-BT /F1 10 Tf 54 418.00 Td (- Can we meet somewhere public where I can test it?) Tj ET
-BT /F1 10 Tf 54 396.00 Td (Generic fallback checklist items include:) Tj ET
-BT /F1 10 Tf 54 373.00 Td (- Verify ownership before meeting.) Tj ET
-BT /F1 10 Tf 54 357.00 Td (- Test the item before paying.) Tj ET
-BT /F1 10 Tf 54 341.00 Td (- Meet publicly.) Tj ET
-BT /F1 10 Tf 54 325.00 Td (- Do not send money before inspection.) Tj ET
-BT /F1 10 Tf 54 303.00 Td (The result card uses different subtle background/border styling based on the recommendation:) Tj ET
-BT /F1 10 Tf 54 280.00 Td (- Great deal.) Tj ET
-BT /F1 10 Tf 54 264.00 Td (- Fair price.) Tj ET
-BT /F1 10 Tf 54 248.00 Td (- Overpriced.) Tj ET
-BT /F1 10 Tf 54 232.00 Td (- Risky purchase.) Tj ET
-BT /F1 10 Tf 54 216.00 Td (- Avoid.) Tj ET
-BT /F1 10 Tf 54 194.00 Td (Risk level also has its own visual treatment:) Tj ET
-BT /F1 10 Tf 54 171.00 Td (- Low: green.) Tj ET
-BT /F1 10 Tf 54 155.00 Td (- Medium: amber.) Tj ET
-BT /F1 10 Tf 54 139.00 Td (- High: red.) Tj ET
-BT /F1 10 Tf 54 117.00 Td (If link context exists, the result card shows two alternatives panels:) Tj ET
-BT /F1 10 Tf 54 94.00 Td (- Better resale moves: used-side replacement actions if the pasted link is overpriced, risky, or) Tj ET
-BT /F1 10 Tf 54 78.00 Td (  not clearly better than the market.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Used alternatives beating a retail deal.) Tj ET
+BT /F1 10 Tf 54 716.00 Td (If there is no major blocker from the current details, the section says that directly while) Tj ET
+BT /F1 10 Tf 54 699.00 Td (still reminding the user to verify condition, source, and payment/return safety.) Tj ET
+BT /F1 10 Tf 54 676.00 Td (The "Questions to send" panel includes a Copy button. It copies seller questions to the) Tj ET
+BT /F1 10 Tf 54 659.00 Td (clipboard. When copied, the button temporarily changes to "Copied.") Tj ET
+BT /F1 10 Tf 54 636.00 Td (The "Save verdict" button bookmarks the analyzed link into the Saved tab. It stores the matched) Tj ET
+BT /F1 10 Tf 54 619.00 Td (product, analyzed link price, source, seller location if available, verdict summary, deal score,) Tj ET
+BT /F1 10 Tf 54 602.00 Td (confidence score, source label, original link when present, and the main concern if one exists.) Tj ET
+BT /F1 10 Tf 54 585.00 Td (If Supabase is configured and the user is logged in, it writes to `saved_items`; otherwise it) Tj ET
+BT /F1 10 Tf 54 568.00 Td (uses browser local storage.) Tj ET
+BT /F1 10 Tf 54 545.00 Td (If a matched product exists, the result uses that product's category-specific seller questions) Tj ET
+BT /F1 10 Tf 54 528.00 Td (and buying checklist. If no product is available, it falls back to generic safety questions and) Tj ET
+BT /F1 10 Tf 54 511.00 Td (checklist items.) Tj ET
+BT /F1 10 Tf 54 488.00 Td (Fallback questions for high risk include:) Tj ET
+BT /F1 10 Tf 54 465.00 Td (- Can you send a fresh working video with today's date in the shot?) Tj ET
+BT /F1 10 Tf 54 449.00 Td (- Do you have the receipt or serial number?) Tj ET
+BT /F1 10 Tf 54 433.00 Td (- Can I inspect it in person before any payment?) Tj ET
+BT /F1 10 Tf 54 411.00 Td (Generic fallback questions include:) Tj ET
+BT /F1 10 Tf 54 388.00 Td (- Can you send a short video showing it working?) Tj ET
+BT /F1 10 Tf 54 372.00 Td (- Are there any issues not shown in the listing?) Tj ET
+BT /F1 10 Tf 54 356.00 Td (- Can we meet somewhere public where I can test it?) Tj ET
+BT /F1 10 Tf 54 334.00 Td (Generic fallback checklist items include:) Tj ET
+BT /F1 10 Tf 54 311.00 Td (- Verify ownership before meeting.) Tj ET
+BT /F1 10 Tf 54 295.00 Td (- Test the item before paying.) Tj ET
+BT /F1 10 Tf 54 279.00 Td (- Meet publicly.) Tj ET
+BT /F1 10 Tf 54 263.00 Td (- Do not send money before inspection.) Tj ET
+BT /F1 10 Tf 54 241.00 Td (The result card uses different subtle background/border styling based on the recommendation:) Tj ET
+BT /F1 10 Tf 54 218.00 Td (- Great deal.) Tj ET
+BT /F1 10 Tf 54 202.00 Td (- Fair price.) Tj ET
+BT /F1 10 Tf 54 186.00 Td (- Overpriced.) Tj ET
+BT /F1 10 Tf 54 170.00 Td (- Risky purchase.) Tj ET
+BT /F1 10 Tf 54 154.00 Td (- Avoid.) Tj ET
+BT /F1 10 Tf 54 132.00 Td (Risk level also has its own visual treatment:) Tj ET
+BT /F1 10 Tf 54 109.00 Td (- Low: green.) Tj ET
+BT /F1 10 Tf 54 93.00 Td (- Medium: amber.) Tj ET
+BT /F1 10 Tf 54 77.00 Td (- High: red.) Tj ET
 endstream
 endobj
 27 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 26 0 R >>
 endobj
 28 0 obj
-<< /Length 2178 >>
+<< /Length 2330 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Better retail moves: new-product fallbacks to check when warranty, returns, or a close retail) Tj ET
-BT /F1 10 Tf 54 722.00 Td (  price may beat the pasted link.) Tj ET
-BT /F1 10 Tf 54 700.00 Td (Each alternative card shows:) Tj ET
-BT /F1 10 Tf 54 677.00 Td (- Alternative product title.) Tj ET
-BT /F1 10 Tf 54 661.00 Td (- Price label.) Tj ET
-BT /F1 10 Tf 54 645.00 Td (- Price.) Tj ET
-BT /F1 10 Tf 54 629.00 Td (- Reason the alternative is shown.) Tj ET
-BT /F1 10 Tf 54 613.00 Td (- Recommended action.) Tj ET
-BT /F1 10 Tf 54 597.00 Td (- Expected buyer outcome.) Tj ET
-BT /F1 10 Tf 54 581.00 Td (- Link to the relevant product price guide.) Tj ET
-BT /F1 10 Tf 54 559.00 Td (If no better alternative exists in the current mock catalog, the relevant panel says so) Tj ET
-BT /F1 10 Tf 54 542.00 Td (directly.) Tj ET
-BT /F2 15 Tf 54 507.00 Td (Local Deal Scoring Logic) Tj ET
-BT /F1 10 Tf 54 477.00 Td (The core analyzer logic lives in:) Tj ET
-BT /F3 9 Tf 54 454.00 Td (lib/dealQuality.ts) Tj ET
-BT /F1 10 Tf 54 433.00 Td (The main exported function is:) Tj ET
-BT /F3 9 Tf 54 410.00 Td (calculateDealQuality\(input\)) Tj ET
-BT /F1 10 Tf 54 389.00 Td (The input includes:) Tj ET
-BT /F1 10 Tf 54 366.00 Td (- Asking price.) Tj ET
-BT /F1 10 Tf 54 350.00 Td (- Fair price or MSRP benchmark, depending on link mode.) Tj ET
-BT /F1 10 Tf 54 334.00 Td (- Used low.) Tj ET
-BT /F1 10 Tf 54 318.00 Td (- Used high.) Tj ET
-BT /F1 10 Tf 54 302.00 Td (- Reliability score.) Tj ET
-BT /F1 10 Tf 54 286.00 Td (- Scam risk score.) Tj ET
-BT /F1 10 Tf 54 270.00 Td (- Condition.) Tj ET
-BT /F1 10 Tf 54 254.00 Td (- Marketplace source.) Tj ET
-BT /F1 10 Tf 54 238.00 Td (- Listing text.) Tj ET
-BT /F1 10 Tf 54 216.00 Td (The output includes:) Tj ET
-BT /F1 10 Tf 54 193.00 Td (- Deal score.) Tj ET
-BT /F1 10 Tf 54 177.00 Td (- Recommendation label.) Tj ET
-BT /F1 10 Tf 54 161.00 Td (- Explanation.) Tj ET
-BT /F1 10 Tf 54 145.00 Td (- Suggested offer low.) Tj ET
-BT /F1 10 Tf 54 129.00 Td (- Suggested offer high.) Tj ET
-BT /F1 10 Tf 54 113.00 Td (- Risk level.) Tj ET
-BT /F1 10 Tf 54 97.00 Td (- Price difference.) Tj ET
-BT /F1 10 Tf 54 81.00 Td (- Confidence score.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (If link context exists, the result card shows two alternatives panels:) Tj ET
+BT /F1 10 Tf 54 715.00 Td (- Better resale moves: used-side replacement actions if the pasted link is overpriced, risky, or) Tj ET
+BT /F1 10 Tf 54 699.00 Td (  not clearly better than the market.) Tj ET
+BT /F1 10 Tf 54 683.00 Td (- Better retail moves: new-product fallbacks to check when warranty, returns, or a close retail) Tj ET
+BT /F1 10 Tf 54 667.00 Td (  price may beat the pasted link.) Tj ET
+BT /F1 10 Tf 54 645.00 Td (Each alternative card shows:) Tj ET
+BT /F1 10 Tf 54 622.00 Td (- Alternative product title.) Tj ET
+BT /F1 10 Tf 54 606.00 Td (- Price label.) Tj ET
+BT /F1 10 Tf 54 590.00 Td (- Price.) Tj ET
+BT /F1 10 Tf 54 574.00 Td (- Reason the alternative is shown.) Tj ET
+BT /F1 10 Tf 54 558.00 Td (- Recommended action.) Tj ET
+BT /F1 10 Tf 54 542.00 Td (- Expected buyer outcome.) Tj ET
+BT /F1 10 Tf 54 526.00 Td (- Link to the relevant product price guide.) Tj ET
+BT /F1 10 Tf 54 504.00 Td (If no better alternative exists in the current mock catalog, the relevant panel says so) Tj ET
+BT /F1 10 Tf 54 487.00 Td (directly.) Tj ET
+BT /F2 15 Tf 54 452.00 Td (Local Deal Scoring Logic) Tj ET
+BT /F1 10 Tf 54 422.00 Td (The core analyzer logic lives in:) Tj ET
+BT /F3 9 Tf 54 399.00 Td (lib/dealQuality.ts) Tj ET
+BT /F1 10 Tf 54 378.00 Td (The main exported function is:) Tj ET
+BT /F3 9 Tf 54 355.00 Td (calculateDealQuality\(input\)) Tj ET
+BT /F1 10 Tf 54 334.00 Td (The input includes:) Tj ET
+BT /F1 10 Tf 54 311.00 Td (- Asking price.) Tj ET
+BT /F1 10 Tf 54 295.00 Td (- Fair price or MSRP benchmark, depending on link mode.) Tj ET
+BT /F1 10 Tf 54 279.00 Td (- Used low.) Tj ET
+BT /F1 10 Tf 54 263.00 Td (- Used high.) Tj ET
+BT /F1 10 Tf 54 247.00 Td (- Reliability score.) Tj ET
+BT /F1 10 Tf 54 231.00 Td (- Scam risk score.) Tj ET
+BT /F1 10 Tf 54 215.00 Td (- Condition.) Tj ET
+BT /F1 10 Tf 54 199.00 Td (- Marketplace source.) Tj ET
+BT /F1 10 Tf 54 183.00 Td (- Listing text.) Tj ET
+BT /F1 10 Tf 54 161.00 Td (The output includes:) Tj ET
+BT /F1 10 Tf 54 138.00 Td (- Deal score.) Tj ET
+BT /F1 10 Tf 54 122.00 Td (- Recommendation label.) Tj ET
+BT /F1 10 Tf 54 106.00 Td (- Explanation.) Tj ET
+BT /F1 10 Tf 54 90.00 Td (- Suggested offer low.) Tj ET
+BT /F1 10 Tf 54 74.00 Td (- Suggested offer high.) Tj ET
 endstream
 endobj
 29 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 28 0 R >>
 endobj
 30 0 obj
-<< /Length 2052 >>
+<< /Length 2064 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Red flags.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- Positive signals.) Tj ET
-BT /F1 10 Tf 54 706.00 Td (- Negotiation tip.) Tj ET
-BT /F1 10 Tf 54 690.00 Td (- Next steps.) Tj ET
-BT /F1 10 Tf 54 668.00 Td (Supported recommendation labels are:) Tj ET
-BT /F1 10 Tf 54 645.00 Td (- Great deal.) Tj ET
-BT /F1 10 Tf 54 629.00 Td (- Fair price.) Tj ET
-BT /F1 10 Tf 54 613.00 Td (- Overpriced.) Tj ET
-BT /F1 10 Tf 54 597.00 Td (- Risky purchase.) Tj ET
-BT /F1 10 Tf 54 581.00 Td (- Avoid.) Tj ET
-BT /F1 10 Tf 54 559.00 Td (Supported risk levels are:) Tj ET
-BT /F1 10 Tf 54 536.00 Td (- Low.) Tj ET
-BT /F1 10 Tf 54 520.00 Td (- Medium.) Tj ET
-BT /F1 10 Tf 54 504.00 Td (- High.) Tj ET
-BT /F2 12 Tf 54 474.00 Td (Red Flag Detection) Tj ET
-BT /F1 10 Tf 54 448.00 Td (The analyzer checks the condition text and listing text for red flag wording.) Tj ET
-BT /F1 10 Tf 54 425.00 Td (Current red flag categories:) Tj ET
-BT /F1 10 Tf 54 402.00 Td (- Payment before pickup.) Tj ET
-BT /F1 10 Tf 54 386.00 Td (- Urgency pressure.) Tj ET
-BT /F1 10 Tf 54 370.00 Td (- Stock photos only.) Tj ET
-BT /F1 10 Tf 54 354.00 Td (- No proof of ownership.) Tj ET
-BT /F1 10 Tf 54 338.00 Td (- Refuses safe meetup.) Tj ET
-BT /F1 10 Tf 54 322.00 Td (- Lock or ownership warning.) Tj ET
-BT /F1 10 Tf 54 306.00 Td (- Broken or parts listing.) Tj ET
-BT /F1 10 Tf 54 290.00 Td (- Price far below market.) Tj ET
-BT /F1 10 Tf 54 268.00 Td (Examples of risky terms include:) Tj ET
-BT /F1 10 Tf 54 245.00 Td (- pay before.) Tj ET
-BT /F1 10 Tf 54 229.00 Td (- payment before.) Tj ET
-BT /F1 10 Tf 54 213.00 Td (- deposit.) Tj ET
-BT /F1 10 Tf 54 197.00 Td (- zelle first.) Tj ET
-BT /F1 10 Tf 54 181.00 Td (- zelle deposit.) Tj ET
-BT /F1 10 Tf 54 165.00 Td (- cashapp first.) Tj ET
-BT /F1 10 Tf 54 149.00 Td (- cash app first.) Tj ET
-BT /F1 10 Tf 54 133.00 Td (- venmo first.) Tj ET
-BT /F1 10 Tf 54 117.00 Td (- venmo deposit.) Tj ET
-BT /F1 10 Tf 54 101.00 Td (- wire.) Tj ET
-BT /F1 10 Tf 54 85.00 Td (- western union.) Tj ET
-BT /F1 10 Tf 54 69.00 Td (- must go today.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Risk level.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Price difference.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- Confidence score.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- Red flags.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (- Positive signals.) Tj ET
+BT /F1 10 Tf 54 658.00 Td (- Negotiation tip.) Tj ET
+BT /F1 10 Tf 54 642.00 Td (- Next steps.) Tj ET
+BT /F1 10 Tf 54 620.00 Td (Supported recommendation labels are:) Tj ET
+BT /F1 10 Tf 54 597.00 Td (- Great deal.) Tj ET
+BT /F1 10 Tf 54 581.00 Td (- Fair price.) Tj ET
+BT /F1 10 Tf 54 565.00 Td (- Overpriced.) Tj ET
+BT /F1 10 Tf 54 549.00 Td (- Risky purchase.) Tj ET
+BT /F1 10 Tf 54 533.00 Td (- Avoid.) Tj ET
+BT /F1 10 Tf 54 511.00 Td (Supported risk levels are:) Tj ET
+BT /F1 10 Tf 54 488.00 Td (- Low.) Tj ET
+BT /F1 10 Tf 54 472.00 Td (- Medium.) Tj ET
+BT /F1 10 Tf 54 456.00 Td (- High.) Tj ET
+BT /F2 12 Tf 54 426.00 Td (Red Flag Detection) Tj ET
+BT /F1 10 Tf 54 400.00 Td (The analyzer checks the condition text and listing text for red flag wording.) Tj ET
+BT /F1 10 Tf 54 377.00 Td (Current red flag categories:) Tj ET
+BT /F1 10 Tf 54 354.00 Td (- Payment before pickup.) Tj ET
+BT /F1 10 Tf 54 338.00 Td (- Urgency pressure.) Tj ET
+BT /F1 10 Tf 54 322.00 Td (- Stock photos only.) Tj ET
+BT /F1 10 Tf 54 306.00 Td (- No proof of ownership.) Tj ET
+BT /F1 10 Tf 54 290.00 Td (- Refuses safe meetup.) Tj ET
+BT /F1 10 Tf 54 274.00 Td (- Lock or ownership warning.) Tj ET
+BT /F1 10 Tf 54 258.00 Td (- Broken or parts listing.) Tj ET
+BT /F1 10 Tf 54 242.00 Td (- Price far below market.) Tj ET
+BT /F1 10 Tf 54 220.00 Td (Examples of risky terms include:) Tj ET
+BT /F1 10 Tf 54 197.00 Td (- pay before.) Tj ET
+BT /F1 10 Tf 54 181.00 Td (- payment before.) Tj ET
+BT /F1 10 Tf 54 165.00 Td (- deposit.) Tj ET
+BT /F1 10 Tf 54 149.00 Td (- zelle first.) Tj ET
+BT /F1 10 Tf 54 133.00 Td (- zelle deposit.) Tj ET
+BT /F1 10 Tf 54 117.00 Td (- cashapp first.) Tj ET
+BT /F1 10 Tf 54 101.00 Td (- cash app first.) Tj ET
+BT /F1 10 Tf 54 85.00 Td (- venmo first.) Tj ET
+BT /F1 10 Tf 54 69.00 Td (- venmo deposit.) Tj ET
 endstream
 endobj
 31 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 30 0 R >>
 endobj
 32 0 obj
-<< /Length 2220 >>
+<< /Length 2206 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- need gone today.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- first come first serve.) Tj ET
-BT /F1 10 Tf 54 706.00 Td (- no holds.) Tj ET
-BT /F1 10 Tf 54 690.00 Td (- moving today.) Tj ET
-BT /F1 10 Tf 54 674.00 Td (- urgent.) Tj ET
-BT /F1 10 Tf 54 658.00 Td (- priced to sell today.) Tj ET
-BT /F1 10 Tf 54 642.00 Td (- stock photo.) Tj ET
-BT /F1 10 Tf 54 626.00 Td (- stock photos.) Tj ET
-BT /F1 10 Tf 54 610.00 Td (- photos from website.) Tj ET
-BT /F1 10 Tf 54 594.00 Td (- google image.) Tj ET
-BT /F1 10 Tf 54 578.00 Td (- not actual photo.) Tj ET
-BT /F1 10 Tf 54 562.00 Td (- no receipt.) Tj ET
-BT /F1 10 Tf 54 546.00 Td (- lost receipt.) Tj ET
-BT /F1 10 Tf 54 530.00 Td (- no serial.) Tj ET
-BT /F1 10 Tf 54 514.00 Td (- serial removed.) Tj ET
-BT /F1 10 Tf 54 498.00 Td (- cannot provide serial.) Tj ET
-BT /F1 10 Tf 54 482.00 Td (- ship only.) Tj ET
-BT /F1 10 Tf 54 466.00 Td (- no meetup.) Tj ET
-BT /F1 10 Tf 54 450.00 Td (- cannot meet.) Tj ET
-BT /F1 10 Tf 54 434.00 Td (- will not meet.) Tj ET
-BT /F1 10 Tf 54 418.00 Td (- payment only.) Tj ET
-BT /F1 10 Tf 54 402.00 Td (- delivery only.) Tj ET
-BT /F1 10 Tf 54 386.00 Td (- iCloud locked.) Tj ET
-BT /F1 10 Tf 54 370.00 Td (- activation lock.) Tj ET
-BT /F1 10 Tf 54 354.00 Td (- MDM.) Tj ET
-BT /F1 10 Tf 54 338.00 Td (- BIOS password.) Tj ET
-BT /F1 10 Tf 54 322.00 Td (- managed device.) Tj ET
-BT /F1 10 Tf 54 306.00 Td (- locked account.) Tj ET
-BT /F1 10 Tf 54 290.00 Td (- for parts.) Tj ET
-BT /F1 10 Tf 54 274.00 Td (- as-is.) Tj ET
-BT /F1 10 Tf 54 258.00 Td (- broken.) Tj ET
-BT /F1 10 Tf 54 242.00 Td (- does not turn on.) Tj ET
-BT /F1 10 Tf 54 226.00 Td (- cracked.) Tj ET
-BT /F1 10 Tf 54 210.00 Td (- water damage.) Tj ET
-BT /F1 10 Tf 54 188.00 Td (The "Price far below market" red flag is added when the asking price is 65 percent or less of) Tj ET
-BT /F1 10 Tf 54 171.00 Td (fair price. This reflects the product belief that a price far below market should require extra) Tj ET
-BT /F1 10 Tf 54 154.00 Td (proof.) Tj ET
-BT /F2 12 Tf 54 123.00 Td (Positive Signal Detection) Tj ET
-BT /F1 10 Tf 54 97.00 Td (The analyzer checks for trust signals in listing text.) Tj ET
-BT /F1 10 Tf 54 74.00 Td (Current positive signal categories:) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- wire.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- western union.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- must go today.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- need gone today.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (- first come first serve.) Tj ET
+BT /F1 10 Tf 54 658.00 Td (- no holds.) Tj ET
+BT /F1 10 Tf 54 642.00 Td (- moving today.) Tj ET
+BT /F1 10 Tf 54 626.00 Td (- urgent.) Tj ET
+BT /F1 10 Tf 54 610.00 Td (- priced to sell today.) Tj ET
+BT /F1 10 Tf 54 594.00 Td (- stock photo.) Tj ET
+BT /F1 10 Tf 54 578.00 Td (- stock photos.) Tj ET
+BT /F1 10 Tf 54 562.00 Td (- photos from website.) Tj ET
+BT /F1 10 Tf 54 546.00 Td (- google image.) Tj ET
+BT /F1 10 Tf 54 530.00 Td (- not actual photo.) Tj ET
+BT /F1 10 Tf 54 514.00 Td (- no receipt.) Tj ET
+BT /F1 10 Tf 54 498.00 Td (- lost receipt.) Tj ET
+BT /F1 10 Tf 54 482.00 Td (- no serial.) Tj ET
+BT /F1 10 Tf 54 466.00 Td (- serial removed.) Tj ET
+BT /F1 10 Tf 54 450.00 Td (- cannot provide serial.) Tj ET
+BT /F1 10 Tf 54 434.00 Td (- ship only.) Tj ET
+BT /F1 10 Tf 54 418.00 Td (- no meetup.) Tj ET
+BT /F1 10 Tf 54 402.00 Td (- cannot meet.) Tj ET
+BT /F1 10 Tf 54 386.00 Td (- will not meet.) Tj ET
+BT /F1 10 Tf 54 370.00 Td (- payment only.) Tj ET
+BT /F1 10 Tf 54 354.00 Td (- delivery only.) Tj ET
+BT /F1 10 Tf 54 338.00 Td (- iCloud locked.) Tj ET
+BT /F1 10 Tf 54 322.00 Td (- activation lock.) Tj ET
+BT /F1 10 Tf 54 306.00 Td (- MDM.) Tj ET
+BT /F1 10 Tf 54 290.00 Td (- BIOS password.) Tj ET
+BT /F1 10 Tf 54 274.00 Td (- managed device.) Tj ET
+BT /F1 10 Tf 54 258.00 Td (- locked account.) Tj ET
+BT /F1 10 Tf 54 242.00 Td (- for parts.) Tj ET
+BT /F1 10 Tf 54 226.00 Td (- as-is.) Tj ET
+BT /F1 10 Tf 54 210.00 Td (- broken.) Tj ET
+BT /F1 10 Tf 54 194.00 Td (- does not turn on.) Tj ET
+BT /F1 10 Tf 54 178.00 Td (- cracked.) Tj ET
+BT /F1 10 Tf 54 162.00 Td (- water damage.) Tj ET
+BT /F1 10 Tf 54 140.00 Td (The "Price far below market" red flag is added when the asking price is 65 percent or less of) Tj ET
+BT /F1 10 Tf 54 123.00 Td (fair price. This reflects the product belief that a price far below market should require extra) Tj ET
+BT /F1 10 Tf 54 106.00 Td (proof.) Tj ET
+BT /F2 12 Tf 54 75.00 Td (Positive Signal Detection) Tj ET
 endstream
 endobj
 33 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 32 0 R >>
 endobj
 34 0 obj
-<< /Length 2247 >>
+<< /Length 2244 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Receipt or proof of purchase.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- Serial number available.) Tj ET
-BT /F1 10 Tf 54 706.00 Td (- Original box included.) Tj ET
-BT /F1 10 Tf 54 690.00 Td (- Working video available.) Tj ET
-BT /F1 10 Tf 54 674.00 Td (- Can test before buying.) Tj ET
-BT /F1 10 Tf 54 658.00 Td (- Public meetup.) Tj ET
-BT /F1 10 Tf 54 642.00 Td (- Warranty mentioned.) Tj ET
-BT /F1 10 Tf 54 626.00 Td (- Battery health listed.) Tj ET
-BT /F1 10 Tf 54 610.00 Td (- Shutter count listed.) Tj ET
-BT /F1 10 Tf 54 588.00 Td (Examples of positive terms include:) Tj ET
-BT /F1 10 Tf 54 565.00 Td (- receipt.) Tj ET
-BT /F1 10 Tf 54 549.00 Td (- original receipt.) Tj ET
-BT /F1 10 Tf 54 533.00 Td (- receipt included.) Tj ET
-BT /F1 10 Tf 54 517.00 Td (- proof of purchase.) Tj ET
-BT /F1 10 Tf 54 501.00 Td (- serial number.) Tj ET
-BT /F1 10 Tf 54 485.00 Td (- serial available.) Tj ET
-BT /F1 10 Tf 54 469.00 Td (- original box.) Tj ET
-BT /F1 10 Tf 54 453.00 Td (- video available.) Tj ET
-BT /F1 10 Tf 54 437.00 Td (- working video.) Tj ET
-BT /F1 10 Tf 54 421.00 Td (- video of it working.) Tj ET
-BT /F1 10 Tf 54 405.00 Td (- can send video.) Tj ET
-BT /F1 10 Tf 54 389.00 Td (- can test.) Tj ET
-BT /F1 10 Tf 54 373.00 Td (- test before buying.) Tj ET
-BT /F1 10 Tf 54 357.00 Td (- public meetup.) Tj ET
-BT /F1 10 Tf 54 341.00 Td (- meet in public.) Tj ET
-BT /F1 10 Tf 54 325.00 Td (- meet at police station.) Tj ET
-BT /F1 10 Tf 54 309.00 Td (- meet at library.) Tj ET
-BT /F1 10 Tf 54 293.00 Td (- local pickup.) Tj ET
-BT /F1 10 Tf 54 277.00 Td (- warranty.) Tj ET
-BT /F1 10 Tf 54 261.00 Td (- battery health.) Tj ET
-BT /F1 10 Tf 54 245.00 Td (- shutter count.) Tj ET
-BT /F1 10 Tf 54 223.00 Td (Positive signals can improve confidence and slightly improve the score, but they do not fully) Tj ET
-BT /F1 10 Tf 54 206.00 Td (cancel serious red flags.) Tj ET
-BT /F2 12 Tf 54 175.00 Td (Marketplace Risk Adjustment) Tj ET
-BT /F1 10 Tf 54 149.00 Td (The analyzer adjusts effective scam risk based on marketplace:) Tj ET
-BT /F1 10 Tf 54 126.00 Td (- eBay: -1.) Tj ET
-BT /F1 10 Tf 54 110.00 Td (- Craigslist: +1.) Tj ET
-BT /F1 10 Tf 54 94.00 Td (- Facebook Marketplace: +2.) Tj ET
-BT /F1 10 Tf 54 78.00 Td (- OfferUp: +2.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (The analyzer checks for trust signals in listing text.) Tj ET
+BT /F1 10 Tf 54 715.00 Td (Current positive signal categories:) Tj ET
+BT /F1 10 Tf 54 692.00 Td (- Receipt or proof of purchase.) Tj ET
+BT /F1 10 Tf 54 676.00 Td (- Serial number available.) Tj ET
+BT /F1 10 Tf 54 660.00 Td (- Original box included.) Tj ET
+BT /F1 10 Tf 54 644.00 Td (- Working video available.) Tj ET
+BT /F1 10 Tf 54 628.00 Td (- Can test before buying.) Tj ET
+BT /F1 10 Tf 54 612.00 Td (- Public meetup.) Tj ET
+BT /F1 10 Tf 54 596.00 Td (- Warranty mentioned.) Tj ET
+BT /F1 10 Tf 54 580.00 Td (- Battery health listed.) Tj ET
+BT /F1 10 Tf 54 564.00 Td (- Shutter count listed.) Tj ET
+BT /F1 10 Tf 54 542.00 Td (Examples of positive terms include:) Tj ET
+BT /F1 10 Tf 54 519.00 Td (- receipt.) Tj ET
+BT /F1 10 Tf 54 503.00 Td (- original receipt.) Tj ET
+BT /F1 10 Tf 54 487.00 Td (- receipt included.) Tj ET
+BT /F1 10 Tf 54 471.00 Td (- proof of purchase.) Tj ET
+BT /F1 10 Tf 54 455.00 Td (- serial number.) Tj ET
+BT /F1 10 Tf 54 439.00 Td (- serial available.) Tj ET
+BT /F1 10 Tf 54 423.00 Td (- original box.) Tj ET
+BT /F1 10 Tf 54 407.00 Td (- video available.) Tj ET
+BT /F1 10 Tf 54 391.00 Td (- working video.) Tj ET
+BT /F1 10 Tf 54 375.00 Td (- video of it working.) Tj ET
+BT /F1 10 Tf 54 359.00 Td (- can send video.) Tj ET
+BT /F1 10 Tf 54 343.00 Td (- can test.) Tj ET
+BT /F1 10 Tf 54 327.00 Td (- test before buying.) Tj ET
+BT /F1 10 Tf 54 311.00 Td (- public meetup.) Tj ET
+BT /F1 10 Tf 54 295.00 Td (- meet in public.) Tj ET
+BT /F1 10 Tf 54 279.00 Td (- meet at police station.) Tj ET
+BT /F1 10 Tf 54 263.00 Td (- meet at library.) Tj ET
+BT /F1 10 Tf 54 247.00 Td (- local pickup.) Tj ET
+BT /F1 10 Tf 54 231.00 Td (- warranty.) Tj ET
+BT /F1 10 Tf 54 215.00 Td (- battery health.) Tj ET
+BT /F1 10 Tf 54 199.00 Td (- shutter count.) Tj ET
+BT /F1 10 Tf 54 177.00 Td (Positive signals can improve confidence and slightly improve the score, but they do not fully) Tj ET
+BT /F1 10 Tf 54 160.00 Td (cancel serious red flags.) Tj ET
+BT /F2 12 Tf 54 129.00 Td (Marketplace Risk Adjustment) Tj ET
+BT /F1 10 Tf 54 103.00 Td (The analyzer adjusts effective scam risk based on marketplace:) Tj ET
+BT /F1 10 Tf 54 80.00 Td (- eBay: -1.) Tj ET
 endstream
 endobj
 35 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 34 0 R >>
 endobj
 36 0 obj
-<< /Length 2295 >>
+<< /Length 2158 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Local seller: +1.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- Other: +1.) Tj ET
-BT /F1 10 Tf 54 700.00 Td (This does not mean one marketplace is always unsafe or safe. It is a simple MVP risk adjustment) Tj ET
-BT /F1 10 Tf 54 683.00 Td (based on the fact that local marketplaces often require more buyer verification.) Tj ET
-BT /F2 12 Tf 54 652.00 Td (Condition Adjustment) Tj ET
-BT /F1 10 Tf 54 626.00 Td (Poor condition terms reduce the deal score:) Tj ET
-BT /F1 10 Tf 54 603.00 Td (- poor.) Tj ET
-BT /F1 10 Tf 54 587.00 Td (- for parts.) Tj ET
-BT /F1 10 Tf 54 571.00 Td (- broken.) Tj ET
-BT /F1 10 Tf 54 555.00 Td (- repair.) Tj ET
-BT /F1 10 Tf 54 539.00 Td (- damaged.) Tj ET
-BT /F1 10 Tf 54 523.00 Td (- cracked.) Tj ET
-BT /F1 10 Tf 54 507.00 Td (- activation lock.) Tj ET
-BT /F1 10 Tf 54 491.00 Td (- iCloud.) Tj ET
-BT /F1 10 Tf 54 475.00 Td (- locked.) Tj ET
-BT /F1 10 Tf 54 459.00 Td (- MDM.) Tj ET
-BT /F1 10 Tf 54 443.00 Td (- stolen.) Tj ET
-BT /F1 10 Tf 54 421.00 Td (Good condition terms can slightly improve the score:) Tj ET
-BT /F1 10 Tf 54 398.00 Td (- excellent.) Tj ET
-BT /F1 10 Tf 54 382.00 Td (- mint.) Tj ET
-BT /F1 10 Tf 54 366.00 Td (- like new.) Tj ET
-BT /F1 10 Tf 54 350.00 Td (- open box.) Tj ET
-BT /F1 10 Tf 54 334.00 Td (- new.) Tj ET
-BT /F1 10 Tf 54 312.00 Td (The condition value "Fair" also applies a negative adjustment.) Tj ET
-BT /F2 12 Tf 54 281.00 Td (Recommendation Logic) Tj ET
-BT /F1 10 Tf 54 255.00 Td (Recommendation is based on:) Tj ET
-BT /F1 10 Tf 54 232.00 Td (- Asking price compared with fair price.) Tj ET
-BT /F1 10 Tf 54 216.00 Td (- Effective scam risk.) Tj ET
-BT /F1 10 Tf 54 200.00 Td (- Reliability score.) Tj ET
-BT /F1 10 Tf 54 184.00 Td (- Red flags.) Tj ET
-BT /F1 10 Tf 54 162.00 Td (Important behavior:) Tj ET
-BT /F1 10 Tf 54 139.00 Td (- If reliability is very low and price is high, recommendation becomes Avoid.) Tj ET
-BT /F1 10 Tf 54 123.00 Td (- If high risk signals exist, recommendation becomes Risky purchase.) Tj ET
-BT /F1 10 Tf 54 107.00 Td (- If the item is 20 percent or more below fair price and effective scam risk is low enough, it) Tj ET
-BT /F1 10 Tf 54 91.00 Td (  can become Great deal.) Tj ET
-BT /F1 10 Tf 54 75.00 Td (- If price is at least 15 percent above fair price, it can become Overpriced.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Craigslist: +1.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Facebook Marketplace: +2.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- OfferUp: +2.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- Local seller: +1.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (- Other: +1.) Tj ET
+BT /F1 10 Tf 54 652.00 Td (This does not mean one marketplace is always unsafe or safe. It is a simple MVP risk adjustment) Tj ET
+BT /F1 10 Tf 54 635.00 Td (based on the fact that local marketplaces often require more buyer verification.) Tj ET
+BT /F2 12 Tf 54 604.00 Td (Condition Adjustment) Tj ET
+BT /F1 10 Tf 54 578.00 Td (Poor condition terms reduce the deal score:) Tj ET
+BT /F1 10 Tf 54 555.00 Td (- poor.) Tj ET
+BT /F1 10 Tf 54 539.00 Td (- for parts.) Tj ET
+BT /F1 10 Tf 54 523.00 Td (- broken.) Tj ET
+BT /F1 10 Tf 54 507.00 Td (- repair.) Tj ET
+BT /F1 10 Tf 54 491.00 Td (- damaged.) Tj ET
+BT /F1 10 Tf 54 475.00 Td (- cracked.) Tj ET
+BT /F1 10 Tf 54 459.00 Td (- activation lock.) Tj ET
+BT /F1 10 Tf 54 443.00 Td (- iCloud.) Tj ET
+BT /F1 10 Tf 54 427.00 Td (- locked.) Tj ET
+BT /F1 10 Tf 54 411.00 Td (- MDM.) Tj ET
+BT /F1 10 Tf 54 395.00 Td (- stolen.) Tj ET
+BT /F1 10 Tf 54 373.00 Td (Good condition terms can slightly improve the score:) Tj ET
+BT /F1 10 Tf 54 350.00 Td (- excellent.) Tj ET
+BT /F1 10 Tf 54 334.00 Td (- mint.) Tj ET
+BT /F1 10 Tf 54 318.00 Td (- like new.) Tj ET
+BT /F1 10 Tf 54 302.00 Td (- open box.) Tj ET
+BT /F1 10 Tf 54 286.00 Td (- new.) Tj ET
+BT /F1 10 Tf 54 264.00 Td (The condition value "Fair" also applies a negative adjustment.) Tj ET
+BT /F2 12 Tf 54 233.00 Td (Recommendation Logic) Tj ET
+BT /F1 10 Tf 54 207.00 Td (Recommendation is based on:) Tj ET
+BT /F1 10 Tf 54 184.00 Td (- Asking price compared with fair price.) Tj ET
+BT /F1 10 Tf 54 168.00 Td (- Effective scam risk.) Tj ET
+BT /F1 10 Tf 54 152.00 Td (- Reliability score.) Tj ET
+BT /F1 10 Tf 54 136.00 Td (- Red flags.) Tj ET
+BT /F1 10 Tf 54 114.00 Td (Important behavior:) Tj ET
+BT /F1 10 Tf 54 91.00 Td (- If reliability is very low and price is high, recommendation becomes Avoid.) Tj ET
+BT /F1 10 Tf 54 75.00 Td (- If high risk signals exist, recommendation becomes Risky purchase.) Tj ET
 endstream
 endobj
 37 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 36 0 R >>
 endobj
 38 0 obj
-<< /Length 2340 >>
+<< /Length 2444 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- If price is roughly within 10 percent of fair value, it can become Fair price.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- If price looks low but risk is medium/high, it can become Risky purchase.) Tj ET
-BT /F1 10 Tf 54 700.00 Td (This is why a very cheap listing may not receive "Great deal." Risk can override price.) Tj ET
-BT /F2 12 Tf 54 669.00 Td (Deal Score) Tj ET
-BT /F1 10 Tf 54 643.00 Td (The deal score is calculated from:) Tj ET
-BT /F1 10 Tf 54 620.00 Td (- Price score.) Tj ET
-BT /F1 10 Tf 54 604.00 Td (- Reliability adjustment.) Tj ET
-BT /F1 10 Tf 54 588.00 Td (- Scam adjustment.) Tj ET
-BT /F1 10 Tf 54 572.00 Td (- Condition adjustment.) Tj ET
-BT /F1 10 Tf 54 556.00 Td (- Red flag adjustment.) Tj ET
-BT /F1 10 Tf 54 540.00 Td (- Positive signal adjustment.) Tj ET
-BT /F1 10 Tf 54 518.00 Td (The final score is clamped between 0 and 100.) Tj ET
-BT /F1 10 Tf 54 495.00 Td (The price score favors lower prices but is not the only factor. Serious risk can drag down a) Tj ET
-BT /F1 10 Tf 54 478.00 Td (low-priced listing.) Tj ET
-BT /F2 12 Tf 54 447.00 Td (Risk Level) Tj ET
-BT /F1 10 Tf 54 421.00 Td (Risk level is High when:) Tj ET
-BT /F1 10 Tf 54 398.00 Td (- Scam risk is high.) Tj ET
-BT /F1 10 Tf 54 382.00 Td (- Reliability is very low.) Tj ET
-BT /F1 10 Tf 54 366.00 Td (- Condition text has poor/broken/locked terms.) Tj ET
-BT /F1 10 Tf 54 350.00 Td (- Any high-severity red flag exists.) Tj ET
-BT /F1 10 Tf 54 328.00 Td (Risk level is Medium when:) Tj ET
-BT /F1 10 Tf 54 305.00 Td (- Scam risk is moderate.) Tj ET
-BT /F1 10 Tf 54 289.00 Td (- Reliability is moderate/low.) Tj ET
-BT /F1 10 Tf 54 273.00 Td (- Any red flags are present.) Tj ET
-BT /F1 10 Tf 54 251.00 Td (Otherwise, risk level is Low.) Tj ET
-BT /F2 12 Tf 54 220.00 Td (Confidence Score) Tj ET
-BT /F1 10 Tf 54 194.00 Td (Confidence score is based on:) Tj ET
-BT /F1 10 Tf 54 171.00 Td (- Length/detail of listing text.) Tj ET
-BT /F1 10 Tf 54 155.00 Td (- Whether asking price is inside the used low/high range.) Tj ET
-BT /F1 10 Tf 54 139.00 Td (- Number of positive proof signals.) Tj ET
-BT /F1 10 Tf 54 123.00 Td (- Red flag penalties.) Tj ET
-BT /F1 10 Tf 54 101.00 Td (The score is clamped from 30 to 96.) Tj ET
-BT /F1 10 Tf 54 78.00 Td (Longer listings with real proof signals produce higher confidence. Sparse listings with no) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- If the item is 20 percent or more below fair price and effective scam risk is low enough, it) Tj ET
+BT /F1 10 Tf 54 722.00 Td (  can become Great deal.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- If price is at least 15 percent above fair price, it can become Overpriced.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- If price is roughly within 10 percent of fair value, it can become Fair price.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (- If price looks low but risk is medium/high, it can become Risky purchase.) Tj ET
+BT /F1 10 Tf 54 652.00 Td (This is why a very cheap listing may not receive "Great deal." Risk can override price.) Tj ET
+BT /F2 12 Tf 54 621.00 Td (Deal Score) Tj ET
+BT /F1 10 Tf 54 595.00 Td (The deal score is calculated from:) Tj ET
+BT /F1 10 Tf 54 572.00 Td (- Price score.) Tj ET
+BT /F1 10 Tf 54 556.00 Td (- Reliability adjustment.) Tj ET
+BT /F1 10 Tf 54 540.00 Td (- Scam adjustment.) Tj ET
+BT /F1 10 Tf 54 524.00 Td (- Condition adjustment.) Tj ET
+BT /F1 10 Tf 54 508.00 Td (- Red flag adjustment.) Tj ET
+BT /F1 10 Tf 54 492.00 Td (- Positive signal adjustment.) Tj ET
+BT /F1 10 Tf 54 470.00 Td (The final score is clamped between 0 and 100.) Tj ET
+BT /F1 10 Tf 54 447.00 Td (The price score favors lower prices but is not the only factor. Serious risk can drag down a) Tj ET
+BT /F1 10 Tf 54 430.00 Td (low-priced listing.) Tj ET
+BT /F2 12 Tf 54 399.00 Td (Risk Level) Tj ET
+BT /F1 10 Tf 54 373.00 Td (Risk level is High when:) Tj ET
+BT /F1 10 Tf 54 350.00 Td (- Scam risk is high.) Tj ET
+BT /F1 10 Tf 54 334.00 Td (- Reliability is very low.) Tj ET
+BT /F1 10 Tf 54 318.00 Td (- Condition text has poor/broken/locked terms.) Tj ET
+BT /F1 10 Tf 54 302.00 Td (- Any high-severity red flag exists.) Tj ET
+BT /F1 10 Tf 54 280.00 Td (Risk level is Medium when:) Tj ET
+BT /F1 10 Tf 54 257.00 Td (- Scam risk is moderate.) Tj ET
+BT /F1 10 Tf 54 241.00 Td (- Reliability is moderate/low.) Tj ET
+BT /F1 10 Tf 54 225.00 Td (- Any red flags are present.) Tj ET
+BT /F1 10 Tf 54 203.00 Td (Otherwise, risk level is Low.) Tj ET
+BT /F2 12 Tf 54 172.00 Td (Confidence Score) Tj ET
+BT /F1 10 Tf 54 146.00 Td (Confidence score is based on:) Tj ET
+BT /F1 10 Tf 54 123.00 Td (- Length/detail of listing text.) Tj ET
+BT /F1 10 Tf 54 107.00 Td (- Whether asking price is inside the used low/high range.) Tj ET
+BT /F1 10 Tf 54 91.00 Td (- Number of positive proof signals.) Tj ET
+BT /F1 10 Tf 54 75.00 Td (- Red flag penalties.) Tj ET
 endstream
 endobj
 39 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 38 0 R >>
 endobj
 40 0 obj
-<< /Length 2772 >>
+<< /Length 2791 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (seller detail produce lower confidence.) Tj ET
-BT /F2 12 Tf 54 707.00 Td (Suggested Offer Range) Tj ET
-BT /F1 10 Tf 54 681.00 Td (The offer range is based on:) Tj ET
-BT /F1 10 Tf 54 658.00 Td (- Asking/link price.) Tj ET
-BT /F1 10 Tf 54 642.00 Td (- Fair price.) Tj ET
-BT /F1 10 Tf 54 626.00 Td (- Used low.) Tj ET
-BT /F1 10 Tf 54 610.00 Td (- Used high.) Tj ET
-BT /F1 10 Tf 54 594.00 Td (- Condition risk.) Tj ET
-BT /F1 10 Tf 54 572.00 Td (If the asking price is below fair value, the suggested offer range is usually near the asking) Tj ET
-BT /F1 10 Tf 54 555.00 Td (price, roughly 92 percent to 98 percent of asking, bounded by used low and fair price.) Tj ET
-BT /F1 10 Tf 54 532.00 Td (If the asking price is above fair value, the suggested offer range is based on fair value,) Tj ET
-BT /F1 10 Tf 54 515.00 Td (usually around 85 percent to 95 percent of fair value, bounded by used low and used high.) Tj ET
-BT /F1 10 Tf 54 492.00 Td (If condition is poor, the base offer range is lower.) Tj ET
-BT /F2 12 Tf 54 461.00 Td (Negotiation Tip) Tj ET
-BT /F1 10 Tf 54 435.00 Td (Negotiation tip changes based on risk and price:) Tj ET
-BT /F1 10 Tf 54 412.00 Td (- High risk: Do not negotiate until the seller proves ownership and shows the item working.) Tj ET
-BT /F1 10 Tf 54 396.00 Td (- Overpriced: Open below fair value and mention recent sold prices, not asking prices.) Tj ET
-BT /F1 10 Tf 54 380.00 Td (- Underpriced: Ask verification questions first, then move quickly if it checks out.) Tj ET
-BT /F1 10 Tf 54 364.00 Td (- Fair price: Offer slightly under fair value and leave room to meet in the middle.) Tj ET
-BT /F2 12 Tf 54 334.00 Td (Next Steps) Tj ET
-BT /F1 10 Tf 54 308.00 Td (Next steps change based on risk:) Tj ET
-BT /F1 10 Tf 54 285.00 Td (High risk next steps:) Tj ET
-BT /F1 10 Tf 54 262.00 Td (- Ask for a fresh working video with today's date or your name in the shot.) Tj ET
-BT /F1 10 Tf 54 246.00 Td (- Get proof of ownership, receipt, or serial number before meeting.) Tj ET
-BT /F1 10 Tf 54 230.00 Td (- Meet publicly and do not send payment before inspection.) Tj ET
-BT /F1 10 Tf 54 208.00 Td (Listings with red flags:) Tj ET
-BT /F1 10 Tf 54 185.00 Td (- Clarify every red flag before making an offer.) Tj ET
-BT /F1 10 Tf 54 169.00 Td (- Ask category-specific inspection questions.) Tj ET
-BT /F1 10 Tf 54 153.00 Td (- Use the suggested offer range only after the seller answers clearly.) Tj ET
-BT /F1 10 Tf 54 131.00 Td (Overpriced listings:) Tj ET
-BT /F1 10 Tf 54 108.00 Td (- Send a fair offer with one sentence explaining the market range.) Tj ET
-BT /F1 10 Tf 54 92.00 Td (- Ask for proof of condition before driving there.) Tj ET
-BT /F1 10 Tf 54 76.00 Td (- Be ready to pass if the seller will not move on price.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (The score is clamped from 30 to 96.) Tj ET
+BT /F1 10 Tf 54 715.00 Td (Longer listings with real proof signals produce higher confidence. Sparse listings with no) Tj ET
+BT /F1 10 Tf 54 698.00 Td (seller detail produce lower confidence.) Tj ET
+BT /F2 12 Tf 54 667.00 Td (Suggested Offer Range) Tj ET
+BT /F1 10 Tf 54 641.00 Td (The offer range is based on:) Tj ET
+BT /F1 10 Tf 54 618.00 Td (- Asking/link price.) Tj ET
+BT /F1 10 Tf 54 602.00 Td (- Fair price.) Tj ET
+BT /F1 10 Tf 54 586.00 Td (- Used low.) Tj ET
+BT /F1 10 Tf 54 570.00 Td (- Used high.) Tj ET
+BT /F1 10 Tf 54 554.00 Td (- Condition risk.) Tj ET
+BT /F1 10 Tf 54 532.00 Td (If the asking price is below fair value, the suggested offer range is usually near the asking) Tj ET
+BT /F1 10 Tf 54 515.00 Td (price, roughly 92 percent to 98 percent of asking, bounded by used low and fair price.) Tj ET
+BT /F1 10 Tf 54 492.00 Td (If the asking price is above fair value, the suggested offer range is based on fair value,) Tj ET
+BT /F1 10 Tf 54 475.00 Td (usually around 85 percent to 95 percent of fair value, bounded by used low and used high.) Tj ET
+BT /F1 10 Tf 54 452.00 Td (If condition is poor, the base offer range is lower.) Tj ET
+BT /F2 12 Tf 54 421.00 Td (Negotiation Tip) Tj ET
+BT /F1 10 Tf 54 395.00 Td (Negotiation tip changes based on risk and price:) Tj ET
+BT /F1 10 Tf 54 372.00 Td (- High risk: Do not negotiate until the seller proves ownership and shows the item working.) Tj ET
+BT /F1 10 Tf 54 356.00 Td (- Overpriced: Open below fair value and mention recent sold prices, not asking prices.) Tj ET
+BT /F1 10 Tf 54 340.00 Td (- Underpriced: Ask verification questions first, then move quickly if it checks out.) Tj ET
+BT /F1 10 Tf 54 324.00 Td (- Fair price: Offer slightly under fair value and leave room to meet in the middle.) Tj ET
+BT /F2 12 Tf 54 294.00 Td (Next Steps) Tj ET
+BT /F1 10 Tf 54 268.00 Td (Next steps change based on risk:) Tj ET
+BT /F1 10 Tf 54 245.00 Td (High risk next steps:) Tj ET
+BT /F1 10 Tf 54 222.00 Td (- Ask for a fresh working video with today's date or your name in the shot.) Tj ET
+BT /F1 10 Tf 54 206.00 Td (- Get proof of ownership, receipt, or serial number before meeting.) Tj ET
+BT /F1 10 Tf 54 190.00 Td (- Meet publicly and do not send payment before inspection.) Tj ET
+BT /F1 10 Tf 54 168.00 Td (Listings with red flags:) Tj ET
+BT /F1 10 Tf 54 145.00 Td (- Clarify every red flag before making an offer.) Tj ET
+BT /F1 10 Tf 54 129.00 Td (- Ask category-specific inspection questions.) Tj ET
+BT /F1 10 Tf 54 113.00 Td (- Use the suggested offer range only after the seller answers clearly.) Tj ET
+BT /F1 10 Tf 54 91.00 Td (Overpriced listings:) Tj ET
+BT /F1 10 Tf 54 68.00 Td (- Send a fair offer with one sentence explaining the market range.) Tj ET
 endstream
 endobj
 41 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 40 0 R >>
 endobj
 42 0 obj
-<< /Length 2035 >>
+<< /Length 2108 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (Lower-risk listings:) Tj ET
-BT /F1 10 Tf 54 715.00 Td (- Ask for proof it works and verify ownership.) Tj ET
-BT /F1 10 Tf 54 699.00 Td (- Schedule a public meetup where you can inspect it.) Tj ET
-BT /F1 10 Tf 54 683.00 Td (- Use the checklist before handing over payment.) Tj ET
-BT /F2 15 Tf 54 649.00 Td (Product Search) Tj ET
-BT /F1 10 Tf 54 619.00 Td (The search page is available at:) Tj ET
-BT /F3 9 Tf 54 596.00 Td (/search) Tj ET
-BT /F1 10 Tf 54 575.00 Td (Search is secondary to the listing analyzer, but it still matters as a reference tool.) Tj ET
-BT /F1 10 Tf 54 552.00 Td (The search page lets users:) Tj ET
-BT /F1 10 Tf 54 529.00 Td (- Search by product name.) Tj ET
-BT /F1 10 Tf 54 513.00 Td (- Search by category.) Tj ET
-BT /F1 10 Tf 54 497.00 Td (- Search by brand.) Tj ET
-BT /F1 10 Tf 54 481.00 Td (- Search by model.) Tj ET
-BT /F1 10 Tf 54 465.00 Td (- Search by year.) Tj ET
-BT /F1 10 Tf 54 449.00 Td (- Search by common issue text.) Tj ET
-BT /F1 10 Tf 54 433.00 Td (- Filter by category.) Tj ET
-BT /F1 10 Tf 54 417.00 Td (- Filter by minimum year.) Tj ET
-BT /F1 10 Tf 54 395.00 Td (Supported categories are:) Tj ET
-BT /F1 10 Tf 54 372.00 Td (- Cameras.) Tj ET
-BT /F1 10 Tf 54 356.00 Td (- Laptops.) Tj ET
-BT /F1 10 Tf 54 340.00 Td (- Bikes.) Tj ET
-BT /F1 10 Tf 54 324.00 Td (- Monitors.) Tj ET
-BT /F1 10 Tf 54 302.00 Td (The search logic lives in:) Tj ET
-BT /F3 9 Tf 54 279.00 Td (lib/search.ts) Tj ET
-BT /F1 10 Tf 54 258.00 Td (Search checks a combined lowercased text string containing:) Tj ET
-BT /F1 10 Tf 54 235.00 Td (- Category.) Tj ET
-BT /F1 10 Tf 54 219.00 Td (- Brand.) Tj ET
-BT /F1 10 Tf 54 203.00 Td (- Model.) Tj ET
-BT /F1 10 Tf 54 187.00 Td (- Year.) Tj ET
-BT /F1 10 Tf 54 171.00 Td (- Brand plus model.) Tj ET
-BT /F1 10 Tf 54 155.00 Td (- Common issue text.) Tj ET
-BT /F1 10 Tf 54 133.00 Td (The search suggestions are:) Tj ET
-BT /F1 10 Tf 54 110.00 Td (- Sony A6400.) Tj ET
-BT /F1 10 Tf 54 94.00 Td (- MacBook Air M2.) Tj ET
-BT /F1 10 Tf 54 78.00 Td (- Trek Marlin 5.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Ask for proof of condition before driving there.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Be ready to pass if the seller will not move on price.) Tj ET
+BT /F1 10 Tf 54 700.00 Td (Lower-risk listings:) Tj ET
+BT /F1 10 Tf 54 677.00 Td (- Ask for proof it works and verify ownership.) Tj ET
+BT /F1 10 Tf 54 661.00 Td (- Schedule a public meetup where you can inspect it.) Tj ET
+BT /F1 10 Tf 54 645.00 Td (- Use the checklist before handing over payment.) Tj ET
+BT /F2 15 Tf 54 611.00 Td (Product Search) Tj ET
+BT /F1 10 Tf 54 581.00 Td (The search page is available at:) Tj ET
+BT /F3 9 Tf 54 558.00 Td (/search) Tj ET
+BT /F1 10 Tf 54 537.00 Td (Search is secondary to the listing analyzer, but it still matters as a reference tool.) Tj ET
+BT /F1 10 Tf 54 514.00 Td (The search page lets users:) Tj ET
+BT /F1 10 Tf 54 491.00 Td (- Search by product name.) Tj ET
+BT /F1 10 Tf 54 475.00 Td (- Search by category.) Tj ET
+BT /F1 10 Tf 54 459.00 Td (- Search by brand.) Tj ET
+BT /F1 10 Tf 54 443.00 Td (- Search by model.) Tj ET
+BT /F1 10 Tf 54 427.00 Td (- Search by year.) Tj ET
+BT /F1 10 Tf 54 411.00 Td (- Search by common issue text.) Tj ET
+BT /F1 10 Tf 54 395.00 Td (- Filter by category.) Tj ET
+BT /F1 10 Tf 54 379.00 Td (- Filter by minimum year.) Tj ET
+BT /F1 10 Tf 54 357.00 Td (Supported categories are:) Tj ET
+BT /F1 10 Tf 54 334.00 Td (- Cameras.) Tj ET
+BT /F1 10 Tf 54 318.00 Td (- Laptops.) Tj ET
+BT /F1 10 Tf 54 302.00 Td (- Bikes.) Tj ET
+BT /F1 10 Tf 54 286.00 Td (- Monitors.) Tj ET
+BT /F1 10 Tf 54 264.00 Td (The search logic lives in:) Tj ET
+BT /F3 9 Tf 54 241.00 Td (lib/search.ts) Tj ET
+BT /F1 10 Tf 54 220.00 Td (Search checks a combined lowercased text string containing:) Tj ET
+BT /F1 10 Tf 54 197.00 Td (- Category.) Tj ET
+BT /F1 10 Tf 54 181.00 Td (- Brand.) Tj ET
+BT /F1 10 Tf 54 165.00 Td (- Model.) Tj ET
+BT /F1 10 Tf 54 149.00 Td (- Year.) Tj ET
+BT /F1 10 Tf 54 133.00 Td (- Brand plus model.) Tj ET
+BT /F1 10 Tf 54 117.00 Td (- Common issue text.) Tj ET
+BT /F1 10 Tf 54 95.00 Td (The search suggestions are:) Tj ET
+BT /F1 10 Tf 54 72.00 Td (- Sony A6400.) Tj ET
 endstream
 endobj
 43 0 obj
@@ -854,788 +854,790 @@ endobj
 44 0 obj
 << /Length 2588 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Dell Ultrasharp 27.) Tj ET
-BT /F1 10 Tf 54 716.00 Td (Search results are displayed as product cards. Each card shows:) Tj ET
-BT /F1 10 Tf 54 693.00 Td (- Bookmark button in the top-right corner.) Tj ET
-BT /F1 10 Tf 54 677.00 Td (- Category.) Tj ET
-BT /F1 10 Tf 54 661.00 Td (- Brand and model.) Tj ET
-BT /F1 10 Tf 54 645.00 Td (- Year.) Tj ET
-BT /F1 10 Tf 54 629.00 Td (- Recommendation badge.) Tj ET
-BT /F1 10 Tf 54 613.00 Td (- Used average price.) Tj ET
-BT /F1 10 Tf 54 597.00 Td (- Fair price.) Tj ET
-BT /F1 10 Tf 54 581.00 Td (- MSRP drop/depreciation.) Tj ET
-BT /F1 10 Tf 54 565.00 Td (- Reliability score.) Tj ET
-BT /F1 10 Tf 54 549.00 Td (- Demand score.) Tj ET
-BT /F1 10 Tf 54 533.00 Td (- Scam score.) Tj ET
-BT /F1 10 Tf 54 517.00 Td (- Short recommendation explanation.) Tj ET
-BT /F1 10 Tf 54 501.00 Td (- Link to the product insight page.) Tj ET
-BT /F1 10 Tf 54 479.00 Td (The bookmark button saves the product guide into the Saved tab with the product's current fair) Tj ET
-BT /F1 10 Tf 54 462.00 Td (price, "Other" as the source, and a note that it was saved from the price guide. If Supabase is) Tj ET
-BT /F1 10 Tf 54 445.00 Td (configured and the user is logged in, it writes to `saved_items`; otherwise it saves locally in) Tj ET
-BT /F1 10 Tf 54 428.00 Td (browser local storage. The same product-card bookmark appears on the homepage's popular buyer) Tj ET
-BT /F1 10 Tf 54 411.00 Td (guides and on related product cards.) Tj ET
-BT /F1 10 Tf 54 388.00 Td (If no products match, the page shows an empty state telling the user to try a broader model) Tj ET
-BT /F1 10 Tf 54 371.00 Td (name, brand, category, or remove the year filter.) Tj ET
-BT /F2 15 Tf 54 336.00 Td (Product Insight Pages) Tj ET
-BT /F1 10 Tf 54 306.00 Td (Product pages are available at:) Tj ET
-BT /F3 9 Tf 54 283.00 Td (/products/[id]) Tj ET
-BT /F1 10 Tf 54 262.00 Td (Each product page is generated from mock product data. The current app uses static params for) Tj ET
-BT /F1 10 Tf 54 245.00 Td (all mock product ids.) Tj ET
-BT /F1 10 Tf 54 222.00 Td (Each product page includes:) Tj ET
-BT /F1 10 Tf 54 199.00 Td (- Back to search link.) Tj ET
-BT /F1 10 Tf 54 183.00 Td (- Category pill.) Tj ET
-BT /F1 10 Tf 54 167.00 Td (- Year.) Tj ET
-BT /F1 10 Tf 54 151.00 Td (- Product brand and model.) Tj ET
-BT /F1 10 Tf 54 135.00 Td (- Recommendation explanation.) Tj ET
-BT /F1 10 Tf 54 119.00 Td (- Recommendation card.) Tj ET
-BT /F1 10 Tf 54 103.00 Td (- Reliability score.) Tj ET
-BT /F1 10 Tf 54 87.00 Td (- Demand score.) Tj ET
-BT /F1 10 Tf 54 71.00 Td (- Scam risk score.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- MacBook Air M2.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Trek Marlin 5.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- Dell Ultrasharp 27.) Tj ET
+BT /F1 10 Tf 54 684.00 Td (Search results are displayed as product cards. Each card shows:) Tj ET
+BT /F1 10 Tf 54 661.00 Td (- Bookmark button in the top-right corner.) Tj ET
+BT /F1 10 Tf 54 645.00 Td (- Category.) Tj ET
+BT /F1 10 Tf 54 629.00 Td (- Brand and model.) Tj ET
+BT /F1 10 Tf 54 613.00 Td (- Year.) Tj ET
+BT /F1 10 Tf 54 597.00 Td (- Recommendation badge.) Tj ET
+BT /F1 10 Tf 54 581.00 Td (- Used average price.) Tj ET
+BT /F1 10 Tf 54 565.00 Td (- Fair price.) Tj ET
+BT /F1 10 Tf 54 549.00 Td (- MSRP drop/depreciation.) Tj ET
+BT /F1 10 Tf 54 533.00 Td (- Reliability score.) Tj ET
+BT /F1 10 Tf 54 517.00 Td (- Demand score.) Tj ET
+BT /F1 10 Tf 54 501.00 Td (- Scam score.) Tj ET
+BT /F1 10 Tf 54 485.00 Td (- Short recommendation explanation.) Tj ET
+BT /F1 10 Tf 54 469.00 Td (- Link to the product insight page.) Tj ET
+BT /F1 10 Tf 54 447.00 Td (The bookmark button saves the product guide into the Saved tab with the product's current fair) Tj ET
+BT /F1 10 Tf 54 430.00 Td (price, "Other" as the source, and a note that it was saved from the price guide. If Supabase is) Tj ET
+BT /F1 10 Tf 54 413.00 Td (configured and the user is logged in, it writes to `saved_items`; otherwise it saves locally in) Tj ET
+BT /F1 10 Tf 54 396.00 Td (browser local storage. The same product-card bookmark appears on the homepage's popular buyer) Tj ET
+BT /F1 10 Tf 54 379.00 Td (guides and on related product cards.) Tj ET
+BT /F1 10 Tf 54 356.00 Td (If no products match, the page shows an empty state telling the user to try a broader model) Tj ET
+BT /F1 10 Tf 54 339.00 Td (name, brand, category, or remove the year filter.) Tj ET
+BT /F2 15 Tf 54 304.00 Td (Product Insight Pages) Tj ET
+BT /F1 10 Tf 54 274.00 Td (Product pages are available at:) Tj ET
+BT /F3 9 Tf 54 251.00 Td (/products/[id]) Tj ET
+BT /F1 10 Tf 54 230.00 Td (Each product page is generated from mock product data. The current app uses static params for) Tj ET
+BT /F1 10 Tf 54 213.00 Td (all mock product ids.) Tj ET
+BT /F1 10 Tf 54 190.00 Td (Each product page includes:) Tj ET
+BT /F1 10 Tf 54 167.00 Td (- Back to search link.) Tj ET
+BT /F1 10 Tf 54 151.00 Td (- Category pill.) Tj ET
+BT /F1 10 Tf 54 135.00 Td (- Year.) Tj ET
+BT /F1 10 Tf 54 119.00 Td (- Product brand and model.) Tj ET
+BT /F1 10 Tf 54 103.00 Td (- Recommendation explanation.) Tj ET
+BT /F1 10 Tf 54 87.00 Td (- Recommendation card.) Tj ET
+BT /F1 10 Tf 54 71.00 Td (- Reliability score.) Tj ET
 endstream
 endobj
 45 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 44 0 R >>
 endobj
 46 0 obj
-<< /Length 2105 >>
+<< /Length 2123 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Price summary.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- Depreciation chart.) Tj ET
-BT /F1 10 Tf 54 706.00 Td (- Common problems.) Tj ET
-BT /F1 10 Tf 54 690.00 Td (- Seller questions.) Tj ET
-BT /F1 10 Tf 54 674.00 Td (- Scam warnings.) Tj ET
-BT /F1 10 Tf 54 658.00 Td (- Buying checklist.) Tj ET
-BT /F1 10 Tf 54 642.00 Td (- Embedded listing analyzer preloaded with that product.) Tj ET
-BT /F1 10 Tf 54 626.00 Td (- Save listing form.) Tj ET
-BT /F1 10 Tf 54 610.00 Td (- Best years/models.) Tj ET
-BT /F1 10 Tf 54 594.00 Td (- Models to avoid.) Tj ET
-BT /F1 10 Tf 54 578.00 Td (- Mock marketplace listings.) Tj ET
-BT /F1 10 Tf 54 562.00 Td (- Similar alternatives.) Tj ET
-BT /F1 10 Tf 54 540.00 Td (The product insight page is useful when a user wants a reference guide before or while checking) Tj ET
-BT /F1 10 Tf 54 523.00 Td (a specific listing.) Tj ET
-BT /F2 12 Tf 54 492.00 Td (Price Summary) Tj ET
-BT /F1 10 Tf 54 466.00 Td (The price summary shows:) Tj ET
-BT /F1 10 Tf 54 443.00 Td (- Original MSRP.) Tj ET
-BT /F1 10 Tf 54 427.00 Td (- Used average.) Tj ET
-BT /F1 10 Tf 54 411.00 Td (- Fair price range.) Tj ET
-BT /F1 10 Tf 54 395.00 Td (- Depreciation.) Tj ET
-BT /F1 10 Tf 54 373.00 Td (It labels the price summary as:) Tj ET
-BT /F1 10 Tf 54 350.00 Td (- Strong used value.) Tj ET
-BT /F1 10 Tf 54 334.00 Td (- Normal market price.) Tj ET
-BT /F1 10 Tf 54 318.00 Td (- Sellers are asking high.) Tj ET
-BT /F1 10 Tf 54 296.00 Td (The label is based on used average compared with fair price.) Tj ET
-BT /F2 12 Tf 54 265.00 Td (Depreciation Chart) Tj ET
-BT /F1 10 Tf 54 239.00 Td (The depreciation chart uses Recharts and data from:) Tj ET
-BT /F3 9 Tf 54 216.00 Td (lib/depreciation.ts) Tj ET
-BT /F1 10 Tf 54 195.00 Td (It shows estimated value over time with a line chart.) Tj ET
-BT /F2 12 Tf 54 164.00 Td (Common Problems) Tj ET
-BT /F1 10 Tf 54 138.00 Td (The common problems section shows product-specific inspection concerns with severity labels:) Tj ET
-BT /F1 10 Tf 54 115.00 Td (- Low.) Tj ET
-BT /F1 10 Tf 54 99.00 Td (- Medium.) Tj ET
-BT /F1 10 Tf 54 83.00 Td (- High.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Demand score.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Scam risk score.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- Price summary.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- Depreciation chart.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (- Common problems.) Tj ET
+BT /F1 10 Tf 54 658.00 Td (- Seller questions.) Tj ET
+BT /F1 10 Tf 54 642.00 Td (- Scam warnings.) Tj ET
+BT /F1 10 Tf 54 626.00 Td (- Buying checklist.) Tj ET
+BT /F1 10 Tf 54 610.00 Td (- Embedded listing analyzer preloaded with that product.) Tj ET
+BT /F1 10 Tf 54 594.00 Td (- Save listing form.) Tj ET
+BT /F1 10 Tf 54 578.00 Td (- Best years/models.) Tj ET
+BT /F1 10 Tf 54 562.00 Td (- Models to avoid.) Tj ET
+BT /F1 10 Tf 54 546.00 Td (- Mock marketplace listings.) Tj ET
+BT /F1 10 Tf 54 530.00 Td (- Similar alternatives.) Tj ET
+BT /F1 10 Tf 54 508.00 Td (The product insight page is useful when a user wants a reference guide before or while checking) Tj ET
+BT /F1 10 Tf 54 491.00 Td (a specific listing.) Tj ET
+BT /F2 12 Tf 54 460.00 Td (Price Summary) Tj ET
+BT /F1 10 Tf 54 434.00 Td (The price summary shows:) Tj ET
+BT /F1 10 Tf 54 411.00 Td (- Original MSRP.) Tj ET
+BT /F1 10 Tf 54 395.00 Td (- Used average.) Tj ET
+BT /F1 10 Tf 54 379.00 Td (- Fair price range.) Tj ET
+BT /F1 10 Tf 54 363.00 Td (- Depreciation.) Tj ET
+BT /F1 10 Tf 54 341.00 Td (It labels the price summary as:) Tj ET
+BT /F1 10 Tf 54 318.00 Td (- Strong used value.) Tj ET
+BT /F1 10 Tf 54 302.00 Td (- Normal market price.) Tj ET
+BT /F1 10 Tf 54 286.00 Td (- Sellers are asking high.) Tj ET
+BT /F1 10 Tf 54 264.00 Td (The label is based on used average compared with fair price.) Tj ET
+BT /F2 12 Tf 54 233.00 Td (Depreciation Chart) Tj ET
+BT /F1 10 Tf 54 207.00 Td (The depreciation chart uses Recharts and data from:) Tj ET
+BT /F3 9 Tf 54 184.00 Td (lib/depreciation.ts) Tj ET
+BT /F1 10 Tf 54 163.00 Td (It shows estimated value over time with a line chart.) Tj ET
+BT /F2 12 Tf 54 132.00 Td (Common Problems) Tj ET
+BT /F1 10 Tf 54 106.00 Td (The common problems section shows product-specific inspection concerns with severity labels:) Tj ET
+BT /F1 10 Tf 54 83.00 Td (- Low.) Tj ET
 endstream
 endobj
 47 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 46 0 R >>
 endobj
 48 0 obj
-<< /Length 2491 >>
+<< /Length 2466 >>
 stream
-BT /F2 12 Tf 54 738.00 Td (Seller Questions) Tj ET
-BT /F1 10 Tf 54 712.00 Td (Each product has category-specific seller questions. These are intended to help the buyer ask) Tj ET
-BT /F1 10 Tf 54 695.00 Td (about ownership, condition, hidden defects, accessories, and proof before meeting.) Tj ET
-BT /F2 12 Tf 54 664.00 Td (Scam Warnings) Tj ET
-BT /F1 10 Tf 54 638.00 Td (The scam warning section shows a global list of common used-market red flags:) Tj ET
-BT /F1 10 Tf 54 615.00 Td (- Price far below normal market value.) Tj ET
-BT /F1 10 Tf 54 599.00 Td (- Seller refuses public meetup or local pickup.) Tj ET
-BT /F1 10 Tf 54 583.00 Td (- Listing uses stock photos only.) Tj ET
-BT /F1 10 Tf 54 567.00 Td (- Seller will not share serial number or proof of ownership.) Tj ET
-BT /F1 10 Tf 54 551.00 Td (- Seller adds urgency pressure or says other buyers are waiting.) Tj ET
-BT /F1 10 Tf 54 535.00 Td (- Seller asks for payment before pickup.) Tj ET
-BT /F1 10 Tf 54 519.00 Td (- Answers are vague, copied, or avoid basic condition questions.) Tj ET
-BT /F2 12 Tf 54 489.00 Td (Buying Checklist) Tj ET
-BT /F1 10 Tf 54 463.00 Td (Each product has a category-specific buying checklist. The checklist is meant to be used before) Tj ET
-BT /F1 10 Tf 54 446.00 Td (payment or during a meetup.) Tj ET
-BT /F2 12 Tf 54 415.00 Td (Embedded Listing Analyzer) Tj ET
-BT /F1 10 Tf 54 389.00 Td (The product page includes the same listing analyzer used on `/submit`, but preloaded with the) Tj ET
-BT /F1 10 Tf 54 372.00 Td (current product. This means the user can read the product guide and immediately analyze a seller) Tj ET
-BT /F1 10 Tf 54 355.00 Td (listing for that same model.) Tj ET
-BT /F2 12 Tf 54 324.00 Td (Save Listing) Tj ET
-BT /F1 10 Tf 54 298.00 Td (The save form lets the user track a listing for that product. It asks for:) Tj ET
-BT /F1 10 Tf 54 275.00 Td (- Asking price.) Tj ET
-BT /F1 10 Tf 54 259.00 Td (- Marketplace.) Tj ET
-BT /F1 10 Tf 54 243.00 Td (- Seller location.) Tj ET
-BT /F1 10 Tf 54 227.00 Td (- Notes.) Tj ET
-BT /F1 10 Tf 54 205.00 Td (If Supabase is configured and the user is logged in, the saved item is written to the Supabase) Tj ET
-BT /F1 10 Tf 54 188.00 Td (`saved_items` table. Otherwise, it is saved locally in browser local storage.) Tj ET
-BT /F2 15 Tf 54 153.00 Td (Saved Items) Tj ET
-BT /F1 10 Tf 54 123.00 Td (The saved items page is available at:) Tj ET
-BT /F3 9 Tf 54 100.00 Td (/saved) Tj ET
-BT /F1 10 Tf 54 79.00 Td (Saved item behavior lives mainly in:) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Medium.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- High.) Tj ET
+BT /F2 12 Tf 54 692.00 Td (Seller Questions) Tj ET
+BT /F1 10 Tf 54 666.00 Td (Each product has category-specific seller questions. These are intended to help the buyer ask) Tj ET
+BT /F1 10 Tf 54 649.00 Td (about ownership, condition, hidden defects, accessories, and proof before meeting.) Tj ET
+BT /F2 12 Tf 54 618.00 Td (Scam Warnings) Tj ET
+BT /F1 10 Tf 54 592.00 Td (The scam warning section shows a global list of common used-market red flags:) Tj ET
+BT /F1 10 Tf 54 569.00 Td (- Price far below normal market value.) Tj ET
+BT /F1 10 Tf 54 553.00 Td (- Seller refuses public meetup or local pickup.) Tj ET
+BT /F1 10 Tf 54 537.00 Td (- Listing uses stock photos only.) Tj ET
+BT /F1 10 Tf 54 521.00 Td (- Seller will not share serial number or proof of ownership.) Tj ET
+BT /F1 10 Tf 54 505.00 Td (- Seller adds urgency pressure or says other buyers are waiting.) Tj ET
+BT /F1 10 Tf 54 489.00 Td (- Seller asks for payment before pickup.) Tj ET
+BT /F1 10 Tf 54 473.00 Td (- Answers are vague, copied, or avoid basic condition questions.) Tj ET
+BT /F2 12 Tf 54 443.00 Td (Buying Checklist) Tj ET
+BT /F1 10 Tf 54 417.00 Td (Each product has a category-specific buying checklist. The checklist is meant to be used before) Tj ET
+BT /F1 10 Tf 54 400.00 Td (payment or during a meetup.) Tj ET
+BT /F2 12 Tf 54 369.00 Td (Embedded Listing Analyzer) Tj ET
+BT /F1 10 Tf 54 343.00 Td (The product page includes the same listing analyzer used on `/submit`, but preloaded with the) Tj ET
+BT /F1 10 Tf 54 326.00 Td (current product. This means the user can read the product guide and immediately analyze a seller) Tj ET
+BT /F1 10 Tf 54 309.00 Td (listing for that same model.) Tj ET
+BT /F2 12 Tf 54 278.00 Td (Save Listing) Tj ET
+BT /F1 10 Tf 54 252.00 Td (The save form lets the user track a listing for that product. It asks for:) Tj ET
+BT /F1 10 Tf 54 229.00 Td (- Asking price.) Tj ET
+BT /F1 10 Tf 54 213.00 Td (- Marketplace.) Tj ET
+BT /F1 10 Tf 54 197.00 Td (- Seller location.) Tj ET
+BT /F1 10 Tf 54 181.00 Td (- Notes.) Tj ET
+BT /F1 10 Tf 54 159.00 Td (If Supabase is configured and the user is logged in, the saved item is written to the Supabase) Tj ET
+BT /F1 10 Tf 54 142.00 Td (`saved_items` table. Otherwise, it is saved locally in browser local storage.) Tj ET
+BT /F2 15 Tf 54 107.00 Td (Saved Items) Tj ET
+BT /F1 10 Tf 54 77.00 Td (The saved items page is available at:) Tj ET
 endstream
 endobj
 49 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 48 0 R >>
 endobj
 50 0 obj
-<< /Length 2267 >>
+<< /Length 2272 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- `components/SavedItemsClient.tsx`) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- `components/SavedItemCard.tsx`) Tj ET
-BT /F1 10 Tf 54 706.00 Td (- `lib/savedItemsStorage.ts`) Tj ET
-BT /F1 10 Tf 54 684.00 Td (Saved items can come from:) Tj ET
-BT /F1 10 Tf 54 661.00 Td (- Supabase, if environment variables are configured and the user is logged in.) Tj ET
-BT /F1 10 Tf 54 645.00 Td (- Browser local storage, if Supabase is not configured or the user is not logged in.) Tj ET
-BT /F1 10 Tf 54 629.00 Td (- Product-card bookmarks from search, homepage buyer guides, and related product cards.) Tj ET
-BT /F1 10 Tf 54 613.00 Td (- Analyzer verdict saves from the result card after checking a resale or retail link.) Tj ET
-BT /F1 10 Tf 54 591.00 Td (The local storage key is:) Tj ET
-BT /F3 9 Tf 54 568.00 Td (buywise.saved-items) Tj ET
-BT /F1 10 Tf 54 547.00 Td (Each saved item includes:) Tj ET
-BT /F1 10 Tf 54 524.00 Td (- Id.) Tj ET
-BT /F1 10 Tf 54 508.00 Td (- Optional user id.) Tj ET
-BT /F1 10 Tf 54 492.00 Td (- Product id.) Tj ET
-BT /F1 10 Tf 54 476.00 Td (- Asking price.) Tj ET
-BT /F1 10 Tf 54 460.00 Td (- Marketplace.) Tj ET
-BT /F1 10 Tf 54 444.00 Td (- Seller location.) Tj ET
-BT /F1 10 Tf 54 428.00 Td (- Notes.) Tj ET
-BT /F1 10 Tf 54 412.00 Td (- Status.) Tj ET
-BT /F1 10 Tf 54 396.00 Td (- Created date.) Tj ET
-BT /F1 10 Tf 54 374.00 Td (Allowed statuses are:) Tj ET
-BT /F1 10 Tf 54 351.00 Td (- watching.) Tj ET
-BT /F1 10 Tf 54 335.00 Td (- contacted.) Tj ET
-BT /F1 10 Tf 54 319.00 Td (- negotiating.) Tj ET
-BT /F1 10 Tf 54 303.00 Td (- bought.) Tj ET
-BT /F1 10 Tf 54 287.00 Td (- passed.) Tj ET
-BT /F1 10 Tf 54 265.00 Td (On the saved items page, each card can show:) Tj ET
-BT /F1 10 Tf 54 242.00 Td (- Marketplace.) Tj ET
-BT /F1 10 Tf 54 226.00 Td (- Product name.) Tj ET
-BT /F1 10 Tf 54 210.00 Td (- Seller location.) Tj ET
-BT /F1 10 Tf 54 194.00 Td (- Asking price.) Tj ET
-BT /F1 10 Tf 54 178.00 Td (- Fair value.) Tj ET
-BT /F1 10 Tf 54 162.00 Td (- Difference from fair value.) Tj ET
-BT /F1 10 Tf 54 146.00 Td (- Product year.) Tj ET
-BT /F1 10 Tf 54 130.00 Td (- Notes.) Tj ET
-BT /F1 10 Tf 54 114.00 Td (- Status dropdown.) Tj ET
-BT /F1 10 Tf 54 98.00 Td (- View insight link.) Tj ET
-BT /F1 10 Tf 54 82.00 Td (- Delete button.) Tj ET
+BT /F3 9 Tf 54 738.00 Td (/saved) Tj ET
+BT /F1 10 Tf 54 717.00 Td (Saved item behavior lives mainly in:) Tj ET
+BT /F1 10 Tf 54 694.00 Td (- `components/SavedItemsClient.tsx`) Tj ET
+BT /F1 10 Tf 54 678.00 Td (- `components/SavedItemCard.tsx`) Tj ET
+BT /F1 10 Tf 54 662.00 Td (- `lib/savedItemsStorage.ts`) Tj ET
+BT /F1 10 Tf 54 640.00 Td (Saved items can come from:) Tj ET
+BT /F1 10 Tf 54 617.00 Td (- Supabase, if environment variables are configured and the user is logged in.) Tj ET
+BT /F1 10 Tf 54 601.00 Td (- Browser local storage, if Supabase is not configured or the user is not logged in.) Tj ET
+BT /F1 10 Tf 54 585.00 Td (- Product-card bookmarks from search, homepage buyer guides, and related product cards.) Tj ET
+BT /F1 10 Tf 54 569.00 Td (- Analyzer verdict saves from the result card after checking a resale or retail link.) Tj ET
+BT /F1 10 Tf 54 547.00 Td (The local storage key is:) Tj ET
+BT /F3 9 Tf 54 524.00 Td (buywise.saved-items) Tj ET
+BT /F1 10 Tf 54 503.00 Td (Each saved item includes:) Tj ET
+BT /F1 10 Tf 54 480.00 Td (- Id.) Tj ET
+BT /F1 10 Tf 54 464.00 Td (- Optional user id.) Tj ET
+BT /F1 10 Tf 54 448.00 Td (- Product id.) Tj ET
+BT /F1 10 Tf 54 432.00 Td (- Asking price.) Tj ET
+BT /F1 10 Tf 54 416.00 Td (- Marketplace.) Tj ET
+BT /F1 10 Tf 54 400.00 Td (- Seller location.) Tj ET
+BT /F1 10 Tf 54 384.00 Td (- Notes.) Tj ET
+BT /F1 10 Tf 54 368.00 Td (- Status.) Tj ET
+BT /F1 10 Tf 54 352.00 Td (- Created date.) Tj ET
+BT /F1 10 Tf 54 330.00 Td (Allowed statuses are:) Tj ET
+BT /F1 10 Tf 54 307.00 Td (- watching.) Tj ET
+BT /F1 10 Tf 54 291.00 Td (- contacted.) Tj ET
+BT /F1 10 Tf 54 275.00 Td (- negotiating.) Tj ET
+BT /F1 10 Tf 54 259.00 Td (- bought.) Tj ET
+BT /F1 10 Tf 54 243.00 Td (- passed.) Tj ET
+BT /F1 10 Tf 54 221.00 Td (On the saved items page, each card can show:) Tj ET
+BT /F1 10 Tf 54 198.00 Td (- Marketplace.) Tj ET
+BT /F1 10 Tf 54 182.00 Td (- Product name.) Tj ET
+BT /F1 10 Tf 54 166.00 Td (- Seller location.) Tj ET
+BT /F1 10 Tf 54 150.00 Td (- Asking price.) Tj ET
+BT /F1 10 Tf 54 134.00 Td (- Fair value.) Tj ET
+BT /F1 10 Tf 54 118.00 Td (- Difference from fair value.) Tj ET
+BT /F1 10 Tf 54 102.00 Td (- Product year.) Tj ET
+BT /F1 10 Tf 54 86.00 Td (- Notes.) Tj ET
+BT /F1 10 Tf 54 70.00 Td (- Status dropdown.) Tj ET
 endstream
 endobj
 51 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 50 0 R >>
 endobj
 52 0 obj
-<< /Length 2350 >>
+<< /Length 2309 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (If the user is not logged in, the page shows a notice explaining that they are viewing browser-) Tj ET
-BT /F1 10 Tf 54 721.00 Td (saved items. If Supabase is configured, the notice tells them to log in to sync items to their) Tj ET
-BT /F1 10 Tf 54 704.00 Td (account. If Supabase is not configured, the notice says saved items are stored in the browser) Tj ET
-BT /F1 10 Tf 54 687.00 Td (for now.) Tj ET
-BT /F1 10 Tf 54 664.00 Td (If there are no saved items, the page shows an empty state telling the user to use the bookmark) Tj ET
-BT /F1 10 Tf 54 647.00 Td (on a product card or save a verdict after analyzing a link.) Tj ET
-BT /F2 15 Tf 54 612.00 Td (Auth) Tj ET
-BT /F1 10 Tf 54 582.00 Td (The auth page is available at:) Tj ET
-BT /F3 9 Tf 54 559.00 Td (/auth) Tj ET
-BT /F1 10 Tf 54 538.00 Td (Auth is backed by Supabase if the following env vars exist:) Tj ET
-BT /F1 10 Tf 54 515.00 Td (- `NEXT_PUBLIC_SUPABASE_URL`) Tj ET
-BT /F1 10 Tf 54 499.00 Td (- `NEXT_PUBLIC_SUPABASE_ANON_KEY`) Tj ET
-BT /F1 10 Tf 54 477.00 Td (The Supabase client lives in:) Tj ET
-BT /F3 9 Tf 54 454.00 Td (lib/supabaseClient.ts) Tj ET
-BT /F1 10 Tf 54 433.00 Td (If either env var is missing, `supabase` is set to `null`, and the app falls back to local) Tj ET
-BT /F1 10 Tf 54 416.00 Td (behavior where possible.) Tj ET
-BT /F1 10 Tf 54 393.00 Td (The auth form supports:) Tj ET
-BT /F1 10 Tf 54 370.00 Td (- Login.) Tj ET
-BT /F1 10 Tf 54 354.00 Td (- Signup.) Tj ET
-BT /F1 10 Tf 54 332.00 Td (The form validates:) Tj ET
-BT /F1 10 Tf 54 309.00 Td (- Email must include `@`.) Tj ET
-BT /F1 10 Tf 54 293.00 Td (- Password must be at least 6 characters.) Tj ET
-BT /F1 10 Tf 54 271.00 Td (If Supabase is not configured, the form shows setup instructions and does not attempt login.) Tj ET
-BT /F1 10 Tf 54 248.00 Td (On signup, the app upserts a row into the `profiles` table with:) Tj ET
-BT /F1 10 Tf 54 225.00 Td (- User id.) Tj ET
-BT /F1 10 Tf 54 209.00 Td (- Email.) Tj ET
-BT /F1 10 Tf 54 187.00 Td (The auth page is available from the footer Account link and the navbar Log In button.) Tj ET
-BT /F2 15 Tf 54 152.00 Td (Admin Page) Tj ET
-BT /F1 10 Tf 54 122.00 Td (The admin page is available at:) Tj ET
-BT /F3 9 Tf 54 99.00 Td (/admin) Tj ET
-BT /F1 10 Tf 54 78.00 Td (It is a mock data overview page, not a protected production admin system.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- View insight link.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Delete button.) Tj ET
+BT /F1 10 Tf 54 700.00 Td (If the user is not logged in, the page shows a notice explaining that they are viewing browser-) Tj ET
+BT /F1 10 Tf 54 683.00 Td (saved items. If Supabase is configured, the notice tells them to log in to sync items to their) Tj ET
+BT /F1 10 Tf 54 666.00 Td (account. If Supabase is not configured, the notice says saved items are stored in the browser) Tj ET
+BT /F1 10 Tf 54 649.00 Td (for now.) Tj ET
+BT /F1 10 Tf 54 626.00 Td (If there are no saved items, the page shows an empty state telling the user to use the bookmark) Tj ET
+BT /F1 10 Tf 54 609.00 Td (on a product card or save a verdict after analyzing a link.) Tj ET
+BT /F2 15 Tf 54 574.00 Td (Auth) Tj ET
+BT /F1 10 Tf 54 544.00 Td (The auth page is available at:) Tj ET
+BT /F3 9 Tf 54 521.00 Td (/auth) Tj ET
+BT /F1 10 Tf 54 500.00 Td (Auth is backed by Supabase if the following env vars exist:) Tj ET
+BT /F1 10 Tf 54 477.00 Td (- `NEXT_PUBLIC_SUPABASE_URL`) Tj ET
+BT /F1 10 Tf 54 461.00 Td (- `NEXT_PUBLIC_SUPABASE_ANON_KEY`) Tj ET
+BT /F1 10 Tf 54 439.00 Td (The Supabase client lives in:) Tj ET
+BT /F3 9 Tf 54 416.00 Td (lib/supabaseClient.ts) Tj ET
+BT /F1 10 Tf 54 395.00 Td (If either env var is missing, `supabase` is set to `null`, and the app falls back to local) Tj ET
+BT /F1 10 Tf 54 378.00 Td (behavior where possible.) Tj ET
+BT /F1 10 Tf 54 355.00 Td (The auth form supports:) Tj ET
+BT /F1 10 Tf 54 332.00 Td (- Login.) Tj ET
+BT /F1 10 Tf 54 316.00 Td (- Signup.) Tj ET
+BT /F1 10 Tf 54 294.00 Td (The form validates:) Tj ET
+BT /F1 10 Tf 54 271.00 Td (- Email must include `@`.) Tj ET
+BT /F1 10 Tf 54 255.00 Td (- Password must be at least 6 characters.) Tj ET
+BT /F1 10 Tf 54 233.00 Td (If Supabase is not configured, the form shows setup instructions and does not attempt login.) Tj ET
+BT /F1 10 Tf 54 210.00 Td (On signup, the app upserts a row into the `profiles` table with:) Tj ET
+BT /F1 10 Tf 54 187.00 Td (- User id.) Tj ET
+BT /F1 10 Tf 54 171.00 Td (- Email.) Tj ET
+BT /F1 10 Tf 54 149.00 Td (The auth page is available from the footer Account link and the navbar Log In button.) Tj ET
+BT /F2 15 Tf 54 114.00 Td (Admin Page) Tj ET
+BT /F1 10 Tf 54 84.00 Td (The admin page is available at:) Tj ET
 endstream
 endobj
 53 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 52 0 R >>
 endobj
 54 0 obj
-<< /Length 2455 >>
+<< /Length 2448 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (It shows:) Tj ET
-BT /F1 10 Tf 54 715.00 Td (- Total product count.) Tj ET
-BT /F1 10 Tf 54 699.00 Td (- Total MSRP tracked.) Tj ET
-BT /F1 10 Tf 54 683.00 Td (- Total fair market value tracked.) Tj ET
-BT /F1 10 Tf 54 667.00 Td (- Category cards.) Tj ET
-BT /F1 10 Tf 54 651.00 Td (- Mock product lists by category.) Tj ET
-BT /F1 10 Tf 54 635.00 Td (- Integration-ready service file list.) Tj ET
-BT /F1 10 Tf 54 619.00 Td (- Customer-facing page note.) Tj ET
-BT /F1 10 Tf 54 603.00 Td (- Link to the About Us page.) Tj ET
-BT /F1 10 Tf 54 587.00 Td (- Table of all mock products.) Tj ET
-BT /F1 10 Tf 54 565.00 Td (The admin page helps inspect the current mock catalog and service architecture.) Tj ET
-BT /F2 15 Tf 54 530.00 Td (About Us Page) Tj ET
-BT /F1 10 Tf 54 500.00 Td (The customer-facing explanation page is available at:) Tj ET
-BT /F3 9 Tf 54 477.00 Td (/about) Tj ET
-BT /F1 10 Tf 54 456.00 Td (The old `/monetization` route redirects to `/about`.) Tj ET
-BT /F1 10 Tf 54 433.00 Td (This page is designed for potential users, not internal planning. It explains what BuyWise does,) Tj ET
-BT /F1 10 Tf 54 416.00 Td (who it helps, and why a buyer should use it before paying for a used listing or retail bargain.) Tj ET
-BT /F1 10 Tf 54 393.00 Td (The main message is:) Tj ET
-BT /F1 10 Tf 54 370.00 Td (Know if a used listing or retail deal is worth buying before you pay.) Tj ET
-BT /F1 10 Tf 54 347.00 Td (The page explains that users can paste a product link and get:) Tj ET
-BT /F1 10 Tf 54 324.00 Td (- Deal verdict.) Tj ET
-BT /F1 10 Tf 54 308.00 Td (- Risk level.) Tj ET
-BT /F1 10 Tf 54 292.00 Td (- Confidence score.) Tj ET
-BT /F1 10 Tf 54 276.00 Td (- Suggested offer or buy-under range.) Tj ET
-BT /F1 10 Tf 54 260.00 Td (- Reasons the link might not be worth it.) Tj ET
-BT /F1 10 Tf 54 244.00 Td (- Questions to ask the seller.) Tj ET
-BT /F1 10 Tf 54 228.00 Td (- Buyer checklist.) Tj ET
-BT /F1 10 Tf 54 212.00 Td (- Resale and retail alternatives.) Tj ET
-BT /F1 10 Tf 54 190.00 Td (It also explains the four main benefits:) Tj ET
-BT /F1 10 Tf 54 167.00 Td (- Start with a link.) Tj ET
-BT /F1 10 Tf 54 151.00 Td (- See if the price makes sense.) Tj ET
-BT /F1 10 Tf 54 135.00 Td (- Catch risky listings.) Tj ET
-BT /F1 10 Tf 54 119.00 Td (- Compare better options.) Tj ET
-BT /F1 10 Tf 54 97.00 Td (The page puts credibility stats from the current catalog near the top:) Tj ET
-BT /F1 10 Tf 54 74.00 Td (- MSRP tracked.) Tj ET
+BT /F3 9 Tf 54 738.00 Td (/admin) Tj ET
+BT /F1 10 Tf 54 717.00 Td (It is a mock data overview page, not a protected production admin system.) Tj ET
+BT /F1 10 Tf 54 694.00 Td (It shows:) Tj ET
+BT /F1 10 Tf 54 671.00 Td (- Total product count.) Tj ET
+BT /F1 10 Tf 54 655.00 Td (- Total MSRP tracked.) Tj ET
+BT /F1 10 Tf 54 639.00 Td (- Total fair market value tracked.) Tj ET
+BT /F1 10 Tf 54 623.00 Td (- Category cards.) Tj ET
+BT /F1 10 Tf 54 607.00 Td (- Mock product lists by category.) Tj ET
+BT /F1 10 Tf 54 591.00 Td (- Integration-ready service file list.) Tj ET
+BT /F1 10 Tf 54 575.00 Td (- Customer-facing page note.) Tj ET
+BT /F1 10 Tf 54 559.00 Td (- Link to the About Us page.) Tj ET
+BT /F1 10 Tf 54 543.00 Td (- Table of all mock products.) Tj ET
+BT /F1 10 Tf 54 521.00 Td (The admin page helps inspect the current mock catalog and service architecture.) Tj ET
+BT /F2 15 Tf 54 486.00 Td (About Us Page) Tj ET
+BT /F1 10 Tf 54 456.00 Td (The customer-facing explanation page is available at:) Tj ET
+BT /F3 9 Tf 54 433.00 Td (/about) Tj ET
+BT /F1 10 Tf 54 412.00 Td (The old `/monetization` route redirects to `/about`.) Tj ET
+BT /F1 10 Tf 54 389.00 Td (This page is designed for potential users, not internal planning. It explains what BuyWise does,) Tj ET
+BT /F1 10 Tf 54 372.00 Td (who it helps, and why a buyer should use it before paying for a used listing or retail bargain.) Tj ET
+BT /F1 10 Tf 54 349.00 Td (The main message is:) Tj ET
+BT /F1 10 Tf 54 326.00 Td (Know if a used listing or retail deal is worth buying before you pay.) Tj ET
+BT /F1 10 Tf 54 303.00 Td (The page explains that users can paste a product link and get:) Tj ET
+BT /F1 10 Tf 54 280.00 Td (- Deal verdict.) Tj ET
+BT /F1 10 Tf 54 264.00 Td (- Risk level.) Tj ET
+BT /F1 10 Tf 54 248.00 Td (- Confidence score.) Tj ET
+BT /F1 10 Tf 54 232.00 Td (- Suggested offer or buy-under range.) Tj ET
+BT /F1 10 Tf 54 216.00 Td (- Reasons the link might not be worth it.) Tj ET
+BT /F1 10 Tf 54 200.00 Td (- Questions to ask the seller.) Tj ET
+BT /F1 10 Tf 54 184.00 Td (- Buyer checklist.) Tj ET
+BT /F1 10 Tf 54 168.00 Td (- Resale and retail alternatives.) Tj ET
+BT /F1 10 Tf 54 146.00 Td (It also explains the four main benefits:) Tj ET
+BT /F1 10 Tf 54 123.00 Td (- Start with a link.) Tj ET
+BT /F1 10 Tf 54 107.00 Td (- See if the price makes sense.) Tj ET
+BT /F1 10 Tf 54 91.00 Td (- Catch risky listings.) Tj ET
+BT /F1 10 Tf 54 75.00 Td (- Compare better options.) Tj ET
 endstream
 endobj
 55 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 54 0 R >>
 endobj
 56 0 obj
-<< /Length 2116 >>
+<< /Length 2157 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Used fair value tracked.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- Categories covered.) Tj ET
-BT /F1 10 Tf 54 706.00 Td (- Product guides.) Tj ET
-BT /F1 10 Tf 54 684.00 Td (The page is aimed at:) Tj ET
-BT /F1 10 Tf 54 661.00 Td (- Students buying laptops or MacBooks.) Tj ET
-BT /F1 10 Tf 54 645.00 Td (- Creators buying used cameras.) Tj ET
-BT /F1 10 Tf 54 629.00 Td (- Parents buying used gear.) Tj ET
-BT /F1 10 Tf 54 613.00 Td (- People checking bikes, monitors, and electronics.) Tj ET
-BT /F1 10 Tf 54 597.00 Td (- Anyone who wants a second opinion before paying.) Tj ET
-BT /F1 10 Tf 54 575.00 Td (The page is honest that the current preview uses a starter catalog for cameras, laptops, bikes,) Tj ET
-BT /F1 10 Tf 54 558.00 Td (and monitors, and that link reading works when public pages expose readable product data.) Tj ET
-BT /F2 15 Tf 54 523.00 Td (Mock Product Catalog) Tj ET
-BT /F1 10 Tf 54 493.00 Td (The current mock catalog lives in:) Tj ET
-BT /F3 9 Tf 54 470.00 Td (data/mockProducts.ts) Tj ET
-BT /F1 10 Tf 54 449.00 Td (The MVP includes 20 products:) Tj ET
-BT /F2 12 Tf 54 418.00 Td (Cameras) Tj ET
-BT /F1 10 Tf 54 392.00 Td (- Sony A6400, 2019.) Tj ET
-BT /F1 10 Tf 54 376.00 Td (- Canon EOS R10, 2022.) Tj ET
-BT /F1 10 Tf 54 360.00 Td (- Fujifilm X-T30 II, 2021.) Tj ET
-BT /F1 10 Tf 54 344.00 Td (- Sony A7 III, 2018.) Tj ET
-BT /F1 10 Tf 54 328.00 Td (- Canon M50 Mark II, 2020.) Tj ET
-BT /F2 12 Tf 54 298.00 Td (Laptops) Tj ET
-BT /F1 10 Tf 54 272.00 Td (- Apple MacBook Air M1, 2020.) Tj ET
-BT /F1 10 Tf 54 256.00 Td (- Apple MacBook Air M2, 2022.) Tj ET
-BT /F1 10 Tf 54 240.00 Td (- Dell XPS 13, 2022.) Tj ET
-BT /F1 10 Tf 54 224.00 Td (- Lenovo ThinkPad X1 Carbon, 2022.) Tj ET
-BT /F1 10 Tf 54 208.00 Td (- Microsoft Surface Laptop 5, 2022.) Tj ET
-BT /F2 12 Tf 54 178.00 Td (Bikes) Tj ET
-BT /F1 10 Tf 54 152.00 Td (- Trek Marlin 5, 2022.) Tj ET
-BT /F1 10 Tf 54 136.00 Td (- Specialized Rockhopper, 2021.) Tj ET
-BT /F1 10 Tf 54 120.00 Td (- Giant Talon, 2022.) Tj ET
-BT /F1 10 Tf 54 104.00 Td (- Cannondale Quick, 2021.) Tj ET
-BT /F1 10 Tf 54 88.00 Td (- Trek FX 3, 2022.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (The page puts credibility stats from the current catalog near the top:) Tj ET
+BT /F1 10 Tf 54 715.00 Td (- MSRP tracked.) Tj ET
+BT /F1 10 Tf 54 699.00 Td (- Used fair value tracked.) Tj ET
+BT /F1 10 Tf 54 683.00 Td (- Categories covered.) Tj ET
+BT /F1 10 Tf 54 667.00 Td (- Product guides.) Tj ET
+BT /F1 10 Tf 54 645.00 Td (The page is aimed at:) Tj ET
+BT /F1 10 Tf 54 622.00 Td (- Students buying laptops or MacBooks.) Tj ET
+BT /F1 10 Tf 54 606.00 Td (- Creators buying used cameras.) Tj ET
+BT /F1 10 Tf 54 590.00 Td (- Parents buying used gear.) Tj ET
+BT /F1 10 Tf 54 574.00 Td (- People checking bikes, monitors, and electronics.) Tj ET
+BT /F1 10 Tf 54 558.00 Td (- Anyone who wants a second opinion before paying.) Tj ET
+BT /F1 10 Tf 54 536.00 Td (The page is honest that the current preview uses a starter catalog for cameras, laptops, bikes,) Tj ET
+BT /F1 10 Tf 54 519.00 Td (and monitors, and that link reading works when public pages expose readable product data.) Tj ET
+BT /F2 15 Tf 54 484.00 Td (Mock Product Catalog) Tj ET
+BT /F1 10 Tf 54 454.00 Td (The current mock catalog lives in:) Tj ET
+BT /F3 9 Tf 54 431.00 Td (data/mockProducts.ts) Tj ET
+BT /F1 10 Tf 54 410.00 Td (The MVP includes 20 products:) Tj ET
+BT /F2 12 Tf 54 379.00 Td (Cameras) Tj ET
+BT /F1 10 Tf 54 353.00 Td (- Sony A6400, 2019.) Tj ET
+BT /F1 10 Tf 54 337.00 Td (- Canon EOS R10, 2022.) Tj ET
+BT /F1 10 Tf 54 321.00 Td (- Fujifilm X-T30 II, 2021.) Tj ET
+BT /F1 10 Tf 54 305.00 Td (- Sony A7 III, 2018.) Tj ET
+BT /F1 10 Tf 54 289.00 Td (- Canon M50 Mark II, 2020.) Tj ET
+BT /F2 12 Tf 54 259.00 Td (Laptops) Tj ET
+BT /F1 10 Tf 54 233.00 Td (- Apple MacBook Air M1, 2020.) Tj ET
+BT /F1 10 Tf 54 217.00 Td (- Apple MacBook Air M2, 2022.) Tj ET
+BT /F1 10 Tf 54 201.00 Td (- Dell XPS 13, 2022.) Tj ET
+BT /F1 10 Tf 54 185.00 Td (- Lenovo ThinkPad X1 Carbon, 2022.) Tj ET
+BT /F1 10 Tf 54 169.00 Td (- Microsoft Surface Laptop 5, 2022.) Tj ET
+BT /F2 12 Tf 54 139.00 Td (Bikes) Tj ET
+BT /F1 10 Tf 54 113.00 Td (- Trek Marlin 5, 2022.) Tj ET
+BT /F1 10 Tf 54 97.00 Td (- Specialized Rockhopper, 2021.) Tj ET
+BT /F1 10 Tf 54 81.00 Td (- Giant Talon, 2022.) Tj ET
 endstream
 endobj
 57 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 56 0 R >>
 endobj
 58 0 obj
-<< /Length 1949 >>
+<< /Length 1929 >>
 stream
-BT /F2 12 Tf 54 738.00 Td (Monitors) Tj ET
-BT /F1 10 Tf 54 712.00 Td (- Dell UltraSharp U2720Q, 2020.) Tj ET
-BT /F1 10 Tf 54 696.00 Td (- LG 27GL850, 2019.) Tj ET
-BT /F1 10 Tf 54 680.00 Td (- ASUS ProArt PA278QV, 2020.) Tj ET
-BT /F1 10 Tf 54 664.00 Td (- Samsung Odyssey G5, 2021.) Tj ET
-BT /F1 10 Tf 54 648.00 Td (- BenQ PD2700U, 2018.) Tj ET
-BT /F1 10 Tf 54 626.00 Td (Each product contains:) Tj ET
-BT /F1 10 Tf 54 603.00 Td (- Id.) Tj ET
-BT /F1 10 Tf 54 587.00 Td (- Category.) Tj ET
-BT /F1 10 Tf 54 571.00 Td (- Brand.) Tj ET
-BT /F1 10 Tf 54 555.00 Td (- Model.) Tj ET
-BT /F1 10 Tf 54 539.00 Td (- Year.) Tj ET
-BT /F1 10 Tf 54 523.00 Td (- Original MSRP.) Tj ET
-BT /F1 10 Tf 54 507.00 Td (- Used low.) Tj ET
-BT /F1 10 Tf 54 491.00 Td (- Used average.) Tj ET
-BT /F1 10 Tf 54 475.00 Td (- Used high.) Tj ET
-BT /F1 10 Tf 54 459.00 Td (- Fair price.) Tj ET
-BT /F1 10 Tf 54 443.00 Td (- Depreciation percent.) Tj ET
-BT /F1 10 Tf 54 427.00 Td (- Reliability score.) Tj ET
-BT /F1 10 Tf 54 411.00 Td (- Demand score.) Tj ET
-BT /F1 10 Tf 54 395.00 Td (- Scam risk score.) Tj ET
-BT /F1 10 Tf 54 379.00 Td (- Common issues.) Tj ET
-BT /F1 10 Tf 54 363.00 Td (- Best years/models.) Tj ET
-BT /F1 10 Tf 54 347.00 Td (- Models to avoid.) Tj ET
-BT /F1 10 Tf 54 331.00 Td (- Buying checklist.) Tj ET
-BT /F1 10 Tf 54 315.00 Td (- Seller questions.) Tj ET
-BT /F1 10 Tf 54 299.00 Td (- Recommendation.) Tj ET
-BT /F1 10 Tf 54 283.00 Td (- Recommendation explanation.) Tj ET
-BT /F1 10 Tf 54 261.00 Td (Product ids are used for product routes and saved items.) Tj ET
-BT /F2 15 Tf 54 226.00 Td (Data Types) Tj ET
-BT /F1 10 Tf 54 196.00 Td (Core types live in:) Tj ET
-BT /F3 9 Tf 54 173.00 Td (types/index.ts) Tj ET
-BT /F1 10 Tf 54 152.00 Td (Main product categories currently supported:) Tj ET
-BT /F1 10 Tf 54 129.00 Td (- Cameras.) Tj ET
-BT /F1 10 Tf 54 113.00 Td (- Laptops.) Tj ET
-BT /F1 10 Tf 54 97.00 Td (- Bikes.) Tj ET
-BT /F1 10 Tf 54 81.00 Td (- Monitors.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Cannondale Quick, 2021.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Trek FX 3, 2022.) Tj ET
+BT /F2 12 Tf 54 692.00 Td (Monitors) Tj ET
+BT /F1 10 Tf 54 666.00 Td (- Dell UltraSharp U2720Q, 2020.) Tj ET
+BT /F1 10 Tf 54 650.00 Td (- LG 27GL850, 2019.) Tj ET
+BT /F1 10 Tf 54 634.00 Td (- ASUS ProArt PA278QV, 2020.) Tj ET
+BT /F1 10 Tf 54 618.00 Td (- Samsung Odyssey G5, 2021.) Tj ET
+BT /F1 10 Tf 54 602.00 Td (- BenQ PD2700U, 2018.) Tj ET
+BT /F1 10 Tf 54 580.00 Td (Each product contains:) Tj ET
+BT /F1 10 Tf 54 557.00 Td (- Id.) Tj ET
+BT /F1 10 Tf 54 541.00 Td (- Category.) Tj ET
+BT /F1 10 Tf 54 525.00 Td (- Brand.) Tj ET
+BT /F1 10 Tf 54 509.00 Td (- Model.) Tj ET
+BT /F1 10 Tf 54 493.00 Td (- Year.) Tj ET
+BT /F1 10 Tf 54 477.00 Td (- Original MSRP.) Tj ET
+BT /F1 10 Tf 54 461.00 Td (- Used low.) Tj ET
+BT /F1 10 Tf 54 445.00 Td (- Used average.) Tj ET
+BT /F1 10 Tf 54 429.00 Td (- Used high.) Tj ET
+BT /F1 10 Tf 54 413.00 Td (- Fair price.) Tj ET
+BT /F1 10 Tf 54 397.00 Td (- Depreciation percent.) Tj ET
+BT /F1 10 Tf 54 381.00 Td (- Reliability score.) Tj ET
+BT /F1 10 Tf 54 365.00 Td (- Demand score.) Tj ET
+BT /F1 10 Tf 54 349.00 Td (- Scam risk score.) Tj ET
+BT /F1 10 Tf 54 333.00 Td (- Common issues.) Tj ET
+BT /F1 10 Tf 54 317.00 Td (- Best years/models.) Tj ET
+BT /F1 10 Tf 54 301.00 Td (- Models to avoid.) Tj ET
+BT /F1 10 Tf 54 285.00 Td (- Buying checklist.) Tj ET
+BT /F1 10 Tf 54 269.00 Td (- Seller questions.) Tj ET
+BT /F1 10 Tf 54 253.00 Td (- Recommendation.) Tj ET
+BT /F1 10 Tf 54 237.00 Td (- Recommendation explanation.) Tj ET
+BT /F1 10 Tf 54 215.00 Td (Product ids are used for product routes and saved items.) Tj ET
+BT /F2 15 Tf 54 180.00 Td (Data Types) Tj ET
+BT /F1 10 Tf 54 150.00 Td (Core types live in:) Tj ET
+BT /F3 9 Tf 54 127.00 Td (types/index.ts) Tj ET
+BT /F1 10 Tf 54 106.00 Td (Main product categories currently supported:) Tj ET
+BT /F1 10 Tf 54 83.00 Td (- Cameras.) Tj ET
 endstream
 endobj
 59 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 58 0 R >>
 endobj
 60 0 obj
-<< /Length 2003 >>
+<< /Length 1829 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (Recommendation labels:) Tj ET
-BT /F1 10 Tf 54 715.00 Td (- Great deal.) Tj ET
-BT /F1 10 Tf 54 699.00 Td (- Fair price.) Tj ET
-BT /F1 10 Tf 54 683.00 Td (- Overpriced.) Tj ET
-BT /F1 10 Tf 54 667.00 Td (- Risky purchase.) Tj ET
-BT /F1 10 Tf 54 651.00 Td (- Avoid.) Tj ET
-BT /F1 10 Tf 54 629.00 Td (Risk levels:) Tj ET
-BT /F1 10 Tf 54 606.00 Td (- Low.) Tj ET
-BT /F1 10 Tf 54 590.00 Td (- Medium.) Tj ET
-BT /F1 10 Tf 54 574.00 Td (- High.) Tj ET
-BT /F1 10 Tf 54 552.00 Td (Saved item statuses:) Tj ET
-BT /F1 10 Tf 54 529.00 Td (- watching.) Tj ET
-BT /F1 10 Tf 54 513.00 Td (- contacted.) Tj ET
-BT /F1 10 Tf 54 497.00 Td (- negotiating.) Tj ET
-BT /F1 10 Tf 54 481.00 Td (- bought.) Tj ET
-BT /F1 10 Tf 54 465.00 Td (- passed.) Tj ET
-BT /F1 10 Tf 54 443.00 Td (Marketplace sources:) Tj ET
-BT /F1 10 Tf 54 420.00 Td (- eBay.) Tj ET
-BT /F1 10 Tf 54 404.00 Td (- Craigslist.) Tj ET
-BT /F1 10 Tf 54 388.00 Td (- Facebook Marketplace.) Tj ET
-BT /F1 10 Tf 54 372.00 Td (- OfferUp.) Tj ET
-BT /F1 10 Tf 54 356.00 Td (- Local seller.) Tj ET
-BT /F1 10 Tf 54 340.00 Td (- Other.) Tj ET
-BT /F1 10 Tf 54 318.00 Td (Link analysis modes:) Tj ET
-BT /F1 10 Tf 54 295.00 Td (- resale.) Tj ET
-BT /F1 10 Tf 54 279.00 Td (- retail.) Tj ET
-BT /F1 10 Tf 54 257.00 Td (Risk signal severity:) Tj ET
-BT /F1 10 Tf 54 234.00 Td (- low.) Tj ET
-BT /F1 10 Tf 54 218.00 Td (- medium.) Tj ET
-BT /F1 10 Tf 54 202.00 Td (- high.) Tj ET
-BT /F1 10 Tf 54 180.00 Td (The app also defines link-analysis and extraction structures:) Tj ET
-BT /F1 10 Tf 54 157.00 Td (- `ListingAlternative`.) Tj ET
-BT /F1 10 Tf 54 141.00 Td (- `ListingAnalysisContext`.) Tj ET
-BT /F1 10 Tf 54 125.00 Td (- `LinkExtractionResult`.) Tj ET
-BT /F1 10 Tf 54 103.00 Td (`ListingAlternative` describes a better resale or retail/MSRP option from the mock catalog. It) Tj ET
-BT /F1 10 Tf 54 86.00 Td (includes product id, title, price, price label, source type, recommended action, expected) Tj ET
-BT /F1 10 Tf 54 69.00 Td (outcome, and reason.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Laptops.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Bikes.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- Monitors.) Tj ET
+BT /F1 10 Tf 54 684.00 Td (Recommendation labels:) Tj ET
+BT /F1 10 Tf 54 661.00 Td (- Great deal.) Tj ET
+BT /F1 10 Tf 54 645.00 Td (- Fair price.) Tj ET
+BT /F1 10 Tf 54 629.00 Td (- Overpriced.) Tj ET
+BT /F1 10 Tf 54 613.00 Td (- Risky purchase.) Tj ET
+BT /F1 10 Tf 54 597.00 Td (- Avoid.) Tj ET
+BT /F1 10 Tf 54 575.00 Td (Risk levels:) Tj ET
+BT /F1 10 Tf 54 552.00 Td (- Low.) Tj ET
+BT /F1 10 Tf 54 536.00 Td (- Medium.) Tj ET
+BT /F1 10 Tf 54 520.00 Td (- High.) Tj ET
+BT /F1 10 Tf 54 498.00 Td (Saved item statuses:) Tj ET
+BT /F1 10 Tf 54 475.00 Td (- watching.) Tj ET
+BT /F1 10 Tf 54 459.00 Td (- contacted.) Tj ET
+BT /F1 10 Tf 54 443.00 Td (- negotiating.) Tj ET
+BT /F1 10 Tf 54 427.00 Td (- bought.) Tj ET
+BT /F1 10 Tf 54 411.00 Td (- passed.) Tj ET
+BT /F1 10 Tf 54 389.00 Td (Marketplace sources:) Tj ET
+BT /F1 10 Tf 54 366.00 Td (- eBay.) Tj ET
+BT /F1 10 Tf 54 350.00 Td (- Craigslist.) Tj ET
+BT /F1 10 Tf 54 334.00 Td (- Facebook Marketplace.) Tj ET
+BT /F1 10 Tf 54 318.00 Td (- OfferUp.) Tj ET
+BT /F1 10 Tf 54 302.00 Td (- Local seller.) Tj ET
+BT /F1 10 Tf 54 286.00 Td (- Other.) Tj ET
+BT /F1 10 Tf 54 264.00 Td (Link analysis modes:) Tj ET
+BT /F1 10 Tf 54 241.00 Td (- resale.) Tj ET
+BT /F1 10 Tf 54 225.00 Td (- retail.) Tj ET
+BT /F1 10 Tf 54 203.00 Td (Risk signal severity:) Tj ET
+BT /F1 10 Tf 54 180.00 Td (- low.) Tj ET
+BT /F1 10 Tf 54 164.00 Td (- medium.) Tj ET
+BT /F1 10 Tf 54 148.00 Td (- high.) Tj ET
+BT /F1 10 Tf 54 126.00 Td (The app also defines link-analysis and extraction structures:) Tj ET
+BT /F1 10 Tf 54 103.00 Td (- `ListingAlternative`.) Tj ET
+BT /F1 10 Tf 54 87.00 Td (- `ListingAnalysisContext`.) Tj ET
+BT /F1 10 Tf 54 71.00 Td (- `LinkExtractionResult`.) Tj ET
 endstream
 endobj
 61 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 60 0 R >>
 endobj
 62 0 obj
-<< /Length 2175 >>
+<< /Length 2310 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (`ListingAnalysisContext` describes the analyzed link context. It includes mode, URL, source) Tj ET
-BT /F1 10 Tf 54 721.00 Td (label, source domain, link price, benchmark label, matched product name, resale alternatives,) Tj ET
-BT /F1 10 Tf 54 704.00 Td (and retail alternatives.) Tj ET
-BT /F1 10 Tf 54 681.00 Td (`LinkExtractionResult` describes what the server was able to read from a pasted link. It) Tj ET
-BT /F1 10 Tf 54 664.00 Td (includes success/manual flags, URL, source label, source domain, mode, marketplace, title,) Tj ET
-BT /F1 10 Tf 54 647.00 Td (description, price, product name, confidence, message, and optional warnings.) Tj ET
-BT /F2 15 Tf 54 612.00 Td (Supabase Schema) Tj ET
-BT /F1 10 Tf 54 582.00 Td (The schema lives in:) Tj ET
-BT /F3 9 Tf 54 559.00 Td (supabase/schema.sql) Tj ET
-BT /F1 10 Tf 54 538.00 Td (Tables currently defined:) Tj ET
-BT /F1 10 Tf 54 515.00 Td (- `profiles`.) Tj ET
-BT /F1 10 Tf 54 499.00 Td (- `products`.) Tj ET
-BT /F1 10 Tf 54 483.00 Td (- `product_issues`.) Tj ET
-BT /F1 10 Tf 54 467.00 Td (- `buying_checklist_items`.) Tj ET
-BT /F1 10 Tf 54 451.00 Td (- `seller_questions`.) Tj ET
-BT /F1 10 Tf 54 435.00 Td (- `saved_items`.) Tj ET
-BT /F1 10 Tf 54 419.00 Td (- `listing_checks`.) Tj ET
-BT /F1 10 Tf 54 397.00 Td (The app currently reads product data from `data/mockProducts.ts`. The Supabase product tables) Tj ET
-BT /F1 10 Tf 54 380.00 Td (are scaffolded for a future migration of the mock catalog into the database.) Tj ET
-BT /F2 12 Tf 54 349.00 Td (profiles) Tj ET
-BT /F1 10 Tf 54 323.00 Td (Stores:) Tj ET
-BT /F1 10 Tf 54 300.00 Td (- id.) Tj ET
-BT /F1 10 Tf 54 284.00 Td (- email.) Tj ET
-BT /F1 10 Tf 54 268.00 Td (- created_at.) Tj ET
-BT /F1 10 Tf 54 246.00 Td (The id references `auth.users\(id\)`.) Tj ET
-BT /F2 12 Tf 54 215.00 Td (products) Tj ET
-BT /F1 10 Tf 54 189.00 Td (Stores:) Tj ET
-BT /F1 10 Tf 54 166.00 Td (- id.) Tj ET
-BT /F1 10 Tf 54 150.00 Td (- category.) Tj ET
-BT /F1 10 Tf 54 134.00 Td (- brand.) Tj ET
-BT /F1 10 Tf 54 118.00 Td (- model.) Tj ET
-BT /F1 10 Tf 54 102.00 Td (- year.) Tj ET
-BT /F1 10 Tf 54 86.00 Td (- msrp.) Tj ET
-BT /F1 10 Tf 54 70.00 Td (- used_low.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (`ListingAlternative` describes a better resale or retail/MSRP option from the mock catalog. It) Tj ET
+BT /F1 10 Tf 54 721.00 Td (includes product id, title, price, price label, source type, recommended action, expected) Tj ET
+BT /F1 10 Tf 54 704.00 Td (outcome, and reason.) Tj ET
+BT /F1 10 Tf 54 681.00 Td (`ListingAnalysisContext` describes the analyzed link context. It includes mode, URL, source) Tj ET
+BT /F1 10 Tf 54 664.00 Td (label, source domain, link price, benchmark label, matched product name, resale alternatives,) Tj ET
+BT /F1 10 Tf 54 647.00 Td (and retail alternatives.) Tj ET
+BT /F1 10 Tf 54 624.00 Td (`LinkExtractionResult` describes what the server was able to read from a pasted link. It) Tj ET
+BT /F1 10 Tf 54 607.00 Td (includes success/manual flags, URL, source label, source domain, mode, marketplace, title,) Tj ET
+BT /F1 10 Tf 54 590.00 Td (description, price, product name, confidence, message, and optional warnings.) Tj ET
+BT /F2 15 Tf 54 555.00 Td (Supabase Schema) Tj ET
+BT /F1 10 Tf 54 525.00 Td (The schema lives in:) Tj ET
+BT /F3 9 Tf 54 502.00 Td (supabase/schema.sql) Tj ET
+BT /F1 10 Tf 54 481.00 Td (Tables currently defined:) Tj ET
+BT /F1 10 Tf 54 458.00 Td (- `profiles`.) Tj ET
+BT /F1 10 Tf 54 442.00 Td (- `products`.) Tj ET
+BT /F1 10 Tf 54 426.00 Td (- `product_issues`.) Tj ET
+BT /F1 10 Tf 54 410.00 Td (- `buying_checklist_items`.) Tj ET
+BT /F1 10 Tf 54 394.00 Td (- `seller_questions`.) Tj ET
+BT /F1 10 Tf 54 378.00 Td (- `saved_items`.) Tj ET
+BT /F1 10 Tf 54 362.00 Td (- `listing_checks`.) Tj ET
+BT /F1 10 Tf 54 340.00 Td (The app currently reads product data from `data/mockProducts.ts`. The Supabase product tables) Tj ET
+BT /F1 10 Tf 54 323.00 Td (are scaffolded for a future migration of the mock catalog into the database.) Tj ET
+BT /F2 12 Tf 54 292.00 Td (profiles) Tj ET
+BT /F1 10 Tf 54 266.00 Td (Stores:) Tj ET
+BT /F1 10 Tf 54 243.00 Td (- id.) Tj ET
+BT /F1 10 Tf 54 227.00 Td (- email.) Tj ET
+BT /F1 10 Tf 54 211.00 Td (- created_at.) Tj ET
+BT /F1 10 Tf 54 189.00 Td (The id references `auth.users\(id\)`.) Tj ET
+BT /F2 12 Tf 54 158.00 Td (products) Tj ET
+BT /F1 10 Tf 54 132.00 Td (Stores:) Tj ET
+BT /F1 10 Tf 54 109.00 Td (- id.) Tj ET
+BT /F1 10 Tf 54 93.00 Td (- category.) Tj ET
+BT /F1 10 Tf 54 77.00 Td (- brand.) Tj ET
 endstream
 endobj
 63 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 62 0 R >>
 endobj
 64 0 obj
-<< /Length 1774 >>
+<< /Length 1752 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- used_avg.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- used_high.) Tj ET
-BT /F1 10 Tf 54 706.00 Td (- fair_price.) Tj ET
-BT /F1 10 Tf 54 690.00 Td (- depreciation_percent.) Tj ET
-BT /F1 10 Tf 54 674.00 Td (- reliability_score.) Tj ET
-BT /F1 10 Tf 54 658.00 Td (- demand_score.) Tj ET
-BT /F1 10 Tf 54 642.00 Td (- scam_risk_score.) Tj ET
-BT /F1 10 Tf 54 626.00 Td (- recommendation.) Tj ET
-BT /F1 10 Tf 54 610.00 Td (- recommendation_explanation.) Tj ET
-BT /F1 10 Tf 54 594.00 Td (- created_at.) Tj ET
-BT /F2 12 Tf 54 564.00 Td (product_issues) Tj ET
-BT /F1 10 Tf 54 538.00 Td (Stores product-specific issues:) Tj ET
-BT /F1 10 Tf 54 515.00 Td (- id.) Tj ET
-BT /F1 10 Tf 54 499.00 Td (- product_id.) Tj ET
-BT /F1 10 Tf 54 483.00 Td (- issue.) Tj ET
-BT /F1 10 Tf 54 467.00 Td (- severity.) Tj ET
-BT /F2 12 Tf 54 437.00 Td (buying_checklist_items) Tj ET
-BT /F1 10 Tf 54 411.00 Td (Stores product-specific checklist items:) Tj ET
-BT /F1 10 Tf 54 388.00 Td (- id.) Tj ET
-BT /F1 10 Tf 54 372.00 Td (- product_id.) Tj ET
-BT /F1 10 Tf 54 356.00 Td (- checklist_item.) Tj ET
-BT /F2 12 Tf 54 326.00 Td (seller_questions) Tj ET
-BT /F1 10 Tf 54 300.00 Td (Stores product-specific seller questions:) Tj ET
-BT /F1 10 Tf 54 277.00 Td (- id.) Tj ET
-BT /F1 10 Tf 54 261.00 Td (- product_id.) Tj ET
-BT /F1 10 Tf 54 245.00 Td (- question.) Tj ET
-BT /F2 12 Tf 54 215.00 Td (saved_items) Tj ET
-BT /F1 10 Tf 54 189.00 Td (Stores saved listings:) Tj ET
-BT /F1 10 Tf 54 166.00 Td (- id.) Tj ET
-BT /F1 10 Tf 54 150.00 Td (- user_id.) Tj ET
-BT /F1 10 Tf 54 134.00 Td (- product_id.) Tj ET
-BT /F1 10 Tf 54 118.00 Td (- asking_price.) Tj ET
-BT /F1 10 Tf 54 102.00 Td (- marketplace.) Tj ET
-BT /F1 10 Tf 54 86.00 Td (- seller_location.) Tj ET
-BT /F1 10 Tf 54 70.00 Td (- notes.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- model.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- year.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- msrp.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- used_low.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (- used_avg.) Tj ET
+BT /F1 10 Tf 54 658.00 Td (- used_high.) Tj ET
+BT /F1 10 Tf 54 642.00 Td (- fair_price.) Tj ET
+BT /F1 10 Tf 54 626.00 Td (- depreciation_percent.) Tj ET
+BT /F1 10 Tf 54 610.00 Td (- reliability_score.) Tj ET
+BT /F1 10 Tf 54 594.00 Td (- demand_score.) Tj ET
+BT /F1 10 Tf 54 578.00 Td (- scam_risk_score.) Tj ET
+BT /F1 10 Tf 54 562.00 Td (- recommendation.) Tj ET
+BT /F1 10 Tf 54 546.00 Td (- recommendation_explanation.) Tj ET
+BT /F1 10 Tf 54 530.00 Td (- created_at.) Tj ET
+BT /F2 12 Tf 54 500.00 Td (product_issues) Tj ET
+BT /F1 10 Tf 54 474.00 Td (Stores product-specific issues:) Tj ET
+BT /F1 10 Tf 54 451.00 Td (- id.) Tj ET
+BT /F1 10 Tf 54 435.00 Td (- product_id.) Tj ET
+BT /F1 10 Tf 54 419.00 Td (- issue.) Tj ET
+BT /F1 10 Tf 54 403.00 Td (- severity.) Tj ET
+BT /F2 12 Tf 54 373.00 Td (buying_checklist_items) Tj ET
+BT /F1 10 Tf 54 347.00 Td (Stores product-specific checklist items:) Tj ET
+BT /F1 10 Tf 54 324.00 Td (- id.) Tj ET
+BT /F1 10 Tf 54 308.00 Td (- product_id.) Tj ET
+BT /F1 10 Tf 54 292.00 Td (- checklist_item.) Tj ET
+BT /F2 12 Tf 54 262.00 Td (seller_questions) Tj ET
+BT /F1 10 Tf 54 236.00 Td (Stores product-specific seller questions:) Tj ET
+BT /F1 10 Tf 54 213.00 Td (- id.) Tj ET
+BT /F1 10 Tf 54 197.00 Td (- product_id.) Tj ET
+BT /F1 10 Tf 54 181.00 Td (- question.) Tj ET
+BT /F2 12 Tf 54 151.00 Td (saved_items) Tj ET
+BT /F1 10 Tf 54 125.00 Td (Stores saved listings:) Tj ET
+BT /F1 10 Tf 54 102.00 Td (- id.) Tj ET
+BT /F1 10 Tf 54 86.00 Td (- user_id.) Tj ET
+BT /F1 10 Tf 54 70.00 Td (- product_id.) Tj ET
 endstream
 endobj
 65 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 64 0 R >>
 endobj
 66 0 obj
-<< /Length 1915 >>
+<< /Length 1905 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- status.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- created_at.) Tj ET
-BT /F1 10 Tf 54 700.00 Td (Status must be one of:) Tj ET
-BT /F1 10 Tf 54 677.00 Td (- watching.) Tj ET
-BT /F1 10 Tf 54 661.00 Td (- contacted.) Tj ET
-BT /F1 10 Tf 54 645.00 Td (- negotiating.) Tj ET
-BT /F1 10 Tf 54 629.00 Td (- bought.) Tj ET
-BT /F1 10 Tf 54 613.00 Td (- passed.) Tj ET
-BT /F2 12 Tf 54 583.00 Td (listing_checks) Tj ET
-BT /F1 10 Tf 54 557.00 Td (Stores analyzer runs when Supabase and auth are available:) Tj ET
-BT /F1 10 Tf 54 534.00 Td (- id.) Tj ET
-BT /F1 10 Tf 54 518.00 Td (- user_id.) Tj ET
-BT /F1 10 Tf 54 502.00 Td (- product_id.) Tj ET
-BT /F1 10 Tf 54 486.00 Td (- asking_price.) Tj ET
-BT /F1 10 Tf 54 470.00 Td (- condition.) Tj ET
-BT /F1 10 Tf 54 454.00 Td (- description.) Tj ET
-BT /F1 10 Tf 54 438.00 Td (- marketplace.) Tj ET
-BT /F1 10 Tf 54 422.00 Td (- deal_score.) Tj ET
-BT /F1 10 Tf 54 406.00 Td (- risk_level.) Tj ET
-BT /F1 10 Tf 54 390.00 Td (- confidence_score.) Tj ET
-BT /F1 10 Tf 54 374.00 Td (- price_difference.) Tj ET
-BT /F1 10 Tf 54 358.00 Td (- red_flags.) Tj ET
-BT /F1 10 Tf 54 342.00 Td (- positive_signals.) Tj ET
-BT /F1 10 Tf 54 326.00 Td (- suggested_offer_low.) Tj ET
-BT /F1 10 Tf 54 310.00 Td (- suggested_offer_high.) Tj ET
-BT /F1 10 Tf 54 294.00 Td (- created_at.) Tj ET
-BT /F1 10 Tf 54 272.00 Td (The `red_flags` and `positive_signals` fields are JSONB arrays.) Tj ET
-BT /F2 12 Tf 54 241.00 Td (Row Level Security) Tj ET
-BT /F1 10 Tf 54 215.00 Td (RLS is enabled for:) Tj ET
-BT /F1 10 Tf 54 192.00 Td (- profiles.) Tj ET
-BT /F1 10 Tf 54 176.00 Td (- saved_items.) Tj ET
-BT /F1 10 Tf 54 160.00 Td (- listing_checks.) Tj ET
-BT /F1 10 Tf 54 138.00 Td (Policies:) Tj ET
-BT /F1 10 Tf 54 115.00 Td (- Profiles are readable by owner.) Tj ET
-BT /F1 10 Tf 54 99.00 Td (- Profiles are insertable by owner.) Tj ET
-BT /F1 10 Tf 54 83.00 Td (- Saved items are owned by user.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- asking_price.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- marketplace.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- seller_location.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- notes.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (- status.) Tj ET
+BT /F1 10 Tf 54 658.00 Td (- created_at.) Tj ET
+BT /F1 10 Tf 54 636.00 Td (Status must be one of:) Tj ET
+BT /F1 10 Tf 54 613.00 Td (- watching.) Tj ET
+BT /F1 10 Tf 54 597.00 Td (- contacted.) Tj ET
+BT /F1 10 Tf 54 581.00 Td (- negotiating.) Tj ET
+BT /F1 10 Tf 54 565.00 Td (- bought.) Tj ET
+BT /F1 10 Tf 54 549.00 Td (- passed.) Tj ET
+BT /F2 12 Tf 54 519.00 Td (listing_checks) Tj ET
+BT /F1 10 Tf 54 493.00 Td (Stores analyzer runs when Supabase and auth are available:) Tj ET
+BT /F1 10 Tf 54 470.00 Td (- id.) Tj ET
+BT /F1 10 Tf 54 454.00 Td (- user_id.) Tj ET
+BT /F1 10 Tf 54 438.00 Td (- product_id.) Tj ET
+BT /F1 10 Tf 54 422.00 Td (- asking_price.) Tj ET
+BT /F1 10 Tf 54 406.00 Td (- condition.) Tj ET
+BT /F1 10 Tf 54 390.00 Td (- description.) Tj ET
+BT /F1 10 Tf 54 374.00 Td (- marketplace.) Tj ET
+BT /F1 10 Tf 54 358.00 Td (- deal_score.) Tj ET
+BT /F1 10 Tf 54 342.00 Td (- risk_level.) Tj ET
+BT /F1 10 Tf 54 326.00 Td (- confidence_score.) Tj ET
+BT /F1 10 Tf 54 310.00 Td (- price_difference.) Tj ET
+BT /F1 10 Tf 54 294.00 Td (- red_flags.) Tj ET
+BT /F1 10 Tf 54 278.00 Td (- positive_signals.) Tj ET
+BT /F1 10 Tf 54 262.00 Td (- suggested_offer_low.) Tj ET
+BT /F1 10 Tf 54 246.00 Td (- suggested_offer_high.) Tj ET
+BT /F1 10 Tf 54 230.00 Td (- created_at.) Tj ET
+BT /F1 10 Tf 54 208.00 Td (The `red_flags` and `positive_signals` fields are JSONB arrays.) Tj ET
+BT /F2 12 Tf 54 177.00 Td (Row Level Security) Tj ET
+BT /F1 10 Tf 54 151.00 Td (RLS is enabled for:) Tj ET
+BT /F1 10 Tf 54 128.00 Td (- profiles.) Tj ET
+BT /F1 10 Tf 54 112.00 Td (- saved_items.) Tj ET
+BT /F1 10 Tf 54 96.00 Td (- listing_checks.) Tj ET
+BT /F1 10 Tf 54 74.00 Td (Policies:) Tj ET
 endstream
 endobj
 67 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 66 0 R >>
 endobj
 68 0 obj
-<< /Length 2531 >>
+<< /Length 2566 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Listing checks are owned by user, with support for nullable user_id.) Tj ET
-BT /F2 15 Tf 54 704.00 Td (Marketplace Services) Tj ET
-BT /F1 10 Tf 54 674.00 Td (Mock marketplace service files:) Tj ET
-BT /F1 10 Tf 54 651.00 Td (- `services/ebayService.ts`.) Tj ET
-BT /F1 10 Tf 54 635.00 Td (- `services/craigslistService.ts`.) Tj ET
-BT /F1 10 Tf 54 619.00 Td (- `services/facebookMarketplaceService.ts`.) Tj ET
-BT /F1 10 Tf 54 603.00 Td (- `services/priceAnalysisService.ts`.) Tj ET
-BT /F1 10 Tf 54 581.00 Td (These services return typed `MarketplaceListing` objects. They are async so they can be replaced) Tj ET
-BT /F1 10 Tf 54 564.00 Td (later with real API calls.) Tj ET
-BT /F1 10 Tf 54 541.00 Td (The `getMarketplaceSignals\(product\)` function calls:) Tj ET
-BT /F1 10 Tf 54 518.00 Td (- `getEbayCompletedListings\(product\)`.) Tj ET
-BT /F1 10 Tf 54 502.00 Td (- `getCraigslistLocalListings\(product\)`.) Tj ET
-BT /F1 10 Tf 54 486.00 Td (- `getFacebookMarketplaceListings\(product\)`.) Tj ET
-BT /F1 10 Tf 54 464.00 Td (It combines and sorts listings by price.) Tj ET
-BT /F1 10 Tf 54 441.00 Td (The app does not scrape Facebook Marketplace. Facebook Marketplace data is mocked.) Tj ET
-BT /F1 10 Tf 54 418.00 Td (Future real marketplace integration should:) Tj ET
-BT /F1 10 Tf 54 395.00 Td (1. Keep the same return type.) Tj ET
-BT /F1 10 Tf 54 379.00 Td (2. Use approved APIs or user-submitted listing data.) Tj ET
-BT /F1 10 Tf 54 363.00 Td (3. Store provider credentials in server-only environment variables.) Tj ET
-BT /F1 10 Tf 54 347.00 Td (4. Move provider calls into server routes or server actions.) Tj ET
-BT /F1 10 Tf 54 331.00 Td (5. Normalize results into `MarketplaceListing`.) Tj ET
-BT /F1 10 Tf 54 315.00 Td (6. Avoid scraping Facebook Marketplace.) Tj ET
-BT /F2 15 Tf 54 281.00 Td (Current UI and Design Direction) Tj ET
-BT /F1 10 Tf 54 251.00 Td (The current app is designed to feel like a clean consumer buyer tool.) Tj ET
-BT /F1 10 Tf 54 228.00 Td (Important visual direction:) Tj ET
-BT /F1 10 Tf 54 205.00 Td (- Simple and fast.) Tj ET
-BT /F1 10 Tf 54 189.00 Td (- Mobile-friendly.) Tj ET
-BT /F1 10 Tf 54 173.00 Td (- Practical and trustworthy.) Tj ET
-BT /F1 10 Tf 54 157.00 Td (- Marketplace/tool-like.) Tj ET
-BT /F1 10 Tf 54 141.00 Td (- Buyer-focused.) Tj ET
-BT /F1 10 Tf 54 119.00 Td (Current style details:) Tj ET
-BT /F1 10 Tf 54 96.00 Td (- Tailwind theme uses `ink`, `paper`, `mint`, `amber`, and `danger`.) Tj ET
-BT /F1 10 Tf 54 80.00 Td (- Cards use small border radius.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Profiles are readable by owner.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Profiles are insertable by owner.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- Saved items are owned by user.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- Listing checks are owned by user, with support for nullable user_id.) Tj ET
+BT /F2 15 Tf 54 656.00 Td (Marketplace Services) Tj ET
+BT /F1 10 Tf 54 626.00 Td (Mock marketplace service files:) Tj ET
+BT /F1 10 Tf 54 603.00 Td (- `services/ebayService.ts`.) Tj ET
+BT /F1 10 Tf 54 587.00 Td (- `services/craigslistService.ts`.) Tj ET
+BT /F1 10 Tf 54 571.00 Td (- `services/facebookMarketplaceService.ts`.) Tj ET
+BT /F1 10 Tf 54 555.00 Td (- `services/priceAnalysisService.ts`.) Tj ET
+BT /F1 10 Tf 54 533.00 Td (These services return typed `MarketplaceListing` objects. They are async so they can be replaced) Tj ET
+BT /F1 10 Tf 54 516.00 Td (later with real API calls.) Tj ET
+BT /F1 10 Tf 54 493.00 Td (The `getMarketplaceSignals\(product\)` function calls:) Tj ET
+BT /F1 10 Tf 54 470.00 Td (- `getEbayCompletedListings\(product\)`.) Tj ET
+BT /F1 10 Tf 54 454.00 Td (- `getCraigslistLocalListings\(product\)`.) Tj ET
+BT /F1 10 Tf 54 438.00 Td (- `getFacebookMarketplaceListings\(product\)`.) Tj ET
+BT /F1 10 Tf 54 416.00 Td (It combines and sorts listings by price.) Tj ET
+BT /F1 10 Tf 54 393.00 Td (The app does not scrape Facebook Marketplace. Facebook Marketplace data is mocked.) Tj ET
+BT /F1 10 Tf 54 370.00 Td (Future real marketplace integration should:) Tj ET
+BT /F1 10 Tf 54 347.00 Td (1. Keep the same return type.) Tj ET
+BT /F1 10 Tf 54 331.00 Td (2. Use approved APIs or user-submitted listing data.) Tj ET
+BT /F1 10 Tf 54 315.00 Td (3. Store provider credentials in server-only environment variables.) Tj ET
+BT /F1 10 Tf 54 299.00 Td (4. Move provider calls into server routes or server actions.) Tj ET
+BT /F1 10 Tf 54 283.00 Td (5. Normalize results into `MarketplaceListing`.) Tj ET
+BT /F1 10 Tf 54 267.00 Td (6. Avoid scraping Facebook Marketplace.) Tj ET
+BT /F2 15 Tf 54 233.00 Td (Current UI and Design Direction) Tj ET
+BT /F1 10 Tf 54 203.00 Td (The current app is designed to feel like a clean consumer buyer tool.) Tj ET
+BT /F1 10 Tf 54 180.00 Td (Important visual direction:) Tj ET
+BT /F1 10 Tf 54 157.00 Td (- Simple and fast.) Tj ET
+BT /F1 10 Tf 54 141.00 Td (- Mobile-friendly.) Tj ET
+BT /F1 10 Tf 54 125.00 Td (- Practical and trustworthy.) Tj ET
+BT /F1 10 Tf 54 109.00 Td (- Marketplace/tool-like.) Tj ET
+BT /F1 10 Tf 54 93.00 Td (- Buyer-focused.) Tj ET
+BT /F1 10 Tf 54 71.00 Td (Current style details:) Tj ET
 endstream
 endobj
 69 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 68 0 R >>
 endobj
 70 0 obj
-<< /Length 3370 >>
+<< /Length 3378 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- UI uses lucide-react icons.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- Buttons and inputs use a shared `focus-ring` class.) Tj ET
-BT /F1 10 Tf 54 706.00 Td (- The app avoids a heavy finance-dashboard feel.) Tj ET
-BT /F1 10 Tf 54 690.00 Td (- The homepage avoids generic marketing-first layout and puts the link checker action first.) Tj ET
-BT /F1 10 Tf 54 668.00 Td (The main user will often be on mobile while browsing a marketplace or retail app. Mobile) Tj ET
-BT /F1 10 Tf 54 651.00 Td (behavior matters because a user may paste a link quickly, check the verdict, copy seller) Tj ET
-BT /F1 10 Tf 54 634.00 Td (questions, compare alternatives, and use the checklist at a meetup or before checkout.) Tj ET
-BT /F2 15 Tf 54 599.00 Td (What Is Implemented Right Now) Tj ET
-BT /F1 10 Tf 54 569.00 Td (The current version can:) Tj ET
-BT /F1 10 Tf 54 546.00 Td (- Show a polished homepage focused on dropping resale or retail links.) Tj ET
-BT /F1 10 Tf 54 530.00 Td (- Accept a quick link draft on the homepage.) Tj ET
-BT /F1 10 Tf 54 514.00 Td (- Try to auto-populate homepage fields from safe public product/listing links.) Tj ET
-BT /F1 10 Tf 54 498.00 Td (- Move that draft into the full analyzer.) Tj ET
-BT /F1 10 Tf 54 482.00 Td (- Try to auto-populate analyzer fields from safe public product/listing links.) Tj ET
-BT /F1 10 Tf 54 466.00 Td (- Extract readable page metadata, structured product names, descriptions, and prices when the) Tj ET
-BT /F1 10 Tf 54 450.00 Td (  source exposes them.) Tj ET
-BT /F1 10 Tf 54 434.00 Td (- Safely reject local/private links and Facebook Marketplace links.) Tj ET
-BT /F1 10 Tf 54 418.00 Td (- Infer link source labels from common resale and retail domains.) Tj ET
-BT /F1 10 Tf 54 402.00 Td (- Infer whether a link is likely resale or retail.) Tj ET
-BT /F1 10 Tf 54 386.00 Td (- Analyze a resale listing or retail product link with local deterministic logic.) Tj ET
-BT /F1 10 Tf 54 370.00 Td (- Compare resale link price to mock fair-market values.) Tj ET
-BT /F1 10 Tf 54 354.00 Td (- Compare retail link price to mock MSRP benchmarks.) Tj ET
-BT /F1 10 Tf 54 338.00 Td (- Detect red flag wording in seller/listing text.) Tj ET
-BT /F1 10 Tf 54 322.00 Td (- Detect positive trust signals in seller/listing text.) Tj ET
-BT /F1 10 Tf 54 306.00 Td (- Adjust risk based on marketplace source.) Tj ET
-BT /F1 10 Tf 54 290.00 Td (- Adjust score based on condition.) Tj ET
-BT /F1 10 Tf 54 274.00 Td (- Return a recommendation label.) Tj ET
-BT /F1 10 Tf 54 258.00 Td (- Return a deal score.) Tj ET
-BT /F1 10 Tf 54 242.00 Td (- Return a confidence score.) Tj ET
-BT /F1 10 Tf 54 226.00 Td (- Return a risk level.) Tj ET
-BT /F1 10 Tf 54 210.00 Td (- Return a benchmark gap.) Tj ET
-BT /F1 10 Tf 54 194.00 Td (- Return a suggested offer range or target buy range.) Tj ET
-BT /F1 10 Tf 54 178.00 Td (- Return a negotiation tip.) Tj ET
-BT /F1 10 Tf 54 162.00 Td (- Return next steps.) Tj ET
-BT /F1 10 Tf 54 146.00 Td (- Show a visible "Why this might NOT be worth it" section.) Tj ET
-BT /F1 10 Tf 54 130.00 Td (- Show better resale moves when the mock catalog has them.) Tj ET
-BT /F1 10 Tf 54 114.00 Td (- Show better retail moves when the mock catalog has them.) Tj ET
-BT /F1 10 Tf 54 98.00 Td (- Explain what action to take for each alternative.) Tj ET
-BT /F1 10 Tf 54 82.00 Td (- Show product-specific seller questions.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Tailwind theme uses `ink`, `paper`, `mint`, `amber`, and `danger`.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Cards use small border radius.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- UI uses lucide-react icons.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- Buttons and inputs use a shared `focus-ring` class.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (- The app avoids a heavy finance-dashboard feel.) Tj ET
+BT /F1 10 Tf 54 658.00 Td (- The homepage avoids generic marketing-first layout and puts the link checker action first.) Tj ET
+BT /F1 10 Tf 54 636.00 Td (The main user will often be on mobile while browsing a marketplace or retail app. Mobile) Tj ET
+BT /F1 10 Tf 54 619.00 Td (behavior matters because a user may paste a link quickly, check the verdict, copy seller) Tj ET
+BT /F1 10 Tf 54 602.00 Td (questions, compare alternatives, and use the checklist at a meetup or before checkout.) Tj ET
+BT /F2 15 Tf 54 567.00 Td (What Is Implemented Right Now) Tj ET
+BT /F1 10 Tf 54 537.00 Td (The current version can:) Tj ET
+BT /F1 10 Tf 54 514.00 Td (- Show a polished homepage focused on dropping resale or retail links.) Tj ET
+BT /F1 10 Tf 54 498.00 Td (- Accept a quick link draft on the homepage.) Tj ET
+BT /F1 10 Tf 54 482.00 Td (- Try to auto-populate homepage fields from safe public product/listing links.) Tj ET
+BT /F1 10 Tf 54 466.00 Td (- Move that draft into the full analyzer.) Tj ET
+BT /F1 10 Tf 54 450.00 Td (- Try to auto-populate analyzer fields from safe public product/listing links.) Tj ET
+BT /F1 10 Tf 54 434.00 Td (- Extract readable page metadata, structured product names, descriptions, and prices when the) Tj ET
+BT /F1 10 Tf 54 418.00 Td (  source exposes them.) Tj ET
+BT /F1 10 Tf 54 402.00 Td (- Safely reject local/private links and Facebook Marketplace links.) Tj ET
+BT /F1 10 Tf 54 386.00 Td (- Infer link source labels from common resale and retail domains.) Tj ET
+BT /F1 10 Tf 54 370.00 Td (- Infer whether a link is likely resale or retail.) Tj ET
+BT /F1 10 Tf 54 354.00 Td (- Analyze a resale listing or retail product link with local deterministic logic.) Tj ET
+BT /F1 10 Tf 54 338.00 Td (- Compare resale link price to mock fair-market values.) Tj ET
+BT /F1 10 Tf 54 322.00 Td (- Compare retail link price to mock MSRP benchmarks.) Tj ET
+BT /F1 10 Tf 54 306.00 Td (- Detect red flag wording in seller/listing text.) Tj ET
+BT /F1 10 Tf 54 290.00 Td (- Detect positive trust signals in seller/listing text.) Tj ET
+BT /F1 10 Tf 54 274.00 Td (- Adjust risk based on marketplace source.) Tj ET
+BT /F1 10 Tf 54 258.00 Td (- Adjust score based on condition.) Tj ET
+BT /F1 10 Tf 54 242.00 Td (- Return a recommendation label.) Tj ET
+BT /F1 10 Tf 54 226.00 Td (- Return a deal score.) Tj ET
+BT /F1 10 Tf 54 210.00 Td (- Return a confidence score.) Tj ET
+BT /F1 10 Tf 54 194.00 Td (- Return a risk level.) Tj ET
+BT /F1 10 Tf 54 178.00 Td (- Return a benchmark gap.) Tj ET
+BT /F1 10 Tf 54 162.00 Td (- Return a suggested offer range or target buy range.) Tj ET
+BT /F1 10 Tf 54 146.00 Td (- Return a negotiation tip.) Tj ET
+BT /F1 10 Tf 54 130.00 Td (- Return next steps.) Tj ET
+BT /F1 10 Tf 54 114.00 Td (- Show a visible "Why this might NOT be worth it" section.) Tj ET
+BT /F1 10 Tf 54 98.00 Td (- Show better resale moves when the mock catalog has them.) Tj ET
+BT /F1 10 Tf 54 82.00 Td (- Show better retail moves when the mock catalog has them.) Tj ET
 endstream
 endobj
 71 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 70 0 R >>
 endobj
 72 0 obj
-<< /Length 2879 >>
+<< /Length 2917 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Let users copy seller questions from the result.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- Show product-specific meetup checklist items.) Tj ET
-BT /F1 10 Tf 54 706.00 Td (- Search the mock product catalog.) Tj ET
-BT /F1 10 Tf 54 690.00 Td (- Filter products by category and minimum year.) Tj ET
-BT /F1 10 Tf 54 674.00 Td (- View product insight pages.) Tj ET
-BT /F1 10 Tf 54 658.00 Td (- View price summaries.) Tj ET
-BT /F1 10 Tf 54 642.00 Td (- View depreciation charts.) Tj ET
-BT /F1 10 Tf 54 626.00 Td (- View common issues.) Tj ET
-BT /F1 10 Tf 54 610.00 Td (- View scam warnings.) Tj ET
-BT /F1 10 Tf 54 594.00 Td (- View buying checklists.) Tj ET
-BT /F1 10 Tf 54 578.00 Td (- Bookmark product cards from search, homepage guides, and related product cards.) Tj ET
-BT /F1 10 Tf 54 562.00 Td (- Save analyzed link verdicts from the result card.) Tj ET
-BT /F1 10 Tf 54 546.00 Td (- Save product/listing details locally.) Tj ET
-BT /F1 10 Tf 54 530.00 Td (- Sync saved items to Supabase if configured and logged in.) Tj ET
-BT /F1 10 Tf 54 514.00 Td (- Update saved item status.) Tj ET
-BT /F1 10 Tf 54 498.00 Td (- Delete saved items.) Tj ET
-BT /F1 10 Tf 54 482.00 Td (- Sign up and log in with Supabase if configured.) Tj ET
-BT /F1 10 Tf 54 466.00 Td (- Save listing check results to Supabase if configured and logged in.) Tj ET
-BT /F1 10 Tf 54 450.00 Td (- Show admin/mock data overview.) Tj ET
-BT /F1 10 Tf 54 434.00 Td (- Show a customer-facing About Us page.) Tj ET
-BT /F2 15 Tf 54 400.00 Td (What Is Not Implemented Yet) Tj ET
-BT /F1 10 Tf 54 370.00 Td (The current version does not:) Tj ET
-BT /F1 10 Tf 54 347.00 Td (- Use OpenAI API analysis.) Tj ET
-BT /F1 10 Tf 54 331.00 Td (- Have an `app/api/analyze-listing/route.ts` route.) Tj ET
-BT /F1 10 Tf 54 315.00 Td (- Guarantee live page extraction works for every pasted link.) Tj ET
-BT /F1 10 Tf 54 299.00 Td (- Extract images, condition, shipping, seller profiles, or private marketplace details from) Tj ET
-BT /F1 10 Tf 54 283.00 Td (  URLs.) Tj ET
-BT /F1 10 Tf 54 267.00 Td (- Use computer vision.) Tj ET
-BT /F1 10 Tf 54 251.00 Td (- Upload screenshots.) Tj ET
-BT /F1 10 Tf 54 235.00 Td (- Extract text from listing screenshots.) Tj ET
-BT /F1 10 Tf 54 219.00 Td (- Analyze product photos.) Tj ET
-BT /F1 10 Tf 54 203.00 Td (- Scrape Facebook Marketplace.) Tj ET
-BT /F1 10 Tf 54 187.00 Td (- Call real eBay/Craigslist/Facebook/OfferUp APIs.) Tj ET
-BT /F1 10 Tf 54 171.00 Td (- Call real retail APIs.) Tj ET
-BT /F1 10 Tf 54 155.00 Td (- Seed Supabase products from the mock catalog automatically.) Tj ET
-BT /F1 10 Tf 54 139.00 Td (- Require accounts for local use.) Tj ET
-BT /F1 10 Tf 54 123.00 Td (- Process payments.) Tj ET
-BT /F1 10 Tf 54 107.00 Td (- Send price alerts.) Tj ET
-BT /F1 10 Tf 54 91.00 Td (- Generate paid reports.) Tj ET
-BT /F1 10 Tf 54 75.00 Td (- Provide seller verification.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Explain what action to take for each alternative.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Show product-specific seller questions.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- Let users copy seller questions from the result.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- Show product-specific meetup checklist items.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (- Search the mock product catalog.) Tj ET
+BT /F1 10 Tf 54 658.00 Td (- Filter products by category and minimum year.) Tj ET
+BT /F1 10 Tf 54 642.00 Td (- View product insight pages.) Tj ET
+BT /F1 10 Tf 54 626.00 Td (- View price summaries.) Tj ET
+BT /F1 10 Tf 54 610.00 Td (- View depreciation charts.) Tj ET
+BT /F1 10 Tf 54 594.00 Td (- View common issues.) Tj ET
+BT /F1 10 Tf 54 578.00 Td (- View scam warnings.) Tj ET
+BT /F1 10 Tf 54 562.00 Td (- View buying checklists.) Tj ET
+BT /F1 10 Tf 54 546.00 Td (- Bookmark product cards from search, homepage guides, and related product cards.) Tj ET
+BT /F1 10 Tf 54 530.00 Td (- Save analyzed link verdicts from the result card.) Tj ET
+BT /F1 10 Tf 54 514.00 Td (- Save product/listing details locally.) Tj ET
+BT /F1 10 Tf 54 498.00 Td (- Sync saved items to Supabase if configured and logged in.) Tj ET
+BT /F1 10 Tf 54 482.00 Td (- Update saved item status.) Tj ET
+BT /F1 10 Tf 54 466.00 Td (- Delete saved items.) Tj ET
+BT /F1 10 Tf 54 450.00 Td (- Sign up and log in with Supabase if configured.) Tj ET
+BT /F1 10 Tf 54 434.00 Td (- Save listing check results to Supabase if configured and logged in.) Tj ET
+BT /F1 10 Tf 54 418.00 Td (- Show admin/mock data overview.) Tj ET
+BT /F1 10 Tf 54 402.00 Td (- Show a customer-facing About Us page.) Tj ET
+BT /F2 15 Tf 54 368.00 Td (What Is Not Implemented Yet) Tj ET
+BT /F1 10 Tf 54 338.00 Td (The current version does not:) Tj ET
+BT /F1 10 Tf 54 315.00 Td (- Use OpenAI API analysis.) Tj ET
+BT /F1 10 Tf 54 299.00 Td (- Have an `app/api/analyze-listing/route.ts` route.) Tj ET
+BT /F1 10 Tf 54 283.00 Td (- Guarantee live page extraction works for every pasted link.) Tj ET
+BT /F1 10 Tf 54 267.00 Td (- Extract images, condition, shipping, seller profiles, or private marketplace details from) Tj ET
+BT /F1 10 Tf 54 251.00 Td (  URLs.) Tj ET
+BT /F1 10 Tf 54 235.00 Td (- Use computer vision.) Tj ET
+BT /F1 10 Tf 54 219.00 Td (- Upload screenshots.) Tj ET
+BT /F1 10 Tf 54 203.00 Td (- Extract text from listing screenshots.) Tj ET
+BT /F1 10 Tf 54 187.00 Td (- Analyze product photos.) Tj ET
+BT /F1 10 Tf 54 171.00 Td (- Scrape Facebook Marketplace.) Tj ET
+BT /F1 10 Tf 54 155.00 Td (- Call real eBay/Craigslist/Facebook/OfferUp APIs.) Tj ET
+BT /F1 10 Tf 54 139.00 Td (- Call real retail APIs.) Tj ET
+BT /F1 10 Tf 54 123.00 Td (- Seed Supabase products from the mock catalog automatically.) Tj ET
+BT /F1 10 Tf 54 107.00 Td (- Require accounts for local use.) Tj ET
+BT /F1 10 Tf 54 91.00 Td (- Process payments.) Tj ET
+BT /F1 10 Tf 54 75.00 Td (- Send price alerts.) Tj ET
 endstream
 endobj
 73 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 72 0 R >>
 endobj
 74 0 obj
-<< /Length 3162 >>
+<< /Length 3203 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Have a browser extension.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- Have a mobile app.) Tj ET
-BT /F1 10 Tf 54 706.00 Td (- Include cars.) Tj ET
-BT /F1 10 Tf 54 690.00 Td (- Include phones, game consoles, tools, furniture, or sneakers in the current mock catalog.) Tj ET
-BT /F1 10 Tf 54 668.00 Td (Phones, game consoles, and tools are desired future categories. Cars are intentionally excluded) Tj ET
-BT /F1 10 Tf 54 651.00 Td (for now because car purchases involve VINs, titles, accident history, financing, insurance,) Tj ET
-BT /F1 10 Tf 54 634.00 Td (local laws, and higher liability.) Tj ET
-BT /F2 15 Tf 54 599.00 Td (Current Limitations) Tj ET
-BT /F1 10 Tf 54 569.00 Td (The largest current limitations are:) Tj ET
-BT /F1 10 Tf 54 546.00 Td (- Market prices are mock estimates.) Tj ET
-BT /F1 10 Tf 54 530.00 Td (- Product catalog only covers 20 products.) Tj ET
-BT /F1 10 Tf 54 514.00 Td (- Listing checks are calculated on the client.) Tj ET
-BT /F1 10 Tf 54 498.00 Td (- The analyzer uses keyword/rule-based logic, not a language model.) Tj ET
-BT /F1 10 Tf 54 482.00 Td (- Product matching is simple string matching against brand and model.) Tj ET
-BT /F1 10 Tf 54 466.00 Td (- Link extraction depends on what the public page exposes in HTML metadata.) Tj ET
-BT /F1 10 Tf 54 450.00 Td (- Some retailers and marketplaces block automated reads or render details only in client-side) Tj ET
-BT /F1 10 Tf 54 434.00 Td (  scripts.) Tj ET
-BT /F1 10 Tf 54 418.00 Td (- Extracted prices may need user review because pages can contain multiple dollar amounts.) Tj ET
-BT /F1 10 Tf 54 402.00 Td (- Pasted URLs are not used to scrape Facebook Marketplace.) Tj ET
-BT /F1 10 Tf 54 386.00 Td (- Retail alternatives are mock MSRP benchmarks, not real store availability.) Tj ET
-BT /F1 10 Tf 54 370.00 Td (- No image/screenshot support.) Tj ET
-BT /F1 10 Tf 54 354.00 Td (- No real marketplace integrations.) Tj ET
-BT /F1 10 Tf 54 338.00 Td (- Supabase is optional and may not be configured.) Tj ET
-BT /F1 10 Tf 54 322.00 Td (- Saved items are local to the browser when not logged in.) Tj ET
-BT /F1 10 Tf 54 306.00 Td (- Listing check history is only saved to Supabase when logged in.) Tj ET
-BT /F1 10 Tf 54 290.00 Td (- Product pages use mock marketplace listings.) Tj ET
-BT /F1 10 Tf 54 268.00 Td (These limitations are acceptable for the current MVP because the goal is to make the core buyer) Tj ET
-BT /F1 10 Tf 54 251.00 Td (workflow feel useful before adding API cost and complexity.) Tj ET
-BT /F2 15 Tf 54 216.00 Td (Future-Ready Architecture) Tj ET
-BT /F1 10 Tf 54 186.00 Td (The current structure intentionally leaves room for OpenAI analysis later.) Tj ET
-BT /F1 10 Tf 54 163.00 Td (It now includes a basic server-side link extraction route that can be expanded later. The) Tj ET
-BT /F1 10 Tf 54 146.00 Td (current route should eventually be backed by provider-specific parsers, approved APIs, or) Tj ET
-BT /F1 10 Tf 54 129.00 Td (affiliate/product feeds for better accuracy.) Tj ET
-BT /F1 10 Tf 54 106.00 Td (Recommended future link analysis improvements:) Tj ET
-BT /F1 10 Tf 54 83.00 Td (- Keep URL/source inference in a shared helper.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Generate paid reports.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Provide seller verification.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- Have a browser extension.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- Have a mobile app.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (- Include cars.) Tj ET
+BT /F1 10 Tf 54 658.00 Td (- Include phones, game consoles, tools, furniture, or sneakers in the current mock catalog.) Tj ET
+BT /F1 10 Tf 54 636.00 Td (Phones, game consoles, and tools are desired future categories. Cars are intentionally excluded) Tj ET
+BT /F1 10 Tf 54 619.00 Td (for now because car purchases involve VINs, titles, accident history, financing, insurance,) Tj ET
+BT /F1 10 Tf 54 602.00 Td (local laws, and higher liability.) Tj ET
+BT /F2 15 Tf 54 567.00 Td (Current Limitations) Tj ET
+BT /F1 10 Tf 54 537.00 Td (The largest current limitations are:) Tj ET
+BT /F1 10 Tf 54 514.00 Td (- Market prices are mock estimates.) Tj ET
+BT /F1 10 Tf 54 498.00 Td (- Product catalog only covers 20 products.) Tj ET
+BT /F1 10 Tf 54 482.00 Td (- Listing checks are calculated on the client.) Tj ET
+BT /F1 10 Tf 54 466.00 Td (- The analyzer uses keyword/rule-based logic, not a language model.) Tj ET
+BT /F1 10 Tf 54 450.00 Td (- Product matching is simple string matching against brand and model.) Tj ET
+BT /F1 10 Tf 54 434.00 Td (- Link extraction depends on what the public page exposes in HTML metadata.) Tj ET
+BT /F1 10 Tf 54 418.00 Td (- Some retailers and marketplaces block automated reads or render details only in client-side) Tj ET
+BT /F1 10 Tf 54 402.00 Td (  scripts.) Tj ET
+BT /F1 10 Tf 54 386.00 Td (- Extracted prices may need user review because pages can contain multiple dollar amounts.) Tj ET
+BT /F1 10 Tf 54 370.00 Td (- Pasted URLs are not used to scrape Facebook Marketplace.) Tj ET
+BT /F1 10 Tf 54 354.00 Td (- Retail alternatives are mock MSRP benchmarks, not real store availability.) Tj ET
+BT /F1 10 Tf 54 338.00 Td (- No image/screenshot support.) Tj ET
+BT /F1 10 Tf 54 322.00 Td (- No real marketplace integrations.) Tj ET
+BT /F1 10 Tf 54 306.00 Td (- Supabase is optional and may not be configured.) Tj ET
+BT /F1 10 Tf 54 290.00 Td (- Saved items are local to the browser when not logged in.) Tj ET
+BT /F1 10 Tf 54 274.00 Td (- Listing check history is only saved to Supabase when logged in.) Tj ET
+BT /F1 10 Tf 54 258.00 Td (- Product pages use mock marketplace listings.) Tj ET
+BT /F1 10 Tf 54 236.00 Td (These limitations are acceptable for the current MVP because the goal is to make the core buyer) Tj ET
+BT /F1 10 Tf 54 219.00 Td (workflow feel useful before adding API cost and complexity.) Tj ET
+BT /F2 15 Tf 54 184.00 Td (Future-Ready Architecture) Tj ET
+BT /F1 10 Tf 54 154.00 Td (The current structure intentionally leaves room for OpenAI analysis later.) Tj ET
+BT /F1 10 Tf 54 131.00 Td (It now includes a basic server-side link extraction route that can be expanded later. The) Tj ET
+BT /F1 10 Tf 54 114.00 Td (current route should eventually be backed by provider-specific parsers, approved APIs, or) Tj ET
+BT /F1 10 Tf 54 97.00 Td (affiliate/product feeds for better accuracy.) Tj ET
+BT /F1 10 Tf 54 74.00 Td (Recommended future link analysis improvements:) Tj ET
 endstream
 endobj
 75 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 74 0 R >>
 endobj
 76 0 obj
-<< /Length 3232 >>
+<< /Length 3239 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (- Fetch only from allowed providers or approved APIs.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (- Do not scrape Facebook Marketplace.) Tj ET
-BT /F1 10 Tf 54 706.00 Td (- Normalize extracted page data into a structured listing/product object.) Tj ET
-BT /F1 10 Tf 54 690.00 Td (- Add provider-specific extraction for eBay, Craigslist, major retailers, and approved product) Tj ET
-BT /F1 10 Tf 54 674.00 Td (  APIs.) Tj ET
-BT /F1 10 Tf 54 658.00 Td (- Add stronger price disambiguation when pages show sale price, MSRP, shipping, coupons, and) Tj ET
-BT /F1 10 Tf 54 642.00 Td (  financing.) Tj ET
-BT /F1 10 Tf 54 626.00 Td (- Continue using `lib/dealQuality.ts` for deterministic pricing/risk logic.) Tj ET
-BT /F1 10 Tf 54 610.00 Td (- Return graceful fallback instructions when a link cannot be fetched.) Tj ET
-BT /F1 10 Tf 54 588.00 Td (Recommended future OpenAI architecture:) Tj ET
-BT /F1 10 Tf 54 565.00 Td (- Add server route: `app/api/analyze-listing/route.ts`.) Tj ET
-BT /F1 10 Tf 54 549.00 Td (- Add service: `services/openaiListingAnalysisService.ts`.) Tj ET
-BT /F1 10 Tf 54 533.00 Td (- Keep deterministic price/deal logic in `lib/dealQuality.ts`.) Tj ET
-BT /F1 10 Tf 54 517.00 Td (- Let OpenAI extract structured listing facts and wording risks.) Tj ET
-BT /F1 10 Tf 54 501.00 Td (- Do not let OpenAI become the only source of truth for pricing.) Tj ET
-BT /F1 10 Tf 54 485.00 Td (- Fall back to local analyzer if the API key is missing.) Tj ET
-BT /F1 10 Tf 54 463.00 Td (Potential OpenAI use cases later:) Tj ET
-BT /F1 10 Tf 54 440.00 Td (- Extract title, brand, model, condition, and price from pasted text.) Tj ET
-BT /F1 10 Tf 54 424.00 Td (- Detect scam language beyond exact keyword matches.) Tj ET
-BT /F1 10 Tf 54 408.00 Td (- Generate better seller questions.) Tj ET
-BT /F1 10 Tf 54 392.00 Td (- Explain verdicts in plainer language.) Tj ET
-BT /F1 10 Tf 54 376.00 Td (- Summarize seller replies.) Tj ET
-BT /F1 10 Tf 54 360.00 Td (- Identify missing proof signals.) Tj ET
-BT /F1 10 Tf 54 338.00 Td (Screenshot/photo support can come after text analysis. Future image support could:) Tj ET
-BT /F1 10 Tf 54 315.00 Td (- Let users upload listing screenshots.) Tj ET
-BT /F1 10 Tf 54 299.00 Td (- Extract title, price, description, location, and seller wording.) Tj ET
-BT /F1 10 Tf 54 283.00 Td (- Detect stock images.) Tj ET
-BT /F1 10 Tf 54 267.00 Td (- Detect blurry photos.) Tj ET
-BT /F1 10 Tf 54 251.00 Td (- Check for missing serial number photos.) Tj ET
-BT /F1 10 Tf 54 235.00 Td (- Look for visible damage.) Tj ET
-BT /F1 10 Tf 54 219.00 Td (- Look for missing accessories.) Tj ET
-BT /F2 15 Tf 54 185.00 Td (Suggested Future Product Order) Tj ET
-BT /F1 10 Tf 54 155.00 Td (Based on the current direction, the best next build order is:) Tj ET
-BT /F1 10 Tf 54 132.00 Td (1. Improve provider-specific link extraction accuracy.) Tj ET
-BT /F1 10 Tf 54 116.00 Td (2. Add approved product/price APIs or affiliate feeds for real alternatives.) Tj ET
-BT /F1 10 Tf 54 100.00 Td (3. Add OpenAI-powered text analysis only after link extraction and UX feel good.) Tj ET
-BT /F1 10 Tf 54 84.00 Td (4. Add better saved-deal workflows.) Tj ET
-BT /F1 10 Tf 54 68.00 Td (5. Add phones, game consoles, and tools.) Tj ET
+BT /F1 10 Tf 54 738.00 Td (- Keep URL/source inference in a shared helper.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (- Fetch only from allowed providers or approved APIs.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (- Do not scrape Facebook Marketplace.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (- Normalize extracted page data into a structured listing/product object.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (- Add provider-specific extraction for eBay, Craigslist, major retailers, and approved product) Tj ET
+BT /F1 10 Tf 54 658.00 Td (  APIs.) Tj ET
+BT /F1 10 Tf 54 642.00 Td (- Add stronger price disambiguation when pages show sale price, MSRP, shipping, coupons, and) Tj ET
+BT /F1 10 Tf 54 626.00 Td (  financing.) Tj ET
+BT /F1 10 Tf 54 610.00 Td (- Continue using `lib/dealQuality.ts` for deterministic pricing/risk logic.) Tj ET
+BT /F1 10 Tf 54 594.00 Td (- Return graceful fallback instructions when a link cannot be fetched.) Tj ET
+BT /F1 10 Tf 54 572.00 Td (Recommended future OpenAI architecture:) Tj ET
+BT /F1 10 Tf 54 549.00 Td (- Add server route: `app/api/analyze-listing/route.ts`.) Tj ET
+BT /F1 10 Tf 54 533.00 Td (- Add service: `services/openaiListingAnalysisService.ts`.) Tj ET
+BT /F1 10 Tf 54 517.00 Td (- Keep deterministic price/deal logic in `lib/dealQuality.ts`.) Tj ET
+BT /F1 10 Tf 54 501.00 Td (- Let OpenAI extract structured listing facts and wording risks.) Tj ET
+BT /F1 10 Tf 54 485.00 Td (- Do not let OpenAI become the only source of truth for pricing.) Tj ET
+BT /F1 10 Tf 54 469.00 Td (- Fall back to local analyzer if the API key is missing.) Tj ET
+BT /F1 10 Tf 54 447.00 Td (Potential OpenAI use cases later:) Tj ET
+BT /F1 10 Tf 54 424.00 Td (- Extract title, brand, model, condition, and price from pasted text.) Tj ET
+BT /F1 10 Tf 54 408.00 Td (- Detect scam language beyond exact keyword matches.) Tj ET
+BT /F1 10 Tf 54 392.00 Td (- Generate better seller questions.) Tj ET
+BT /F1 10 Tf 54 376.00 Td (- Explain verdicts in plainer language.) Tj ET
+BT /F1 10 Tf 54 360.00 Td (- Summarize seller replies.) Tj ET
+BT /F1 10 Tf 54 344.00 Td (- Identify missing proof signals.) Tj ET
+BT /F1 10 Tf 54 322.00 Td (Screenshot/photo support can come after text analysis. Future image support could:) Tj ET
+BT /F1 10 Tf 54 299.00 Td (- Let users upload listing screenshots.) Tj ET
+BT /F1 10 Tf 54 283.00 Td (- Extract title, price, description, location, and seller wording.) Tj ET
+BT /F1 10 Tf 54 267.00 Td (- Detect stock images.) Tj ET
+BT /F1 10 Tf 54 251.00 Td (- Detect blurry photos.) Tj ET
+BT /F1 10 Tf 54 235.00 Td (- Check for missing serial number photos.) Tj ET
+BT /F1 10 Tf 54 219.00 Td (- Look for visible damage.) Tj ET
+BT /F1 10 Tf 54 203.00 Td (- Look for missing accessories.) Tj ET
+BT /F2 15 Tf 54 169.00 Td (Suggested Future Product Order) Tj ET
+BT /F1 10 Tf 54 139.00 Td (Based on the current direction, the best next build order is:) Tj ET
+BT /F1 10 Tf 54 116.00 Td (1. Improve provider-specific link extraction accuracy.) Tj ET
+BT /F1 10 Tf 54 100.00 Td (2. Add approved product/price APIs or affiliate feeds for real alternatives.) Tj ET
+BT /F1 10 Tf 54 84.00 Td (3. Add OpenAI-powered text analysis only after link extraction and UX feel good.) Tj ET
+BT /F1 10 Tf 54 68.00 Td (4. Add better saved-deal workflows.) Tj ET
 endstream
 endobj
 77 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 76 0 R >>
 endobj
 78 0 obj
-<< /Length 2933 >>
+<< /Length 2947 >>
 stream
-BT /F1 10 Tf 54 738.00 Td (6. Add screenshot/listing image upload.) Tj ET
-BT /F1 10 Tf 54 722.00 Td (7. Add real sold-price data or approved APIs.) Tj ET
-BT /F1 10 Tf 54 706.00 Td (8. Add premium reports or alerts.) Tj ET
-BT /F1 10 Tf 54 690.00 Td (9. Add seller verification only when trust rules are stronger.) Tj ET
-BT /F1 10 Tf 54 668.00 Td (Do not add cars yet.) Tj ET
-BT /F1 10 Tf 54 645.00 Td (Do not scrape Facebook Marketplace.) Tj ET
-BT /F1 10 Tf 54 622.00 Td (Do not monetize in a way that makes recommendations feel biased.) Tj ET
-BT /F2 15 Tf 54 587.00 Td (How A User Should Experience BuyWise Today) Tj ET
-BT /F1 10 Tf 54 557.00 Td (The ideal current user flow is:) Tj ET
-BT /F1 10 Tf 54 534.00 Td (1. User finds a resale listing or retail product page.) Tj ET
-BT /F1 10 Tf 54 518.00 Td (2. User opens BuyWise.) Tj ET
-BT /F1 10 Tf 54 502.00 Td (3. User drops the link into the homepage.) Tj ET
-BT /F1 10 Tf 54 486.00 Td (4. BuyWise sends them to the full analyzer step when they click Analyze link.) Tj ET
-BT /F1 10 Tf 54 470.00 Td (5. BuyWise tries to auto-fill title, price, description, source, mode, and closest mock price) Tj ET
-BT /F1 10 Tf 54 454.00 Td (   guide.) Tj ET
-BT /F1 10 Tf 54 438.00 Td (6. User reviews or corrects the auto-filled details and adds anything missing.) Tj ET
-BT /F1 10 Tf 54 422.00 Td (7. User checks or adjusts the closest mock price guide.) Tj ET
-BT /F1 10 Tf 54 406.00 Td (8. User clicks Analyze link.) Tj ET
-BT /F1 10 Tf 54 390.00 Td (9. BuyWise returns a buyer verdict.) Tj ET
-BT /F1 10 Tf 54 374.00 Td (10. User reads the offer or target buy range, "Why this might NOT be worth it," red flags, trust) Tj ET
-BT /F1 10 Tf 54 358.00 Td (   signals, alternatives, and next steps.) Tj ET
-BT /F1 10 Tf 54 342.00 Td (11. User compares better resale moves and better retail moves if any are shown.) Tj ET
-BT /F1 10 Tf 54 326.00 Td (12. User copies seller questions or uses the checklist before checkout/meeting.) Tj ET
-BT /F1 10 Tf 54 310.00 Td (13. User can save the item and track status if they want.) Tj ET
-BT /F1 10 Tf 54 288.00 Td (The product should help users avoid bad buys before they waste time messaging, driving, checking) Tj ET
-BT /F1 10 Tf 54 271.00 Td (out, or paying.) Tj ET
-BT /F2 15 Tf 54 236.00 Td (Maintenance Note) Tj ET
-BT /F1 10 Tf 54 206.00 Td (This overview is intended to be a living project document.) Tj ET
-BT /F1 10 Tf 54 183.00 Td (When the website behavior changes, update this overview and regenerate `BuyWise Overview.pdf`.) Tj ET
-BT /F1 10 Tf 54 166.00 Td (Future updates should keep the document focused on what the current version actually does,) Tj ET
-BT /F1 10 Tf 54 149.00 Td (clearly separating implemented features from planned features.) Tj ET
-BT /F1 10 Tf 54 126.00 Td (The current PDF is generated from this Markdown source:) Tj ET
-BT /F3 9 Tf 54 103.00 Td (BuyWise Overview.md) Tj ET
-BT /F1 10 Tf 54 82.00 Td (The current PDF output is:) Tj ET
+BT /F1 10 Tf 54 738.00 Td (5. Add phones, game consoles, and tools.) Tj ET
+BT /F1 10 Tf 54 722.00 Td (6. Add screenshot/listing image upload.) Tj ET
+BT /F1 10 Tf 54 706.00 Td (7. Add real sold-price data or approved APIs.) Tj ET
+BT /F1 10 Tf 54 690.00 Td (8. Add premium reports or alerts.) Tj ET
+BT /F1 10 Tf 54 674.00 Td (9. Add seller verification only when trust rules are stronger.) Tj ET
+BT /F1 10 Tf 54 652.00 Td (Do not add cars yet.) Tj ET
+BT /F1 10 Tf 54 629.00 Td (Do not scrape Facebook Marketplace.) Tj ET
+BT /F1 10 Tf 54 606.00 Td (Do not monetize in a way that makes recommendations feel biased.) Tj ET
+BT /F2 15 Tf 54 571.00 Td (How A User Should Experience BuyWise Today) Tj ET
+BT /F1 10 Tf 54 541.00 Td (The ideal current user flow is:) Tj ET
+BT /F1 10 Tf 54 518.00 Td (1. User finds a resale listing or retail product page.) Tj ET
+BT /F1 10 Tf 54 502.00 Td (2. User opens BuyWise.) Tj ET
+BT /F1 10 Tf 54 486.00 Td (3. User drops the link into the homepage.) Tj ET
+BT /F1 10 Tf 54 470.00 Td (4. BuyWise sends them to the full analyzer step when they click Analyze link.) Tj ET
+BT /F1 10 Tf 54 454.00 Td (5. BuyWise tries to auto-fill title, price, description, source, mode, and closest mock price) Tj ET
+BT /F1 10 Tf 54 438.00 Td (   guide.) Tj ET
+BT /F1 10 Tf 54 422.00 Td (6. User reviews or corrects the auto-filled details and adds anything missing.) Tj ET
+BT /F1 10 Tf 54 406.00 Td (7. User checks or adjusts the closest mock price guide.) Tj ET
+BT /F1 10 Tf 54 390.00 Td (8. User clicks Analyze link.) Tj ET
+BT /F1 10 Tf 54 374.00 Td (9. BuyWise returns a buyer verdict.) Tj ET
+BT /F1 10 Tf 54 358.00 Td (10. User reads the offer or target buy range, "Why this might NOT be worth it," red flags, trust) Tj ET
+BT /F1 10 Tf 54 342.00 Td (   signals, alternatives, and next steps.) Tj ET
+BT /F1 10 Tf 54 326.00 Td (11. User compares better resale moves and better retail moves if any are shown.) Tj ET
+BT /F1 10 Tf 54 310.00 Td (12. User copies seller questions or uses the checklist before checkout/meeting.) Tj ET
+BT /F1 10 Tf 54 294.00 Td (13. User can save the item and track status if they want.) Tj ET
+BT /F1 10 Tf 54 272.00 Td (The product should help users avoid bad buys before they waste time messaging, driving, checking) Tj ET
+BT /F1 10 Tf 54 255.00 Td (out, or paying.) Tj ET
+BT /F2 15 Tf 54 220.00 Td (Maintenance Note) Tj ET
+BT /F1 10 Tf 54 190.00 Td (This overview is intended to be a living project document.) Tj ET
+BT /F1 10 Tf 54 167.00 Td (When the website behavior changes, update this overview and regenerate `BuyWise Overview.pdf`.) Tj ET
+BT /F1 10 Tf 54 150.00 Td (Future updates should keep the document focused on what the current version actually does,) Tj ET
+BT /F1 10 Tf 54 133.00 Td (clearly separating implemented features from planned features.) Tj ET
+BT /F1 10 Tf 54 110.00 Td (The current PDF is generated from this Markdown source:) Tj ET
+BT /F3 9 Tf 54 87.00 Td (BuyWise Overview.md) Tj ET
 endstream
 endobj
 79 0 obj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 78 0 R >>
 endobj
 80 0 obj
-<< /Length 53 >>
+<< /Length 114 >>
 stream
-BT /F3 9 Tf 54 738.00 Td (BuyWise Overview.pdf) Tj ET
+BT /F1 10 Tf 54 738.00 Td (The current PDF output is:) Tj ET
+BT /F3 9 Tf 54 715.00 Td (BuyWise Overview.pdf) Tj ET
 endstream
 endobj
 81 0 obj
@@ -1656,77 +1658,77 @@ xref
 0000006552 00000 n 
 0000009690 00000 n 
 0000009838 00000 n 
-0000013221 00000 n 
-0000013369 00000 n 
-0000016054 00000 n 
-0000016202 00000 n 
-0000018959 00000 n 
-0000019107 00000 n 
-0000021602 00000 n 
-0000021750 00000 n 
-0000024537 00000 n 
-0000024685 00000 n 
-0000027794 00000 n 
-0000027942 00000 n 
-0000030873 00000 n 
-0000031021 00000 n 
-0000034081 00000 n 
-0000034229 00000 n 
-0000036460 00000 n 
-0000036608 00000 n 
-0000038713 00000 n 
-0000038861 00000 n 
-0000041134 00000 n 
-0000041282 00000 n 
-0000043582 00000 n 
-0000043730 00000 n 
-0000046078 00000 n 
-0000046226 00000 n 
-0000048619 00000 n 
-0000048767 00000 n 
-0000051592 00000 n 
-0000051740 00000 n 
-0000053828 00000 n 
-0000053976 00000 n 
-0000056617 00000 n 
-0000056765 00000 n 
-0000058923 00000 n 
-0000059071 00000 n 
-0000061615 00000 n 
-0000061763 00000 n 
-0000064083 00000 n 
-0000064231 00000 n 
-0000066634 00000 n 
-0000066782 00000 n 
-0000069290 00000 n 
-0000069438 00000 n 
-0000071607 00000 n 
-0000071755 00000 n 
-0000073757 00000 n 
-0000073905 00000 n 
-0000075961 00000 n 
-0000076109 00000 n 
-0000078337 00000 n 
-0000078485 00000 n 
-0000080312 00000 n 
-0000080460 00000 n 
-0000082428 00000 n 
-0000082576 00000 n 
-0000085160 00000 n 
-0000085308 00000 n 
-0000088731 00000 n 
-0000088879 00000 n 
-0000091811 00000 n 
-0000091959 00000 n 
-0000095174 00000 n 
-0000095322 00000 n 
-0000098607 00000 n 
-0000098755 00000 n 
-0000101741 00000 n 
-0000101889 00000 n 
-0000101993 00000 n 
+0000013340 00000 n 
+0000013488 00000 n 
+0000016173 00000 n 
+0000016321 00000 n 
+0000018984 00000 n 
+0000019132 00000 n 
+0000021688 00000 n 
+0000021836 00000 n 
+0000024559 00000 n 
+0000024707 00000 n 
+0000027761 00000 n 
+0000027909 00000 n 
+0000030775 00000 n 
+0000030923 00000 n 
+0000033993 00000 n 
+0000034141 00000 n 
+0000036524 00000 n 
+0000036672 00000 n 
+0000038789 00000 n 
+0000038937 00000 n 
+0000041196 00000 n 
+0000041344 00000 n 
+0000043641 00000 n 
+0000043789 00000 n 
+0000046000 00000 n 
+0000046148 00000 n 
+0000048645 00000 n 
+0000048793 00000 n 
+0000051637 00000 n 
+0000051785 00000 n 
+0000053946 00000 n 
+0000054094 00000 n 
+0000056735 00000 n 
+0000056883 00000 n 
+0000059059 00000 n 
+0000059207 00000 n 
+0000061726 00000 n 
+0000061874 00000 n 
+0000064199 00000 n 
+0000064347 00000 n 
+0000066709 00000 n 
+0000066857 00000 n 
+0000069358 00000 n 
+0000069506 00000 n 
+0000071716 00000 n 
+0000071864 00000 n 
+0000073846 00000 n 
+0000073994 00000 n 
+0000075876 00000 n 
+0000076024 00000 n 
+0000078387 00000 n 
+0000078535 00000 n 
+0000080340 00000 n 
+0000080488 00000 n 
+0000082446 00000 n 
+0000082594 00000 n 
+0000085213 00000 n 
+0000085361 00000 n 
+0000088792 00000 n 
+0000088940 00000 n 
+0000091910 00000 n 
+0000092058 00000 n 
+0000095314 00000 n 
+0000095462 00000 n 
+0000098754 00000 n 
+0000098902 00000 n 
+0000101902 00000 n 
+0000102050 00000 n 
+0000102216 00000 n 
 trailer
 << /Size 82 /Root 1 0 R >>
 startxref
-102141
+102364
 %%EOF
