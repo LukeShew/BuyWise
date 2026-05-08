@@ -7,8 +7,7 @@ import {
   MessageSquareText,
   Search,
   ShieldCheck,
-  ShoppingBag,
-  Target
+  ShoppingBag
 } from "lucide-react";
 import { HomeListingPrompt } from "@/components/HomeListingPrompt";
 import { ProductCard } from "@/components/ProductCard";
@@ -25,24 +24,54 @@ const checks = [
 const verdictFeatures = [
   {
     icon: AlertTriangle,
-    title: "Trap detection",
-    text: "Flags rushed payment, stock photos, locks, no receipt, vague answers, and prices that look too good."
+    title: "Risk check",
+    text: "Flags rushed payment, missing proof, locks, vague answers, and prices that look too good."
   },
   {
     icon: BadgeDollarSign,
-    title: "Price verdict",
-    text: "Compares the pasted link price against used fair value or retail MSRP, depending on what the buyer is checking."
+    title: "Price check",
+    text: "Compares the link price against used fair value and retail benchmarks so the deal has context."
   },
   {
     icon: ShoppingBag,
-    title: "Retail and resale alternatives",
-    text: "Shows better used options and retail MSRP benchmarks when the current mock catalog has a stronger choice."
+    title: "Better options",
+    text: "Shows safer used moves and retail fallbacks when the current catalog has a stronger choice."
   },
   {
     icon: MessageSquareText,
-    title: "Buyer next steps",
-    text: "Turns the risk signals into questions, offer guidance, and a checklist before messaging or buying."
+    title: "Next move",
+    text: "Turns the verdict into an offer range, seller questions, and a short checklist before buying."
   }
+];
+
+const outputHighlights = [
+  {
+    label: "Verdict",
+    value: "Buy, negotiate, verify, or pass",
+    text: "The result starts with the decision, not a pile of generic advice."
+  },
+  {
+    label: "Money",
+    value: "Fair value + offer range",
+    text: "See whether the price is actually good and what number to offer."
+  },
+  {
+    label: "Proof",
+    value: "Questions and checklist",
+    text: "Know what to ask before messaging, meeting, or checking out."
+  }
+];
+
+const exampleReasons = [
+  "No receipt or serial number mentioned",
+  "Cheap enough to need extra proof",
+  "Public meetup and working video should come before any offer"
+];
+
+const exampleQuestions = [
+  "Can you send a working video with today's date?",
+  "Do you have the receipt or serial number?",
+  "Can I test it before paying?"
 ];
 
 export default function LandingPage() {
@@ -83,15 +112,24 @@ export default function LandingPage() {
       </section>
 
       <section className="border-b border-stone-200 bg-white">
-        <div className="mx-auto grid max-w-7xl gap-6 px-4 py-12 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
-          <div>
+        <div className="mx-auto grid max-w-7xl gap-6 px-4 py-12 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+          <div className="flex h-full flex-col">
             <p className="text-sm font-semibold text-mint">What you get back</p>
             <h2 className="mt-2 text-3xl font-black leading-tight text-ink">
-              A verdict that compares the link, not just the product
+              Know whether to buy, negotiate, verify, or walk away.
             </h2>
             <p className="mt-3 leading-7 text-stone-600">
-              The current MVP uses mock pricing, but the flow is link-first: pull what the page exposes, rate this place to buy, then show better used or retail choices if they exist.
+              Paste a link and BuyWise turns the messy listing into a clear buyer call: what it is worth, what feels risky, and what to do next.
             </p>
+            <div className="mt-5 grid gap-3">
+              {outputHighlights.map((item) => (
+                <div key={item.label} className="rounded-lg border border-stone-200 bg-paper p-4">
+                  <p className="text-xs font-bold uppercase tracking-normal text-mint">{item.label}</p>
+                  <p className="mt-1 font-bold text-ink">{item.value}</p>
+                  <p className="mt-1 text-sm leading-6 text-stone-600">{item.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -129,40 +167,79 @@ export default function LandingPage() {
             ))}
           </div>
 
-          <aside className="mt-6 rounded-lg border border-stone-200 bg-ink p-5 text-white shadow-soft">
-            <div className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr_1fr] lg:items-center">
-              <div className="flex items-start gap-3">
-                <Target className="mt-1 h-5 w-5 shrink-0 text-mint" aria-hidden />
+          <section className="mt-8 overflow-hidden rounded-lg border border-stone-200 bg-white shadow-soft">
+            <div className="border-b border-stone-200 bg-ink p-5 text-white">
+              <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold text-mint">Example verdict</p>
-                  <h3 className="mt-1 text-2xl font-black">Risky purchase</h3>
-                  <p className="mt-3 text-sm leading-6 text-stone-200">
-                    Cheap enough to be interesting, but the seller has not shown proof. Ask for a working video, serial number, and public meetup before making an offer.
+                  <h3 className="mt-1 text-3xl font-black">Risky purchase</h3>
+                  <div className="mt-3 flex flex-wrap gap-2 text-sm font-semibold text-stone-200">
+                    <span className="rounded-full bg-white/10 px-3 py-1">eBay listing</span>
+                    <span className="rounded-full bg-white/10 px-3 py-1">Sony A6400</span>
+                    <span className="rounded-full bg-white/10 px-3 py-1">$390 link price</span>
+                  </div>
+                  <p className="mt-4 max-w-3xl text-sm leading-6 text-stone-200">
+                    Cheap enough to be interesting, but the seller has not provided enough proof. Ask for a working video, receipt or serial number, and a public meetup before making an offer.
                   </p>
                 </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-lg bg-white/10 p-3">
-                  <p className="text-xs text-stone-300">Fair used price</p>
-                  <p className="mt-1 text-lg font-black">{formatCurrency(525)}</p>
-                </div>
-                <div className="rounded-lg bg-white/10 p-3">
-                  <p className="text-xs text-stone-300">Offer range</p>
-                  <p className="mt-1 text-lg font-black">$390-$410</p>
-                </div>
-              </div>
-
-              <div className="grid gap-2">
-                {["No receipt mentioned", "Check used alternatives", "Compare retail MSRP"].map((item) => (
-                  <div key={item} className="flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2 text-sm font-semibold">
-                    <ClipboardCheck className="h-4 w-4 shrink-0 text-mint" aria-hidden />
-                    {item}
-                  </div>
-                ))}
+                <span className="inline-flex w-fit rounded-full bg-orange-100 px-3 py-1 text-sm font-bold text-orange-950">
+                  Verify before offer
+                </span>
               </div>
             </div>
-          </aside>
+
+            <div className="grid gap-4 bg-orange-50/40 p-5 lg:grid-cols-[0.95fr_1.05fr]">
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
+                  <p className="text-sm text-stone-500">Deal score</p>
+                  <p className="mt-1 text-2xl font-black text-ink">58/100</p>
+                </div>
+                <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
+                  <p className="text-sm text-stone-500">Scam probability</p>
+                  <p className="mt-1 text-2xl font-black text-ink">7/10</p>
+                  <p className="mt-1 text-xs leading-5 text-stone-500">Higher means more likely to be a scam.</p>
+                </div>
+                <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
+                  <p className="text-sm text-stone-500">Fair used price</p>
+                  <p className="mt-1 text-2xl font-black text-ink">{formatCurrency(525)}</p>
+                </div>
+                <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
+                  <p className="text-sm text-stone-500">Suggested offer</p>
+                  <p className="mt-1 text-2xl font-black text-ink">$390-$410</p>
+                </div>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
+                  <h4 className="flex items-center gap-2 font-bold text-ink">
+                    <AlertTriangle className="h-4 w-4 text-danger" aria-hidden />
+                    Why this might not be worth it
+                  </h4>
+                  <div className="mt-3 space-y-2">
+                    {exampleReasons.map((item) => (
+                      <div key={item} className="rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
+                  <h4 className="flex items-center gap-2 font-bold text-ink">
+                    <ClipboardCheck className="h-4 w-4 text-mint" aria-hidden />
+                    What to ask next
+                  </h4>
+                  <div className="mt-3 space-y-2">
+                    {exampleQuestions.map((item) => (
+                      <div key={item} className="rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
     </main>

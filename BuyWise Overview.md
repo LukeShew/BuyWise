@@ -141,10 +141,10 @@ If the user fills any draft field and submits the homepage form, the draft is sa
 
 The homepage also includes:
 
-- A section explaining what BuyWise returns: trap detection, price verdict, retail/resale alternatives, and buyer next steps.
+- A "What you get back" section that explains the result in buyer language: verdict, money, proof, risk check, price check, better options, and next move.
 - An "Example Products" section with four evenly spaced product cards: Sony A6400, MacBook Air M1, Trek FX 3, and Dell UltraSharp U2720Q.
 - A right-aligned Browse all products link in that product section.
-- A horizontal example "Risky purchase" verdict strip below the product cards with fair used price, offer range, and comparison reminders.
+- A condensed example analysis section below the product cards. It shows a "Risky purchase" verdict, listing context, deal score, scam probability, fair used price, suggested offer, reasons the listing may not be worth it, and seller questions to ask next.
 
 The homepage intentionally feels like a practical buyer tool, not a generic SaaS landing page.
 
@@ -492,7 +492,7 @@ The input includes:
 - Used low.
 - Used high.
 - Reliability score.
-- Scam risk score.
+- Scam probability score.
 - Condition.
 - Marketplace source.
 - Listing text.
@@ -636,7 +636,7 @@ Positive signals can improve confidence and slightly improve the score, but they
 
 ### Marketplace Risk Adjustment
 
-The analyzer adjusts effective scam risk based on marketplace:
+The analyzer adjusts effective scam probability based on marketplace:
 
 - eBay: -1.
 - Craigslist: +1.
@@ -678,7 +678,7 @@ The condition value "Fair" also applies a negative adjustment.
 Recommendation is based on:
 
 - Asking price compared with fair price.
-- Effective scam risk.
+- Effective scam probability.
 - Reliability score.
 - Red flags.
 
@@ -686,7 +686,7 @@ Important behavior:
 
 - If reliability is very low and price is high, recommendation becomes Avoid.
 - If high risk signals exist, recommendation becomes Risky purchase.
-- If the item is 20 percent or more below fair price and effective scam risk is low enough, it can become Great deal.
+- If the item is 20 percent or more below fair price and effective scam probability is low enough, it can become Great deal.
 - If price is at least 15 percent above fair price, it can become Overpriced.
 - If price is roughly within 10 percent of fair value, it can become Fair price.
 - If price looks low but risk is medium/high, it can become Risky purchase.
@@ -699,7 +699,7 @@ The deal score is calculated from:
 
 - Price score.
 - Reliability adjustment.
-- Scam adjustment.
+- Scam probability adjustment.
 - Condition adjustment.
 - Red flag adjustment.
 - Positive signal adjustment.
@@ -712,14 +712,14 @@ The price score favors lower prices but is not the only factor. Serious risk can
 
 Risk level is High when:
 
-- Scam risk is high.
+- Scam probability is high.
 - Reliability is very low.
 - Condition text has poor/broken/locked terms.
 - Any high-severity red flag exists.
 
 Risk level is Medium when:
 
-- Scam risk is moderate.
+- Scam probability is moderate.
 - Reliability is moderate/low.
 - Any red flags are present.
 
@@ -849,7 +849,7 @@ Search results are displayed as product cards. Each card shows:
 - MSRP drop/depreciation.
 - Reliability score.
 - Demand score.
-- Scam score.
+- Scam probability score.
 - Short recommendation explanation.
 - Link to the product insight page.
 
@@ -875,12 +875,12 @@ Each product page includes:
 - Recommendation card.
 - Reliability score.
 - Demand score.
-- Scam risk score.
+- Scam probability score.
 - Price summary.
 - Depreciation chart.
 - Common problems.
 - Seller questions.
-- Scam warnings.
+- Scam probability warnings.
 - Buying checklist.
 - Embedded listing analyzer preloaded with that product.
 - Save listing form.
@@ -928,9 +928,9 @@ The common problems section shows product-specific inspection concerns with seve
 
 Each product has category-specific seller questions. These are intended to help the buyer ask about ownership, condition, hidden defects, accessories, and proof before meeting.
 
-### Scam Warnings
+### Scam Probability Warnings
 
-The scam warning section shows a global list of common used-market red flags:
+The scam probability warning section shows a global list of common used-market red flags:
 
 - Price far below normal market value.
 - Seller refuses public meetup or local pickup.
@@ -1182,7 +1182,7 @@ Each product contains:
 - Depreciation percent.
 - Reliability score.
 - Demand score.
-- Scam risk score.
+- Scam probability score.
 - Common issues.
 - Best years/models.
 - Models to avoid.
@@ -1305,7 +1305,7 @@ Stores:
 - depreciation_percent.
 - reliability_score.
 - demand_score.
-- scam_risk_score.
+- scam_risk_score, currently displayed to users as scam probability.
 - recommendation.
 - recommendation_explanation.
 - created_at.
@@ -1489,7 +1489,7 @@ The current version can:
 - View price summaries.
 - View depreciation charts.
 - View common issues.
-- View scam warnings.
+- View scam probability warnings.
 - View buying checklists.
 - Bookmark product cards from search, homepage guides, and related product cards.
 - Save analyzed link verdicts from the result card.

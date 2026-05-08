@@ -116,7 +116,7 @@ export function ProductCard({ product }: { product: Product }) {
         </span>
         <span className="inline-flex items-center gap-1.5">
           <ShieldAlert className="h-4 w-4" aria-hidden />
-          Scam {product.scamRiskScore}/10
+          Scam probability {product.scamRiskScore}/10
         </span>
       </div>
 

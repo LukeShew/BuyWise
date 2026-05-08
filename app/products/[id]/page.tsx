@@ -90,8 +90,9 @@ export default async function ProductInsightPage({ params }: { params: Promise<{
               <p className="mt-1 text-lg font-black text-ink">{product.demandScore}/10</p>
             </div>
             <div className="rounded-lg bg-stone-50 p-3">
-              <p className="text-xs text-stone-500">Scam</p>
+              <p className="text-xs text-stone-500">Scam probability</p>
               <p className="mt-1 text-lg font-black text-ink">{product.scamRiskScore}/10</p>
+              <p className="mt-1 text-xs leading-5 text-stone-500">Higher is worse.</p>
             </div>
           </div>
         </section>

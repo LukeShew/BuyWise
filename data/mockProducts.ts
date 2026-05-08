@@ -139,7 +139,7 @@ export const mockProducts: Product[] = [
       "Why are you selling it?"
     ],
     recommendation: "Risky purchase",
-    recommendationExplanation: "The camera is reliable, but used demand is hot and scam risk is higher than average. Verify ownership and avoid rushed payment."
+    recommendationExplanation: "The camera is reliable, but used demand is hot and scam probability is higher than average. Verify ownership and avoid rushed payment."
   },
   {
     id: "sony-a7-iii-2018",

@@ -150,7 +150,7 @@ function detectRedFlags(input: DealQualityInput): RiskSignal[] {
   if (input.askingPrice <= input.fairPrice * 0.65) {
     flags.push({
       label: "Price far below market",
-      detail: "This is cheap enough that condition, ownership, or scam risk needs extra proof.",
+      detail: "This is cheap enough that condition, ownership, or scam probability needs extra proof.",
       severity: "high"
     });
   }
