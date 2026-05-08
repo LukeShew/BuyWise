@@ -129,7 +129,9 @@ The homepage's main call to action is the link checker panel. It asks for:
 
 The quick homepage prompt now attempts to auto-populate from the pasted link instead of asking for product/model and price up front. It calls `/api/extract-link` to pull the page title, price, source, rough description, link mode, and closest mock-catalog match when the page exposes readable metadata. If the site blocks access or does not expose a reliable price/model, the full analyzer asks for the missing details on `/submit`.
 
-The homepage still stores a draft in browser session storage and sends the user to `/submit`, where the user can review or correct the auto-filled details and run the full analyzer.
+The homepage still stores a draft in browser session storage and sends the user to `/submit?draft=home`. That route now skips the large review form when the draft has enough information and builds the verdict immediately. The result gets the full page width so the buyer sees the recommendation, reasons, offer range, alternatives, questions, and checklist first.
+
+If the link could not provide enough information, such as a missing price, the analyzer falls back to asking for the missing details instead of guessing.
 
 The homepage prompt can infer some source/type details from the URL. For example, eBay and Craigslist links are treated as resale by default, while Best Buy, Amazon, Walmart, Target, Apple, Dell, B&H Photo, Adorama, Sony, Canon, Trek, and similar retailer/manufacturer links are treated as retail by default.
 
@@ -152,7 +154,11 @@ The homepage intentionally feels like a practical buyer tool, not a generic SaaS
 
 The `/submit` page is the full analyzer step behind the homepage flow. It is no longer a main navbar destination because the homepage is the primary Analyze Listing surface.
 
-Its purpose is to let a user review auto-filled link details, add anything missing, and get a practical buyer verdict.
+Its purpose depends on how the user arrives:
+
+- From the homepage link checker, `/submit?draft=home` auto-runs the analysis and shows the verdict full width.
+- If required details are missing, it asks for the missing information before giving a verdict.
+- When opened directly, `/submit` still shows the full form for manual entry.
 
 The page tells the user to paste:
 
@@ -217,6 +223,8 @@ When the user pastes a link, the analyzer waits briefly and then tries to read t
 - Closest matched mock price guide.
 
 The user can edit anything that was filled automatically. Auto-fill is treated as a starting point, not a final source of truth.
+
+When a homepage draft is loaded with enough usable data, the analyzer runs automatically. After a verdict exists on the submit page, the input form is hidden so the result can take over the page.
 
 The supported marketplace values are:
 

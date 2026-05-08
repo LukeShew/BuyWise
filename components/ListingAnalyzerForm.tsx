@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import {
   AlertCircle,
   Calculator,
@@ -42,6 +42,18 @@ const marketplaces: MarketplaceSource[] = [
   "Local seller",
   "Other"
 ];
+
+interface AnalyzerValues {
+  listingUrl: string;
+  analysisMode: LinkAnalysisMode;
+  productName: string;
+  askingPrice: string;
+  condition: string;
+  description: string;
+  sellerNotes: string;
+  marketplace: MarketplaceSource;
+  location: string;
+}
 
 function findClosestProduct(productName: string) {
   const normalized = productName.toLowerCase().trim();
@@ -117,7 +129,15 @@ function AnalyzerEmptyState() {
   );
 }
 
-export function ListingAnalyzerForm({ initialProduct }: { initialProduct?: Product }) {
+export function ListingAnalyzerForm({
+  initialProduct,
+  autoAnalyzeDraft = false,
+  focusResultOnAnalyze = false
+}: {
+  initialProduct?: Product;
+  autoAnalyzeDraft?: boolean;
+  focusResultOnAnalyze?: boolean;
+}) {
   const [listingUrl, setListingUrl] = useState("");
   const [analysisMode, setAnalysisMode] = useState<LinkAnalysisMode>("resale");
   const [productId, setProductId] = useState(initialProduct?.id ?? mockProducts[0].id);
@@ -143,6 +163,8 @@ export function ListingAnalyzerForm({ initialProduct }: { initialProduct?: Produ
   const [isExtractingLink, setIsExtractingLink] = useState(false);
   const [linkMessage, setLinkMessage] = useState("");
   const [lastExtractedUrl, setLastExtractedUrl] = useState("");
+  const [isLoadingDraft, setIsLoadingDraft] = useState(autoAnalyzeDraft && !initialProduct);
+  const shouldFocusResult = autoAnalyzeDraft || focusResultOnAnalyze;
 
   function updateListingUrl(value: string) {
     setListingUrl(value);
@@ -195,6 +217,116 @@ export function ListingAnalyzerForm({ initialProduct }: { initialProduct?: Produ
     }
   }
 
+  function getCurrentValues(): AnalyzerValues {
+    return {
+      listingUrl,
+      analysisMode,
+      productName,
+      askingPrice,
+      condition,
+      description,
+      sellerNotes,
+      marketplace,
+      location
+    };
+  }
+
+  const runAnalysis = useCallback(async (values: AnalyzerValues) => {
+    setError("");
+    setMessage("");
+
+    const parsedPrice = Number(values.askingPrice);
+    if (!Number.isFinite(parsedPrice) || parsedPrice <= 0) {
+      setError("BuyWise needs the listing price before it can give a verdict.");
+      return false;
+    }
+
+    setIsAnalyzing(true);
+
+    try {
+      const matchedProduct = findClosestProduct(values.productName) ?? selectedProduct;
+      setProductId(matchedProduct.id);
+      setAnalyzedProduct(matchedProduct);
+
+      const listingText = [values.description, values.sellerNotes, values.marketplace, values.location].filter(Boolean).join(" ");
+      const conditionText = [values.condition, values.description, values.sellerNotes].join(" ");
+      const benchmarkFairPrice = values.analysisMode === "retail" ? matchedProduct.msrp : matchedProduct.fairPrice;
+      const benchmarkLow = values.analysisMode === "retail" ? Math.round(matchedProduct.msrp * 0.75) : matchedProduct.usedLow;
+      const benchmarkHigh = values.analysisMode === "retail" ? Math.round(matchedProduct.msrp * 1.05) : matchedProduct.usedHigh;
+      const scamRiskScore =
+        values.analysisMode === "retail" ? Math.max(1, matchedProduct.scamRiskScore - 4) : matchedProduct.scamRiskScore;
+
+      const nextResult = calculateDealQuality({
+        askingPrice: parsedPrice,
+        fairPrice: benchmarkFairPrice,
+        usedLow: benchmarkLow,
+        usedHigh: benchmarkHigh,
+        reliabilityScore: matchedProduct.reliabilityScore,
+        scamRiskScore,
+        condition: conditionText,
+        marketplace: values.analysisMode === "retail" ? undefined : values.marketplace,
+        listingText
+      });
+
+      const nextContext = buildListingAnalysisContext({
+        product: matchedProduct,
+        askingPrice: parsedPrice,
+        mode: values.analysisMode,
+        listingUrl: values.listingUrl,
+        marketplace: values.marketplace,
+        sellerLocation: values.location
+      });
+
+      setResult(nextResult);
+      setAnalysisContext(nextContext);
+
+      if (!listingText.trim()) {
+        setMessage("Verdict ready. Paste page details or seller wording for a stronger confidence score.");
+      }
+
+      if (supabase) {
+        const { data } = await supabase.auth.getSession();
+        if (data.session) {
+          const { error: insertError } = await supabase.from("listing_checks").insert({
+            user_id: data.session.user.id,
+            product_id: matchedProduct.id,
+            asking_price: parsedPrice,
+            condition: values.condition,
+            description: [
+              values.listingUrl ? `Link: ${values.listingUrl}` : "",
+              `Link type: ${values.analysisMode}`,
+              values.description,
+              values.sellerNotes,
+              values.location ? `Location: ${values.location}` : ""
+            ]
+              .filter(Boolean)
+              .join("\n\n"),
+            marketplace: values.marketplace,
+            deal_score: nextResult.dealScore,
+            risk_level: nextResult.riskLevel,
+            confidence_score: nextResult.confidenceScore,
+            price_difference: nextResult.priceDifference,
+            red_flags: nextResult.redFlags,
+            positive_signals: nextResult.positiveSignals,
+            suggested_offer_low: nextResult.suggestedOfferLow,
+            suggested_offer_high: nextResult.suggestedOfferHigh
+          });
+
+          if (insertError) {
+            setError(insertError.message);
+            return false;
+          }
+
+          setMessage("Listing check saved to your account.");
+        }
+      }
+
+      return true;
+    } finally {
+      setIsAnalyzing(false);
+    }
+  }, [selectedProduct]);
+
   useEffect(() => {
     if (initialProduct || typeof window === "undefined") {
       return;
@@ -202,27 +334,23 @@ export function ListingAnalyzerForm({ initialProduct }: { initialProduct?: Produ
 
     const rawDraft = window.sessionStorage.getItem(LISTING_DRAFT_STORAGE_KEY);
     if (!rawDraft) {
+      setIsLoadingDraft(false);
       return;
     }
 
     try {
       const draft = JSON.parse(rawDraft) as ListingDraft;
+      const draftListingUrl = draft.listingUrl ?? "";
+      const draftAnalysisMode =
+        draft.analysisMode ?? inferAnalysisModeFromUrl(draftListingUrl) ?? "resale";
+      const draftMarketplace =
+        draft.marketplace ?? inferMarketplaceFromUrl(draftListingUrl) ?? "Facebook Marketplace";
 
-      if (draft.listingUrl) {
-        setListingUrl(draft.listingUrl);
-        const inferredMarketplace = inferMarketplaceFromUrl(draft.listingUrl);
-        const inferredMode = inferAnalysisModeFromUrl(draft.listingUrl);
-        if (inferredMarketplace) {
-          setMarketplace(inferredMarketplace);
-        }
-        if (inferredMode) {
-          setAnalysisMode(inferredMode);
-        }
+      if (draftListingUrl) {
+        setListingUrl(draftListingUrl);
       }
 
-      if (draft.analysisMode) {
-        setAnalysisMode(draft.analysisMode);
-      }
+      setAnalysisMode(draftAnalysisMode);
 
       if (draft.productName) {
         setProductName(draft.productName);
@@ -235,19 +363,33 @@ export function ListingAnalyzerForm({ initialProduct }: { initialProduct?: Produ
       if (draft.askingPrice) {
         setAskingPrice(draft.askingPrice);
       }
-      if (draft.marketplace) {
-        setMarketplace(draft.marketplace);
-      }
+      setMarketplace(draftMarketplace);
       if (draft.description) {
         setDescription(draft.description);
       }
-      setMessage("Draft loaded. Add anything missing, then analyze.");
+      if (autoAnalyzeDraft) {
+        void runAnalysis({
+          listingUrl: draftListingUrl,
+          analysisMode: draftAnalysisMode,
+          productName: draft.productName ?? "",
+          askingPrice: draft.askingPrice ?? "",
+          condition: "Good",
+          description: draft.description ?? "",
+          sellerNotes: "",
+          marketplace: draftMarketplace,
+          location: ""
+        }).finally(() => setIsLoadingDraft(false));
+      } else {
+        setMessage("Draft loaded. Add anything missing, then analyze.");
+        setIsLoadingDraft(false);
+      }
     } catch {
       setError("Could not load the link draft. Paste it again.");
+      setIsLoadingDraft(false);
     } finally {
       window.sessionStorage.removeItem(LISTING_DRAFT_STORAGE_KEY);
     }
-  }, [initialProduct]);
+  }, [autoAnalyzeDraft, initialProduct, runAnalysis]);
 
   useEffect(() => {
     const trimmedUrl = listingUrl.trim();
@@ -300,97 +442,28 @@ export function ListingAnalyzerForm({ initialProduct }: { initialProduct?: Produ
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setError("");
-    setMessage("");
+    await runAnalysis(getCurrentValues());
+  }
 
-    const parsedPrice = Number(askingPrice);
-    if (!Number.isFinite(parsedPrice) || parsedPrice <= 0) {
-      setError("Enter a valid price before analyzing.");
-      return;
-    }
+  if (isLoadingDraft) {
+    return (
+      <section className="rounded-lg border border-stone-200 bg-white p-8 text-center shadow-sm">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-ink text-white">
+          <Loader2 className="h-5 w-5 animate-spin" aria-hidden />
+        </div>
+        <p className="mt-4 text-sm font-semibold text-mint">Building verdict</p>
+        <h2 className="mt-1 text-2xl font-black text-ink">Checking this link now</h2>
+        <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-stone-600">
+          BuyWise is using the link details from the homepage so you can get straight to the buyer verdict.
+        </p>
+      </section>
+    );
+  }
 
-    setIsAnalyzing(true);
-
-    try {
-      const matchedProduct = findClosestProduct(productName) ?? selectedProduct;
-      setProductId(matchedProduct.id);
-      setAnalyzedProduct(matchedProduct);
-
-      const listingText = [description, sellerNotes, marketplace, location].filter(Boolean).join(" ");
-      const conditionText = [condition, description, sellerNotes].join(" ");
-      const benchmarkFairPrice = analysisMode === "retail" ? matchedProduct.msrp : matchedProduct.fairPrice;
-      const benchmarkLow = analysisMode === "retail" ? Math.round(matchedProduct.msrp * 0.75) : matchedProduct.usedLow;
-      const benchmarkHigh = analysisMode === "retail" ? Math.round(matchedProduct.msrp * 1.05) : matchedProduct.usedHigh;
-      const scamRiskScore =
-        analysisMode === "retail" ? Math.max(1, matchedProduct.scamRiskScore - 4) : matchedProduct.scamRiskScore;
-
-      const nextResult = calculateDealQuality({
-        askingPrice: parsedPrice,
-        fairPrice: benchmarkFairPrice,
-        usedLow: benchmarkLow,
-        usedHigh: benchmarkHigh,
-        reliabilityScore: matchedProduct.reliabilityScore,
-        scamRiskScore,
-        condition: conditionText,
-        marketplace: analysisMode === "retail" ? undefined : marketplace,
-        listingText
-      });
-
-      const nextContext = buildListingAnalysisContext({
-        product: matchedProduct,
-        askingPrice: parsedPrice,
-        mode: analysisMode,
-        listingUrl,
-        marketplace,
-        sellerLocation: location
-      });
-
-      setResult(nextResult);
-      setAnalysisContext(nextContext);
-
-      if (!listingText.trim()) {
-        setMessage("Verdict ready. Paste page details or seller wording for a stronger confidence score.");
-      }
-
-      if (supabase) {
-        const { data } = await supabase.auth.getSession();
-        if (data.session) {
-          const { error: insertError } = await supabase.from("listing_checks").insert({
-            user_id: data.session.user.id,
-            product_id: matchedProduct.id,
-            asking_price: parsedPrice,
-            condition,
-            description: [
-              listingUrl ? `Link: ${listingUrl}` : "",
-              `Link type: ${analysisMode}`,
-              description,
-              sellerNotes,
-              location ? `Location: ${location}` : ""
-            ]
-              .filter(Boolean)
-              .join("\n\n"),
-            marketplace,
-            deal_score: nextResult.dealScore,
-            risk_level: nextResult.riskLevel,
-            confidence_score: nextResult.confidenceScore,
-            price_difference: nextResult.priceDifference,
-            red_flags: nextResult.redFlags,
-            positive_signals: nextResult.positiveSignals,
-            suggested_offer_low: nextResult.suggestedOfferLow,
-            suggested_offer_high: nextResult.suggestedOfferHigh
-          });
-
-          if (insertError) {
-            setError(insertError.message);
-            return;
-          }
-
-          setMessage("Listing check saved to your account.");
-        }
-      }
-    } finally {
-      setIsAnalyzing(false);
-    }
+  if (shouldFocusResult && result) {
+    return (
+      <DealScoreCard result={result} product={analyzedProduct} context={analysisContext ?? undefined} />
+    );
   }
 
   return (
