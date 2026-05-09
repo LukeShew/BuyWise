@@ -112,16 +112,48 @@ create policy "Profiles are insertable by owner"
   with check (auth.uid() = id);
 
 drop policy if exists "Saved items are owned by user" on public.saved_items;
-create policy "Saved items are owned by user"
-  on public.saved_items for all
+drop policy if exists "Saved items are readable by owner" on public.saved_items;
+drop policy if exists "Saved items are insertable by owner" on public.saved_items;
+drop policy if exists "Saved items are updatable by owner" on public.saved_items;
+drop policy if exists "Saved items are deletable by owner" on public.saved_items;
+
+create policy "Saved items are readable by owner"
+  on public.saved_items for select
+  using (auth.uid() = user_id);
+
+create policy "Saved items are insertable by owner"
+  on public.saved_items for insert
+  with check (auth.uid() = user_id);
+
+create policy "Saved items are updatable by owner"
+  on public.saved_items for update
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
+
+create policy "Saved items are deletable by owner"
+  on public.saved_items for delete
+  using (auth.uid() = user_id);
 
 drop policy if exists "Listing checks are owned by user" on public.listing_checks;
 create policy "Listing checks are owned by user"
   on public.listing_checks for all
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
+
+grant usage on schema public to anon, authenticated;
+
+grant select on table public.products to anon, authenticated;
+grant select on table public.product_issues to anon, authenticated;
+grant select on table public.buying_checklist_items to anon, authenticated;
+grant select on table public.seller_questions to anon, authenticated;
+
+revoke all on table public.profiles from anon;
+revoke all on table public.saved_items from anon;
+revoke all on table public.listing_checks from anon;
+
+grant select, insert, update on table public.profiles to authenticated;
+grant select, insert, update, delete on table public.saved_items to authenticated;
+grant select, insert, update, delete on table public.listing_checks to authenticated;
 
 create index if not exists saved_items_user_id_created_at_idx
   on public.saved_items (user_id, created_at desc);

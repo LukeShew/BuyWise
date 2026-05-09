@@ -39,6 +39,7 @@ export function ProductCard({ product }: { product: Product }) {
       const { data } = await supabase
         .from("saved_items")
         .select("id")
+        .eq("user_id", sessionData.session.user.id)
         .eq("product_id", product.id)
         .limit(1);
 

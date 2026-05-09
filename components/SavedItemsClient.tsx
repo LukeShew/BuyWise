@@ -47,11 +47,13 @@ export function SavedItemsClient() {
         setSession(data.session);
 
         if (data.session) {
+          const userId = data.session.user.id;
           const localItems = getLocalSavedItems();
           if (localItems.length) {
             const { data: existingRows } = await supabase
               .from("saved_items")
-              .select("product_id, asking_price, notes");
+              .select("product_id, asking_price, notes")
+              .eq("user_id", userId);
             const existingKeys = new Set(
               (existingRows ?? []).map((row) =>
                 savedItemKey({
@@ -64,7 +66,7 @@ export function SavedItemsClient() {
             const rowsToSync = localItems
               .filter((item) => !existingKeys.has(savedItemKey(item)))
               .map((item) => ({
-                user_id: data.session.user.id,
+                user_id: userId,
                 product_id: item.productId,
                 asking_price: item.askingPrice,
                 marketplace: item.marketplace,
@@ -86,6 +88,7 @@ export function SavedItemsClient() {
           const { data: rows, error: queryError } = await supabase
             .from("saved_items")
             .select("*")
+            .eq("user_id", userId)
             .order("created_at", { ascending: false });
 
           if (queryError) {
@@ -108,7 +111,11 @@ export function SavedItemsClient() {
 
   async function handleStatusChange(id: string, status: SavedItemStatus) {
     if (supabase && session) {
-      const { error: updateError } = await supabase.from("saved_items").update({ status }).eq("id", id);
+      const { error: updateError } = await supabase
+        .from("saved_items")
+        .update({ status })
+        .eq("id", id)
+        .eq("user_id", session.user.id);
       if (updateError) {
         setError(updateError.message);
         return;
@@ -122,7 +129,11 @@ export function SavedItemsClient() {
 
   async function handleDelete(id: string) {
     if (supabase && session) {
-      const { error: deleteError } = await supabase.from("saved_items").delete().eq("id", id);
+      const { error: deleteError } = await supabase
+        .from("saved_items")
+        .delete()
+        .eq("id", id)
+        .eq("user_id", session.user.id);
       if (deleteError) {
         setError(deleteError.message);
         return;
