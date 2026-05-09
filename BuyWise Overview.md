@@ -1,12 +1,36 @@
 # BuyWise Overview
 
-Last updated: May 8, 2026
+Last updated: May 9, 2026
 
-BuyWise helps shoppers check a product link before they buy. A user can paste a resale listing or a retail product page, and BuyWise gives a plain-English verdict on whether that link looks worth buying from, what risks to verify, what price to offer or target, and whether there are better used or retail options in the current BuyWise price guides.
+BuyWise helps shoppers check a product link before they buy. A user can paste a resale listing or retail product page, and BuyWise gives a plain-English verdict on whether that link looks worth buying from, what risks to verify, what price to offer or target, and whether there are better used or retail options in the current BuyWise price guides.
 
 The current product promise is:
 
 Drop a product link. Know if it is the best place to buy.
+
+## Current Build Status
+
+BuyWise is still in an early working build. The app now has real public-link reading in the code, but it is not a full live marketplace search engine yet.
+
+What is real right now:
+
+- Users can paste real public product/listing URLs.
+- The server tries to fetch the page safely.
+- If the page exposes readable title, description, and price data, BuyWise can use that information.
+- The analyzer can produce a verdict from the extracted data plus the current BuyWise price guides.
+- Users can sign up, log in, and sync saved items once Supabase is configured.
+
+What is still limited:
+
+- BuyWise does not have real eBay, Amazon, Best Buy, Craigslist, OfferUp, or retail partner API integrations yet.
+- BuyWise does not search the live web for better alternatives yet.
+- Better resale and retail alternatives come from the current local BuyWise price guides, not live inventory.
+- The current price guide data is starter data inside the app, not constantly updated market data.
+- Some real links will fail because many sites block automated reads, require login, or hide prices in client-side scripts.
+- Facebook Marketplace links are not fetched. Users must paste the listing details manually.
+- Account sync will not work on the live site until Supabase environment variables are added in Vercel and the SQL schema is run.
+
+Earlier versions mostly worked from sample/manual inputs. The current version is a step forward: it can attempt real link extraction, but it should still be described as limited link reading plus local price-guide analysis, not complete live shopping intelligence.
 
 BuyWise is designed for normal buyers, not professional resellers. The first users are people checking used or discounted laptops, cameras, bikes, and monitors from places like eBay, Craigslist, OfferUp, Facebook Marketplace, Best Buy, Amazon, or local sellers. The product is intentionally cautious: avoiding scams and bad purchases matters more than calling something a great deal too quickly.
 
@@ -15,12 +39,12 @@ BuyWise is designed for normal buyers, not professional resellers. The first use
 BuyWise currently supports these main flows:
 
 - Paste a product or listing link on the homepage.
-- Let BuyWise try to read the product title, price, source, and page summary from the link.
+- Let BuyWise try to read the product title, price, source, and page summary from a real public link.
 - Continue to a full verdict page when enough details are available.
 - Add missing details manually if the site blocks link reading or hides the price.
 - Search current BuyWise price guides.
 - Save product guides and analyzed verdicts.
-- Create an account, log in, and sync saved items across devices when Supabase is configured.
+- Create an account, log in, and sync saved items across devices after Supabase is configured.
 - View an About Us page that explains what BuyWise checks.
 
 The website does not scrape Facebook Marketplace. Facebook Marketplace links are treated as resale links, but BuyWise asks the user to paste the listing title, price, and description instead of fetching the page.
@@ -47,7 +71,7 @@ The homepage has:
 
 The homepage form asks for a product link first. It no longer asks users to manually enter the product/model and price up front. When the user submits, the page stores a draft in session storage and sends the user to `/submit?draft=home`.
 
-The homepage tries to extract link details before routing. If the link is readable, the submitted draft includes:
+The homepage tries to extract link details before routing. This works only when the pasted page exposes readable data. If the link is readable, the submitted draft includes:
 
 - Original URL.
 - Inferred link type: resale or retail.
@@ -57,7 +81,7 @@ The homepage tries to extract link details before routing. If the link is readab
 - Extracted description or summary, if found.
 - Closest BuyWise price guide match, if found.
 
-If the link cannot be read, the draft still moves forward so the analyzer can ask for the missing details.
+If the link cannot be read, the draft still moves forward so the analyzer can ask for the missing details. BuyWise does not guess hidden prices or product details.
 
 ### Analyzer Page
 
@@ -196,6 +220,8 @@ Server route: `/api/extract-link`
 
 The link reader is a server-side route that tries to read safe public product pages. It exists so the homepage and analyzer can work from real URLs instead of only sample inputs.
 
+Important: this is basic real-link extraction, not a full marketplace integration. It reads public page data when available. It does not use official marketplace APIs, does not log into sites, does not bypass blocks, and does not scrape private pages.
+
 The route does this:
 
 1. Accepts a URL.
@@ -231,6 +257,8 @@ The response can include:
 - `warnings`
 
 This is real link reading, but it is not guaranteed for every website. Some sites block automated page reads, hide prices in scripts, require login, or return incomplete metadata. In those cases, BuyWise asks for manual details instead of pretending it knows more than it does.
+
+The analyzer should be understood as: extracted link details plus BuyWise's current local price-guide logic. It is not yet a real-time price comparison engine across the internet.
 
 ## Current Price Coverage
 
@@ -338,7 +366,7 @@ The goal is not just "used is cheaper" or "new is safer." The goal is to identif
 
 Core file: `lib/linkAnalysis.ts`
 
-BuyWise shows alternatives when the current price guides contain a clearly better move.
+BuyWise shows alternatives when the current price guides contain a clearly better move. These alternatives are not pulled from live inventory yet.
 
 Better retail moves can include:
 
@@ -352,7 +380,7 @@ Better resale moves can include:
 - A stronger used alternative in the same category.
 - A reason to keep watching instead of buying the pasted link.
 
-If no better move exists in the current BuyWise price guides, the UI says that clearly.
+If no better move exists in the current BuyWise price guides, the UI says that clearly. This does not mean no better deal exists anywhere online; it only means BuyWise does not currently have a better option in its built-in price guides.
 
 ## Saving Behavior
 
@@ -474,20 +502,31 @@ There is no public admin page and no public build-planning page. Old `/admin` an
 - Product card bookmarking.
 - Verdict saving.
 - Local saved items.
-- Supabase account signup/login when env vars and schema are configured.
-- Supabase saved item sync when logged in.
-- Listing check history writes when logged in.
+- Supabase account signup/login after env vars are added and the schema is run.
+- Supabase saved item sync after account setup is complete.
+- Listing check history writes after account setup is complete.
 - Public UI cleanup: no visible admin, setup, or build-planning copy.
 
 ## Practical Limits
 
-BuyWise can only give strong benchmark-based verdicts for products covered by the current price guides. For unsupported products, it can read the link but still needs the user to pick the closest available guide or wait until that product category is added.
+BuyWise can only give strong benchmark-based verdicts for products covered by the current price guides. For unsupported products, it can sometimes read the link title and price, but it still needs the user to pick the closest available guide or wait until that product category is added.
 
 Some websites block link reading. BuyWise handles that by asking for the missing details manually.
 
 Facebook Marketplace is not fetched. Users should paste the listing text and price.
 
 The current analyzer uses local deterministic logic, not an OpenAI API. That keeps the product fast and cost-free while the user experience is being validated.
+
+BuyWise does not yet:
+
+- Pull live completed-sale data.
+- Pull live retail prices.
+- Check live availability.
+- Search every marketplace for better options.
+- Analyze listing photos or screenshots.
+- Read private marketplace pages.
+- Verify seller identities.
+- Guarantee that an extracted price is the final checkout price after tax, shipping, coupon, or financing terms.
 
 ## Manual Setup Needed For Production Accounts
 
