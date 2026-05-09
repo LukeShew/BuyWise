@@ -1,12 +1,14 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import { LockKeyhole, Mail } from "lucide-react";
 import { isSupabaseConfigured, supabase } from "@/lib/supabaseClient";
 
 type Mode = "login" | "signup";
 
 export function AuthForm() {
+  const router = useRouter();
   const [mode, setMode] = useState<Mode>("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +22,7 @@ export function AuthForm() {
     setMessage("");
 
     if (!supabase) {
-      setError("Add Supabase env vars to enable account login.");
+      setError("Accounts are temporarily unavailable. Please try again later.");
       return;
     }
 
@@ -42,14 +44,12 @@ export function AuthForm() {
       return;
     }
 
-    if (mode === "signup" && response.data.user) {
-      await supabase.from("profiles").upsert({
-        id: response.data.user.id,
-        email
-      });
-    }
+    setMessage(mode === "signup" ? "Account created. Check your email if confirmation is required." : "Logged in.");
+    router.refresh();
 
-    setMessage(mode === "signup" ? "Account created. Check your email if confirmation is enabled." : "Logged in.");
+    if (response.data.session) {
+      router.push("/saved");
+    }
   }
 
   return (
@@ -71,9 +71,7 @@ export function AuthForm() {
 
       {!isSupabaseConfigured() ? (
         <div className="mt-5 rounded-lg bg-amber-50 p-4 text-sm leading-6 text-amber-900">
-          Supabase is not configured yet. Add `NEXT_PUBLIC_SUPABASE_URL` and
-          `NEXT_PUBLIC_SUPABASE_ANON_KEY` to `.env.local`, then run the SQL in
-          `supabase/schema.sql`.
+          Accounts are temporarily unavailable. You can still analyze links and save items on this device.
         </div>
       ) : null}
 

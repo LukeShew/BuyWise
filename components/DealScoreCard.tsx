@@ -143,7 +143,7 @@ function buildNotWorthItReasons(result: DealQualityResult, context?: ListingAnal
   if (context?.mode === "retail" && context.resaleAlternatives.length > 0) {
     reasons.push({
       title: "Used options may beat the retail deal",
-      detail: "The current catalog has resale alternatives that may give you better savings than this retail price."
+      detail: "BuyWise has resale alternatives that may give you better savings than this retail price."
     });
   }
 
@@ -303,18 +303,6 @@ export function DealScoreCard({
         });
 
         if (!error) {
-          const alreadySaved = getLocalSavedItems().some((item) =>
-            isSameSavedVerdict({
-              savedProductId: item.productId,
-              targetProductId: product.id,
-              askingPrice: item.askingPrice,
-              notes: item.notes,
-              context
-            })
-          );
-          if (!alreadySaved) {
-            saveLocalItem(savedItem);
-          }
           setSaved(true);
           setSaving(false);
           return;
@@ -525,7 +513,7 @@ export function DealScoreCard({
             <AlternativePanel
               title="Better retail moves"
               description="New-product fallbacks to check when warranty, returns, or a close retail price may beat the pasted link."
-              emptyText="No better retail move found in the current mock catalog."
+              emptyText="No better retail move found in the BuyWise price guides."
               alternatives={context.retailAlternatives}
               icon={ShoppingBag}
             />
@@ -535,7 +523,7 @@ export function DealScoreCard({
             <AlternativePanel
               title="Better resale moves"
               description="Used-side replacement actions if this link is overpriced, risky, or not clearly better than the market."
-              emptyText="No clearly better resale move found in the current mock catalog."
+              emptyText="No clearly better resale move found in the BuyWise price guides."
               alternatives={context.resaleAlternatives}
               icon={Target}
             />

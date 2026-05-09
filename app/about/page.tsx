@@ -25,7 +25,7 @@ const valueCards = [
   {
     icon: BadgeDollarSign,
     title: "See if the price makes sense",
-    text: "The analyzer compares the link price against used fair-value and retail MSRP benchmarks from the current BuyWise catalog."
+    text: "The analyzer compares the link price against used fair-value and retail MSRP benchmarks from BuyWise price guides."
   },
   {
     icon: AlertTriangle,
@@ -35,7 +35,7 @@ const valueCards = [
   {
     icon: ShoppingBag,
     title: "Compare better options",
-    text: "If the link looks weak, BuyWise shows better resale or retail moves from the catalog when there is a stronger choice."
+    text: "If the link looks weak, BuyWise shows better resale or retail moves when there is a stronger choice."
   }
 ];
 
@@ -132,7 +132,7 @@ export default function AboutPage() {
                 <p className="text-sm font-semibold text-mint">Current coverage</p>
                 <h2 className="mt-2 text-2xl font-black text-ink sm:text-3xl">What BuyWise can check today</h2>
                 <p className="mt-3 text-sm leading-6 text-stone-600">
-                  The current preview covers focused categories with price benchmarks, category-specific questions, and buyer checklists.
+                  BuyWise covers focused categories with price benchmarks, category-specific questions, and buyer checklists.
                 </p>
               </div>
 
@@ -220,12 +220,12 @@ export default function AboutPage() {
           <div className="flex items-start gap-3">
             <Sparkles className="mt-1 h-6 w-6 text-mint" aria-hidden />
             <div>
-              <p className="text-sm font-semibold text-mint">Current preview</p>
-              <h2 className="mt-1 text-3xl font-black">BuyWise is improving quickly</h2>
+              <p className="text-sm font-semibold text-mint">Built for practical checks</p>
+              <h2 className="mt-1 text-3xl font-black">A clearer way to judge product links</h2>
             </div>
           </div>
           <p className="mt-4 text-sm leading-6 text-stone-200">
-            This version uses a starter catalog for cameras, laptops, bikes, and monitors. Link reading works when a public page exposes readable product data. If a site blocks access, BuyWise still lets you paste the missing details and run the analyzer.
+            BuyWise supports cameras, laptops, bikes, and monitors today. Link reading works when a public page exposes readable product data. If a site blocks access, BuyWise still lets you paste the missing details and run the analyzer.
           </p>
           <div className="mt-5 rounded-lg bg-white/10 p-4">
             <h3 className="flex items-center gap-2 font-bold">

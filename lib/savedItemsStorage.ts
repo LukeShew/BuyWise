@@ -55,6 +55,10 @@ export function deleteLocalSavedItem(id: string) {
   return nextItems;
 }
 
+export function clearLocalSavedItems() {
+  writeItems([]);
+}
+
 export function normalizeStatus(status: string): SavedItemStatus {
   const allowed: SavedItemStatus[] = ["watching", "contacted", "negotiating", "bought", "passed"];
   return allowed.includes(status as SavedItemStatus) ? (status as SavedItemStatus) : "watching";

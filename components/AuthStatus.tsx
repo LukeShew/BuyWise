@@ -26,9 +26,9 @@ export function AuthStatus() {
     return (
       <Link
         href="/auth"
-        className="focus-ring rounded-lg border border-stone-200 px-3 py-2 text-sm font-semibold text-stone-700 hover:border-mint hover:text-ink"
+        className="focus-ring rounded-lg bg-ink px-3 py-2 text-sm font-semibold text-white hover:bg-stone-800"
       >
-        Auth setup
+        Log in
       </Link>
     );
   }

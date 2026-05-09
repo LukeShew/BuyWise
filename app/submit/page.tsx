@@ -29,7 +29,7 @@ export default async function SubmitListingPage({
                 {
                   icon: ClipboardPaste,
                   title: "Start with the link",
-                  text: "The MVP detects source/type from the URL, then uses your pasted price and details."
+                  text: "BuyWise detects source/type from the URL, then uses the price and details it can read."
                 },
                 {
                   icon: ShieldAlert,
@@ -39,7 +39,7 @@ export default async function SubmitListingPage({
                 {
                   icon: Target,
                   title: "Act only when better",
-                  text: "BuyWise shows alternatives only when the current mock catalog has a stronger option."
+                  text: "BuyWise shows alternatives only when the current price guides have a stronger option."
                 }
               ].map((item) => (
                 <div key={item.title} className="flex items-start gap-3">

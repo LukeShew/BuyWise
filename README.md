@@ -1,34 +1,47 @@
 # BuyWise
 
-An MVP web app that helps buyers decide whether a used item is a good deal before messaging the seller.
+BuyWise helps shoppers check a product link before they buy. Paste a resale listing or retail product page, and BuyWise gives a plain-English verdict on whether that link looks worth buying from, what risks to verify, what price to offer or target, and whether there are better used or retail options in the current BuyWise price guides.
 
-Users can search supported products, review used-market pricing, see depreciation, inspect common problems, check scam warnings, analyze a live listing, and save items they are considering.
+Live site:
+
+```text
+https://trybuywise.com
+```
+
+Local preview:
+
+```text
+http://localhost:3000
+```
 
 ## Tech Stack
 
 - Next.js App Router
 - TypeScript
 - Tailwind CSS
-- Supabase auth and database
-- Recharts for depreciation charts
-- Mock marketplace services structured for real API integrations later
+- Supabase Auth and database
+- Recharts
+- lucide-react
 
-## Features
+## Main Features
 
-- Landing page with search and example products
-- Search/results page with category and year filtering
-- Product insight pages for 20 mock products
-- Listing analyzer with deal score, recommendation, risk level, and suggested offer range
-- Listing-specific red flag detection, trust signals, confidence score, and negotiation tip
-- Saved items page with status tracking
-- Supabase login/signup page
-- Internal admin/mock data page
+- Homepage link checker for resale and retail product links
+- Server-side link reader for public product metadata and prices
+- Full listing analyzer with verdicts, deal score, risk level, confidence, and suggested offer guidance
+- Red flag detection, trust signals, seller questions, and buyer checklist
+- Retail-versus-resale comparison logic
+- Better retail and resale alternatives when current BuyWise price guides have a stronger option
+- Searchable BuyWise price guides
+- Product insight pages
+- Bookmark/save buttons on product cards
+- Saved verdicts from analyzed links
+- Local saved-item fallback when logged out
+- Supabase account sync when configured
 - Customer-facing About Us page
-- Database schema in `supabase/schema.sql`
 
-## Mock Catalog
+## Current Price Guides
 
-The MVP includes 20 products:
+BuyWise currently has 20 starter price guides:
 
 - Cameras: Sony A6400, Canon EOS R10, Fujifilm X-T30 II, Sony A7 III, Canon M50 Mark II
 - Laptops: MacBook Air M1, MacBook Air M2, Dell XPS 13, Lenovo ThinkPad X1 Carbon, Microsoft Surface Laptop 5
@@ -62,73 +75,42 @@ Start locally:
 npm run dev
 ```
 
-Open:
+## Checks
 
-```text
-http://localhost:3000
+```bash
+npm run typecheck
+npm run lint
 ```
 
-## Database Schema
+## Important Files
 
-Tables:
+- `app/page.tsx` - Homepage
+- `components/HomeListingPrompt.tsx` - Homepage link checker
+- `app/submit/page.tsx` - Analyzer route
+- `components/ListingAnalyzerForm.tsx` - Analyzer form and auto-analysis behavior
+- `components/DealScoreCard.tsx` - Verdict/result UI
+- `app/api/extract-link/route.ts` - Server-side link reader
+- `lib/dealQuality.ts` - Scoring, risk, confidence, offer, and next-step logic
+- `lib/linkAnalysis.ts` - Source inference and alternatives
+- `lib/productMatch.ts` - Product matching against current price guides
+- `data/mockProducts.ts` - Current internal product data
+- `components/SavedItemsClient.tsx` - Saved items and account sync
+- `components/AuthForm.tsx` - Login/signup form
+- `supabase/schema.sql` - Database schema
 
-- `profiles`
-- `products`
-- `product_issues`
-- `buying_checklist_items`
-- `seller_questions`
-- `saved_items`
-- `listing_checks`
+## Account Sync
 
-The app currently reads product data from `data/mockProducts.ts`. The schema is ready for moving products and related rows into Supabase.
+Supabase is used for accounts, profiles, saved items, and listing check history. If Supabase environment variables are missing, the app still works locally with device-only saved items.
 
-## Marketplace API Architecture
+For production accounts:
 
-Mock services live in:
+1. Run `supabase/schema.sql` in the Supabase SQL editor.
+2. Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` to Vercel environment variables.
+3. Redeploy the Vercel site.
+4. Test signup, login, saving, status updates, and deletion.
 
-- `services/ebayService.ts`
-- `services/craigslistService.ts`
-- `services/facebookMarketplaceService.ts`
-- `services/priceAnalysisService.ts`
+## Link Reading
 
-Each service returns typed `MarketplaceListing` objects. To add real APIs later:
+The link reader works with public pages that expose readable HTML metadata, JSON-LD, or visible price text. Some websites block automated reading, require login, or hide prices. In those cases, BuyWise asks the user for the missing details.
 
-1. Keep the same return type.
-2. Add provider credentials to server-only environment variables.
-3. Move API calls into server routes or server actions.
-4. Normalize source results into `MarketplaceListing`.
-5. Update `priceAnalysisService.ts` to blend completed sales, active listings, and local-market signals.
-
-Do not scrape Facebook Marketplace. Use an approved API, user-submitted listings, or mock/local data.
-
-## Deal Scoring Logic
-
-Core calculation lives in `lib/dealQuality.ts`.
-
-Inputs:
-
-- asking price
-- fair price
-- used low/high
-- reliability score
-- scam risk score
-- condition
-
-Outputs:
-
-- deal score from 0-100
-- recommendation label
-- explanation
-- suggested offer range
-- risk level
-- confidence score
-- detected red flags and trust signals
-- negotiation tip and next steps
-
-## Known Limitations
-
-- Market prices are mock estimates.
-- Supabase product tables are defined but not seeded by the app yet.
-- Saved items sync to Supabase only when env vars and auth are configured; otherwise they use browser local storage.
-- Listing checks are calculated client-side in the MVP.
-- No real marketplace API calls are included.
+Facebook Marketplace is not fetched. Users should paste the listing title, price, and description.

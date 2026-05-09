@@ -152,7 +152,7 @@ export default async function ProductInsightPage({ params }: { params: Promise<{
 
           <section className="rounded-lg border border-stone-200 bg-white p-5 shadow-sm">
             <p className="text-sm font-semibold text-mint">Marketplace signals</p>
-            <h2 className="mt-1 text-xl font-bold text-ink">Mock listings</h2>
+            <h2 className="mt-1 text-xl font-bold text-ink">Example listings</h2>
             <div className="mt-4 space-y-3">
               {marketplaceListings.map((listing) => (
                 <a

@@ -14,7 +14,44 @@ export function ProductCard({ product }: { product: Product }) {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    setSaved(getLocalSavedItems().some((item) => item.productId === product.id));
+    let isMounted = true;
+
+    async function checkSavedState() {
+      const localSaved = getLocalSavedItems().some((item) => item.productId === product.id);
+      if (localSaved) {
+        setSaved(true);
+        return;
+      }
+
+      if (!supabase) {
+        setSaved(false);
+        return;
+      }
+
+      const { data: sessionData } = await supabase.auth.getSession();
+      if (!sessionData.session) {
+        if (isMounted) {
+          setSaved(false);
+        }
+        return;
+      }
+
+      const { data } = await supabase
+        .from("saved_items")
+        .select("id")
+        .eq("product_id", product.id)
+        .limit(1);
+
+      if (isMounted) {
+        setSaved(Boolean(data?.length));
+      }
+    }
+
+    void checkSavedState();
+
+    return () => {
+      isMounted = false;
+    };
   }, [product.id]);
 
   async function saveProduct() {
@@ -46,10 +83,6 @@ export function ProductCard({ product }: { product: Product }) {
         });
 
         if (!error) {
-          const alreadySaved = getLocalSavedItems().some((item) => item.productId === product.id);
-          if (!alreadySaved) {
-            saveLocalItem(savedItem);
-          }
           setSaved(true);
           setSaving(false);
           return;

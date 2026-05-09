@@ -79,7 +79,7 @@ export function SaveProductButton({ product }: { product: Product }) {
     });
 
     setLoading(false);
-    setMessage(isSupabaseConfigured() ? "Saved locally. Log in to tie it to your account." : "Saved locally for this browser.");
+    setMessage(isSupabaseConfigured() ? "Saved on this device. Log in to sync it to your account." : "Saved on this device.");
   }
 
   return (

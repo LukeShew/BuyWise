@@ -154,7 +154,7 @@ function buildResaleAlternatives(product: Product, askingPrice: number) {
             sourceType: "resale",
             actionLabel: "Use this as your used-price target",
             outcome: "Push the seller toward this number before you meet.",
-            reason: `${formatCurrency(product.fairPrice)} is the current mock fair used price for this model.`
+            reason: `${formatCurrency(product.fairPrice)} is the current BuyWise fair used price for this model.`
           }
         ]
       : [];
@@ -209,7 +209,7 @@ function buildRetailAlternatives(product: Product, askingPrice: number, mode: Li
       sourceType: "retail",
       actionLabel: "Compare buying this new",
       outcome: "This gives you a retail fallback if the pasted deal is weak.",
-      reason: `${formatCurrency(candidate.msrp)} MSRP is lower than this link price in the current mock catalog.`
+      reason: `${formatCurrency(candidate.msrp)} MSRP is lower than this link price in the BuyWise price guides.`
     }));
 
   return uniqueAlternatives([...closeNewBenchmark, ...sameCategory]).slice(0, 4);

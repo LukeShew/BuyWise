@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, CheckCircle2, Link2, Loader2, Repeat2, ShoppingBag } from "lucide-react";
 import { LISTING_DRAFT_STORAGE_KEY } from "@/lib/listingDraft";
@@ -37,6 +37,7 @@ export function HomeListingPrompt() {
   const [marketplace, setMarketplace] = useState<MarketplaceSource>("Facebook Marketplace");
   const [description, setDescription] = useState("");
   const [isExtractingLink, setIsExtractingLink] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [linkMessage, setLinkMessage] = useState("");
   const [lastExtractedUrl, setLastExtractedUrl] = useState("");
 
@@ -55,7 +56,7 @@ export function HomeListingPrompt() {
     }
   }
 
-  function applyLinkExtraction(data: LinkExtractionResult) {
+  const applyLinkExtraction = useCallback((data: LinkExtractionResult) => {
     if (data.mode) {
       setAnalysisMode(data.mode);
     }
@@ -81,7 +82,26 @@ export function HomeListingPrompt() {
         return current;
       });
     }
-  }
+  }, []);
+
+  const extractLinkDetails = useCallback(async (url: string, signal?: AbortSignal) => {
+    setIsExtractingLink(true);
+    setLinkMessage("");
+
+    const response = await fetch("/api/extract-link", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ url }),
+      signal
+    });
+    const data = (await response.json()) as LinkExtractionResult;
+
+    setLastExtractedUrl(url);
+    applyLinkExtraction(data);
+    setLinkMessage(data.message);
+
+    return data;
+  }, [applyLinkExtraction]);
 
   useEffect(() => {
     const trimmedUrl = listingUrl.trim();
@@ -98,21 +118,8 @@ export function HomeListingPrompt() {
 
     const controller = new AbortController();
     const timer = window.setTimeout(async () => {
-      setIsExtractingLink(true);
-      setLinkMessage("");
-
       try {
-        const response = await fetch("/api/extract-link", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ url: trimmedUrl }),
-          signal: controller.signal
-        });
-        const data = (await response.json()) as LinkExtractionResult;
-
-        setLastExtractedUrl(trimmedUrl);
-        applyLinkExtraction(data);
-        setLinkMessage(data.message);
+        await extractLinkDetails(trimmedUrl, controller.signal);
       } catch {
         if (!controller.signal.aborted) {
           setLastExtractedUrl(trimmedUrl);
@@ -130,23 +137,47 @@ export function HomeListingPrompt() {
       window.clearTimeout(timer);
       setIsExtractingLink(false);
     };
-  }, [lastExtractedUrl, listingUrl]);
+  }, [extractLinkDetails, lastExtractedUrl, listingUrl]);
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setIsSubmitting(true);
 
-    const hasDraft = [listingUrl, productName, askingPrice, description].some((value) => value.trim());
+    let nextProductName = productName;
+    let nextAskingPrice = askingPrice;
+    let nextAnalysisMode = analysisMode;
+    let nextMarketplace = marketplace;
+    let nextDescription = description;
+    const trimmedUrl = listingUrl.trim();
+
+    if (looksLikeUrl(trimmedUrl) && trimmedUrl !== lastExtractedUrl) {
+      try {
+        const data = await extractLinkDetails(trimmedUrl);
+        nextProductName = (data.productName ?? data.title ?? productName).slice(0, 140);
+        nextAskingPrice =
+          typeof data.price === "number" && Number.isFinite(data.price) ? String(data.price) : askingPrice;
+        nextAnalysisMode = data.mode ?? analysisMode;
+        nextMarketplace = data.marketplace ?? marketplace;
+        nextDescription = buildExtractedDetails(data) || description;
+      } catch {
+        setLinkMessage("Could not read that link. Add the missing details on the next page.");
+      } finally {
+        setIsExtractingLink(false);
+      }
+    }
+
+    const hasDraft = [listingUrl, nextProductName, nextAskingPrice, nextDescription].some((value) => value.trim());
 
     if (typeof window !== "undefined" && hasDraft) {
       window.sessionStorage.setItem(
         LISTING_DRAFT_STORAGE_KEY,
         JSON.stringify({
           listingUrl,
-          analysisMode,
-          productName,
-          askingPrice,
-          marketplace,
-          description
+          analysisMode: nextAnalysisMode,
+          productName: nextProductName,
+          askingPrice: nextAskingPrice,
+          marketplace: nextMarketplace,
+          description: nextDescription
         })
       );
     } else if (typeof window !== "undefined") {
@@ -263,10 +294,20 @@ export function HomeListingPrompt() {
         <div className="flex flex-col gap-3 sm:flex-row">
           <button
             type="submit"
-            className="focus-ring inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-ink px-5 font-bold text-white transition hover:bg-stone-800"
+            disabled={isSubmitting || isExtractingLink}
+            className="focus-ring inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-ink px-5 font-bold text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:bg-stone-500"
           >
-            Analyze link
-            <ArrowRight className="h-4 w-4" aria-hidden />
+            {isSubmitting || isExtractingLink ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+                Reading link
+              </>
+            ) : (
+              <>
+                Analyze link
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </>
+            )}
           </button>
           <button
             type="button"

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AuthStatus } from "@/components/AuthStatus";
 
 const links = [
   { href: "/search", label: "Search" },
@@ -40,13 +41,7 @@ export function Navbar() {
           >
             About Us
           </Link>
-          <Link
-            href="/auth"
-            prefetch={false}
-            className="focus-ring rounded-lg bg-ink px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-stone-800"
-          >
-            Log In
-          </Link>
+          <AuthStatus />
         </div>
       </nav>
     </header>

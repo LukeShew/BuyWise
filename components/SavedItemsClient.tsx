@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { mockProducts } from "@/data/mockProducts";
 import {
+  clearLocalSavedItems,
   deleteLocalSavedItem,
   getLocalSavedItems,
   normalizeStatus,
@@ -27,6 +28,10 @@ function mapSavedRow(row: Record<string, unknown>): SavedItem {
   };
 }
 
+function savedItemKey(item: Pick<SavedItem, "productId" | "askingPrice" | "notes">) {
+  return `${item.productId}:${item.askingPrice}:${item.notes}`;
+}
+
 export function SavedItemsClient() {
   const [items, setItems] = useState<SavedItem[]>([]);
   const [session, setSession] = useState<Session | null>(null);
@@ -42,6 +47,42 @@ export function SavedItemsClient() {
         setSession(data.session);
 
         if (data.session) {
+          const localItems = getLocalSavedItems();
+          if (localItems.length) {
+            const { data: existingRows } = await supabase
+              .from("saved_items")
+              .select("product_id, asking_price, notes");
+            const existingKeys = new Set(
+              (existingRows ?? []).map((row) =>
+                savedItemKey({
+                  productId: String(row.product_id),
+                  askingPrice: Number(row.asking_price),
+                  notes: String(row.notes ?? "")
+                })
+              )
+            );
+            const rowsToSync = localItems
+              .filter((item) => !existingKeys.has(savedItemKey(item)))
+              .map((item) => ({
+                user_id: data.session.user.id,
+                product_id: item.productId,
+                asking_price: item.askingPrice,
+                marketplace: item.marketplace,
+                seller_location: item.sellerLocation,
+                notes: item.notes,
+                status: item.status
+              }));
+
+            if (rowsToSync.length) {
+              const { error: syncError } = await supabase.from("saved_items").insert(rowsToSync);
+              if (!syncError) {
+                clearLocalSavedItems();
+              }
+            } else {
+              clearLocalSavedItems();
+            }
+          }
+
           const { data: rows, error: queryError } = await supabase
             .from("saved_items")
             .select("*")
@@ -106,8 +147,8 @@ export function SavedItemsClient() {
       {!session ? (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
           {isSupabaseConfigured()
-            ? "You are viewing browser-saved items. Log in to sync them to your account."
-            : "Supabase is not configured, so saved items are stored in this browser for now."}
+            ? "Log in to keep saved items synced across devices."
+            : "Saved items stay on this device until account sync is available."}
         </div>
       ) : null}
 

@@ -46,7 +46,7 @@ create table if not exists public.seller_questions (
 create table if not exists public.saved_items (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users(id) on delete cascade,
-  product_id text not null references public.products(id) on delete cascade,
+  product_id text not null,
   asking_price numeric not null,
   marketplace text not null,
   seller_location text,
@@ -59,7 +59,7 @@ create table if not exists public.saved_items (
 create table if not exists public.listing_checks (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references auth.users(id) on delete set null,
-  product_id text not null references public.products(id) on delete cascade,
+  product_id text not null,
   asking_price numeric not null,
   condition text not null,
   description text,
@@ -79,20 +79,52 @@ alter table public.profiles enable row level security;
 alter table public.saved_items enable row level security;
 alter table public.listing_checks enable row level security;
 
+alter table public.saved_items drop constraint if exists saved_items_product_id_fkey;
+alter table public.listing_checks drop constraint if exists listing_checks_product_id_fkey;
+
+create or replace function public.handle_new_user()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  insert into public.profiles (id, email)
+  values (new.id, coalesce(new.email, ''))
+  on conflict (id) do update set email = excluded.email;
+  return new;
+end;
+$$;
+
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function public.handle_new_user();
+
+drop policy if exists "Profiles are readable by owner" on public.profiles;
 create policy "Profiles are readable by owner"
   on public.profiles for select
   using (auth.uid() = id);
 
+drop policy if exists "Profiles are insertable by owner" on public.profiles;
 create policy "Profiles are insertable by owner"
   on public.profiles for insert
   with check (auth.uid() = id);
 
+drop policy if exists "Saved items are owned by user" on public.saved_items;
 create policy "Saved items are owned by user"
   on public.saved_items for all
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
 
+drop policy if exists "Listing checks are owned by user" on public.listing_checks;
 create policy "Listing checks are owned by user"
   on public.listing_checks for all
-  using (auth.uid() = user_id or user_id is null)
-  with check (auth.uid() = user_id or user_id is null);
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);
+
+create index if not exists saved_items_user_id_created_at_idx
+  on public.saved_items (user_id, created_at desc);
+
+create index if not exists listing_checks_user_id_created_at_idx
+  on public.listing_checks (user_id, created_at desc);

@@ -18,7 +18,7 @@ const checks = [
   "Rate resale listings",
   "Rate retail bargains",
   "Compare used vs new",
-  "Show better alternatives when the catalog has them"
+  "Show better alternatives when BuyWise has them"
 ];
 
 const verdictFeatures = [
@@ -35,7 +35,7 @@ const verdictFeatures = [
   {
     icon: ShoppingBag,
     title: "Better options",
-    text: "Shows safer used moves and retail fallbacks when the current catalog has a stronger choice."
+    text: "Shows safer used moves and retail fallbacks when BuyWise has a stronger choice."
   },
   {
     icon: MessageSquareText,
@@ -92,7 +92,7 @@ export default function LandingPage() {
               Drop a product link. Know if it is the best place to buy.
             </h1>
             <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-stone-700 sm:text-lg">
-              Paste a resale or retail link. BuyWise rates the bargain, checks risk, and compares it against used and retail alternatives when the current catalog has a better option.
+              Paste a resale or retail link. BuyWise rates the bargain, checks risk, and compares it against used and retail alternatives when there is a better option.
             </p>
           </div>
 

@@ -7,7 +7,7 @@ export default function AuthPage() {
         <p className="text-sm font-semibold text-mint">Account</p>
         <h1 className="mt-2 text-4xl font-black text-ink">Log in or sign up</h1>
         <p className="mt-3 leading-7 text-stone-600">
-          Supabase auth ties saved items and listing checks to a user account once environment variables are configured.
+          Create an account to keep saved products and listing verdicts tied to you across devices.
         </p>
       </div>
       <AuthForm />

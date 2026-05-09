@@ -24,6 +24,7 @@ import {
   inferAnalysisModeFromUrl,
   inferMarketplaceFromUrl
 } from "@/lib/linkAnalysis";
+import { findBestProductMatch } from "@/lib/productMatch";
 import { supabase } from "@/lib/supabaseClient";
 import type {
   DealQualityResult,
@@ -53,23 +54,11 @@ interface AnalyzerValues {
   sellerNotes: string;
   marketplace: MarketplaceSource;
   location: string;
+  requireProductMatch?: boolean;
 }
 
 function findClosestProduct(productName: string) {
-  const normalized = productName.toLowerCase().trim();
-  if (!normalized) {
-    return null;
-  }
-
-  return (
-    mockProducts.find((product) =>
-      `${product.brand} ${product.model}`.toLowerCase().includes(normalized)
-    ) ??
-    mockProducts.find((product) =>
-      normalized.includes(`${product.brand} ${product.model}`.toLowerCase())
-    ) ??
-    null
-  );
+  return findBestProductMatch(productName);
 }
 
 function looksLikeUrl(value: string) {
@@ -245,6 +234,11 @@ export function ListingAnalyzerForm({
 
     try {
       const matchedProduct = findClosestProduct(values.productName) ?? selectedProduct;
+      if (values.requireProductMatch && !findClosestProduct(values.productName)) {
+        setError("BuyWise read the link, but this product is not in the current price guides yet. Choose the closest guide to finish the verdict.");
+        return false;
+      }
+
       setProductId(matchedProduct.id);
       setAnalyzedProduct(matchedProduct);
 
@@ -377,7 +371,8 @@ export function ListingAnalyzerForm({
           description: draft.description ?? "",
           sellerNotes: "",
           marketplace: draftMarketplace,
-          location: ""
+          location: "",
+          requireProductMatch: true
         }).finally(() => setIsLoadingDraft(false));
       } else {
         setMessage("Draft loaded. Add anything missing, then analyze.");
@@ -571,7 +566,7 @@ export function ListingAnalyzerForm({
               ))}
             </select>
             <p className="mt-2 text-xs leading-5 text-stone-500">
-              Current MVP uses mock price guides for cameras, laptops, bikes, and monitors.
+              BuyWise currently has price guides for cameras, laptops, bikes, and monitors.
             </p>
           </label>
 

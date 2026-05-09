@@ -2,14 +2,14 @@ import dns from "dns/promises";
 import net from "net";
 import { NextResponse } from "next/server";
 
-import { mockProducts } from "@/data/mockProducts";
 import {
   getSourceDomain,
   getSourceLabel,
   inferAnalysisModeFromUrl,
   inferMarketplaceFromUrl
 } from "@/lib/linkAnalysis";
-import type { LinkExtractionResult, Product } from "@/types";
+import { findBestProductMatch, getProductName } from "@/lib/productMatch";
+import type { LinkExtractionResult } from "@/types";
 
 export const runtime = "nodejs";
 
@@ -195,6 +195,12 @@ function getStructuredPrice(html: string) {
     return parsedMetaPrice;
   }
 
+  const dataPrice = html.match(/\bdata-(?:price|amount|sale-price)=["']\$?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)["']/i)?.[1];
+  const parsedDataPrice = parsePrice(dataPrice);
+  if (parsedDataPrice) {
+    return parsedDataPrice;
+  }
+
   for (const match of html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
     const rawJson = cleanText(match[1]);
     if (!rawJson) {
@@ -212,7 +218,7 @@ function getStructuredPrice(html: string) {
     }
   }
 
-  return null;
+  return getEmbeddedJsonPrice(html);
 }
 
 function findJsonPrice(value: unknown): number | null {
@@ -231,9 +237,27 @@ function findJsonPrice(value: unknown): number | null {
   }
 
   const record = value as Record<string, unknown>;
-  const directPrice = parsePrice(record.price ?? record.lowPrice ?? record.highPrice);
+  const directPrice = parsePrice(
+    record.price ??
+      record.lowPrice ??
+      record.highPrice ??
+      record.salePrice ??
+      record.currentPrice ??
+      record.offerPrice ??
+      record.finalPrice ??
+      record.amount ??
+      record.value
+  );
   if (directPrice) {
     return directPrice;
+  }
+
+  const priceSpecification = record.priceSpecification;
+  if (priceSpecification) {
+    const specificationPrice = findJsonPrice(priceSpecification);
+    if (specificationPrice) {
+      return specificationPrice;
+    }
   }
 
   const offers = record.offers;
@@ -253,6 +277,18 @@ function findJsonPrice(value: unknown): number | null {
   }
 
   return null;
+}
+
+function getEmbeddedJsonPrice(html: string) {
+  const candidates = Array.from(
+    html.matchAll(
+      /"(?:price|currentPrice|salePrice|offerPrice|finalPrice|discountedPrice|amount)"\s*:\s*"?\$?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)"?/gi
+    )
+  )
+    .map((match) => parsePrice(match[1]))
+    .filter((price): price is number => Boolean(price));
+
+  return candidates[0] ?? null;
 }
 
 function getFallbackPrice(html: string) {
@@ -337,18 +373,8 @@ function normalizeForMatch(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
 
-function productLabel(product: Product) {
-  return `${product.brand} ${product.model}`;
-}
-
 function findMatchingProduct(title: string, description: string) {
-  const haystack = normalizeForMatch(`${title} ${description}`);
-
-  return mockProducts.find((product) => {
-    const fullName = normalizeForMatch(productLabel(product));
-    const model = normalizeForMatch(product.model);
-    return haystack.includes(fullName) || haystack.includes(model);
-  });
+  return findBestProductMatch(normalizeForMatch(`${title} ${description}`));
 }
 
 async function readLimitedText(response: Response) {
@@ -507,7 +533,7 @@ export async function POST(request: Request) {
       title: title || undefined,
       description: description || undefined,
       price: price ?? undefined,
-      productName: matchedProduct ? productLabel(matchedProduct) : undefined,
+      productName: matchedProduct ? getProductName(matchedProduct) : undefined,
       confidence: Math.min(confidence, 90),
       message:
         price && matchedProduct
@@ -515,7 +541,7 @@ export async function POST(request: Request) {
           : "Pulled what was available. Add any missing price or product details before analyzing.",
       warnings: [
         !price ? "No reliable price was found on the page." : "",
-        !matchedProduct ? "No exact mock-catalog product match was found." : ""
+        !matchedProduct ? "No matching BuyWise price guide was found." : ""
       ].filter(Boolean)
     });
   } catch {
