@@ -39,7 +39,7 @@ export default async function SubmitListingPage({
                 {
                   icon: Target,
                   title: "Act only when better",
-                  text: "BuyWise shows alternatives only when the current price guides have a stronger option."
+                  text: "BuyWise shows alternatives only when the current benchmarks have a stronger option."
                 }
               ].map((item) => (
                 <div key={item.title} className="flex items-start gap-3">

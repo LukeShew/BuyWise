@@ -9,4 +9,10 @@ export interface ListingDraft {
   askingPrice?: string;
   marketplace?: MarketplaceSource;
   description?: string;
+  extractionConfidence?: number;
+  priceConfidence?: number;
+  priceSource?: string;
+  priceExplanation?: string;
+  productMatchConfidence?: number;
+  productMatchExplanation?: string;
 }

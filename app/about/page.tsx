@@ -25,7 +25,7 @@ const valueCards = [
   {
     icon: BadgeDollarSign,
     title: "See if the price makes sense",
-    text: "The analyzer compares the link price against used fair-value and retail MSRP benchmarks from BuyWise price guides."
+    text: "The analyzer compares the link price against used fair-value and retail MSRP benchmarks."
   },
   {
     icon: AlertTriangle,
@@ -122,7 +122,7 @@ export default function AboutPage() {
                   prefetch={false}
                   className="focus-ring inline-flex h-12 items-center justify-center rounded-lg border border-stone-200 bg-white px-5 font-semibold text-ink transition hover:border-mint"
                 >
-                  Browse price guides
+                  Browse products
                 </Link>
               </div>
             </div>

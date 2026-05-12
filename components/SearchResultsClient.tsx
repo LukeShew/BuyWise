@@ -61,7 +61,7 @@ export function SearchResultsClient() {
           <h2 className="text-2xl font-black text-ink">
             {products.length} {products.length === 1 ? "result" : "results"}
           </h2>
-          <p className="text-sm text-stone-500">BuyWise price guides</p>
+          <p className="text-sm text-stone-500">BuyWise benchmarks</p>
         </div>
 
         {products.length === 0 ? (

@@ -8,7 +8,6 @@ import {
   BookmarkPlus,
   CheckCircle2,
   Clipboard,
-  ClipboardCheck,
   Copy,
   ExternalLink,
   ShieldCheck,
@@ -95,68 +94,6 @@ function getFallbackQuestions(result: DealQualityResult) {
   ];
 }
 
-function buildNotWorthItReasons(result: DealQualityResult, context?: ListingAnalysisContext) {
-  const reasons: Array<{ title: string; detail: string }> = [];
-
-  result.redFlags.slice(0, 3).forEach((flag) => {
-    reasons.push({
-      title: flag.label,
-      detail: flag.detail
-    });
-  });
-
-  if (result.priceDifference > 0) {
-    reasons.push({
-      title: "The price is above the benchmark",
-      detail: `This link is ${formatCurrency(result.priceDifference)} over the ${context?.benchmarkLabel.toLowerCase() ?? "used fair-value benchmark"}.`
-    });
-  }
-
-  if (result.riskLevel !== "Low") {
-    reasons.push({
-      title: `${result.riskLevel} risk level`,
-      detail: "The current details do not clear enough buyer-protection checks to treat this as an easy yes."
-    });
-  }
-
-  if (result.confidenceScore < 70) {
-    reasons.push({
-      title: "Not enough proof yet",
-      detail: "Confidence is held back until the listing shows proof like receipt, serial number, warranty, clear condition, or a working video."
-    });
-  }
-
-  if (result.positiveSignals.length === 0) {
-    reasons.push({
-      title: "No trust signals mentioned",
-      detail: "The pasted details do not mention proof that would make the seller, product condition, or checkout path feel safer."
-    });
-  }
-
-  if (context?.mode === "resale" && context.retailAlternatives.length > 0) {
-    reasons.push({
-      title: "Buying new may be close enough",
-      detail: "There is at least one retail/MSRP comparison worth checking before taking used-item risk."
-    });
-  }
-
-  if (context?.mode === "retail" && context.resaleAlternatives.length > 0) {
-    reasons.push({
-      title: "Used options may beat the retail deal",
-      detail: "BuyWise has resale alternatives that may give you better savings than this retail price."
-    });
-  }
-
-  if (reasons.length === 0) {
-    reasons.push({
-      title: "No major blocker from the current details",
-      detail: "This does not look clearly bad from the pasted information, but you should still verify condition, source, and return/payment safety before paying."
-    });
-  }
-
-  return reasons.slice(0, 5);
-}
-
 function AlternativePanel({
   title,
   description,
@@ -199,7 +136,7 @@ function AlternativePanel({
                 href={`/products/${alternative.productId}`}
                 className="focus-ring mt-2 inline-flex items-center gap-1.5 rounded-lg text-sm font-semibold text-ink hover:text-mint"
               >
-                View price guide
+                View benchmark
                 <ExternalLink className="h-3.5 w-3.5" aria-hidden />
               </Link>
             </div>
@@ -235,14 +172,21 @@ export function DealScoreCard({
       ? formatCurrency(result.suggestedOfferLow)
       : `${formatCurrency(result.suggestedOfferLow)} - ${formatCurrency(result.suggestedOfferHigh)}`;
   const sellerQuestions = product?.sellerQuestions.slice(0, 4) ?? getFallbackQuestions(result);
-  const checklistItems = product?.buyingChecklist.slice(0, 4) ?? [
-    "Verify ownership before meeting",
-    "Test the item before paying",
-    "Meet publicly",
-    "Do not send money before inspection"
-  ];
   const isRetailMode = context?.mode === "retail";
-  const notWorthItReasons = buildNotWorthItReasons(result, context);
+  const subScores = [
+    { label: "Price / Value", value: result.priceAttractivenessScore },
+    { label: "Trust / Safety", value: result.trustSafetyScore },
+    { label: "Condition", value: result.conditionScore },
+    { label: "Market Fit", value: result.marketCompetitivenessScore },
+    { label: "Confidence", value: result.confidenceScore }
+  ];
+  const confidenceStyle =
+    result.confidenceLevel === "High"
+      ? "bg-emerald-50 text-emerald-900 ring-emerald-100"
+      : result.confidenceLevel === "Medium"
+        ? "bg-amber-50 text-amber-950 ring-amber-100"
+        : "bg-red-50 text-red-950 ring-red-100";
+  const dataSources = [...new Set([...(context?.dataSources ?? []), ...result.dataSources])];
 
   useEffect(() => {
     if (!product || !context) {
@@ -334,14 +278,19 @@ export function DealScoreCard({
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <p className="text-sm font-semibold text-mint">
-              {isRetailMode ? "Retail bargain verdict" : "Resale listing verdict"}
+              {isRetailMode ? "Retail deal score" : "Listing deal score"}
             </p>
-            <h2 className="mt-1 text-3xl font-black leading-tight text-ink">
-              {result.recommendation}
+            <h2 className="mt-1 text-5xl font-black leading-none text-ink">
+              {result.dealScore}
+              <span className="text-2xl text-stone-400">/100</span>
             </h2>
+            <p className="mt-2 text-xl font-black text-ink">{result.marketPositionLabel}</p>
           </div>
           <div className="flex flex-wrap items-center justify-end gap-2">
             <RecommendationBadge label={result.recommendation} />
+            <span className={cn("inline-flex rounded-full px-3 py-1 text-sm font-bold", riskStyles[result.riskLevel])}>
+              {result.riskLevel} risk
+            </span>
             {product && context ? (
               <button
                 type="button"
@@ -367,6 +316,30 @@ export function DealScoreCard({
 
         <p className="mt-4 text-base leading-7 text-stone-700">{result.explanation}</p>
 
+        <div className="mt-5 h-3 overflow-hidden rounded-full bg-stone-100">
+          <div
+            className="h-full rounded-full bg-ink"
+            style={{ width: `${result.dealScore}%` }}
+          />
+        </div>
+
+        <div className={cn("mt-5 rounded-lg p-4 ring-1", confidenceStyle)}>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p className="text-sm font-bold">Confidence</p>
+              <p className="mt-1 text-2xl font-black">{result.confidenceLevel} confidence</p>
+            </div>
+            <p className="text-sm font-bold">{result.confidenceScore}/100</p>
+          </div>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            {result.confidenceReasons.map((reason) => (
+              <div key={reason} className="rounded-lg bg-white/70 px-3 py-2 text-sm font-semibold">
+                {reason}
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="mt-5 rounded-lg bg-stone-50 p-4">
           <p className="text-sm font-semibold text-stone-700">
             {isRetailMode ? "Target buy range" : "Suggested offer"}
@@ -385,62 +358,51 @@ export function DealScoreCard({
       <div className="grid gap-4 p-5 sm:p-6 lg:grid-cols-2">
         <div className="space-y-4">
           <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
-              <p className="text-sm text-stone-500">Deal score</p>
-              <p className="mt-1 text-2xl font-black text-ink">{result.dealScore}/100</p>
-              <div className="mt-3 h-2 rounded-full bg-stone-100">
-                <div
-                  className="h-2 rounded-full bg-mint"
-                  style={{ width: `${result.dealScore}%` }}
-                />
+            {subScores.map((score) => (
+              <div key={score.label} className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
+                <p className="text-sm text-stone-500">{score.label}</p>
+                <p className="mt-1 text-2xl font-black text-ink">{score.value}/100</p>
+                <div className="mt-3 h-2 rounded-full bg-stone-100">
+                  <div
+                    className="h-2 rounded-full bg-mint"
+                    style={{ width: `${score.value}%` }}
+                  />
+                </div>
               </div>
-            </div>
-
-            <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
-              <p className="text-sm text-stone-500">Risk level</p>
-              <p className={cn("mt-2 inline-flex rounded-full px-3 py-1 text-sm font-bold", riskStyles[result.riskLevel])}>
-                {result.riskLevel}
-              </p>
-              <p className="mt-3 text-sm leading-6 text-stone-600">{priceGapLabel}</p>
-            </div>
-
-            <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
-              <p className="flex items-center gap-1.5 text-sm text-stone-500">
-                <ShieldCheck className="h-4 w-4" aria-hidden />
-                Confidence
-              </p>
-              <p className="mt-1 text-2xl font-black text-ink">{result.confidenceScore}/100</p>
-              <div className="mt-3 h-2 rounded-full bg-stone-100">
-                <div
-                  className="h-2 rounded-full bg-ink"
-                  style={{ width: `${result.confidenceScore}%` }}
-                />
-              </div>
-            </div>
-
+            ))}
             <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
               <p className="flex items-center gap-1.5 text-sm text-stone-500">
                 <Target className="h-4 w-4" aria-hidden />
                 Benchmark gap
               </p>
-              <p className="mt-1 text-2xl font-black text-ink">
-                {result.priceDifference > 0 ? "+" : ""}
-                {formatCurrency(result.priceDifference)}
-              </p>
-              <p className="mt-2 text-sm leading-6 text-stone-600">Compared with {benchmarkLabel.toLowerCase()}.</p>
+              <p className="mt-1 text-2xl font-black text-ink">{priceGapLabel}</p>
             </div>
           </div>
 
           <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
             <h3 className="flex items-center gap-2 font-bold text-ink">
               <AlertTriangle className="h-4 w-4 text-danger" aria-hidden />
-              Why this might NOT be worth it
+              Why this score?
             </h3>
             <div className="mt-3 space-y-2">
-              {notWorthItReasons.map((reason) => (
-                <div key={`${reason.title}-${reason.detail}`} className="rounded-lg bg-stone-50 p-3">
-                  <p className="text-sm font-semibold text-ink">{reason.title}</p>
-                  <p className="mt-1 text-sm leading-6 text-stone-600">{reason.detail}</p>
+              {result.scoreBreakdown.map((item) => (
+                <div key={`${item.label}-${item.detail}`} className="rounded-lg bg-stone-50 p-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <p className="text-sm font-semibold text-ink">{item.label}</p>
+                    <span
+                      className={cn(
+                        "shrink-0 rounded-full px-2 py-0.5 text-xs font-bold",
+                        item.tone === "positive"
+                          ? "bg-emerald-100 text-emerald-900"
+                          : item.tone === "negative"
+                            ? "bg-red-100 text-red-900"
+                            : "bg-stone-200 text-stone-700"
+                      )}
+                    >
+                      {item.impact}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm leading-6 text-stone-600">{item.detail}</p>
                 </div>
               ))}
             </div>
@@ -467,21 +429,42 @@ export function DealScoreCard({
             )}
           </div>
 
-          <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
-            <h3 className="flex items-center gap-2 font-bold text-ink">
-              <ClipboardCheck className="h-4 w-4 text-mint" aria-hidden />
-              Next steps before buying
-            </h3>
-            <ol className="mt-3 space-y-2">
-              {result.nextSteps.map((step, index) => (
-                <li key={step} className="flex gap-3 rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-bold text-white">
-                    {index + 1}
-                  </span>
-                  <span>{step}</span>
-                </li>
-              ))}
-            </ol>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
+              <h3 className="flex items-center gap-2 font-bold text-ink">
+                <CheckCircle2 className="h-4 w-4 text-mint" aria-hidden />
+                Pros
+              </h3>
+              {result.pros.length > 0 ? (
+                <div className="mt-3 space-y-2">
+                  {result.pros.map((item) => (
+                    <p key={item} className="rounded-lg bg-emerald-50 p-3 text-sm leading-6 text-emerald-900">
+                      {item}
+                    </p>
+                  ))}
+                </div>
+              ) : (
+                <p className="mt-3 text-sm leading-6 text-stone-600">No clear advantage found from the current details.</p>
+              )}
+            </div>
+
+            <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
+              <h3 className="flex items-center gap-2 font-bold text-ink">
+                <AlertTriangle className="h-4 w-4 text-danger" aria-hidden />
+                Cons
+              </h3>
+              {result.cons.length > 0 ? (
+                <div className="mt-3 space-y-2">
+                  {result.cons.map((item) => (
+                    <p key={item} className="rounded-lg bg-red-50 p-3 text-sm leading-6 text-red-900">
+                      {item}
+                    </p>
+                  ))}
+                </div>
+              ) : (
+                <p className="mt-3 text-sm leading-6 text-stone-600">No major downside found from the current details.</p>
+              )}
+            </div>
           </div>
 
           <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
@@ -513,7 +496,7 @@ export function DealScoreCard({
             <AlternativePanel
               title="Better retail moves"
               description="New-product fallbacks to check when warranty, returns, or a close retail price may beat the pasted link."
-              emptyText="No better retail move found in the BuyWise price guides."
+              emptyText="No better retail move found in the current BuyWise benchmarks."
               alternatives={context.retailAlternatives}
               icon={ShoppingBag}
             />
@@ -523,7 +506,7 @@ export function DealScoreCard({
             <AlternativePanel
               title="Better resale moves"
               description="Used-side replacement actions if this link is overpriced, risky, or not clearly better than the market."
-              emptyText="No clearly better resale move found in the BuyWise price guides."
+              emptyText="No clearly better resale move found in the current BuyWise benchmarks."
               alternatives={context.resaleAlternatives}
               icon={Target}
             />
@@ -554,14 +537,26 @@ export function DealScoreCard({
           </div>
 
           <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
-            <h3 className="font-bold text-ink">{isRetailMode ? "Before checkout" : "Meetup checklist"}</h3>
+            <h3 className="flex items-center gap-2 font-bold text-ink">
+              <ShieldCheck className="h-4 w-4 text-mint" aria-hidden />
+              Compared against
+            </h3>
             <div className="mt-3 space-y-2">
-              {checklistItems.map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-lg bg-stone-50 p-3">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-mint" aria-hidden />
-                  <p className="text-sm leading-6 text-stone-700">{item}</p>
-                </div>
+              {dataSources.map((source) => (
+                <p key={source} className="rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
+                  {source}
+                </p>
               ))}
+              {context?.priceExplanation ? (
+                <p className="rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
+                  {context.priceExplanation}
+                </p>
+              ) : null}
+              {context?.productMatchExplanation ? (
+                <p className="rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
+                  {context.productMatchExplanation}
+                </p>
+              ) : null}
             </div>
           </div>
         </div>

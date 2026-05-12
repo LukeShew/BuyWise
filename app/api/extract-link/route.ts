@@ -8,7 +8,7 @@ import {
   inferAnalysisModeFromUrl,
   inferMarketplaceFromUrl
 } from "@/lib/linkAnalysis";
-import { findBestProductMatch, getProductName } from "@/lib/productMatch";
+import { findProductMatch, getProductName } from "@/lib/productMatch";
 import type { LinkExtractionResult } from "@/types";
 
 export const runtime = "nodejs";
@@ -28,9 +28,74 @@ function normalizeUrl(value: string) {
     if (url.protocol !== "http:" && url.protocol !== "https:") {
       return null;
     }
+
+    const nestedUrl = getNestedRedirectUrl(url);
+    if (nestedUrl) {
+      return nestedUrl;
+    }
+
+    normalizeHostname(url);
+    removeTrackingParams(url);
     return url;
   } catch {
     return null;
+  }
+}
+
+function normalizeHostname(url: URL) {
+  url.hostname = url.hostname.toLowerCase().replace(/^m\./, "www.").replace(/^mobile\./, "www.");
+}
+
+function getNestedRedirectUrl(url: URL) {
+  const redirectKeys = ["url", "u", "redirect", "redirect_url", "redirectUrl", "target", "to"];
+  for (const key of redirectKeys) {
+    const value = url.searchParams.get(key);
+    if (!value) {
+      continue;
+    }
+
+    try {
+      const decoded = decodeURIComponent(value);
+      if (/^https?:\/\//i.test(decoded)) {
+        const nested = new URL(decoded);
+        if (nested.protocol === "http:" || nested.protocol === "https:") {
+          normalizeHostname(nested);
+          removeTrackingParams(nested);
+          return nested;
+        }
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  return null;
+}
+
+function removeTrackingParams(url: URL) {
+  const trackingKeys = [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+    "fbclid",
+    "gclid",
+    "msclkid",
+    "igshid",
+    "mc_cid",
+    "mc_eid",
+    "ref",
+    "ref_",
+    "tag",
+    "ascsubtag",
+    "psc"
+  ];
+
+  for (const key of Array.from(url.searchParams.keys())) {
+    if (trackingKeys.includes(key) || key.startsWith("utm_")) {
+      url.searchParams.delete(key);
+    }
   }
 }
 
@@ -160,6 +225,21 @@ function getDescription(html: string) {
   return getMetaContent(html, ["og:description", "twitter:description", "description"]);
 }
 
+interface PriceCandidate {
+  price: number;
+  source: string;
+  confidence: number;
+  context: string;
+}
+
+interface PriceExtraction {
+  price?: number;
+  confidence: number;
+  source: string;
+  explanation: string;
+  warnings: string[];
+}
+
 function parsePrice(value: unknown) {
   if (typeof value === "number" && Number.isFinite(value)) {
     return value;
@@ -175,31 +255,108 @@ function parsePrice(value: unknown) {
   }
 
   const price = Number.parseFloat(match[1]);
-  if (!Number.isFinite(price) || price < 10 || price > 50_000) {
+  if (!Number.isFinite(price) || price < 1 || price > 100_000) {
     return null;
   }
 
   return price;
 }
 
-function getStructuredPrice(html: string) {
-  const metaPrice = getMetaContent(html, [
-    "product:price:amount",
-    "og:price:amount",
-    "twitter:data1",
-    "price",
-    "sale_price"
-  ]);
-  const parsedMetaPrice = parsePrice(metaPrice);
-  if (parsedMetaPrice) {
-    return parsedMetaPrice;
+function getPageText(html: string) {
+  return cleanText(
+    html
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+  );
+}
+
+function getExpectedMinimumPrice(productText: string) {
+  const normalized = productText.toLowerCase();
+
+  if (/(macbook|laptop|iphone|ipad|surface|thinkpad|xps)/.test(normalized)) {
+    return 100;
   }
 
-  const dataPrice = html.match(/\bdata-(?:price|amount|sale-price)=["']\$?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)["']/i)?.[1];
-  const parsedDataPrice = parsePrice(dataPrice);
-  if (parsedDataPrice) {
-    return parsedDataPrice;
+  if (/(camera|mirrorless|dslr|lens)/.test(normalized)) {
+    return 60;
   }
+
+  if (/(bike|bicycle|trek|specialized|giant|cannondale)/.test(normalized)) {
+    return 60;
+  }
+
+  if (/(monitor|ultrasharp|odyssey|proart)/.test(normalized)) {
+    return 40;
+  }
+
+  if (/(playstation|xbox|nintendo|console|stockx|goat|sneaker|shoe)/.test(normalized)) {
+    return 25;
+  }
+
+  return 10;
+}
+
+function hasBadPriceContext(context: string) {
+  return /shipping|delivery|coupon|promo|discount|save\s+\$|monthly|\/mo|per month|month|financ|affirm|klarna|afterpay|payment|installment|trade[\s-]?in|protection plan|warranty plan|gift card|accessor|case|charger|cable|suggested|sponsored|related|carousel|compare|list price|was\s+\$|regular price|strike|crossed|starting at/i.test(
+    context
+  );
+}
+
+function hasStrongPriceContext(context: string) {
+  return /buy box|current price|sale price|deal price|now\s+\$|price\s+\$|our price|itemprice|product price|offer price|final price/i.test(
+    context
+  );
+}
+
+function adjustCandidateConfidence(candidate: PriceCandidate, productText: string) {
+  let confidence = candidate.confidence;
+  const minimum = getExpectedMinimumPrice(productText);
+
+  if (candidate.price < minimum) {
+    confidence -= 45;
+  }
+
+  if (hasBadPriceContext(candidate.context)) {
+    confidence -= 55;
+  }
+
+  if (hasStrongPriceContext(candidate.context)) {
+    confidence += 10;
+  }
+
+  return {
+    ...candidate,
+    confidence: Math.max(0, Math.min(98, Math.round(confidence)))
+  };
+}
+
+function getMetaPriceCandidates(html: string): PriceCandidate[] {
+  const keys = [
+    { key: "product:price:amount", source: "OpenGraph product price", confidence: 84 },
+    { key: "og:price:amount", source: "OpenGraph price", confidence: 78 },
+    { key: "price", source: "page price metadata", confidence: 66 },
+    { key: "sale_price", source: "sale price metadata", confidence: 68 },
+    { key: "twitter:data1", source: "Twitter card price hint", confidence: 46 }
+  ];
+
+  return keys
+    .map((item) => {
+      const price = parsePrice(getMetaContent(html, [item.key]));
+      return price
+        ? {
+            price,
+            source: item.source,
+            confidence: item.confidence,
+            context: item.key
+          }
+        : null;
+    })
+    .filter((candidate): candidate is PriceCandidate => Boolean(candidate));
+}
+
+function getStructuredPriceCandidates(html: string): PriceCandidate[] {
+  const candidates: PriceCandidate[] = [];
 
   for (const match of html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
     const rawJson = cleanText(match[1]);
@@ -209,105 +366,180 @@ function getStructuredPrice(html: string) {
 
     try {
       const value = JSON.parse(rawJson) as unknown;
-      const price = findJsonPrice(value);
-      if (price) {
-        return price;
-      }
+      candidates.push(...findJsonPriceCandidates(value));
     } catch {
       continue;
     }
   }
 
-  return getEmbeddedJsonPrice(html);
+  return candidates;
 }
 
-function findJsonPrice(value: unknown): number | null {
+function findJsonPriceCandidates(value: unknown, context = ""): PriceCandidate[] {
   if (!value || typeof value !== "object") {
-    return null;
+    return [];
   }
 
   if (Array.isArray(value)) {
-    for (const item of value) {
-      const price = findJsonPrice(item);
-      if (price) {
-        return price;
-      }
-    }
-    return null;
+    return value.flatMap((item) => findJsonPriceCandidates(item, context));
   }
 
   const record = value as Record<string, unknown>;
-  const directPrice = parsePrice(
-    record.price ??
-      record.lowPrice ??
-      record.highPrice ??
-      record.salePrice ??
-      record.currentPrice ??
-      record.offerPrice ??
-      record.finalPrice ??
-      record.amount ??
-      record.value
-  );
-  if (directPrice) {
-    return directPrice;
+  const type = Array.isArray(record["@type"]) ? record["@type"].join(" ") : String(record["@type"] ?? "");
+  const nextContext = `${context} ${type}`.trim();
+  const isProductOrOffer = /product|offer|pricespecification/i.test(nextContext);
+  const candidates: PriceCandidate[] = [];
+
+  if (isProductOrOffer) {
+    const price = parsePrice(record.price ?? record.salePrice ?? record.currentPrice ?? record.offerPrice ?? record.finalPrice);
+    if (price) {
+      candidates.push({
+        price,
+        source: /offer/i.test(nextContext) ? "JSON-LD offer price" : "JSON-LD product price",
+        confidence: /offer/i.test(nextContext) ? 88 : 76,
+        context: nextContext
+      });
+    }
+
+    const lowPrice = parsePrice(record.lowPrice);
+    const highPrice = parsePrice(record.highPrice);
+    if (lowPrice && highPrice && lowPrice === highPrice) {
+      candidates.push({
+        price: lowPrice,
+        source: "JSON-LD offer range",
+        confidence: 80,
+        context: nextContext
+      });
+    }
   }
 
   const priceSpecification = record.priceSpecification;
   if (priceSpecification) {
-    const specificationPrice = findJsonPrice(priceSpecification);
-    if (specificationPrice) {
-      return specificationPrice;
-    }
+    candidates.push(...findJsonPriceCandidates(priceSpecification, `${nextContext} PriceSpecification`));
   }
 
   const offers = record.offers;
   if (offers) {
-    const offerPrice = findJsonPrice(offers);
-    if (offerPrice) {
-      return offerPrice;
-    }
+    candidates.push(...findJsonPriceCandidates(offers, `${nextContext} Offer`));
   }
 
   const graph = record["@graph"];
   if (graph) {
-    const graphPrice = findJsonPrice(graph);
-    if (graphPrice) {
-      return graphPrice;
-    }
+    candidates.push(...findJsonPriceCandidates(graph, nextContext));
   }
 
-  return null;
+  return candidates;
 }
 
-function getEmbeddedJsonPrice(html: string) {
-  const candidates = Array.from(
-    html.matchAll(
-      /"(?:price|currentPrice|salePrice|offerPrice|finalPrice|discountedPrice|amount)"\s*:\s*"?\$?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)"?/gi
-    )
+function getEmbeddedJsonPriceCandidates(html: string) {
+  return Array.from(
+    html.matchAll(/"(?:price|currentPrice|salePrice|offerPrice|finalPrice|discountedPrice)"\s*:\s*"?\$?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)"?/gi)
   )
-    .map((match) => parsePrice(match[1]))
-    .filter((price): price is number => Boolean(price));
+    .map((match): PriceCandidate | null => {
+      const price = parsePrice(match[1]);
+      if (!price) {
+        return null;
+      }
 
-  return candidates[0] ?? null;
+      const index = match.index ?? 0;
+      return {
+        price,
+        source: "embedded page data",
+        confidence: 52,
+        context: cleanText(html.slice(Math.max(0, index - 90), index + 120))
+      };
+    })
+    .filter((candidate): candidate is PriceCandidate => Boolean(candidate));
 }
 
-function getFallbackPrice(html: string) {
-  const bodyText = cleanText(
-    html
-      .replace(/<script[\s\S]*?<\/script>/gi, " ")
-      .replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ")
-  );
+function getDataAttributePriceCandidates(html: string) {
+  return Array.from(html.matchAll(/\bdata-(?:price|amount|sale-price|current-price)=["']\$?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)["']/gi))
+    .map((match): PriceCandidate | null => {
+      const price = parsePrice(match[1]);
+      if (!price) {
+        return null;
+      }
 
-  const candidates = Array.from(bodyText.matchAll(/(?:US\s*)?\$\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)/gi))
-    .map((match) => parsePrice(match[1]))
-    .filter((price): price is number => Boolean(price));
+      return {
+        price,
+        source: "structured page price attribute",
+        confidence: 70,
+        context: match[0]
+      };
+    })
+    .filter((candidate): candidate is PriceCandidate => Boolean(candidate));
+}
 
-  if (!candidates.length) {
-    return null;
+function getVisiblePriceCandidates(html: string) {
+  const bodyText = getPageText(html);
+
+  return Array.from(bodyText.matchAll(/(?:US\s*)?\$\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)/gi))
+    .map((match): PriceCandidate | null => {
+      const price = parsePrice(match[1]);
+      if (!price) {
+        return null;
+      }
+
+      const index = match.index ?? 0;
+      return {
+        price,
+        source: "visible page text",
+        confidence: 44,
+        context: bodyText.slice(Math.max(0, index - 80), index + 110)
+      };
+    })
+    .filter((candidate): candidate is PriceCandidate => Boolean(candidate));
+}
+
+function extractPrice(html: string, productText: string): PriceExtraction {
+  const rawCandidates = [
+    ...getStructuredPriceCandidates(html),
+    ...getMetaPriceCandidates(html),
+    ...getDataAttributePriceCandidates(html),
+    ...getEmbeddedJsonPriceCandidates(html),
+    ...getVisiblePriceCandidates(html)
+  ];
+  const adjusted = rawCandidates
+    .map((candidate) => adjustCandidateConfidence(candidate, productText))
+    .sort((a, b) => b.confidence - a.confidence || a.price - b.price);
+  const best = adjusted[0];
+
+  if (!best) {
+    return {
+      confidence: 0,
+      source: "No price found",
+      explanation: "No readable product price was found in the page metadata or visible text.",
+      warnings: ["Confirm the listing price manually before scoring."]
+    };
   }
 
-  return candidates[0];
+  if (best.confidence < 65) {
+    return {
+      confidence: best.confidence,
+      source: best.source,
+      explanation:
+        best.price < getExpectedMinimumPrice(productText)
+          ? `A possible ${formatMoney(best.price)} price was found, but it looks too low for this product and may be shipping, financing, or unrelated page text.`
+          : `A possible ${formatMoney(best.price)} price was found in ${best.source}, but the surrounding page text was not reliable enough to score from it.`,
+      warnings: ["Confirm the listing price manually before scoring."]
+    };
+  }
+
+  return {
+    price: best.price,
+    confidence: best.confidence,
+    source: best.source,
+    explanation: `Detected ${best.source}: ${formatMoney(best.price)}.`,
+    warnings: []
+  };
+}
+
+function formatMoney(value: number) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: value % 1 === 0 ? 0 : 2
+  }).format(value);
 }
 
 function getStructuredNameAndDescription(html: string) {
@@ -374,7 +606,7 @@ function normalizeForMatch(value: string) {
 }
 
 function findMatchingProduct(title: string, description: string) {
-  return findBestProductMatch(normalizeForMatch(`${title} ${description}`));
+  return findProductMatch(normalizeForMatch(`${title} ${description}`));
 }
 
 async function readLimitedText(response: Response) {
@@ -508,41 +740,58 @@ export async function POST(request: Request) {
       });
     }
 
+    const finalUrl = response.url || normalizedUrl;
+    const finalSourceLabel = getSourceLabel(finalUrl, sourceLabel);
+    const finalSourceDomain = getSourceDomain(finalUrl) || sourceDomain;
+    const finalMode = inferAnalysisModeFromUrl(finalUrl) ?? mode;
+    const finalMarketplace = inferMarketplaceFromUrl(finalUrl) ?? marketplace;
     const html = await readLimitedText(response);
     const structuredInfo = getStructuredNameAndDescription(html);
     const title = structuredInfo.name || getTitle(html);
     const description = structuredInfo.description || getDescription(html);
-    const price = getStructuredPrice(html) ?? getFallbackPrice(html);
-    const matchedProduct = findMatchingProduct(title, description);
+    const productText = [title, description, finalUrl].filter(Boolean).join(" ");
+    const price = extractPrice(html, productText);
+    const match = findMatchingProduct(title, description);
+    const matchedProduct = match.product;
     const confidence =
       30 +
       (title ? 20 : 0) +
       (description ? 10 : 0) +
-      (price ? 20 : 0) +
-      (matchedProduct ? 15 : 0) +
-      (sourceDomain ? 5 : 0);
+      (price.price ? Math.round(price.confidence * 0.18) : 0) +
+      (matchedProduct ? Math.round(match.confidence * 0.16) : 0) +
+      (finalSourceDomain ? 5 : 0);
+
+    const manualWarnings = [
+      ...price.warnings,
+      !matchedProduct ? match.explanation : "",
+      price.price ? "" : "BuyWise needs the listing price confirmed before scoring.",
+      !matchedProduct ? "Confirm the closest benchmark before scoring." : ""
+    ].filter(Boolean);
 
     return buildResponse({
-      ok: Boolean(title || description || price),
-      manualRequired: !price || !matchedProduct,
-      url: normalizedUrl,
-      sourceLabel,
-      sourceDomain,
-      mode,
-      marketplace,
+      ok: Boolean(title || description || price.price),
+      manualRequired: !price.price || !matchedProduct,
+      url: finalUrl,
+      sourceLabel: finalSourceLabel,
+      sourceDomain: finalSourceDomain || undefined,
+      mode: finalMode,
+      marketplace: finalMarketplace,
       title: title || undefined,
       description: description || undefined,
-      price: price ?? undefined,
+      price: price.price,
+      priceConfidence: price.confidence,
+      priceSource: price.source,
+      priceExplanation: price.explanation,
       productName: matchedProduct ? getProductName(matchedProduct) : undefined,
+      productMatchConfidence: match.confidence,
+      productMatchExplanation: match.explanation,
+      matchCandidates: match.candidates,
       confidence: Math.min(confidence, 90),
       message:
-        price && matchedProduct
-          ? "Pulled product details from the link. Check them before analyzing."
-          : "Pulled what was available. Add any missing price or product details before analyzing.",
-      warnings: [
-        !price ? "No reliable price was found on the page." : "",
-        !matchedProduct ? "No matching BuyWise price guide was found." : ""
-      ].filter(Boolean)
+        price.price && matchedProduct
+          ? "Pulled reliable enough product and price details. Check them before analyzing."
+          : "BuyWise pulled what it could, but needs the missing price or product match confirmed before scoring.",
+      warnings: manualWarnings
     });
   } catch {
     clearTimeout(timeout);

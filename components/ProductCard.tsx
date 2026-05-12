@@ -66,7 +66,7 @@ export function ProductCard({ product }: { product: Product }) {
       askingPrice: product.fairPrice,
       marketplace: "Other" as const,
       sellerLocation: "",
-      notes: `Saved from the ${product.brand} ${product.model} price guide.`,
+      notes: `Saved from the ${product.brand} ${product.model} benchmark.`,
       status: "watching" as const
     };
 

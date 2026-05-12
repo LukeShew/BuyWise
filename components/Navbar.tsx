@@ -34,13 +34,6 @@ export function Navbar() {
           ))}
         </div>
         <div className="z-10 ml-auto flex items-center gap-1">
-          <Link
-            href="/about"
-            prefetch={false}
-            className="focus-ring hidden rounded-lg px-3 py-2 text-sm font-semibold text-stone-600 hover:bg-white hover:text-ink sm:inline-flex"
-          >
-            About Us
-          </Link>
           <AuthStatus />
         </div>
       </nav>

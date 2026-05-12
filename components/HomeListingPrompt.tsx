@@ -40,6 +40,12 @@ export function HomeListingPrompt() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [linkMessage, setLinkMessage] = useState("");
   const [lastExtractedUrl, setLastExtractedUrl] = useState("");
+  const [extractionConfidence, setExtractionConfidence] = useState<number | undefined>();
+  const [priceConfidence, setPriceConfidence] = useState<number | undefined>();
+  const [priceSource, setPriceSource] = useState<string | undefined>();
+  const [priceExplanation, setPriceExplanation] = useState<string | undefined>();
+  const [productMatchConfidence, setProductMatchConfidence] = useState<number | undefined>();
+  const [productMatchExplanation, setProductMatchExplanation] = useState<string | undefined>();
 
   function updateUrl(value: string) {
     setListingUrl(value);
@@ -57,6 +63,13 @@ export function HomeListingPrompt() {
   }
 
   const applyLinkExtraction = useCallback((data: LinkExtractionResult) => {
+    setExtractionConfidence(data.confidence);
+    setPriceConfidence(data.priceConfidence);
+    setPriceSource(data.priceSource);
+    setPriceExplanation(data.priceExplanation);
+    setProductMatchConfidence(data.productMatchConfidence);
+    setProductMatchExplanation(data.productMatchExplanation);
+
     if (data.mode) {
       setAnalysisMode(data.mode);
     }
@@ -98,7 +111,7 @@ export function HomeListingPrompt() {
 
     setLastExtractedUrl(url);
     applyLinkExtraction(data);
-    setLinkMessage(data.message);
+    setLinkMessage([data.message, data.priceExplanation].filter(Boolean).join(" "));
 
     return data;
   }, [applyLinkExtraction]);
@@ -148,6 +161,12 @@ export function HomeListingPrompt() {
     let nextAnalysisMode = analysisMode;
     let nextMarketplace = marketplace;
     let nextDescription = description;
+    let nextExtractionConfidence = extractionConfidence;
+    let nextPriceConfidence = priceConfidence;
+    let nextPriceSource = priceSource;
+    let nextPriceExplanation = priceExplanation;
+    let nextProductMatchConfidence = productMatchConfidence;
+    let nextProductMatchExplanation = productMatchExplanation;
     const trimmedUrl = listingUrl.trim();
 
     if (looksLikeUrl(trimmedUrl) && trimmedUrl !== lastExtractedUrl) {
@@ -159,6 +178,12 @@ export function HomeListingPrompt() {
         nextAnalysisMode = data.mode ?? analysisMode;
         nextMarketplace = data.marketplace ?? marketplace;
         nextDescription = buildExtractedDetails(data) || description;
+        nextExtractionConfidence = data.confidence;
+        nextPriceConfidence = data.priceConfidence;
+        nextPriceSource = data.priceSource;
+        nextPriceExplanation = data.priceExplanation;
+        nextProductMatchConfidence = data.productMatchConfidence;
+        nextProductMatchExplanation = data.productMatchExplanation;
       } catch {
         setLinkMessage("Could not read that link. Add the missing details on the next page.");
       } finally {
@@ -177,7 +202,13 @@ export function HomeListingPrompt() {
           productName: nextProductName,
           askingPrice: nextAskingPrice,
           marketplace: nextMarketplace,
-          description: nextDescription
+          description: nextDescription,
+          extractionConfidence: nextExtractionConfidence,
+          priceConfidence: nextPriceConfidence,
+          priceSource: nextPriceSource,
+          priceExplanation: nextPriceExplanation,
+          productMatchConfidence: nextProductMatchConfidence,
+          productMatchExplanation: nextProductMatchExplanation
         })
       );
     } else if (typeof window !== "undefined") {
@@ -194,6 +225,12 @@ export function HomeListingPrompt() {
     setAnalysisMode("resale");
     setProductName("MacBook Air M1");
     setAskingPrice("420");
+    setExtractionConfidence(88);
+    setPriceConfidence(90);
+    setPriceSource("Sample confirmed price");
+    setPriceExplanation("Sample price confirmed for demo analysis.");
+    setProductMatchConfidence(92);
+    setProductMatchExplanation("Sample matched to MacBook Air M1.");
     setMarketplace("eBay");
     setDescription(resaleSample);
     setLinkMessage("Sample loaded. Analyze it to see the verdict.");
@@ -206,6 +243,12 @@ export function HomeListingPrompt() {
     setAnalysisMode("retail");
     setProductName("MacBook Air M1");
     setAskingPrice("799");
+    setExtractionConfidence(88);
+    setPriceConfidence(90);
+    setPriceSource("Sample confirmed price");
+    setPriceExplanation("Sample price confirmed for demo analysis.");
+    setProductMatchConfidence(92);
+    setProductMatchExplanation("Sample matched to MacBook Air M1.");
     setMarketplace("Other");
     setDescription(retailSample);
     setLinkMessage("Sample loaded. Analyze it to see the verdict.");

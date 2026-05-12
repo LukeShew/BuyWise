@@ -12,7 +12,7 @@ export function BuyingChecklist({ items }: { items: string[] }) {
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-semibold text-mint">Buying checklist</p>
-          <h2 className="mt-1 text-2xl font-bold text-ink">Use this at meetup</h2>
+          <h2 className="mt-1 text-2xl font-bold text-ink">Review before paying</h2>
         </div>
         <span className="rounded-full bg-stone-100 px-3 py-1 text-sm font-semibold text-stone-700">
           {completed}/{items.length}

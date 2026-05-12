@@ -20,6 +20,8 @@ const sourceLabels: Array<{ label: string; terms: string[] }> = [
   { label: "Walmart", terms: ["walmart."] },
   { label: "Target", terms: ["target."] },
   { label: "B&H Photo", terms: ["bhphotovideo.", "bandh."] },
+  { label: "StockX", terms: ["stockx."] },
+  { label: "GOAT", terms: ["goat."] },
   { label: "Adorama", terms: ["adorama."] },
   { label: "Apple", terms: ["apple."] },
   { label: "Dell", terms: ["dell."] },
@@ -39,7 +41,9 @@ const resaleTerms = [
   "mercari.",
   "swappa.",
   "depop.",
-  "poshmark."
+  "poshmark.",
+  "stockx.",
+  "goat."
 ];
 
 const retailTerms = [
@@ -154,7 +158,7 @@ function buildResaleAlternatives(product: Product, askingPrice: number) {
             sourceType: "resale",
             actionLabel: "Use this as your used-price target",
             outcome: "Push the seller toward this number before you meet.",
-            reason: `${formatCurrency(product.fairPrice)} is the current BuyWise fair used price for this model.`
+            reason: `${formatCurrency(product.fairPrice)} is the current BuyWise fair used benchmark for this model.`
           }
         ]
       : [];
@@ -209,7 +213,7 @@ function buildRetailAlternatives(product: Product, askingPrice: number, mode: Li
       sourceType: "retail",
       actionLabel: "Compare buying this new",
       outcome: "This gives you a retail fallback if the pasted deal is weak.",
-      reason: `${formatCurrency(candidate.msrp)} MSRP is lower than this link price in the BuyWise price guides.`
+      reason: `${formatCurrency(candidate.msrp)} MSRP is lower than this link price in the current BuyWise benchmarks.`
     }));
 
   return uniqueAlternatives([...closeNewBenchmark, ...sameCategory]).slice(0, 4);
@@ -221,7 +225,14 @@ export function buildListingAnalysisContext({
   mode,
   listingUrl,
   marketplace,
-  sellerLocation
+  sellerLocation,
+  productMatchConfidence,
+  productMatchExplanation,
+  priceConfidence,
+  priceSource,
+  priceExplanation,
+  extractionConfidence,
+  matchCandidates
 }: {
   product: Product;
   askingPrice: number;
@@ -229,9 +240,22 @@ export function buildListingAnalysisContext({
   listingUrl?: string;
   marketplace: MarketplaceSource;
   sellerLocation?: string;
+  productMatchConfidence?: number;
+  productMatchExplanation?: string;
+  priceConfidence?: number;
+  priceSource?: string;
+  priceExplanation?: string;
+  extractionConfidence?: number;
+  matchCandidates?: ListingAnalysisContext["matchCandidates"];
 }): ListingAnalysisContext {
   const sourceLabel = getSourceLabel(listingUrl, mode === "retail" ? "Retail link" : marketplace);
   const sourceDomain = getSourceDomain(listingUrl);
+  const dataSources = [
+    listingUrl ? `${sourceLabel} page metadata and visible text` : "",
+    priceSource ? priceSource : "",
+    mode === "retail" ? "Retail MSRP benchmark" : "Used fair-value benchmark",
+    "BuyWise internal product benchmarks"
+  ].filter(Boolean);
 
   return {
     mode,
@@ -243,6 +267,14 @@ export function buildListingAnalysisContext({
     askingPrice,
     benchmarkLabel: mode === "retail" ? "Retail MSRP benchmark" : "Used fair-value benchmark",
     matchedProductName: productTitle(product),
+    productMatchConfidence,
+    productMatchExplanation,
+    priceConfidence,
+    priceSource,
+    priceExplanation,
+    extractionConfidence,
+    matchCandidates,
+    dataSources,
     resaleAlternatives: buildResaleAlternatives(product, askingPrice),
     retailAlternatives: buildRetailAlternatives(product, askingPrice, mode)
   };

@@ -28,6 +28,10 @@ export type LinkAnalysisMode = "resale" | "retail";
 
 export type Severity = "low" | "medium" | "high";
 
+export type ConfidenceLevel = "High" | "Medium" | "Low";
+
+export type ScoreTone = "positive" | "negative" | "neutral";
+
 export interface ProductIssue {
   issue: string;
   severity: Severity;
@@ -77,12 +81,26 @@ export interface DealQualityInput {
   condition: string;
   marketplace?: MarketplaceSource;
   listingText?: string;
+  analysisMode?: LinkAnalysisMode;
+  extractionConfidence?: number;
+  priceConfidence?: number;
+  productMatchConfidence?: number;
+  listingCompletenessScore?: number;
+  sourceReliabilityScore?: number;
+  warrantyProtectionScore?: number;
 }
 
 export interface RiskSignal {
   label: string;
   detail: string;
   severity: Severity;
+}
+
+export interface ScoreBreakdownItem {
+  label: string;
+  impact: string;
+  detail: string;
+  tone: ScoreTone;
 }
 
 export interface DealQualityResult {
@@ -94,10 +112,28 @@ export interface DealQualityResult {
   riskLevel: RiskLevel;
   priceDifference: number;
   confidenceScore: number;
+  confidenceLevel: ConfidenceLevel;
+  confidenceReasons: string[];
+  marketPositionLabel: string;
+  priceAttractivenessScore: number;
+  trustSafetyScore: number;
+  conditionScore: number;
+  marketCompetitivenessScore: number;
+  scoreBreakdown: ScoreBreakdownItem[];
+  pros: string[];
+  cons: string[];
+  dataSources: string[];
   redFlags: RiskSignal[];
   positiveSignals: string[];
   negotiationTip: string;
   nextSteps: string[];
+}
+
+export interface ProductMatchCandidate {
+  productId: string;
+  title: string;
+  confidence: number;
+  reason: string;
 }
 
 export interface ListingAlternative {
@@ -121,6 +157,14 @@ export interface ListingAnalysisContext {
   askingPrice: number;
   benchmarkLabel: string;
   matchedProductName: string;
+  productMatchConfidence?: number;
+  productMatchExplanation?: string;
+  priceConfidence?: number;
+  priceSource?: string;
+  priceExplanation?: string;
+  extractionConfidence?: number;
+  matchCandidates?: ProductMatchCandidate[];
+  dataSources: string[];
   resaleAlternatives: ListingAlternative[];
   retailAlternatives: ListingAlternative[];
 }
@@ -136,7 +180,13 @@ export interface LinkExtractionResult {
   title?: string;
   description?: string;
   price?: number;
+  priceConfidence?: number;
+  priceSource?: string;
+  priceExplanation?: string;
   productName?: string;
+  productMatchConfidence?: number;
+  productMatchExplanation?: string;
+  matchCandidates?: ProductMatchCandidate[];
   confidence: number;
   message: string;
   warnings?: string[];
