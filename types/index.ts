@@ -1,5 +1,3 @@
-export type ProductCategory = "Cameras" | "Laptops" | "Bikes" | "Monitors";
-
 export type RecommendationLabel =
   | "Great deal"
   | "Fair price"
@@ -24,62 +22,22 @@ export type MarketplaceSource =
   | "Local seller"
   | "Other";
 
-export type LinkAnalysisMode = "resale" | "retail";
+export type DealContext = "resale" | "retail";
 
-export type OfferSourceMethod =
-  | "official_api"
-  | "affiliate_api"
-  | "metadata"
-  | "html"
-  | "headless"
-  | "manual";
+export type PhotoModerationStatus = "approved" | "rejected" | "needs_review";
 
-export type OfferProviderStatusType = "configured" | "missing_config" | "error" | "skipped";
+export type PhotoImageType =
+  | "marketplace_listing"
+  | "retail_product_page"
+  | "checkout_page"
+  | "product_photo"
+  | "not_product";
 
 export type Severity = "low" | "medium" | "high";
 
 export type ConfidenceLevel = "High" | "Medium" | "Low";
 
 export type ScoreTone = "positive" | "negative" | "neutral";
-
-export interface ProductIssue {
-  issue: string;
-  severity: Severity;
-}
-
-export interface Product {
-  id: string;
-  category: ProductCategory;
-  brand: string;
-  model: string;
-  year: number;
-  msrp: number;
-  usedLow: number;
-  usedAvg: number;
-  usedHigh: number;
-  fairPrice: number;
-  depreciationPercent: number;
-  reliabilityScore: number;
-  demandScore: number;
-  scamRiskScore: number;
-  commonIssues: ProductIssue[];
-  bestYearsModels: string[];
-  modelsToAvoid: string[];
-  buyingChecklist: string[];
-  sellerQuestions: string[];
-  recommendation: RecommendationLabel;
-  recommendationExplanation: string;
-}
-
-export interface MarketplaceListing {
-  title: string;
-  price: number;
-  condition: string;
-  location: string;
-  source: MarketplaceSource;
-  dateListed: string;
-  url: string;
-}
 
 export interface DealQualityInput {
   askingPrice: number;
@@ -92,7 +50,7 @@ export interface DealQualityInput {
   condition: string;
   marketplace?: MarketplaceSource;
   listingText?: string;
-  analysisMode?: LinkAnalysisMode;
+  analysisMode?: DealContext;
   marketBenchmarkAvailable?: boolean;
   extractionConfidence?: number;
   priceConfidence?: number;
@@ -141,66 +99,48 @@ export interface DealQualityResult {
   nextSteps: string[];
 }
 
-export interface ProductMatchCandidate {
-  productId: string;
-  title: string;
-  confidence: number;
-  reason: string;
-}
-
 export interface ListingAlternative {
   productId: string;
   title: string;
   price: number;
   priceLabel: string;
-  sourceType: LinkAnalysisMode;
+  sourceType: DealContext;
   actionLabel: string;
   outcome: string;
   reason: string;
 }
 
-export interface OfferProviderStatus {
-  provider: string;
-  label: string;
-  status: OfferProviderStatusType;
-  message: string;
+export interface PhotoAnalysisExtract {
+  isProductForSale: boolean;
+  isAppropriate: boolean;
+  imageType: PhotoImageType;
+  productName: string;
+  price?: number;
+  priceConfidence: number;
+  sourceLabel?: string;
+  condition?: string;
+  description: string;
+  sellerNotes?: string;
+  confidence: number;
+  warnings: string[];
+  extractedText: string;
 }
 
-export interface LiveOffer {
+export interface PublicPhotoProduct {
   id: string;
   title: string;
-  url: string;
-  canonicalUrl?: string;
-  sourceLabel: string;
-  sourceDomain?: string;
-  sourceType: LinkAnalysisMode;
-  sourceMethod: OfferSourceMethod;
   price?: number;
-  currency?: string;
+  sourceLabel?: string;
   condition?: string;
+  verdict: RecommendationLabel;
+  dealScore: number;
   imageUrl?: string;
-  merchantName?: string;
-  availability?: string;
-  confidence: number;
-  priceConfidence?: number;
-  explanation: string;
-  warnings: string[];
-  fetchedAt: string;
-}
-
-export interface LiveOfferSearchResponse {
-  ok: boolean;
-  query: string;
-  offers: LiveOffer[];
-  providerStatuses: OfferProviderStatus[];
-  message: string;
+  createdAt: string;
+  expiresAt: string;
 }
 
 export interface ListingAnalysisContext {
-  mode: LinkAnalysisMode;
-  listingUrl?: string;
   sourceLabel: string;
-  sourceDomain?: string;
   marketplace: MarketplaceSource;
   sellerLocation?: string;
   askingPrice: number;
@@ -210,33 +150,19 @@ export interface ListingAnalysisContext {
   priceSource?: string;
   priceExplanation?: string;
   extractionConfidence?: number;
-  matchCandidates?: ProductMatchCandidate[];
   dataSources: string[];
   resaleAlternatives: ListingAlternative[];
   retailAlternatives: ListingAlternative[];
 }
 
-export interface LinkExtractionResult {
+export interface PhotoAnalysisApiResponse {
   ok: boolean;
-  manualRequired?: boolean;
-  url: string;
-  sourceLabel: string;
-  sourceDomain?: string;
-  mode?: LinkAnalysisMode;
-  marketplace?: MarketplaceSource;
-  title?: string;
-  description?: string;
-  price?: number;
-  priceConfidence?: number;
-  priceSource?: string;
-  priceExplanation?: string;
-  productName?: string;
-  matchCandidates?: ProductMatchCandidate[];
-  liveOffer?: LiveOffer;
-  providerStatuses?: OfferProviderStatus[];
-  confidence: number;
+  published: boolean;
   message: string;
-  warnings?: string[];
+  extract?: PhotoAnalysisExtract;
+  result?: DealQualityResult;
+  context?: ListingAnalysisContext;
+  feedItem?: PublicPhotoProduct;
 }
 
 export interface SavedItem {

@@ -1,46 +1,15 @@
+alter table if exists public.saved_items drop constraint if exists saved_items_product_id_fkey;
+alter table if exists public.listing_checks drop constraint if exists listing_checks_product_id_fkey;
+
+drop table if exists public.seller_questions cascade;
+drop table if exists public.buying_checklist_items cascade;
+drop table if exists public.product_issues cascade;
+drop table if exists public.products cascade;
+
 create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   email text not null,
   created_at timestamptz not null default now()
-);
-
-create table if not exists public.products (
-  id text primary key,
-  category text not null,
-  brand text not null,
-  model text not null,
-  year integer not null,
-  msrp numeric not null,
-  used_low numeric not null,
-  used_avg numeric not null,
-  used_high numeric not null,
-  fair_price numeric not null,
-  depreciation_percent numeric not null,
-  reliability_score integer not null check (reliability_score between 1 and 10),
-  demand_score integer not null check (demand_score between 1 and 10),
-  scam_risk_score integer not null check (scam_risk_score between 1 and 10),
-  recommendation text not null,
-  recommendation_explanation text not null,
-  created_at timestamptz not null default now()
-);
-
-create table if not exists public.product_issues (
-  id bigint generated always as identity primary key,
-  product_id text not null references public.products(id) on delete cascade,
-  issue text not null,
-  severity text not null check (severity in ('low', 'medium', 'high'))
-);
-
-create table if not exists public.buying_checklist_items (
-  id bigint generated always as identity primary key,
-  product_id text not null references public.products(id) on delete cascade,
-  checklist_item text not null
-);
-
-create table if not exists public.seller_questions (
-  id bigint generated always as identity primary key,
-  product_id text not null references public.products(id) on delete cascade,
-  question text not null
 );
 
 create table if not exists public.saved_items (
@@ -75,12 +44,35 @@ create table if not exists public.listing_checks (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.photo_analyses (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references auth.users(id) on delete set null,
+  image_paths text[] not null default '{}'::text[],
+  product_name text not null,
+  price numeric,
+  source_label text,
+  condition text,
+  description text,
+  extracted_text text,
+  deal_score integer not null check (deal_score between 0 and 100),
+  recommendation text not null,
+  confidence_score integer not null check (confidence_score between 0 and 100),
+  moderation_status text not null default 'needs_review'
+    check (moderation_status in ('approved', 'rejected', 'needs_review')),
+  visible_in_search boolean not null default false,
+  market_price_label text,
+  expires_at timestamptz not null default (now() + interval '24 hours'),
+  created_at timestamptz not null default now()
+);
+
+insert into storage.buckets (id, name, public)
+values ('buywise-photo-uploads', 'buywise-photo-uploads', false)
+on conflict (id) do update set public = false;
+
 alter table public.profiles enable row level security;
 alter table public.saved_items enable row level security;
 alter table public.listing_checks enable row level security;
-
-alter table public.saved_items drop constraint if exists saved_items_product_id_fkey;
-alter table public.listing_checks drop constraint if exists listing_checks_product_id_fkey;
+alter table public.photo_analyses enable row level security;
 
 create or replace function public.handle_new_user()
 returns trigger
@@ -140,23 +132,48 @@ create policy "Listing checks are owned by user"
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
 
-grant usage on schema public to anon, authenticated;
+drop policy if exists "Photo analyses are readable by owner" on public.photo_analyses;
+drop policy if exists "Photo analyses are insertable by owner" on public.photo_analyses;
+drop policy if exists "Photo analyses are updatable by owner" on public.photo_analyses;
+drop policy if exists "Photo analyses are deletable by owner" on public.photo_analyses;
 
-grant select on table public.products to anon, authenticated;
-grant select on table public.product_issues to anon, authenticated;
-grant select on table public.buying_checklist_items to anon, authenticated;
-grant select on table public.seller_questions to anon, authenticated;
+create policy "Photo analyses are readable by owner"
+  on public.photo_analyses for select
+  using (auth.uid() = user_id);
+
+create policy "Photo analyses are insertable by owner"
+  on public.photo_analyses for insert
+  with check (auth.uid() = user_id);
+
+create policy "Photo analyses are updatable by owner"
+  on public.photo_analyses for update
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);
+
+create policy "Photo analyses are deletable by owner"
+  on public.photo_analyses for delete
+  using (auth.uid() = user_id);
+
+grant usage on schema public to anon, authenticated;
 
 revoke all on table public.profiles from anon;
 revoke all on table public.saved_items from anon;
 revoke all on table public.listing_checks from anon;
+revoke all on table public.photo_analyses from anon;
 
 grant select, insert, update on table public.profiles to authenticated;
 grant select, insert, update, delete on table public.saved_items to authenticated;
 grant select, insert, update, delete on table public.listing_checks to authenticated;
+grant select, insert, update, delete on table public.photo_analyses to authenticated;
 
 create index if not exists saved_items_user_id_created_at_idx
   on public.saved_items (user_id, created_at desc);
 
 create index if not exists listing_checks_user_id_created_at_idx
   on public.listing_checks (user_id, created_at desc);
+
+create index if not exists photo_analyses_feed_idx
+  on public.photo_analyses (visible_in_search, moderation_status, expires_at desc, created_at desc);
+
+create index if not exists photo_analyses_user_id_created_at_idx
+  on public.photo_analyses (user_id, created_at desc);

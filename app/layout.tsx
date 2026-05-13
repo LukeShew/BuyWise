@@ -5,7 +5,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "BuyWise",
-  description: "Paste a product link and see whether it is a good buy, risky, or overpriced."
+  description: "Upload product photos and see whether the deal looks worth buying, risky, or overpriced."
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

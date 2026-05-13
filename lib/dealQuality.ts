@@ -243,7 +243,7 @@ function getNegotiationTip(input: ResolvedDealQualityInput, riskLevel: RiskLevel
   }
 
   if (priceDifference <= input.fairPrice * -0.15) {
-    return "The price is already low. Ask verification questions first, then move quickly if it checks out.";
+    return "The price is already low. Verify the details first, then move quickly if it checks out.";
   }
 
   return "Offer slightly under fair value and leave room to meet in the middle.";
@@ -261,7 +261,7 @@ function getNextSteps(input: ResolvedDealQualityInput, riskLevel: RiskLevel, red
   if (redFlags.length > 0) {
     return [
       "Clarify every red flag before making an offer.",
-      "Ask category-specific inspection questions.",
+      "Confirm the category-specific details before making a decision.",
       "Use the suggested offer range only after the seller answers clearly."
     ];
   }
@@ -555,7 +555,7 @@ function buildStrictExplanation({
   const difference = Math.round(Math.abs(input.askingPrice - input.fairPrice));
 
   if (!input.marketBenchmarkAvailable) {
-    return "BuyWise could read enough to review the link, but it does not have a verified market price for this exact item yet. Treat the score as a safety and confidence check, not proof that the price is good.";
+    return "BuyWise could read enough from the uploaded photos to review the item, but it does not have a verified market price for this exact product yet. Treat the score as a safety and confidence check, not proof that the price is good.";
   }
 
   if (confidenceLevel === "Low") {

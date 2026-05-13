@@ -1,6 +1,6 @@
 # BuyWise
 
-BuyWise helps shoppers check a product link before they buy. Paste a resale listing or retail product page, and BuyWise gives a plain-English verdict on whether that link looks safe enough to keep checking, what risks to verify, and what price range to treat cautiously.
+BuyWise is a photo-first deal checker. Users upload screenshots or product photos from a marketplace listing, retail product page, checkout page, or product sale post. BuyWise analyzes the images, asks for a confirmed price when needed, scores the deal, and can publish a safe extracted product card to Search for 24 hours.
 
 Live site:
 
@@ -19,28 +19,28 @@ http://localhost:3000
 - Next.js App Router
 - TypeScript
 - Tailwind CSS
-- Supabase Auth and database
-- Recharts
+- Supabase Auth, database, and private storage
+- OpenAI vision analysis
 - lucide-react
 
 ## Main Features
 
-- Homepage link checker for resale and retail product links
-- Live offer Search page that returns real provider data when API credentials are configured
-- Server-side link reader for public product metadata, JSON-LD, OpenGraph/Twitter cards, and visible server-rendered prices
-- Full listing analyzer with strict deal score, market position label, risk level, confidence level, and suggested offer guidance
-- Red flag detection, trust signals, and seller questions
-- Retail-versus-resale link handling
-- Saved verdicts from analyzed links
-- Local saved-item fallback when logged out
-- Supabase account sync when configured
-- Customer-facing About Us page
+- Photo-only analyzer with drag/drop, camera import, and file picker
+- Multi-photo upload for one product or listing
+- OpenAI vision analysis with structured JSON output
+- Rejection flow for unrelated, non-product, unsafe, or inappropriate uploads
+- Manual price confirmation, where a typed price is treated as 100% price confidence
+- Strict deal score, market position label, confidence level, suggested offer/buy range, subscores, red flags, pros/cons, and alternatives
+- Search page showing approved extracted product cards for 24 hours
+- Private raw uploaded images; Search does not expose original screenshots
+- Supabase account creation, login, saved verdicts, and saved-item syncing
+- Cleanup route for expired Search feed rows and private storage objects
 
 ## Current Product Direction
 
-BuyWise is link-first. The old starter product catalog is not part of the main user flow anymore. Search is being rebuilt around live offer providers instead of preset products.
+BuyWise is now photo-only. Link analysis was removed from the active app because many major sites block or hide reliable pricing, which made link extraction feel inconsistent. The retired link direction is documented in `docs/retired-link-analyzer.md`.
 
-The analyzer does not force links into saved product guides. If BuyWise cannot verify a market price for the exact item, it says that clearly and keeps the score cautious.
+The current analyzer is honest about uncertainty. If the uploaded photo does not clearly show a product for sale, BuyWise rejects it. If the price is missing, BuyWise asks for the price before scoring. If market comparisons are not available from configured providers, the verdict says that instead of inventing a benchmark.
 
 ## Setup
 
@@ -55,13 +55,16 @@ Create `.env.local`:
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+OPENAI_API_KEY=your_openai_api_key
+OPENAI_VISION_MODEL=gpt-4.1-mini
+CRON_SECRET=your_cleanup_secret
+
+# Optional market comparison providers
 EBAY_CLIENT_ID=optional_ebay_client_id
 EBAY_CLIENT_SECRET=optional_ebay_client_secret
+EBAY_MARKETPLACE_ID=EBAY_US
 BEST_BUY_API_KEY=optional_best_buy_api_key
-AMAZON_PAAPI_ACCESS_KEY=optional_amazon_paapi_key
-AMAZON_PAAPI_SECRET_KEY=optional_amazon_paapi_secret
-AMAZON_ASSOCIATE_TAG=optional_amazon_associate_tag
-WALMART_API_KEY=optional_walmart_key
 ```
 
 Run the database schema in Supabase SQL Editor:
@@ -85,61 +88,67 @@ npm run lint
 
 ## Important Files
 
-- `app/page.tsx` - Homepage
-- `app/search/page.tsx` - Live offer search page
-- `app/api/search-offers/route.ts` - Live offer search endpoint
-- `components/HomeListingPrompt.tsx` - Homepage link checker
-- `app/submit/page.tsx` - Analyzer route
-- `components/ListingAnalyzerForm.tsx` - Analyzer form and auto-analysis behavior
+- `app/page.tsx` - Homepage with photo analyzer
+- `app/submit/page.tsx` - Analyzer page
+- `components/PhotoAnalyzerForm.tsx` - Upload, preview, drag/drop, and analysis flow
+- `app/api/analyze-photos/route.ts` - Server-side photo analysis and optional Search publishing
 - `components/DealScoreCard.tsx` - Verdict/result UI
-- `app/api/extract-link/route.ts` - Server-side link reader
-- `services/liveOfferService.ts` - Official/API-first live offer provider adapters
-- `lib/dealQuality.ts` - Strict scoring, risk, confidence, offer, and breakdown logic
-- `lib/linkAnalysis.ts` - Source and link-type inference
-- `lib/priceText.ts` - Manual price parsing from pasted details
+- `app/search/page.tsx` - Public temporary product feed page
+- `components/PhotoFeedSearch.tsx` - Search feed UI
+- `app/api/photo-feed/route.ts` - Approved non-expired Search feed API
+- `app/api/cleanup-photo-feed/route.ts` - Expired row/storage cleanup API
+- `services/marketCompsService.ts` - Optional provider-backed market comparison service
+- `lib/dealQuality.ts` - Deal scoring, risk, confidence, offer, and breakdown logic
 - `components/SavedItemsClient.tsx` - Saved items and account sync
 - `components/AuthForm.tsx` - Login/signup form
-- `supabase/schema.sql` - Database schema
+- `supabase/schema.sql` - Database, RLS, and storage schema
+- `docs/retired-link-analyzer.md` - Notes for restoring the old link direction later
 
 ## Account Sync
 
-Supabase is used for accounts, profiles, saved items, and listing check history. If Supabase environment variables are missing, the app still works locally with device-only saved items.
+Supabase is used for accounts, profiles, saved items, listing check history, photo analysis rows, and private uploaded-image storage. If Supabase environment variables are missing, users can still analyze photos locally, but uploads will not publish to Search and account syncing will not work.
 
-For production accounts:
+For production accounts and photo publishing:
 
-1. Run `supabase/schema.sql` in the Supabase SQL editor.
-2. Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` to Vercel environment variables.
+1. Run `supabase/schema.sql` in Supabase SQL Editor.
+2. Add Supabase, OpenAI, and cleanup environment variables to Vercel.
 3. Redeploy the Vercel site.
-4. Test signup, login, saving, status updates, and deletion.
+4. Test signup, login, photo analysis, saving verdicts, Search feed publishing, and cleanup.
 
-## Live Search and Link Reading
+## Photo Analysis
 
-Search only shows real offers returned by configured providers. If no provider credentials are present, the Search page shows a clear setup message instead of fake product cards.
+The analyzer sends uploaded images to OpenAI vision through a server route. The route asks for structured JSON and does not trust missing or unclear details. It rejects:
 
-Current provider layer:
+- unrelated photos
+- images that do not show a product or sale flow
+- unsafe or inappropriate products
+- uploads without enough product identity to analyze
+
+Raw uploaded images are stored privately in Supabase Storage only when service-role storage is configured. Search returns approved extracted product cards, not original screenshots.
+
+## Search Feed
+
+Search is a temporary feed of approved photo-analyzed product cards. It only returns rows where:
+
+- `visible_in_search = true`
+- `moderation_status = 'approved'`
+- `expires_at > now()`
+
+Rows expire after 24 hours. The cleanup route hides expired rows and removes private storage objects.
+
+## Market Checks
+
+BuyWise can search configured providers for comparable products after the photo analysis extracts a product name. Current optional providers:
 
 - eBay Browse API with `EBAY_CLIENT_ID` and `EBAY_CLIENT_SECRET`
 - Best Buy Product API with `BEST_BUY_API_KEY`
-- Amazon Product Advertising API with PA-API credentials and an associate tag
-- Walmart catalog/search access when compatible credentials and endpoint are configured
 
-The analyzer tries official provider lookup first for supported links. If that does not return enough data, it falls back to readable page metadata and HTML.
-
-The link reader works with public pages that expose readable HTML metadata, JSON-LD, OpenGraph/Twitter cards, embedded structured data, or visible server-rendered price text. It does not use a headless browser, bypass CAPTCHAs, scrape private pages, or invent prices.
-
-Supported sources are best-effort, not guaranteed. Amazon, eBay, Craigslist, Apple, Best Buy, Walmart, Target, B&H, StockX, and GOAT can work when the public page exposes enough readable data. Some pages block automated requests, hide prices behind scripts, show financing numbers, or expose unrelated prices. In those cases, BuyWise asks the user to confirm the missing product or price before scoring.
-
-Price extraction now includes a confidence score and source explanation. Low-confidence prices, tiny unrelated prices, shipping costs, financing/monthly payment text, coupons, crossed-out prices, and unrelated suggested-product prices are not allowed to drive the final score.
-
-BuyWise no longer maps unclear links to saved product guides. It scores from extracted and user-confirmed link details.
-
-Facebook Marketplace is not fetched. Users should paste the listing title, price, and description.
+If provider credentials are missing or too few comparable prices are found, BuyWise keeps the market check unverified and lowers confidence. It does not fake live market prices.
 
 ## Current Limitations
 
-- BuyWise does not yet pull full live market comps from every marketplace.
-- BuyWise can only find live retail/resale alternatives from providers that are configured with valid API credentials.
-- Universal link extraction is unrealistic because many retailers and marketplaces block or hide page data.
-- Headless browser rendering is not enabled by default and should only be added behind a strict fallback flag.
-- If extraction confidence or price confidence is low, the app should ask for confirmation instead of pretending to know.
-- Screenshot upload and browser-extension support are future candidates, especially for Facebook Marketplace and blocked pages.
+- OpenAI vision credentials are required for the photo analyzer.
+- Market comparison quality depends on configured provider credentials and comparable search results.
+- Raw screenshots are not publicly shown because they may contain personal or seller information.
+- Search feed thumbnails should only be added later after safe cropping/redaction is implemented.
+- Link analysis is retired from the active app. It can be revisited later from the archived notes.

@@ -3,42 +3,42 @@ import {
   AlertTriangle,
   ArrowRight,
   BadgeDollarSign,
+  Camera,
   CheckCircle2,
   ClipboardCheck,
-  Link2,
-  MessageSquareText,
-  ShoppingBag,
+  Search,
+  ShieldCheck,
   Sparkles
 } from "lucide-react";
 
 const valueCards = [
   {
-    icon: Link2,
-    title: "Start with a link",
-    text: "Paste a resale listing or retail product page. BuyWise tries to pull the product, price, source, and page details automatically."
+    icon: Camera,
+    title: "Upload product photos",
+    text: "Add screenshots, marketplace photos, checkout pages, or product sale images. BuyWise reads what is visible and rejects uploads that are not sale-related products."
   },
   {
     icon: BadgeDollarSign,
-    title: "See if the price makes sense",
-    text: "The analyzer checks whether the price was read reliably or needs manual confirmation before scoring."
+    title: "Confirm the price",
+    text: "If you enter the price yourself, BuyWise treats that price as confirmed and shows that clearly in the verdict."
   },
   {
     icon: AlertTriangle,
-    title: "Catch risky listings",
-    text: "BuyWise flags suspicious seller wording, missing proof, rushed payment, locked devices, vague condition notes, and prices that look too low."
+    title: "Catch risky details",
+    text: "The analyzer looks for thin details, suspicious wording, unclear condition, missing price context, and anything that should lower confidence."
   },
   {
-    icon: ShoppingBag,
-    title: "Compare better options",
-    text: "If BuyWise cannot verify enough about the link, it says so instead of pretending the deal is proven."
+    icon: Search,
+    title: "Find recent checks",
+    text: "Approved product cards can appear in Search for 24 hours. Raw uploaded photos stay private."
   }
 ];
 
 const steps = [
-  "Paste the product or listing link.",
-  "Review anything BuyWise was able to auto-fill.",
-  "Run the analyzer and read the verdict.",
-  "Use the offer range, questions, and proof checks before buying."
+  "Upload or drag in one or more product/listing photos.",
+  "Enter the price if the image does not show it clearly.",
+  "BuyWise checks the product, price, visible details, and market context.",
+  "Read the verdict before deciding whether to keep shopping or move on."
 ];
 
 const audiences = [
@@ -50,41 +50,41 @@ const audiences = [
 ];
 
 const outputs = [
-  "Deal verdict",
-  "Risk level",
-  "Confidence score",
-  "Suggested offer or buy-under range",
-  "Why it might not be worth it",
-  "Questions to ask the seller",
-  "Proof and trust signals",
-  "What still needs confirmation"
+  "Deal score",
+  "Market position",
+  "Confidence level",
+  "Suggested offer or buy range",
+  "Why this score",
+  "Pros and cons",
+  "Red flags",
+  "Better options when available"
 ];
 
 export default function AboutPage() {
   const stats = [
     {
-      icon: Link2,
-      label: "Link-first checks",
-      value: "Resale + retail",
-      text: "BuyWise starts with the pasted page, not a saved product card."
+      icon: Camera,
+      label: "Main input",
+      value: "Photos",
+      text: "Built around screenshots and product images."
     },
     {
-      icon: AlertTriangle,
-      label: "Risk signals",
-      value: "Strict",
-      text: "Low prices, vague details, and missing proof lower the score."
+      icon: ShieldCheck,
+      label: "Privacy",
+      value: "Private uploads",
+      text: "Original photos are not shown publicly in Search."
     },
     {
       icon: BadgeDollarSign,
-      label: "Price confidence",
-      value: "Visible",
-      text: "If a site blocks price reading, BuyWise asks for confirmation."
+      label: "Price handling",
+      value: "User-confirmed",
+      text: "Manual prices are treated as confirmed."
     },
     {
       icon: ClipboardCheck,
-      label: "Buyer output",
-      value: "Actionable",
-      text: "The result gives a verdict, score, questions, and next steps."
+      label: "Search feed",
+      value: "24 hours",
+      text: "Approved extracted product cards expire automatically."
     }
   ];
 
@@ -96,10 +96,10 @@ export default function AboutPage() {
             <div>
               <p className="text-sm font-semibold text-mint">About Us</p>
               <h1 className="mt-3 max-w-4xl text-4xl font-black leading-tight text-ink sm:text-5xl">
-                Know if a used listing or retail deal is worth buying before you pay.
+                Know if a product photo shows a deal worth buying.
               </h1>
               <p className="mt-5 max-w-3xl text-lg leading-8 text-stone-700">
-                BuyWise helps normal buyers check product links from places like eBay, Craigslist, OfferUp, retail stores, and local sellers. It gives a plain-English verdict, flags risk, and suggests what to do next.
+                BuyWise helps normal buyers check screenshots and product photos before they pay. It gives a plain-English verdict, explains risk, and keeps the score cautious when the details are unclear.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Link
@@ -107,7 +107,7 @@ export default function AboutPage() {
                   prefetch={false}
                   className="focus-ring inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-ink px-5 font-bold text-white transition hover:bg-stone-800"
                 >
-                  Check a link
+                  Analyze photos
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </div>
@@ -116,9 +116,9 @@ export default function AboutPage() {
             <div className="rounded-lg border border-stone-200 bg-white p-5 shadow-sm">
               <div className="mb-5 max-w-2xl">
                 <p className="text-sm font-semibold text-mint">Current coverage</p>
-                <h2 className="mt-2 text-2xl font-black text-ink sm:text-3xl">What BuyWise can check today</h2>
+                <h2 className="mt-2 text-2xl font-black text-ink sm:text-3xl">What BuyWise checks today</h2>
                 <p className="mt-3 text-sm leading-6 text-stone-600">
-                  BuyWise checks public page metadata, readable product text, confirmed prices, and seller wording. It does not force a saved product match when the link is unclear.
+                  BuyWise reads uploaded images, uses confirmed prices when provided, searches configured market providers when available, and avoids publishing low-confidence or inappropriate uploads.
                 </p>
               </div>
 
@@ -140,7 +140,7 @@ export default function AboutPage() {
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-6">
           <p className="text-sm font-semibold text-mint">What it does</p>
-          <h2 className="mt-2 text-3xl font-black text-ink">A second opinion for used and retail product links</h2>
+          <h2 className="mt-2 text-3xl font-black text-ink">A second opinion from the photo evidence</h2>
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {valueCards.map((item) => (
@@ -157,7 +157,7 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:px-8">
           <div>
             <p className="text-sm font-semibold text-mint">How it works</p>
-            <h2 className="mt-2 text-3xl font-black text-ink">From pasted link to buyer decision</h2>
+            <h2 className="mt-2 text-3xl font-black text-ink">From upload to buyer decision</h2>
             <div className="mt-5 space-y-3">
               {steps.map((step, index) => (
                 <div key={step} className="flex gap-3 rounded-lg bg-paper p-4">
@@ -190,7 +190,7 @@ export default function AboutPage() {
           <p className="text-sm font-semibold text-mint">Who it helps</p>
           <h2 className="mt-2 text-3xl font-black text-ink">Built for regular buyers, not resale experts</h2>
           <p className="mt-3 leading-7 text-stone-600">
-            BuyWise is for people who want a fast, practical answer before they message a seller, meet in person, or check out online.
+            BuyWise is for people who want a practical check before they message a seller, meet in person, or check out online.
           </p>
           <div className="mt-5 space-y-2">
             {audiences.map((item) => (
@@ -207,15 +207,15 @@ export default function AboutPage() {
             <Sparkles className="mt-1 h-6 w-6 text-mint" aria-hidden />
             <div>
               <p className="text-sm font-semibold text-mint">Built for practical checks</p>
-              <h2 className="mt-1 text-3xl font-black">A clearer way to judge product links</h2>
+              <h2 className="mt-1 text-3xl font-black">A clearer way to judge a possible buy</h2>
             </div>
           </div>
           <p className="mt-4 text-sm leading-6 text-stone-200">
-            Link reading works when a public page exposes readable product data. If a site blocks access, BuyWise still lets you paste the missing details and run the analyzer.
+            BuyWise works best when the upload clearly shows the product, price, condition, and source. If the image is unclear or the market data is thin, the verdict says that instead of pretending the answer is certain.
           </p>
           <div className="mt-5 rounded-lg bg-white/10 p-4">
             <h3 className="flex items-center gap-2 font-bold">
-              <MessageSquareText className="h-4 w-4 text-mint" aria-hidden />
+              <ShieldCheck className="h-4 w-4 text-mint" aria-hidden />
               The goal
             </h3>
             <p className="mt-2 text-sm leading-6 text-stone-200">

@@ -71,7 +71,7 @@ export function AuthForm() {
 
       {!isSupabaseConfigured() ? (
         <div className="mt-5 rounded-lg bg-amber-50 p-4 text-sm leading-6 text-amber-900">
-          Accounts are temporarily unavailable. You can still analyze links and save items on this device.
+          Accounts are temporarily unavailable. You can still analyze photos and save items on this device.
         </div>
       ) : null}
 

@@ -1,19 +1,19 @@
-import { LiveOfferSearch } from "@/components/LiveOfferSearch";
+import { PhotoFeedSearch } from "@/components/PhotoFeedSearch";
 
 export default function SearchPage() {
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <section className="mb-8">
-        <p className="text-sm font-semibold text-mint">Live product search</p>
+        <p className="text-sm font-semibold text-mint">Recent photo checks</p>
         <h1 className="mt-2 max-w-3xl text-4xl font-black leading-tight text-ink sm:text-5xl">
-          Find real offers before you buy.
+          Products people checked today.
         </h1>
         <p className="mt-4 max-w-3xl text-lg leading-8 text-stone-700">
-          Search live retailer and marketplace data when provider APIs are configured. BuyWise only shows cards returned from real sources, not preset sample products.
+          Approved photo analyses appear here for 24 hours. Raw screenshots stay private, and rejected or inappropriate uploads are never shown.
         </p>
       </section>
 
-      <LiveOfferSearch />
+      <PhotoFeedSearch />
     </main>
   );
 }

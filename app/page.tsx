@@ -7,13 +7,13 @@ import {
   ShieldCheck,
   ShoppingBag
 } from "lucide-react";
-import { HomeListingPrompt } from "@/components/HomeListingPrompt";
+import { PhotoAnalyzerForm } from "@/components/PhotoAnalyzerForm";
 
 const checks = [
-  "Rate resale listings",
-  "Rate retail bargains",
-  "Check price confidence",
-  "Show what still needs proof"
+  "Analyze listing screenshots",
+  "Check product photos",
+  "Reject non-products",
+  "Post safe cards for 24 hours"
 ];
 
 const verdictFeatures = [
@@ -25,17 +25,17 @@ const verdictFeatures = [
   {
     icon: BadgeDollarSign,
     title: "Price check",
-    text: "Checks whether the extracted price is reliable enough to score or needs manual confirmation."
+    text: "Reads visible prices from photos and treats a price you type yourself as confirmed."
   },
   {
     icon: ShoppingBag,
     title: "Better options",
-    text: "Calls out when BuyWise needs more data before claiming there is a better place to buy."
+    text: "Checks configured market sources for comparable products when available."
   },
   {
     icon: MessageSquareText,
-    title: "Next move",
-    text: "Turns the verdict into an offer range, seller questions, and a short checklist before buying."
+    title: "Public feed",
+    text: "Approved products can appear in Search for 24 hours without exposing raw screenshots."
   }
 ];
 
@@ -52,21 +52,15 @@ const outputHighlights = [
   },
   {
     label: "Proof",
-    value: "Questions and checklist",
-    text: "Know what to ask before messaging, meeting, or checking out."
+    value: "Photo-based evidence",
+    text: "BuyWise looks for visible product, listing, price, condition, and source clues."
   }
 ];
 
 const exampleReasons = [
-  "No receipt or serial number mentioned",
-  "Cheap enough to need extra proof",
-  "Public meetup and working video should come before any offer"
-];
-
-const exampleQuestions = [
-  "Can you send a working video with today's date?",
-  "Do you have the receipt or serial number?",
-  "Can I test it before paying?"
+  "Screenshot is missing proof of condition",
+  "Price is cheap enough to need extra caution",
+  "Market price could not be verified from configured sources"
 ];
 
 export default function LandingPage() {
@@ -80,15 +74,15 @@ export default function LandingPage() {
               Built for used buyers, deal hunters, and anyone checking before they pay
             </div>
             <h1 className="mt-4 text-4xl font-black leading-tight text-ink sm:text-[2.8rem] lg:text-[3.15rem] lg:leading-[1.08]">
-              Drop a product link. Know if it is the best place to buy.
+              Upload a product photo. Know if it is worth buying.
             </h1>
             <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-stone-700 sm:text-lg">
-              Paste a resale or retail link. BuyWise checks what the page exposes, flags risk, and tells you what still needs confirmation before you buy.
+              Add listing screenshots, checkout pages, retail product pages, or item photos. BuyWise checks whether the photo looks like a real product for sale before scoring it.
             </p>
           </div>
 
           <div className="mx-auto mt-5 max-w-4xl">
-            <HomeListingPrompt />
+            <PhotoAnalyzerForm />
           </div>
 
           <div className="mx-auto mt-5 grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -110,7 +104,7 @@ export default function LandingPage() {
               Know whether to buy, negotiate, verify, or walk away.
             </h2>
             <p className="mt-3 leading-7 text-stone-600">
-              Paste a link and BuyWise turns the messy listing into a clear buyer call: what it is worth, what feels risky, and what to do next.
+              Upload photos and BuyWise turns the messy listing into a clear buyer call: what it is worth, what feels risky, and whether it should appear in Search.
             </p>
             <div className="mt-5 grid gap-3">
               {outputHighlights.map((item) => (
@@ -141,7 +135,7 @@ export default function LandingPage() {
             <p className="text-sm font-semibold text-mint">Example analysis</p>
             <h2 className="mt-2 text-3xl font-black text-ink">What a verdict looks like</h2>
             <p className="mt-3 leading-7 text-stone-600">
-              BuyWise should be strict. If the link has missing proof, weak extraction, or no confirmed market price, the score stays cautious.
+              BuyWise should be strict. If the photo has missing proof, weak extraction, or no confirmed market price, the score stays cautious.
             </p>
           </div>
 
@@ -152,12 +146,12 @@ export default function LandingPage() {
                   <p className="text-sm font-semibold text-mint">Example verdict</p>
                   <h3 className="mt-1 text-3xl font-black">Needs more proof</h3>
                   <div className="mt-3 flex flex-wrap gap-2 text-sm font-semibold text-stone-200">
-                    <span className="rounded-full bg-white/10 px-3 py-1">Product link</span>
+                    <span className="rounded-full bg-white/10 px-3 py-1">Product photo</span>
                     <span className="rounded-full bg-white/10 px-3 py-1">Price needs confirmation</span>
-                    <span className="rounded-full bg-white/10 px-3 py-1">Scored from link details</span>
+                    <span className="rounded-full bg-white/10 px-3 py-1">Scored from visible details</span>
                   </div>
                   <p className="mt-4 max-w-3xl text-sm leading-6 text-stone-200">
-                    BuyWise can review the link and risk signals, but it will not call something a great deal unless the price and product details are reliable.
+                    BuyWise can review the photos and risk signals, but it will not call something a great deal unless the price and product details are reliable.
                   </p>
                 </div>
                 <span className="inline-flex w-fit rounded-full bg-orange-100 px-3 py-1 text-sm font-bold text-orange-950">
@@ -205,15 +199,11 @@ export default function LandingPage() {
                 <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
                   <h4 className="flex items-center gap-2 font-bold text-ink">
                     <ClipboardCheck className="h-4 w-4 text-mint" aria-hidden />
-                    What to ask next
+                    Search eligibility
                   </h4>
-                  <div className="mt-3 space-y-2">
-                    {exampleQuestions.map((item) => (
-                      <div key={item} className="rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
-                        {item}
-                      </div>
-                    ))}
-                  </div>
+                  <p className="mt-3 rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
+                    If the upload clearly shows an appropriate product for sale, BuyWise can add a safe extracted card to Search for 24 hours.
+                  </p>
                 </div>
               </div>
             </div>

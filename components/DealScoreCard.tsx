@@ -6,12 +6,10 @@ import {
   BookmarkCheck,
   BookmarkPlus,
   CheckCircle2,
-  Clipboard,
-  Copy,
-  ShieldCheck,
   ShoppingBag,
   Target
 } from "lucide-react";
+
 import { RecommendationBadge } from "@/components/RecommendationBadge";
 import { formatCurrency } from "@/lib/format";
 import { getLocalSavedItems, saveLocalItem } from "@/lib/savedItemsStorage";
@@ -22,7 +20,6 @@ import type {
   ListingAlternative,
   ListingAnalysisContext,
   MarketplaceSource,
-  Product,
   RecommendationLabel
 } from "@/types";
 
@@ -42,55 +39,14 @@ const riskStyles: Record<DealQualityResult["riskLevel"], string> = {
 
 function buildSavedVerdictNotes(result: DealQualityResult, context: ListingAnalysisContext) {
   return [
-    `${context.mode === "retail" ? "Retail bargain" : "Resale listing"} verdict: ${result.recommendation}.`,
+    `Photo verdict: ${result.recommendation}.`,
     `Source: ${context.sourceLabel}.`,
     `Product: ${context.matchedProductName}.`,
-    context.listingUrl ? `Link: ${context.listingUrl}` : "",
     `Deal score: ${result.dealScore}/100. Confidence: ${result.confidenceScore}/100.`,
     result.redFlags[0] ? `Main concern: ${result.redFlags[0].label}.` : ""
   ]
     .filter(Boolean)
     .join(" ");
-}
-
-function isSameSavedVerdict({
-  savedProductId,
-  targetProductId,
-  askingPrice,
-  notes,
-  context
-}: {
-  savedProductId: string;
-  targetProductId: string;
-  askingPrice: number;
-  notes: string;
-  context: ListingAnalysisContext;
-}) {
-  if (savedProductId !== targetProductId || askingPrice !== context.askingPrice) {
-    return false;
-  }
-
-  if (context.listingUrl) {
-    return notes.includes(context.listingUrl);
-  }
-
-  return notes.includes(`Source: ${context.sourceLabel}.`) && askingPrice === context.askingPrice;
-}
-
-function getFallbackQuestions(result: DealQualityResult) {
-  if (result.riskLevel === "High") {
-    return [
-      "Can you send a fresh working video with today's date in the shot?",
-      "Do you have the receipt or serial number?",
-      "Can I inspect it in person before any payment?"
-    ];
-  }
-
-  return [
-    "Can you send a short video showing it working?",
-    "Are there any issues not shown in the listing?",
-    "Can we meet somewhere public where I can test it?"
-  ];
 }
 
 function AlternativePanel({
@@ -126,22 +82,6 @@ function AlternativePanel({
                 <p className="shrink-0 text-lg font-black text-ink">{formatCurrency(alternative.price)}</p>
               </div>
               <p className="mt-2 text-sm leading-6 text-stone-700">{alternative.reason}</p>
-              <div className="mt-3 rounded-lg bg-white p-3 ring-1 ring-stone-200">
-                <p className="text-xs font-bold text-stone-500">Recommended action</p>
-                <p className="mt-1 text-sm font-bold text-ink">{alternative.actionLabel}</p>
-                {alternative.outcome.startsWith("http") ? (
-                  <a
-                    href={alternative.outcome}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-1 inline-flex text-sm font-semibold text-mint hover:text-ink"
-                  >
-                    Open live offer
-                  </a>
-                ) : (
-                  <p className="mt-1 text-sm leading-6 text-stone-600">{alternative.outcome}</p>
-                )}
-              </div>
             </div>
           ))}
         </div>
@@ -154,21 +94,18 @@ function AlternativePanel({
 
 export function DealScoreCard({
   result,
-  product,
   context
 }: {
   result: DealQualityResult;
-  product?: Product;
   context?: ListingAnalysisContext;
 }) {
-  const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
   const [saving, setSaving] = useState(false);
   const priceGap = Math.abs(result.priceDifference);
   const hasMarketPrice = Boolean(context?.marketPriceLabel);
   const marketPriceLabel = context?.marketPriceLabel ?? "verified market price";
   const priceGapLabel = !hasMarketPrice
-    ? "No verified market price yet"
+    ? "Market price not verified yet"
     : result.priceDifference === 0
       ? `At ${marketPriceLabel.toLowerCase()}`
       : `${formatCurrency(priceGap)} ${result.priceDifference > 0 ? "over" : "under"} ${marketPriceLabel.toLowerCase()}`;
@@ -176,8 +113,6 @@ export function DealScoreCard({
     result.suggestedOfferLow === result.suggestedOfferHigh
       ? formatCurrency(result.suggestedOfferLow)
       : `${formatCurrency(result.suggestedOfferLow)} - ${formatCurrency(result.suggestedOfferHigh)}`;
-  const sellerQuestions = product?.sellerQuestions.slice(0, 4) ?? getFallbackQuestions(result);
-  const isRetailMode = context?.mode === "retail";
   const subScores = [
     { label: "Price / Value", value: result.priceAttractivenessScore },
     { label: "Trust / Safety", value: result.trustSafetyScore },
@@ -191,36 +126,14 @@ export function DealScoreCard({
       : result.confidenceLevel === "Medium"
         ? "bg-amber-50 text-amber-950 ring-amber-100"
         : "bg-red-50 text-red-950 ring-red-100";
-  const dataSources = [...new Set([...(context?.dataSources ?? []), ...result.dataSources])];
 
   useEffect(() => {
     if (!context) {
       return;
     }
 
-    const targetProductId = product?.id ?? "link-analysis";
-    setSaved(
-      getLocalSavedItems().some((item) =>
-        isSameSavedVerdict({
-          savedProductId: item.productId,
-          targetProductId,
-          askingPrice: item.askingPrice,
-          notes: item.notes,
-          context
-        })
-      )
-    );
-  }, [context, product]);
-
-  async function copyQuestions() {
-    try {
-      await navigator.clipboard.writeText(sellerQuestions.join("\n"));
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
-    } catch {
-      setCopied(false);
-    }
-  }
+    setSaved(getLocalSavedItems().some((item) => item.productId === "photo-analysis" && item.askingPrice === context.askingPrice));
+  }, [context]);
 
   async function saveVerdict() {
     if (!context || saving || saved) {
@@ -229,10 +142,9 @@ export function DealScoreCard({
 
     setSaving(true);
     const notes = buildSavedVerdictNotes(result, context);
-    const marketplace: MarketplaceSource = context.mode === "retail" ? "Other" : context.marketplace;
-    const productId = product?.id ?? "link-analysis";
+    const marketplace: MarketplaceSource = context.marketplace;
     const savedItem = {
-      productId,
+      productId: "photo-analysis",
       askingPrice: context.askingPrice,
       marketplace,
       sellerLocation: context.sellerLocation ?? "",
@@ -261,20 +173,7 @@ export function DealScoreCard({
       }
     }
 
-    const alreadySaved = getLocalSavedItems().some((item) =>
-      isSameSavedVerdict({
-        savedProductId: item.productId,
-        targetProductId: productId,
-        askingPrice: item.askingPrice,
-        notes: item.notes,
-        context
-      })
-    );
-
-    if (!alreadySaved) {
-      saveLocalItem(savedItem);
-    }
-
+    saveLocalItem(savedItem);
     setSaved(true);
     setSaving(false);
   }
@@ -284,9 +183,7 @@ export function DealScoreCard({
       <div className="border-b border-stone-200 bg-white p-5 sm:p-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold text-mint">
-              {isRetailMode ? "Retail deal score" : "Listing deal score"}
-            </p>
+            <p className="text-sm font-semibold text-mint">Photo deal score</p>
             <h2 className="mt-1 text-5xl font-black leading-none text-ink">
               {result.dealScore}
               <span className="text-2xl text-stone-400">/100</span>
@@ -317,17 +214,14 @@ export function DealScoreCard({
           <div className="mt-4 flex flex-wrap gap-2 text-sm font-semibold text-stone-600">
             <span className="rounded-full bg-stone-100 px-3 py-1">{context.sourceLabel}</span>
             <span className="rounded-full bg-stone-100 px-3 py-1">{context.matchedProductName}</span>
-            <span className="rounded-full bg-stone-100 px-3 py-1">{formatCurrency(context.askingPrice)} link price</span>
+            <span className="rounded-full bg-stone-100 px-3 py-1">{formatCurrency(context.askingPrice)} price</span>
           </div>
         ) : null}
 
         <p className="mt-4 text-base leading-7 text-stone-700">{result.explanation}</p>
 
         <div className="mt-5 h-3 overflow-hidden rounded-full bg-stone-100">
-          <div
-            className="h-full rounded-full bg-ink"
-            style={{ width: `${result.dealScore}%` }}
-          />
+          <div className="h-full rounded-full bg-ink" style={{ width: `${result.dealScore}%` }} />
         </div>
 
         <div className={cn("mt-5 rounded-lg p-4 ring-1", confidenceStyle)}>
@@ -348,17 +242,9 @@ export function DealScoreCard({
         </div>
 
         <div className="mt-5 rounded-lg bg-stone-50 p-4">
-          <p className="text-sm font-semibold text-stone-700">
-            {isRetailMode ? "Target buy range" : "Suggested offer"}
-          </p>
-          <p className="mt-1 text-3xl font-black text-ink">
-            {offerLabel}
-          </p>
-          <p className="mt-2 text-sm leading-6 text-stone-600">
-            {isRetailMode
-              ? "For retail links, treat this as a cautious buy-under range until the product page, return policy, and price are confirmed."
-              : result.negotiationTip}
-          </p>
+          <p className="text-sm font-semibold text-stone-700">Suggested offer</p>
+          <p className="mt-1 text-3xl font-black text-ink">{offerLabel}</p>
+          <p className="mt-2 text-sm leading-6 text-stone-600">{result.negotiationTip}</p>
         </div>
       </div>
 
@@ -370,10 +256,7 @@ export function DealScoreCard({
                 <p className="text-sm text-stone-500">{score.label}</p>
                 <p className="mt-1 text-2xl font-black text-ink">{score.value}/100</p>
                 <div className="mt-3 h-2 rounded-full bg-stone-100">
-                  <div
-                    className="h-2 rounded-full bg-mint"
-                    style={{ width: `${score.value}%` }}
-                  />
+                  <div className="h-2 rounded-full bg-mint" style={{ width: `${score.value}%` }} />
                 </div>
               </div>
             ))}
@@ -431,11 +314,13 @@ export function DealScoreCard({
               </div>
             ) : (
               <p className="mt-3 text-sm leading-6 text-stone-600">
-                No major text-based red flags were detected. Still verify price, source, condition, and return/payment safety.
+                No major text-based red flags were detected from the photos.
               </p>
             )}
           </div>
+        </div>
 
+        <div className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
               <h3 className="flex items-center gap-2 font-bold text-ink">
@@ -474,36 +359,11 @@ export function DealScoreCard({
             </div>
           </div>
 
-          <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
-            <h3 className="flex items-center gap-2 font-bold text-ink">
-              <CheckCircle2 className="h-4 w-4 text-mint" aria-hidden />
-              Trust signals
-            </h3>
-            {result.positiveSignals.length > 0 ? (
-              <div className="mt-3 flex flex-wrap gap-2">
-                {result.positiveSignals.map((signal) => (
-                  <span
-                    key={signal}
-                    className="rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-800"
-                  >
-                    {signal}
-                  </span>
-                ))}
-              </div>
-            ) : (
-              <p className="mt-3 text-sm leading-6 text-stone-600">
-                The pasted details do not mention proof like receipt, serial number, warranty, public meetup, or a working video.
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="space-y-4">
           {context ? (
             <AlternativePanel
               title="Better retail moves"
-              description="New-product fallbacks to check when warranty, returns, or a close retail price may beat the pasted link."
-              emptyText="BuyWise does not have verified retail alternatives for this link yet."
+              description="New-product fallbacks to check when warranty, returns, or a close retail price may beat this photo listing."
+              emptyText="BuyWise does not have verified retail alternatives for this product yet."
               alternatives={context.retailAlternatives}
               icon={ShoppingBag}
             />
@@ -512,55 +372,12 @@ export function DealScoreCard({
           {context ? (
             <AlternativePanel
               title="Better resale moves"
-              description="Used-side replacement actions if this link is overpriced, risky, or not clearly better than the market."
-              emptyText="BuyWise does not have verified resale alternatives for this link yet."
+              description="Used-side replacement actions if this listing is overpriced, risky, or not clearly better than market."
+              emptyText="BuyWise does not have verified resale alternatives for this product yet."
               alternatives={context.resaleAlternatives}
               icon={Target}
             />
           ) : null}
-
-          <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
-            <div className="flex items-start justify-between gap-3">
-              <h3 className="flex items-center gap-2 font-bold text-ink">
-                <Clipboard className="h-4 w-4 text-mint" aria-hidden />
-                Questions to ask
-              </h3>
-              <button
-                type="button"
-                onClick={copyQuestions}
-                className="focus-ring inline-flex items-center gap-1.5 rounded-lg border border-stone-200 px-3 py-1.5 text-sm font-semibold text-stone-700 hover:border-mint hover:text-ink"
-              >
-                <Copy className="h-3.5 w-3.5" aria-hidden />
-                {copied ? "Copied" : "Copy"}
-              </button>
-            </div>
-            <div className="mt-3 space-y-2">
-              {sellerQuestions.map((question) => (
-                <p key={question} className="rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
-                  {question}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
-            <h3 className="flex items-center gap-2 font-bold text-ink">
-              <ShieldCheck className="h-4 w-4 text-mint" aria-hidden />
-              Compared against
-            </h3>
-            <div className="mt-3 space-y-2">
-              {dataSources.map((source) => (
-                <p key={source} className="rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
-                  {source}
-                </p>
-              ))}
-              {context?.priceExplanation ? (
-                <p className="rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
-                  {context.priceExplanation}
-                </p>
-              ) : null}
-            </div>
-          </div>
         </div>
       </div>
     </section>

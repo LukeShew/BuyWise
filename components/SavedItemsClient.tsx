@@ -168,7 +168,7 @@ export function SavedItemsClient() {
         <div className="rounded-lg border border-stone-200 bg-white p-8 text-center shadow-sm">
           <h2 className="text-xl font-bold text-ink">No saved items yet</h2>
           <p className="mt-2 text-stone-600">
-            Save a verdict after analyzing a link.
+            Save a verdict after analyzing product photos.
           </p>
         </div>
       ) : (

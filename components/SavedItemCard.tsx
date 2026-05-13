@@ -3,31 +3,25 @@
 import Link from "next/link";
 import { Trash2 } from "lucide-react";
 import { formatCurrency } from "@/lib/format";
-import type { Product, SavedItem, SavedItemStatus } from "@/types";
+import type { SavedItem, SavedItemStatus } from "@/types";
 
 const statuses: SavedItemStatus[] = ["watching", "contacted", "negotiating", "bought", "passed"];
 
-function getSavedTitle(item: SavedItem, product?: Product) {
-  if (product) {
-    return `${product.brand} ${product.model}`;
-  }
-
+function getSavedTitle(item: SavedItem) {
   const match = item.notes.match(/Product:\s*([^.]*)\./);
-  return match?.[1]?.trim() || "Saved link verdict";
+  return match?.[1]?.trim() || "Saved photo verdict";
 }
 
 export function SavedItemCard({
   item,
-  product,
   onStatusChange,
   onDelete
 }: {
   item: SavedItem;
-  product?: Product;
   onStatusChange: (id: string, status: SavedItemStatus) => void;
   onDelete: (id: string) => void;
 }) {
-  const title = getSavedTitle(item, product);
+  const title = getSavedTitle(item);
 
   return (
     <article className="rounded-lg border border-stone-200 bg-white p-5 shadow-sm">
@@ -41,26 +35,6 @@ export function SavedItemCard({
         </div>
         <p className="text-2xl font-bold text-ink">{formatCurrency(item.askingPrice)}</p>
       </div>
-
-      {product ? (
-        <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          <div className="rounded-lg bg-stone-50 p-3">
-            <p className="text-sm text-stone-500">Fair value</p>
-            <p className="mt-1 font-bold text-ink">{formatCurrency(product.fairPrice)}</p>
-          </div>
-          <div className="rounded-lg bg-stone-50 p-3">
-            <p className="text-sm text-stone-500">Difference</p>
-            <p className="mt-1 font-bold text-ink">
-              {item.askingPrice - product.fairPrice > 0 ? "+" : ""}
-              {formatCurrency(item.askingPrice - product.fairPrice)}
-            </p>
-          </div>
-          <div className="rounded-lg bg-stone-50 p-3">
-            <p className="text-sm text-stone-500">Product year</p>
-            <p className="mt-1 font-bold text-ink">{product.year}</p>
-          </div>
-        </div>
-      ) : null}
 
       {item.notes ? <p className="mt-4 text-sm leading-6 text-stone-700">{item.notes}</p> : null}
 
@@ -80,14 +54,12 @@ export function SavedItemCard({
           </select>
         </label>
         <div className="flex gap-2">
-          {product ? (
-            <Link
-              href={`/products/${product.id}`}
-              className="focus-ring rounded-lg border border-stone-200 px-3 py-2 text-sm font-semibold text-stone-700 hover:border-mint hover:text-ink"
-            >
-              View insight
-            </Link>
-          ) : null}
+          <Link
+            href="/"
+            className="focus-ring rounded-lg border border-stone-200 px-3 py-2 text-sm font-semibold text-stone-700 hover:border-mint hover:text-ink"
+          >
+            Analyze another
+          </Link>
           <button
             type="button"
             onClick={() => onDelete(item.id)}
