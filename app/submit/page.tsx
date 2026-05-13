@@ -19,7 +19,7 @@ export default async function SubmitListingPage({
               Check if this is the best place to buy
             </h1>
             <p className="mt-4 max-w-3xl text-lg leading-8 text-stone-700">
-              Drop a resale or retail link, add the price and product/model, and BuyWise rates the bargain against used fair value and retail MSRP benchmarks.
+              Drop a resale or retail link, confirm the price and product/model, and BuyWise checks the bargain, risk signals, and confidence.
             </p>
           </div>
 
@@ -33,13 +33,13 @@ export default async function SubmitListingPage({
                 },
                 {
                   icon: ShieldAlert,
-                  title: "Compare both sides",
-                  text: "A retail deal may lose to used pricing. A used listing may lose to buying new."
+                  title: "Flag weak proof",
+                  text: "Low prices, missing details, rushed payment, and vague seller wording lower the score."
                 },
                 {
                   icon: Target,
-                  title: "Act only when better",
-                  text: "BuyWise shows alternatives only when the current benchmarks have a stronger option."
+                  title: "Act only when clear",
+                  text: "BuyWise stays cautious when the price, source, or product details need confirmation."
                 }
               ].map((item) => (
                 <div key={item.title} className="flex items-start gap-3">

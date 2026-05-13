@@ -7,6 +7,15 @@ import type { Product, SavedItem, SavedItemStatus } from "@/types";
 
 const statuses: SavedItemStatus[] = ["watching", "contacted", "negotiating", "bought", "passed"];
 
+function getSavedTitle(item: SavedItem, product?: Product) {
+  if (product) {
+    return `${product.brand} ${product.model}`;
+  }
+
+  const match = item.notes.match(/Product:\s*([^.]*)\./);
+  return match?.[1]?.trim() || "Saved link verdict";
+}
+
 export function SavedItemCard({
   item,
   product,
@@ -18,13 +27,15 @@ export function SavedItemCard({
   onStatusChange: (id: string, status: SavedItemStatus) => void;
   onDelete: (id: string) => void;
 }) {
+  const title = getSavedTitle(item, product);
+
   return (
     <article className="rounded-lg border border-stone-200 bg-white p-5 shadow-sm">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="text-sm font-semibold text-mint">{item.marketplace}</p>
           <h3 className="mt-1 text-xl font-bold text-ink">
-            {product ? `${product.brand} ${product.model}` : "Saved product"}
+            {title}
           </h3>
           <p className="mt-1 text-sm text-stone-500">{item.sellerLocation || "No location added"}</p>
         </div>

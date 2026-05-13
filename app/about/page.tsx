@@ -5,16 +5,11 @@ import {
   BadgeDollarSign,
   CheckCircle2,
   ClipboardCheck,
-  Database,
-  FileText,
   Link2,
   MessageSquareText,
-  PlugZap,
   ShoppingBag,
   Sparkles
 } from "lucide-react";
-import { mockProducts, supportedCategories } from "@/data/mockProducts";
-import { formatCurrency } from "@/lib/format";
 
 const valueCards = [
   {
@@ -25,7 +20,7 @@ const valueCards = [
   {
     icon: BadgeDollarSign,
     title: "See if the price makes sense",
-    text: "The analyzer compares the link price against used fair-value and retail MSRP benchmarks."
+    text: "The analyzer checks whether the price was read reliably or needs manual confirmation before scoring."
   },
   {
     icon: AlertTriangle,
@@ -35,7 +30,7 @@ const valueCards = [
   {
     icon: ShoppingBag,
     title: "Compare better options",
-    text: "If the link looks weak, BuyWise shows better resale or retail moves when there is a stronger choice."
+    text: "If BuyWise cannot verify enough about the link, it says so instead of pretending the deal is proven."
   }
 ];
 
@@ -43,7 +38,7 @@ const steps = [
   "Paste the product or listing link.",
   "Review anything BuyWise was able to auto-fill.",
   "Run the analyzer and read the verdict.",
-  "Use the offer range, questions, checklist, and alternatives before buying."
+  "Use the offer range, questions, and proof checks before buying."
 ];
 
 const audiences = [
@@ -61,37 +56,35 @@ const outputs = [
   "Suggested offer or buy-under range",
   "Why it might not be worth it",
   "Questions to ask the seller",
-  "Buyer checklist",
-  "Resale and retail alternatives"
+  "Proof and trust signals",
+  "What still needs confirmation"
 ];
 
 export default function AboutPage() {
-  const totalMsrp = mockProducts.reduce((sum, product) => sum + product.msrp, 0);
-  const totalFair = mockProducts.reduce((sum, product) => sum + product.fairPrice, 0);
   const stats = [
     {
-      icon: FileText,
-      label: "MSRP tracked",
-      value: formatCurrency(totalMsrp),
-      text: "Retail prices used for comparison."
+      icon: Link2,
+      label: "Link-first checks",
+      value: "Resale + retail",
+      text: "BuyWise starts with the pasted page, not a saved product card."
     },
     {
-      icon: PlugZap,
-      label: "Used fair value tracked",
-      value: formatCurrency(totalFair),
-      text: "Used price benchmarks used for deal checks."
+      icon: AlertTriangle,
+      label: "Risk signals",
+      value: "Strict",
+      text: "Low prices, vague details, and missing proof lower the score."
     },
     {
-      icon: ShoppingBag,
-      label: "Categories covered",
-      value: supportedCategories.length.toString(),
-      text: "Laptops, cameras, bikes, and monitors."
+      icon: BadgeDollarSign,
+      label: "Price confidence",
+      value: "Visible",
+      text: "If a site blocks price reading, BuyWise asks for confirmation."
     },
     {
-      icon: Database,
-      label: "Product guides",
-      value: mockProducts.length.toString(),
-      text: "Focused guides for common used buys."
+      icon: ClipboardCheck,
+      label: "Buyer output",
+      value: "Actionable",
+      text: "The result gives a verdict, score, questions, and next steps."
     }
   ];
 
@@ -117,13 +110,6 @@ export default function AboutPage() {
                   Check a link
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
-                <Link
-                  href="/search"
-                  prefetch={false}
-                  className="focus-ring inline-flex h-12 items-center justify-center rounded-lg border border-stone-200 bg-white px-5 font-semibold text-ink transition hover:border-mint"
-                >
-                  Browse products
-                </Link>
               </div>
             </div>
 
@@ -132,7 +118,7 @@ export default function AboutPage() {
                 <p className="text-sm font-semibold text-mint">Current coverage</p>
                 <h2 className="mt-2 text-2xl font-black text-ink sm:text-3xl">What BuyWise can check today</h2>
                 <p className="mt-3 text-sm leading-6 text-stone-600">
-                  BuyWise covers focused categories with price benchmarks, category-specific questions, and buyer checklists.
+                  BuyWise checks public page metadata, readable product text, confirmed prices, and seller wording. It does not force a saved product match when the link is unclear.
                 </p>
               </div>
 
@@ -225,7 +211,7 @@ export default function AboutPage() {
             </div>
           </div>
           <p className="mt-4 text-sm leading-6 text-stone-200">
-            BuyWise supports cameras, laptops, bikes, and monitors today. Link reading works when a public page exposes readable product data. If a site blocks access, BuyWise still lets you paste the missing details and run the analyzer.
+            Link reading works when a public page exposes readable product data. If a site blocks access, BuyWise still lets you paste the missing details and run the analyzer.
           </p>
           <div className="mt-5 rounded-lg bg-white/10 p-4">
             <h3 className="flex items-center gap-2 font-bold">

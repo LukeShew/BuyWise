@@ -73,18 +73,20 @@ export interface MarketplaceListing {
 
 export interface DealQualityInput {
   askingPrice: number;
-  fairPrice: number;
-  usedLow: number;
-  usedHigh: number;
-  reliabilityScore: number;
-  scamRiskScore: number;
+  productName?: string;
+  fairPrice?: number;
+  usedLow?: number;
+  usedHigh?: number;
+  reliabilityScore?: number;
+  scamRiskScore?: number;
   condition: string;
   marketplace?: MarketplaceSource;
   listingText?: string;
   analysisMode?: LinkAnalysisMode;
+  marketBenchmarkAvailable?: boolean;
   extractionConfidence?: number;
   priceConfidence?: number;
-  productMatchConfidence?: number;
+  marketPriceConfidence?: number;
   listingCompletenessScore?: number;
   sourceReliabilityScore?: number;
   warrantyProtectionScore?: number;
@@ -155,10 +157,8 @@ export interface ListingAnalysisContext {
   marketplace: MarketplaceSource;
   sellerLocation?: string;
   askingPrice: number;
-  benchmarkLabel: string;
+  marketPriceLabel?: string;
   matchedProductName: string;
-  productMatchConfidence?: number;
-  productMatchExplanation?: string;
   priceConfidence?: number;
   priceSource?: string;
   priceExplanation?: string;
@@ -184,8 +184,6 @@ export interface LinkExtractionResult {
   priceSource?: string;
   priceExplanation?: string;
   productName?: string;
-  productMatchConfidence?: number;
-  productMatchExplanation?: string;
   matchCandidates?: ProductMatchCandidate[];
   confidence: number;
   message: string;

@@ -8,7 +8,6 @@ import {
   inferAnalysisModeFromUrl,
   inferMarketplaceFromUrl
 } from "@/lib/linkAnalysis";
-import { findProductMatch, getProductName } from "@/lib/productMatch";
 import type { LinkExtractionResult } from "@/types";
 
 export const runtime = "nodejs";
@@ -601,14 +600,6 @@ function findJsonProductInfo(value: unknown): { name: string; description: strin
   return { name: "", description: "" };
 }
 
-function normalizeForMatch(value: string) {
-  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
-}
-
-function findMatchingProduct(title: string, description: string) {
-  return findProductMatch(normalizeForMatch(`${title} ${description}`));
-}
-
 async function readLimitedText(response: Response) {
   if (!response.body) {
     return response.text();
@@ -751,26 +742,22 @@ export async function POST(request: Request) {
     const description = structuredInfo.description || getDescription(html);
     const productText = [title, description, finalUrl].filter(Boolean).join(" ");
     const price = extractPrice(html, productText);
-    const match = findMatchingProduct(title, description);
-    const matchedProduct = match.product;
     const confidence =
       30 +
       (title ? 20 : 0) +
       (description ? 10 : 0) +
       (price.price ? Math.round(price.confidence * 0.18) : 0) +
-      (matchedProduct ? Math.round(match.confidence * 0.16) : 0) +
       (finalSourceDomain ? 5 : 0);
 
     const manualWarnings = [
       ...price.warnings,
-      !matchedProduct ? match.explanation : "",
       price.price ? "" : "BuyWise needs the listing price confirmed before scoring.",
-      !matchedProduct ? "Confirm the closest benchmark before scoring." : ""
+      title ? "" : "BuyWise could not find a reliable page title."
     ].filter(Boolean);
 
     return buildResponse({
       ok: Boolean(title || description || price.price),
-      manualRequired: !price.price || !matchedProduct,
+      manualRequired: !price.price || !title,
       url: finalUrl,
       sourceLabel: finalSourceLabel,
       sourceDomain: finalSourceDomain || undefined,
@@ -782,15 +769,13 @@ export async function POST(request: Request) {
       priceConfidence: price.confidence,
       priceSource: price.source,
       priceExplanation: price.explanation,
-      productName: matchedProduct ? getProductName(matchedProduct) : undefined,
-      productMatchConfidence: match.confidence,
-      productMatchExplanation: match.explanation,
-      matchCandidates: match.candidates,
+      productName: title || undefined,
+      matchCandidates: [],
       confidence: Math.min(confidence, 90),
       message:
-        price.price && matchedProduct
-          ? "Pulled reliable enough product and price details. Check them before analyzing."
-          : "BuyWise pulled what it could, but needs the missing price or product match confirmed before scoring.",
+        price.price && title
+          ? "Pulled readable product and price details. Check them before analyzing."
+          : "BuyWise pulled what it could, but needs the missing title or price confirmed before scoring.",
       warnings: manualWarnings
     });
   } catch {

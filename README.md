@@ -1,6 +1,6 @@
 # BuyWise
 
-BuyWise helps shoppers check a product link before they buy. Paste a resale listing or retail product page, and BuyWise gives a plain-English verdict on whether that link looks worth buying from, what risks to verify, what price to offer or target, and whether there are better used or retail options in the current BuyWise benchmarks.
+BuyWise helps shoppers check a product link before they buy. Paste a resale listing or retail product page, and BuyWise gives a plain-English verdict on whether that link looks safe enough to keep checking, what risks to verify, and what price range to treat cautiously.
 
 Live site:
 
@@ -28,25 +28,18 @@ http://localhost:3000
 - Homepage link checker for resale and retail product links
 - Server-side link reader for public product metadata, JSON-LD, OpenGraph/Twitter cards, and visible server-rendered prices
 - Full listing analyzer with strict deal score, market position label, risk level, confidence level, and suggested offer guidance
-- Red flag detection, trust signals, seller questions, and buyer checklist
-- Retail-versus-resale comparison logic
-- Better retail and resale alternatives when current BuyWise benchmarks have a stronger option
-- Searchable BuyWise benchmarks
-- Product insight pages
-- Bookmark/save buttons on product cards
+- Red flag detection, trust signals, and seller questions
+- Retail-versus-resale link handling
 - Saved verdicts from analyzed links
 - Local saved-item fallback when logged out
 - Supabase account sync when configured
 - Customer-facing About Us page
 
-## Current Benchmarks
+## Current Product Direction
 
-BuyWise currently has 20 starter product benchmarks:
+BuyWise is link-first. The old starter product catalog is not part of the main user flow anymore. Search and old product guide URLs redirect to the analyzer.
 
-- Cameras: Sony A6400, Canon EOS R10, Fujifilm X-T30 II, Sony A7 III, Canon M50 Mark II
-- Laptops: MacBook Air M1, MacBook Air M2, Dell XPS 13, Lenovo ThinkPad X1 Carbon, Microsoft Surface Laptop 5
-- Bikes: Trek Marlin 5, Specialized Rockhopper, Giant Talon, Cannondale Quick, Trek FX 3
-- Monitors: Dell UltraSharp U2720Q, LG 27GL850, ASUS ProArt PA278QV, Samsung Odyssey G5, BenQ PD2700U
+The analyzer does not force links into saved product guides. If BuyWise cannot verify a market price for the exact item, it says that clearly and keeps the score cautious.
 
 ## Setup
 
@@ -91,9 +84,8 @@ npm run lint
 - `components/DealScoreCard.tsx` - Verdict/result UI
 - `app/api/extract-link/route.ts` - Server-side link reader
 - `lib/dealQuality.ts` - Strict scoring, risk, confidence, offer, and breakdown logic
-- `lib/linkAnalysis.ts` - Source inference and alternatives
-- `lib/productMatch.ts` - Confidence-aware product matching against current benchmarks
-- `data/mockProducts.ts` - Current internal product data
+- `lib/linkAnalysis.ts` - Source and link-type inference
+- `lib/priceText.ts` - Manual price parsing from pasted details
 - `components/SavedItemsClient.tsx` - Saved items and account sync
 - `components/AuthForm.tsx` - Login/signup form
 - `supabase/schema.sql` - Database schema
@@ -117,13 +109,14 @@ Supported sources are best-effort, not guaranteed. Amazon, eBay, Craigslist, App
 
 Price extraction now includes a confidence score and source explanation. Low-confidence prices, tiny unrelated prices, shipping costs, financing/monthly payment text, coupons, crossed-out prices, and unrelated suggested-product prices are not allowed to drive the final score.
 
-Product matching is also confidence-aware. BuyWise should not silently map vague links like "Apple MacBook" to an older benchmark such as "MacBook Air M1" unless the model/generation details are clear enough.
+BuyWise no longer maps unclear links to saved product guides. It scores from extracted and user-confirmed link details.
 
 Facebook Marketplace is not fetched. Users should paste the listing title, price, and description.
 
 ## Current Limitations
 
-- BuyWise still uses internal product benchmarks for comparison. It does not yet pull full live market comps from every marketplace.
+- BuyWise does not yet pull full live market comps from every marketplace.
+- BuyWise does not yet reliably find better live retail or resale alternatives.
 - Universal link extraction is unrealistic because many retailers and marketplaces block or hide page data.
-- If extraction confidence, price confidence, or product-match confidence is low, the app should ask for confirmation instead of pretending to know.
+- If extraction confidence or price confidence is low, the app should ask for confirmation instead of pretending to know.
 - Screenshot upload and browser-extension support are future candidates, especially for Facebook Marketplace and blocked pages.

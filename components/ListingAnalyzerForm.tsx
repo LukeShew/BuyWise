@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import {
   AlertCircle,
   Calculator,
@@ -15,16 +15,14 @@ import {
   ShoppingBag
 } from "lucide-react";
 import { DealScoreCard } from "@/components/DealScoreCard";
-import { mockProducts } from "@/data/mockProducts";
 import { calculateDealQuality } from "@/lib/dealQuality";
-import { formatCurrency } from "@/lib/format";
 import { LISTING_DRAFT_STORAGE_KEY, type ListingDraft } from "@/lib/listingDraft";
 import {
   buildListingAnalysisContext,
   inferAnalysisModeFromUrl,
   inferMarketplaceFromUrl
 } from "@/lib/linkAnalysis";
-import { findProductMatch } from "@/lib/productMatch";
+import { parseConfirmedPriceFromText } from "@/lib/priceText";
 import { supabase } from "@/lib/supabaseClient";
 import type {
   DealQualityResult,
@@ -54,17 +52,10 @@ interface AnalyzerValues {
   sellerNotes: string;
   marketplace: MarketplaceSource;
   location: string;
-  requireProductMatch?: boolean;
   extractionConfidence?: number;
   priceConfidence?: number;
   priceSource?: string;
   priceExplanation?: string;
-  productMatchConfidence?: number;
-  productMatchExplanation?: string;
-}
-
-function findClosestProduct(productName: string) {
-  return findProductMatch(productName).product;
 }
 
 function looksLikeUrl(value: string) {
@@ -102,7 +93,7 @@ function AnalyzerEmptyState() {
         {[
           "For resale links: paste seller wording, condition, proof, and pickup notes",
           "For retail links: paste product name, sale price, retailer, warranty, and deal notes",
-          "BuyWise compares the link against used fair value and retail MSRP benchmarks"
+          "BuyWise scores only what it can read or what you confirm"
         ].map((item) => (
           <div key={item} className="flex items-start gap-3 rounded-lg bg-stone-50 p-3">
             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-mint" aria-hidden />
@@ -117,7 +108,7 @@ function AnalyzerEmptyState() {
           Buyer rule
         </h3>
         <p className="mt-2 text-sm leading-6 text-amber-900">
-          A low resale price still needs proof. A retail sale still needs comparison against used prices and MSRP.
+          A low resale price still needs proof. A retail sale still needs a price check against the product page and return policy.
         </p>
       </div>
     </section>
@@ -135,11 +126,6 @@ export function ListingAnalyzerForm({
 }) {
   const [listingUrl, setListingUrl] = useState("");
   const [analysisMode, setAnalysisMode] = useState<LinkAnalysisMode>("resale");
-  const [productId, setProductId] = useState(initialProduct?.id ?? mockProducts[0].id);
-  const selectedProduct = useMemo(
-    () => mockProducts.find((product) => product.id === productId) ?? mockProducts[0],
-    [productId]
-  );
   const [productName, setProductName] = useState(
     initialProduct ? `${initialProduct.brand} ${initialProduct.model}` : ""
   );
@@ -151,7 +137,6 @@ export function ListingAnalyzerForm({
   const [location, setLocation] = useState("");
   const [result, setResult] = useState<DealQualityResult | null>(null);
   const [analysisContext, setAnalysisContext] = useState<ListingAnalysisContext | null>(null);
-  const [analyzedProduct, setAnalyzedProduct] = useState<Product | undefined>(initialProduct);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -163,8 +148,6 @@ export function ListingAnalyzerForm({
   const [priceConfidence, setPriceConfidence] = useState<number | undefined>();
   const [priceSource, setPriceSource] = useState<string | undefined>();
   const [priceExplanation, setPriceExplanation] = useState<string | undefined>();
-  const [productMatchConfidence, setProductMatchConfidence] = useState<number | undefined>();
-  const [productMatchExplanation, setProductMatchExplanation] = useState<string | undefined>();
   const shouldFocusResult = autoAnalyzeDraft || focusResultOnAnalyze;
 
   function updateListingUrl(value: string) {
@@ -175,6 +158,9 @@ export function ListingAnalyzerForm({
 
     if (inferredMode) {
       setAnalysisMode(inferredMode);
+      if (inferredMode === "retail" && !inferredMarketplace) {
+        setMarketplace("Other");
+      }
     }
 
     if (inferredMarketplace) {
@@ -187,11 +173,12 @@ export function ListingAnalyzerForm({
     setPriceConfidence(data.priceConfidence);
     setPriceSource(data.priceSource);
     setPriceExplanation(data.priceExplanation);
-    setProductMatchConfidence(data.productMatchConfidence);
-    setProductMatchExplanation(data.productMatchExplanation);
 
     if (data.mode) {
       setAnalysisMode(data.mode);
+      if (data.mode === "retail" && !data.marketplace) {
+        setMarketplace("Other");
+      }
     }
 
     if (data.marketplace) {
@@ -202,12 +189,6 @@ export function ListingAnalyzerForm({
     if (extractedProductName) {
       const trimmedName = extractedProductName.slice(0, 140);
       setProductName(trimmedName);
-
-      const match = findClosestProduct(trimmedName);
-      if (match) {
-        setProductId(match.id);
-        setAnalyzedProduct(match);
-      }
     }
 
     if (typeof data.price === "number" && Number.isFinite(data.price)) {
@@ -241,9 +222,7 @@ export function ListingAnalyzerForm({
       extractionConfidence,
       priceConfidence,
       priceSource,
-      priceExplanation,
-      productMatchConfidence,
-      productMatchExplanation
+      priceExplanation
     };
   }
 
@@ -251,77 +230,71 @@ export function ListingAnalyzerForm({
     setError("");
     setMessage("");
 
-    const parsedPrice = Number(values.askingPrice);
+    let parsedPrice = Number(values.askingPrice);
+    if (!Number.isFinite(parsedPrice) || parsedPrice <= 0) {
+      const textPrice = parseConfirmedPriceFromText([values.description, values.sellerNotes].join(" "));
+      if (textPrice) {
+        parsedPrice = textPrice;
+        values = {
+          ...values,
+          askingPrice: String(textPrice),
+          priceConfidence: values.priceConfidence ?? 86,
+          priceSource: values.priceSource ?? "Price from pasted details",
+          priceExplanation: values.priceExplanation ?? "Price was read from the details you entered."
+        };
+        setAskingPrice(String(textPrice));
+        setPriceConfidence(values.priceConfidence);
+        setPriceSource(values.priceSource);
+        setPriceExplanation(values.priceExplanation);
+      }
+    }
     if (!Number.isFinite(parsedPrice) || parsedPrice <= 0) {
       setError("BuyWise needs the listing price before it can give a verdict.");
+      return false;
+    }
+
+    if (!values.productName.trim()) {
+      setError("BuyWise needs a product name or page title before it can score the link.");
       return false;
     }
 
     setIsAnalyzing(true);
 
     try {
-      const match = findProductMatch(values.productName);
-      const matchedProduct = match.product ?? selectedProduct;
-      const finalProductMatchConfidence = match.product
-        ? match.confidence
-        : values.productMatchConfidence ?? (values.productName.trim() ? 58 : 42);
-      const finalProductMatchExplanation = match.product
-        ? match.explanation
-        : values.productMatchExplanation ??
-          "BuyWise could not confidently match this link to a benchmark. The selected benchmark is being treated as user-confirmed.";
-
-      if (values.requireProductMatch && !match.product) {
-        setError("We could not confidently verify the product model. Confirm the closest benchmark before scoring.");
-        return false;
-      }
-
       const finalPriceConfidence = values.priceConfidence ?? (values.listingUrl ? 72 : 84);
       if (finalPriceConfidence < 65) {
         setError("We need the listing price confirmed before scoring. Enter the actual price shown on the listing or product page.");
         return false;
       }
 
-      setProductId(matchedProduct.id);
-      setAnalyzedProduct(matchedProduct);
-
       const listingText = [values.description, values.sellerNotes, values.marketplace, values.location].filter(Boolean).join(" ");
       const conditionText = [values.condition, values.description, values.sellerNotes].join(" ");
-      const benchmarkFairPrice = values.analysisMode === "retail" ? matchedProduct.msrp : matchedProduct.fairPrice;
-      const benchmarkLow = values.analysisMode === "retail" ? Math.round(matchedProduct.msrp * 0.75) : matchedProduct.usedLow;
-      const benchmarkHigh = values.analysisMode === "retail" ? Math.round(matchedProduct.msrp * 1.05) : matchedProduct.usedHigh;
-      const scamRiskScore =
-        values.analysisMode === "retail" ? Math.max(1, matchedProduct.scamRiskScore - 4) : matchedProduct.scamRiskScore;
 
       const nextResult = calculateDealQuality({
         askingPrice: parsedPrice,
-        fairPrice: benchmarkFairPrice,
-        usedLow: benchmarkLow,
-        usedHigh: benchmarkHigh,
-        reliabilityScore: matchedProduct.reliabilityScore,
-        scamRiskScore,
+        productName: values.productName.trim(),
         condition: conditionText,
         marketplace: values.analysisMode === "retail" ? undefined : values.marketplace,
         listingText,
         analysisMode: values.analysisMode,
+        marketBenchmarkAvailable: false,
         extractionConfidence: values.extractionConfidence,
         priceConfidence: finalPriceConfidence,
-        productMatchConfidence: finalProductMatchConfidence
+        marketPriceConfidence: 0
       });
 
       const nextContext = buildListingAnalysisContext({
-        product: matchedProduct,
+        productName: values.productName.trim(),
         askingPrice: parsedPrice,
         mode: values.analysisMode,
         listingUrl: values.listingUrl,
         marketplace: values.marketplace,
         sellerLocation: values.location,
-        productMatchConfidence: finalProductMatchConfidence,
-        productMatchExplanation: finalProductMatchExplanation,
         priceConfidence: finalPriceConfidence,
         priceSource: values.priceSource ?? "Manual price confirmation",
         priceExplanation: values.priceExplanation,
         extractionConfidence: values.extractionConfidence,
-        matchCandidates: match.candidates
+        matchCandidates: []
       });
 
       setResult(nextResult);
@@ -336,7 +309,7 @@ export function ListingAnalyzerForm({
         if (data.session) {
           const { error: insertError } = await supabase.from("listing_checks").insert({
             user_id: data.session.user.id,
-            product_id: matchedProduct.id,
+            product_id: "link-analysis",
             asking_price: parsedPrice,
             condition: values.condition,
             description: [
@@ -372,7 +345,7 @@ export function ListingAnalyzerForm({
     } finally {
       setIsAnalyzing(false);
     }
-  }, [selectedProduct]);
+  }, []);
 
   useEffect(() => {
     if (initialProduct || typeof window === "undefined") {
@@ -401,11 +374,6 @@ export function ListingAnalyzerForm({
 
       if (draft.productName) {
         setProductName(draft.productName);
-        const match = findClosestProduct(draft.productName);
-        if (match) {
-          setProductId(match.id);
-          setAnalyzedProduct(match);
-        }
       }
       if (draft.askingPrice) {
         setAskingPrice(draft.askingPrice);
@@ -418,8 +386,6 @@ export function ListingAnalyzerForm({
       setPriceConfidence(draft.priceConfidence);
       setPriceSource(draft.priceSource);
       setPriceExplanation(draft.priceExplanation);
-      setProductMatchConfidence(draft.productMatchConfidence);
-      setProductMatchExplanation(draft.productMatchExplanation);
       if (autoAnalyzeDraft) {
         void runAnalysis({
           listingUrl: draftListingUrl,
@@ -431,13 +397,10 @@ export function ListingAnalyzerForm({
           sellerNotes: "",
           marketplace: draftMarketplace,
           location: "",
-          requireProductMatch: true,
           extractionConfidence: draft.extractionConfidence,
           priceConfidence: draft.priceConfidence,
           priceSource: draft.priceSource,
-          priceExplanation: draft.priceExplanation,
-          productMatchConfidence: draft.productMatchConfidence,
-          productMatchExplanation: draft.productMatchExplanation
+          priceExplanation: draft.priceExplanation
         }).finally(() => setIsLoadingDraft(false));
       } else {
         setMessage("Draft loaded. Add anything missing, then analyze.");
@@ -522,7 +485,7 @@ export function ListingAnalyzerForm({
 
   if (shouldFocusResult && result) {
     return (
-      <DealScoreCard result={result} product={analyzedProduct} context={analysisContext ?? undefined} />
+      <DealScoreCard result={result} context={analysisContext ?? undefined} />
     );
   }
 
@@ -539,7 +502,7 @@ export function ListingAnalyzerForm({
               Rate this place to buy
             </h2>
             <p className="mt-2 text-sm leading-6 text-stone-600">
-              Drop a resale or retail link, add the price/model, and BuyWise compares it against used and retail benchmarks.
+              Drop a resale or retail link. BuyWise checks the page details, price confidence, and risk signals from the link itself.
             </p>
           </div>
         </div>
@@ -605,40 +568,10 @@ export function ListingAnalyzerForm({
             <span className="text-sm font-semibold text-stone-700">Product or model</span>
             <input
               value={productName}
-              onChange={(event) => {
-                setProductName(event.target.value);
-                setProductMatchConfidence(undefined);
-                setProductMatchExplanation(undefined);
-              }}
-              placeholder="Example: MacBook Air M1, Sony A6400, Trek FX 3"
+              onChange={(event) => setProductName(event.target.value)}
+              placeholder="Paste or confirm the exact product name"
               className="focus-ring mt-2 h-12 w-full rounded-lg border border-stone-200 bg-stone-50 px-3 text-ink placeholder:text-stone-500"
             />
-          </label>
-
-          <label className="block md:col-span-2">
-            <span className="text-sm font-semibold text-stone-700">Closest benchmark</span>
-            <select
-              value={productId}
-              onChange={(event) => {
-                const nextProduct = mockProducts.find((product) => product.id === event.target.value);
-                setProductId(event.target.value);
-                if (nextProduct) {
-                  setProductName(`${nextProduct.brand} ${nextProduct.model}`);
-                  setProductMatchConfidence(84);
-                  setProductMatchExplanation("Benchmark selected manually.");
-                }
-              }}
-              className="focus-ring mt-2 h-12 w-full rounded-lg border border-stone-200 bg-stone-50 px-3 text-ink"
-            >
-              {mockProducts.map((product) => (
-                <option key={product.id} value={product.id}>
-                  {product.brand} {product.model} ({product.year}) - used fair {formatCurrency(product.fairPrice)} / MSRP {formatCurrency(product.msrp)}
-                </option>
-              ))}
-            </select>
-            <p className="mt-2 text-xs leading-5 text-stone-500">
-              If BuyWise cannot verify the exact model from the link, choose the closest benchmark before scoring.
-            </p>
           </label>
 
           <label className="block">
@@ -765,7 +698,7 @@ export function ListingAnalyzerForm({
       </section>
 
       {result ? (
-        <DealScoreCard result={result} product={analyzedProduct} context={analysisContext ?? undefined} />
+        <DealScoreCard result={result} context={analysisContext ?? undefined} />
       ) : (
         <AnalyzerEmptyState />
       )}

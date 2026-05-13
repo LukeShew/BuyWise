@@ -13,6 +13,4 @@ export interface ListingDraft {
   priceConfidence?: number;
   priceSource?: string;
   priceExplanation?: string;
-  productMatchConfidence?: number;
-  productMatchExplanation?: string;
 }

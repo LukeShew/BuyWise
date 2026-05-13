@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   AlertTriangle,
@@ -9,7 +8,6 @@ import {
   CheckCircle2,
   Clipboard,
   Copy,
-  ExternalLink,
   ShieldCheck,
   ShoppingBag,
   Target
@@ -46,6 +44,7 @@ function buildSavedVerdictNotes(result: DealQualityResult, context: ListingAnaly
   return [
     `${context.mode === "retail" ? "Retail bargain" : "Resale listing"} verdict: ${result.recommendation}.`,
     `Source: ${context.sourceLabel}.`,
+    `Product: ${context.matchedProductName}.`,
     context.listingUrl ? `Link: ${context.listingUrl}` : "",
     `Deal score: ${result.dealScore}/100. Confidence: ${result.confidenceScore}/100.`,
     result.redFlags[0] ? `Main concern: ${result.redFlags[0].label}.` : ""
@@ -132,13 +131,6 @@ function AlternativePanel({
                 <p className="mt-1 text-sm font-bold text-ink">{alternative.actionLabel}</p>
                 <p className="mt-1 text-sm leading-6 text-stone-600">{alternative.outcome}</p>
               </div>
-              <Link
-                href={`/products/${alternative.productId}`}
-                className="focus-ring mt-2 inline-flex items-center gap-1.5 rounded-lg text-sm font-semibold text-ink hover:text-mint"
-              >
-                View benchmark
-                <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-              </Link>
             </div>
           ))}
         </div>
@@ -162,11 +154,13 @@ export function DealScoreCard({
   const [saved, setSaved] = useState(false);
   const [saving, setSaving] = useState(false);
   const priceGap = Math.abs(result.priceDifference);
-  const benchmarkLabel = context?.benchmarkLabel ?? "Used fair-value benchmark";
-  const priceGapLabel =
-    result.priceDifference === 0
-      ? `At ${benchmarkLabel.toLowerCase()}`
-      : `${formatCurrency(priceGap)} ${result.priceDifference > 0 ? "over" : "under"} ${benchmarkLabel.toLowerCase()}`;
+  const hasMarketPrice = Boolean(context?.marketPriceLabel);
+  const marketPriceLabel = context?.marketPriceLabel ?? "verified market price";
+  const priceGapLabel = !hasMarketPrice
+    ? "No verified market price yet"
+    : result.priceDifference === 0
+      ? `At ${marketPriceLabel.toLowerCase()}`
+      : `${formatCurrency(priceGap)} ${result.priceDifference > 0 ? "over" : "under"} ${marketPriceLabel.toLowerCase()}`;
   const offerLabel =
     result.suggestedOfferLow === result.suggestedOfferHigh
       ? formatCurrency(result.suggestedOfferLow)
@@ -189,15 +183,16 @@ export function DealScoreCard({
   const dataSources = [...new Set([...(context?.dataSources ?? []), ...result.dataSources])];
 
   useEffect(() => {
-    if (!product || !context) {
+    if (!context) {
       return;
     }
 
+    const targetProductId = product?.id ?? "link-analysis";
     setSaved(
       getLocalSavedItems().some((item) =>
         isSameSavedVerdict({
           savedProductId: item.productId,
-          targetProductId: product.id,
+          targetProductId,
           askingPrice: item.askingPrice,
           notes: item.notes,
           context
@@ -217,15 +212,16 @@ export function DealScoreCard({
   }
 
   async function saveVerdict() {
-    if (!product || !context || saving || saved) {
+    if (!context || saving || saved) {
       return;
     }
 
     setSaving(true);
     const notes = buildSavedVerdictNotes(result, context);
     const marketplace: MarketplaceSource = context.mode === "retail" ? "Other" : context.marketplace;
+    const productId = product?.id ?? "link-analysis";
     const savedItem = {
-      productId: product.id,
+      productId,
       askingPrice: context.askingPrice,
       marketplace,
       sellerLocation: context.sellerLocation ?? "",
@@ -257,7 +253,7 @@ export function DealScoreCard({
     const alreadySaved = getLocalSavedItems().some((item) =>
       isSameSavedVerdict({
         savedProductId: item.productId,
-        targetProductId: product.id,
+        targetProductId: productId,
         askingPrice: item.askingPrice,
         notes: item.notes,
         context
@@ -291,7 +287,7 @@ export function DealScoreCard({
             <span className={cn("inline-flex rounded-full px-3 py-1 text-sm font-bold", riskStyles[result.riskLevel])}>
               {result.riskLevel} risk
             </span>
-            {product && context ? (
+            {context ? (
               <button
                 type="button"
                 onClick={saveVerdict}
@@ -349,7 +345,7 @@ export function DealScoreCard({
           </p>
           <p className="mt-2 text-sm leading-6 text-stone-600">
             {isRetailMode
-              ? "For retail links, treat this as a buy-under range against the MSRP benchmark and used alternatives."
+              ? "For retail links, treat this as a cautious buy-under range until the product page, return policy, and price are confirmed."
               : result.negotiationTip}
           </p>
         </div>
@@ -373,7 +369,7 @@ export function DealScoreCard({
             <div className="rounded-lg bg-white p-4 shadow-sm ring-1 ring-stone-200">
               <p className="flex items-center gap-1.5 text-sm text-stone-500">
                 <Target className="h-4 w-4" aria-hidden />
-                Benchmark gap
+                Market check
               </p>
               <p className="mt-1 text-2xl font-black text-ink">{priceGapLabel}</p>
             </div>
@@ -496,7 +492,7 @@ export function DealScoreCard({
             <AlternativePanel
               title="Better retail moves"
               description="New-product fallbacks to check when warranty, returns, or a close retail price may beat the pasted link."
-              emptyText="No better retail move found in the current BuyWise benchmarks."
+              emptyText="BuyWise does not have verified retail alternatives for this link yet."
               alternatives={context.retailAlternatives}
               icon={ShoppingBag}
             />
@@ -506,7 +502,7 @@ export function DealScoreCard({
             <AlternativePanel
               title="Better resale moves"
               description="Used-side replacement actions if this link is overpriced, risky, or not clearly better than the market."
-              emptyText="No clearly better resale move found in the current BuyWise benchmarks."
+              emptyText="BuyWise does not have verified resale alternatives for this link yet."
               alternatives={context.resaleAlternatives}
               icon={Target}
             />
@@ -550,11 +546,6 @@ export function DealScoreCard({
               {context?.priceExplanation ? (
                 <p className="rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
                   {context.priceExplanation}
-                </p>
-              ) : null}
-              {context?.productMatchExplanation ? (
-                <p className="rounded-lg bg-stone-50 p-3 text-sm leading-6 text-stone-700">
-                  {context.productMatchExplanation}
                 </p>
               ) : null}
             </div>

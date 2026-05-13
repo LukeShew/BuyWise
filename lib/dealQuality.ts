@@ -10,6 +10,15 @@ import type {
 } from "@/types";
 import { clamp, formatCurrency } from "@/lib/format";
 
+type ResolvedDealQualityInput = DealQualityInput & {
+  fairPrice: number;
+  usedLow: number;
+  usedHigh: number;
+  reliabilityScore: number;
+  scamRiskScore: number;
+  marketBenchmarkAvailable: boolean;
+};
+
 const poorConditionTerms = [
   "poor",
   "for parts",
@@ -139,7 +148,20 @@ function getMarketplaceRiskAdjustment(marketplace?: MarketplaceSource) {
   return marketplace ? adjustments[marketplace] : 0;
 }
 
-function detectRedFlags(input: DealQualityInput): RiskSignal[] {
+function resolveDealQualityInput(input: DealQualityInput): ResolvedDealQualityInput {
+  const fairPrice = input.fairPrice ?? input.askingPrice;
+  return {
+    ...input,
+    fairPrice,
+    usedLow: input.usedLow ?? Math.round(input.askingPrice * 0.92),
+    usedHigh: input.usedHigh ?? Math.round(input.askingPrice * 1.08),
+    reliabilityScore: input.reliabilityScore ?? 6,
+    scamRiskScore: input.scamRiskScore ?? (input.analysisMode === "retail" ? 2 : 5),
+    marketBenchmarkAvailable: input.marketBenchmarkAvailable ?? typeof input.fairPrice === "number"
+  };
+}
+
+function detectRedFlags(input: ResolvedDealQualityInput): RiskSignal[] {
   const normalized = [input.condition, input.listingText ?? ""].join(" ").toLowerCase();
   const flags = redFlagRules
     .filter((rule) => rule.terms.some((term) => normalized.includes(term)))
@@ -149,7 +171,7 @@ function detectRedFlags(input: DealQualityInput): RiskSignal[] {
       severity: rule.severity
     }));
 
-  if (input.askingPrice <= input.fairPrice * 0.65) {
+  if (input.marketBenchmarkAvailable && input.askingPrice <= input.fairPrice * 0.65) {
     flags.push({
       label: "Price far below market",
       detail: "This is cheap enough that condition, ownership, or scam probability needs extra proof.",
@@ -205,7 +227,11 @@ function getRiskLevel(
   return "Low";
 }
 
-function getNegotiationTip(input: DealQualityInput, riskLevel: RiskLevel) {
+function getNegotiationTip(input: ResolvedDealQualityInput, riskLevel: RiskLevel) {
+  if (!input.marketBenchmarkAvailable) {
+    return "BuyWise could not verify market value yet. Confirm comparable prices before treating this as a deal.";
+  }
+
   const priceDifference = input.askingPrice - input.fairPrice;
 
   if (riskLevel === "High") {
@@ -223,7 +249,7 @@ function getNegotiationTip(input: DealQualityInput, riskLevel: RiskLevel) {
   return "Offer slightly under fair value and leave room to meet in the middle.";
 }
 
-function getNextSteps(input: DealQualityInput, riskLevel: RiskLevel, redFlags: RiskSignal[]) {
+function getNextSteps(input: ResolvedDealQualityInput, riskLevel: RiskLevel, redFlags: RiskSignal[]) {
   if (riskLevel === "High") {
     return [
       "Ask for a fresh working video with today's date or your name in the shot.",
@@ -298,7 +324,12 @@ function getWarrantyProtectionScore(input: DealQualityInput, positiveSignals: st
   return clamp(retailBase + proofSignals * 12, 0, 96);
 }
 
-function getPriceAttractivenessScore(input: DealQualityInput, effectiveScamRiskScore: number) {
+function getPriceAttractivenessScore(input: ResolvedDealQualityInput, effectiveScamRiskScore: number) {
+  if (!input.marketBenchmarkAvailable) {
+    const priceConfidence = input.priceConfidence ?? 60;
+    return Math.round(clamp(44 + priceConfidence * 0.22 - Math.max(0, effectiveScamRiskScore - 4) * 4, 20, 68));
+  }
+
   const ratio = input.askingPrice / input.fairPrice;
   let score = 70;
 
@@ -335,7 +366,7 @@ function getTrustSafetyScore({
   sourceReliabilityScore,
   warrantyProtectionScore
 }: {
-  input: DealQualityInput;
+  input: ResolvedDealQualityInput;
   redFlags: RiskSignal[];
   positiveSignals: string[];
   effectiveScamRiskScore: number;
@@ -364,7 +395,12 @@ function getTrustSafetyScore({
   );
 }
 
-function getMarketCompetitivenessScore(input: DealQualityInput) {
+function getMarketCompetitivenessScore(input: ResolvedDealQualityInput) {
+  if (!input.marketBenchmarkAvailable) {
+    const confidence = input.extractionConfidence ?? 55;
+    return Math.round(clamp(42 + confidence * 0.2, 25, 60));
+  }
+
   const ratio = input.askingPrice / input.fairPrice;
   const rangePosition =
     input.askingPrice < input.usedLow
@@ -394,8 +430,10 @@ function getConfidenceLevel(score: number): ConfidenceLevel {
 function getConfidenceReasons(input: DealQualityInput, confidenceScore: number) {
   const reasons: string[] = [];
 
-  if ((input.productMatchConfidence ?? 75) >= 75) {
-    reasons.push("Strong product match");
+  if (input.marketBenchmarkAvailable === false) {
+    reasons.push("No verified market price yet");
+  } else if ((input.marketPriceConfidence ?? 75) >= 75) {
+    reasons.push("Verified market price available");
   } else {
     reasons.push("Product model still needs confirmation");
   }
@@ -423,13 +461,19 @@ function getMarketPositionLabel({
   dealScore,
   riskLevel,
   confidenceLevel,
-  priceRatio
+  priceRatio,
+  hasBenchmark
 }: {
   dealScore: number;
   riskLevel: RiskLevel;
   confidenceLevel: ConfidenceLevel;
   priceRatio: number;
+  hasBenchmark?: boolean;
 }) {
+  if (!hasBenchmark) {
+    return confidenceLevel === "Low" ? "Needs More Proof" : "Unverified Price";
+  }
+
   if (riskLevel === "High" && priceRatio <= 0.8) {
     return "High Risk Bargain";
   }
@@ -461,12 +505,14 @@ function getStrictRecommendation({
   dealScore,
   riskLevel,
   priceRatio,
-  confidenceLevel
+  confidenceLevel,
+  hasBenchmark
 }: {
   dealScore: number;
   riskLevel: RiskLevel;
   priceRatio: number;
   confidenceLevel: ConfidenceLevel;
+  hasBenchmark?: boolean;
 }): RecommendationLabel {
   if (riskLevel === "High" && confidenceLevel === "Low") {
     return "Avoid";
@@ -476,15 +522,15 @@ function getStrictRecommendation({
     return "Risky purchase";
   }
 
-  if (priceRatio >= 1.18) {
+  if (hasBenchmark && priceRatio >= 1.18) {
     return "Overpriced";
   }
 
-  if (dealScore >= 82 && confidenceLevel !== "Low") {
+  if (hasBenchmark && dealScore >= 82 && confidenceLevel !== "Low") {
     return "Great deal";
   }
 
-  if (priceRatio >= 0.92 && priceRatio <= 1.08) {
+  if (hasBenchmark && priceRatio >= 0.92 && priceRatio <= 1.08) {
     return "Fair price";
   }
 
@@ -499,7 +545,7 @@ function buildStrictExplanation({
   riskLevel,
   redFlags
 }: {
-  input: DealQualityInput;
+  input: ResolvedDealQualityInput;
   dealScore: number;
   recommendation: RecommendationLabel;
   confidenceLevel: ConfidenceLevel;
@@ -507,6 +553,10 @@ function buildStrictExplanation({
   redFlags: RiskSignal[];
 }) {
   const difference = Math.round(Math.abs(input.askingPrice - input.fairPrice));
+
+  if (!input.marketBenchmarkAvailable) {
+    return "BuyWise could read enough to review the link, but it does not have a verified market price for this exact item yet. Treat the score as a safety and confidence check, not proof that the price is good.";
+  }
 
   if (confidenceLevel === "Low") {
     return "BuyWise cannot confidently recommend this yet because the price, product match, or listing details need confirmation.";
@@ -517,11 +567,11 @@ function buildStrictExplanation({
   }
 
   if (recommendation === "Great deal") {
-    return `This looks meaningfully below the benchmark by about ${formatCurrency(difference)}, with enough confidence to keep checking it seriously.`;
+    return `This looks meaningfully below the market price by about ${formatCurrency(difference)}, with enough confidence to keep checking it seriously.`;
   }
 
   if (recommendation === "Overpriced") {
-    return `This appears overpriced by about ${formatCurrency(difference)} against the current benchmark. A better buy likely needs a lower price or stronger protections.`;
+    return `This appears overpriced by about ${formatCurrency(difference)} against the current market price. A better buy likely needs a lower price or stronger protections.`;
   }
 
   if (dealScore < 60) {
@@ -541,7 +591,7 @@ function getScoreBreakdown({
   redFlags,
   positiveSignals
 }: {
-  input: DealQualityInput;
+  input: ResolvedDealQualityInput;
   priceAttractivenessScore: number;
   trustSafetyScore: number;
   conditionScore: number;
@@ -555,9 +605,11 @@ function getScoreBreakdown({
       label: "Price vs market",
       impact: priceAttractivenessScore >= 75 ? "Helps" : priceAttractivenessScore >= 55 ? "Neutral" : "Hurts",
       detail:
-        input.askingPrice < input.fairPrice
-          ? `${formatCurrency(input.fairPrice - input.askingPrice)} below the benchmark.`
-          : `${formatCurrency(input.askingPrice - input.fairPrice)} above the benchmark.`,
+        !input.marketBenchmarkAvailable
+          ? "No verified market price is available for this exact item yet."
+          : input.askingPrice < input.fairPrice
+          ? `${formatCurrency(input.fairPrice - input.askingPrice)} below the market price.`
+          : `${formatCurrency(input.askingPrice - input.fairPrice)} above the market price.`,
       tone: priceAttractivenessScore >= 75 ? "positive" : priceAttractivenessScore >= 55 ? "neutral" : "negative"
     },
     {
@@ -578,13 +630,13 @@ function getScoreBreakdown({
     {
       label: "Listing confidence",
       impact: confidenceScore >= 78 ? "Helps" : confidenceScore >= 58 ? "Mixed" : "Hurts",
-      detail: "Based on extraction reliability, price confidence, product match, and listing completeness.",
+      detail: "Based on extraction reliability, price confidence, and listing completeness.",
       tone: confidenceScore >= 78 ? "positive" : confidenceScore >= 58 ? "neutral" : "negative"
     },
     {
       label: "Market competitiveness",
       impact: marketCompetitivenessScore >= 72 ? "Helps" : marketCompetitivenessScore >= 52 ? "Mixed" : "Hurts",
-      detail: "Checks whether this price is strong enough versus nearby used or retail benchmarks.",
+      detail: "Checks whether this price is strong enough versus available market context.",
       tone: marketCompetitivenessScore >= 72 ? "positive" : marketCompetitivenessScore >= 52 ? "neutral" : "negative"
     }
   ];
@@ -601,11 +653,11 @@ function getScoreBreakdown({
   return items;
 }
 
-function getPros(input: DealQualityInput, positiveSignals: string[], priceAttractivenessScore: number) {
+function getPros(input: ResolvedDealQualityInput, positiveSignals: string[], priceAttractivenessScore: number) {
   const pros: string[] = [];
 
-  if (priceAttractivenessScore >= 75) {
-    pros.push("Price is meaningfully below the current benchmark.");
+  if (input.marketBenchmarkAvailable && priceAttractivenessScore >= 75) {
+    pros.push("Price is meaningfully below the current market price.");
   }
 
   if (input.reliabilityScore >= 8) {
@@ -621,7 +673,7 @@ function getPros(input: DealQualityInput, positiveSignals: string[], priceAttrac
   return [...new Set(pros)].slice(0, 5);
 }
 
-function getCons(input: DealQualityInput, redFlags: RiskSignal[], confidenceLevel: ConfidenceLevel, trustSafetyScore: number) {
+function getCons(input: ResolvedDealQualityInput, redFlags: RiskSignal[], confidenceLevel: ConfidenceLevel, trustSafetyScore: number) {
   const cons = redFlags.slice(0, 4).map((flag) => flag.label);
 
   if (confidenceLevel === "Low") {
@@ -632,8 +684,8 @@ function getCons(input: DealQualityInput, redFlags: RiskSignal[], confidenceLeve
     cons.push("Trust and safety score is weak.");
   }
 
-  if (input.askingPrice > input.fairPrice * 1.08) {
-    cons.push("Price is above the current benchmark.");
+  if (input.marketBenchmarkAvailable && input.askingPrice > input.fairPrice * 1.08) {
+    cons.push("Price is above the current market price.");
   }
 
   if ((input.listingText?.trim().length ?? 0) < 80) {
@@ -643,7 +695,8 @@ function getCons(input: DealQualityInput, redFlags: RiskSignal[], confidenceLeve
   return [...new Set(cons)].slice(0, 5);
 }
 
-export function calculateDealQuality(input: DealQualityInput): DealQualityResult {
+export function calculateDealQuality(rawInput: DealQualityInput): DealQualityResult {
+  const input = resolveDealQualityInput(rawInput);
   const redFlags = detectRedFlags(input);
   const positiveSignals = detectPositiveSignals(input);
   const effectiveScamRiskScore = clamp(
@@ -676,7 +729,7 @@ export function calculateDealQuality(input: DealQualityInput): DealQualityResult
     clamp(
       ((input.extractionConfidence ?? 72) * 0.22 +
         (input.priceConfidence ?? 74) * 0.26 +
-        (input.productMatchConfidence ?? 74) * 0.24 +
+        (input.marketPriceConfidence ?? (input.marketBenchmarkAvailable ? 74 : 35)) * 0.24 +
         listingCompletenessScore * 0.18 +
         sourceReliabilityScore * 0.1),
       0,
@@ -711,7 +764,11 @@ export function calculateDealQuality(input: DealQualityInput): DealQualityResult
     dealScore = Math.min(dealScore, 64);
   }
 
-  if ((input.productMatchConfidence ?? 74) < 70) {
+  if (input.marketBenchmarkAvailable && (input.marketPriceConfidence ?? 74) < 70) {
+    dealScore = Math.min(dealScore, 60);
+  }
+
+  if (!input.marketBenchmarkAvailable) {
     dealScore = Math.min(dealScore, 60);
   }
 
@@ -728,13 +785,15 @@ export function calculateDealQuality(input: DealQualityInput): DealQualityResult
     dealScore,
     riskLevel,
     priceRatio,
-    confidenceLevel
+    confidenceLevel,
+    hasBenchmark: input.marketBenchmarkAvailable
   });
   const marketPositionLabel = getMarketPositionLabel({
     dealScore,
     riskLevel,
     confidenceLevel,
-    priceRatio
+    priceRatio,
+    hasBenchmark: input.marketBenchmarkAvailable
   });
 
   const poorCondition = poorConditionTerms.some((term) => input.condition.toLowerCase().includes(term));
@@ -787,8 +846,11 @@ export function calculateDealQuality(input: DealQualityInput): DealQualityResult
     cons: getCons(input, redFlags, confidenceLevel, trustSafetyScore),
     dataSources: [
       input.analysisMode === "retail" ? "Retail page details or confirmed sale price" : "Listing details or confirmed seller price",
-      input.analysisMode === "retail" ? "Retail MSRP benchmark" : "Used fair-value benchmark",
-      "BuyWise internal product benchmarks"
+      input.marketBenchmarkAvailable
+        ? input.analysisMode === "retail"
+          ? "Retail market price"
+          : "Used market price"
+        : "No verified market price for this exact item yet"
     ],
     redFlags,
     positiveSignals,

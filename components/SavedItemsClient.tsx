@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
-import { mockProducts } from "@/data/mockProducts";
 import {
   clearLocalSavedItems,
   deleteLocalSavedItem,
@@ -169,7 +168,7 @@ export function SavedItemsClient() {
         <div className="rounded-lg border border-stone-200 bg-white p-8 text-center shadow-sm">
           <h2 className="text-xl font-bold text-ink">No saved items yet</h2>
           <p className="mt-2 text-stone-600">
-            Use the bookmark on a product card or save a verdict after analyzing a link.
+            Save a verdict after analyzing a link.
           </p>
         </div>
       ) : (
@@ -177,7 +176,6 @@ export function SavedItemsClient() {
           <SavedItemCard
             key={item.id}
             item={item}
-            product={mockProducts.find((product) => product.id === item.productId)}
             onStatusChange={handleStatusChange}
             onDelete={handleDelete}
           />

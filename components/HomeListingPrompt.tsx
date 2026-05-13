@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ArrowRight, CheckCircle2, Link2, Loader2, Repeat2, ShoppingBag } from "lucide-react";
 import { LISTING_DRAFT_STORAGE_KEY } from "@/lib/listingDraft";
 import { inferAnalysisModeFromUrl, inferMarketplaceFromUrl } from "@/lib/linkAnalysis";
+import { parseConfirmedPriceFromText } from "@/lib/priceText";
 import type { LinkAnalysisMode, LinkExtractionResult, MarketplaceSource } from "@/types";
 
 const resaleSample =
@@ -44,8 +45,6 @@ export function HomeListingPrompt() {
   const [priceConfidence, setPriceConfidence] = useState<number | undefined>();
   const [priceSource, setPriceSource] = useState<string | undefined>();
   const [priceExplanation, setPriceExplanation] = useState<string | undefined>();
-  const [productMatchConfidence, setProductMatchConfidence] = useState<number | undefined>();
-  const [productMatchExplanation, setProductMatchExplanation] = useState<string | undefined>();
 
   function updateUrl(value: string) {
     setListingUrl(value);
@@ -55,6 +54,9 @@ export function HomeListingPrompt() {
 
     if (inferredMode) {
       setAnalysisMode(inferredMode);
+      if (inferredMode === "retail" && !inferredMarketplace) {
+        setMarketplace("Other");
+      }
     }
 
     if (inferredMarketplace) {
@@ -67,11 +69,12 @@ export function HomeListingPrompt() {
     setPriceConfidence(data.priceConfidence);
     setPriceSource(data.priceSource);
     setPriceExplanation(data.priceExplanation);
-    setProductMatchConfidence(data.productMatchConfidence);
-    setProductMatchExplanation(data.productMatchExplanation);
 
     if (data.mode) {
       setAnalysisMode(data.mode);
+      if (data.mode === "retail" && !data.marketplace) {
+        setMarketplace("Other");
+      }
     }
 
     if (data.marketplace) {
@@ -165,8 +168,6 @@ export function HomeListingPrompt() {
     let nextPriceConfidence = priceConfidence;
     let nextPriceSource = priceSource;
     let nextPriceExplanation = priceExplanation;
-    let nextProductMatchConfidence = productMatchConfidence;
-    let nextProductMatchExplanation = productMatchExplanation;
     const trimmedUrl = listingUrl.trim();
 
     if (looksLikeUrl(trimmedUrl) && trimmedUrl !== lastExtractedUrl) {
@@ -177,13 +178,14 @@ export function HomeListingPrompt() {
           typeof data.price === "number" && Number.isFinite(data.price) ? String(data.price) : askingPrice;
         nextAnalysisMode = data.mode ?? analysisMode;
         nextMarketplace = data.marketplace ?? marketplace;
-        nextDescription = buildExtractedDetails(data) || description;
+        const extractedDetails = buildExtractedDetails(data);
+        nextDescription = [description, extractedDetails]
+          .filter((value, index, values) => value.trim() && values.indexOf(value) === index)
+          .join("\n");
         nextExtractionConfidence = data.confidence;
         nextPriceConfidence = data.priceConfidence;
         nextPriceSource = data.priceSource;
         nextPriceExplanation = data.priceExplanation;
-        nextProductMatchConfidence = data.productMatchConfidence;
-        nextProductMatchExplanation = data.productMatchExplanation;
       } catch {
         setLinkMessage("Could not read that link. Add the missing details on the next page.");
       } finally {
@@ -192,6 +194,15 @@ export function HomeListingPrompt() {
     }
 
     const hasDraft = [listingUrl, nextProductName, nextAskingPrice, nextDescription].some((value) => value.trim());
+    if (!nextAskingPrice && nextDescription) {
+      const manualPrice = parseConfirmedPriceFromText(nextDescription);
+      if (manualPrice) {
+        nextAskingPrice = String(manualPrice);
+        nextPriceConfidence = 86;
+        nextPriceSource = "Price from pasted details";
+        nextPriceExplanation = "Price was read from the details you entered.";
+      }
+    }
 
     if (typeof window !== "undefined" && hasDraft) {
       window.sessionStorage.setItem(
@@ -206,9 +217,7 @@ export function HomeListingPrompt() {
           extractionConfidence: nextExtractionConfidence,
           priceConfidence: nextPriceConfidence,
           priceSource: nextPriceSource,
-          priceExplanation: nextPriceExplanation,
-          productMatchConfidence: nextProductMatchConfidence,
-          productMatchExplanation: nextProductMatchExplanation
+          priceExplanation: nextPriceExplanation
         })
       );
     } else if (typeof window !== "undefined") {
@@ -229,8 +238,6 @@ export function HomeListingPrompt() {
     setPriceConfidence(90);
     setPriceSource("Sample confirmed price");
     setPriceExplanation("Sample price confirmed for demo analysis.");
-    setProductMatchConfidence(92);
-    setProductMatchExplanation("Sample matched to MacBook Air M1.");
     setMarketplace("eBay");
     setDescription(resaleSample);
     setLinkMessage("Sample loaded. Analyze it to see the verdict.");
@@ -247,8 +254,6 @@ export function HomeListingPrompt() {
     setPriceConfidence(90);
     setPriceSource("Sample confirmed price");
     setPriceExplanation("Sample price confirmed for demo analysis.");
-    setProductMatchConfidence(92);
-    setProductMatchExplanation("Sample matched to MacBook Air M1.");
     setMarketplace("Other");
     setDescription(retailSample);
     setLinkMessage("Sample loaded. Analyze it to see the verdict.");
@@ -265,7 +270,7 @@ export function HomeListingPrompt() {
           Drop a resale or retail link
         </h2>
         <p className="mt-1 text-sm leading-6 text-stone-600">
-          Paste the link first. BuyWise tries to pull the product, price, source, and page details automatically.
+          Paste the link first. BuyWise tries to read the product, price, source, and page details automatically.
         </p>
       </div>
 
@@ -297,7 +302,7 @@ export function HomeListingPrompt() {
           {["Product", "Price", "Source"].map((item) => (
             <div key={item} className="flex items-center gap-2 rounded-lg bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-900">
               <CheckCircle2 className="h-4 w-4 shrink-0 text-mint" aria-hidden />
-              Auto-fills {item.toLowerCase()}
+              Tries to read {item.toLowerCase()}
             </div>
           ))}
         </div>

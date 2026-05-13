@@ -1,11 +1,7 @@
-import { mockProducts } from "@/data/mockProducts";
-import { formatCurrency } from "@/lib/format";
 import type {
   LinkAnalysisMode,
-  ListingAlternative,
   ListingAnalysisContext,
-  MarketplaceSource,
-  Product
+  MarketplaceSource
 } from "@/types";
 
 const sourceLabels: Array<{ label: string; terms: string[] }> = [
@@ -130,118 +126,25 @@ export function inferAnalysisModeFromUrl(url?: string): LinkAnalysisMode | null 
   return null;
 }
 
-function productTitle(product: Product) {
-  return `${product.brand} ${product.model}`;
-}
-
-function uniqueAlternatives(items: ListingAlternative[]) {
-  const seen = new Set<string>();
-  return items.filter((item) => {
-    const key = `${item.sourceType}-${item.productId}`;
-    if (seen.has(key)) {
-      return false;
-    }
-    seen.add(key);
-    return true;
-  });
-}
-
-function buildResaleAlternatives(product: Product, askingPrice: number) {
-  const selectedProductAlternative: ListingAlternative[] =
-    product.fairPrice <= askingPrice * 0.9
-      ? [
-          {
-            productId: product.id,
-            title: productTitle(product),
-            price: product.fairPrice,
-            priceLabel: "Fair used price",
-            sourceType: "resale",
-            actionLabel: "Use this as your used-price target",
-            outcome: "Push the seller toward this number before you meet.",
-            reason: `${formatCurrency(product.fairPrice)} is the current BuyWise fair used benchmark for this model.`
-          }
-        ]
-      : [];
-
-  const sameCategory = mockProducts
-    .filter((candidate) => candidate.category === product.category && candidate.id !== product.id)
-    .filter((candidate) => candidate.fairPrice <= askingPrice * 0.92)
-    .filter((candidate) => candidate.recommendation !== "Avoid")
-    .sort((a, b) => a.fairPrice - b.fairPrice)
-    .slice(0, 3)
-    .map<ListingAlternative>((candidate) => ({
-      productId: candidate.id,
-      title: productTitle(candidate),
-      price: candidate.fairPrice,
-      priceLabel: "Fair used price",
-      sourceType: "resale",
-      actionLabel: "Compare this used option first",
-      outcome: "A cheaper resale path may give you the same outcome with less overpay risk.",
-      reason: `${formatCurrency(candidate.fairPrice)} fair used value, which is meaningfully below this link price.`
-    }));
-
-  return uniqueAlternatives([...selectedProductAlternative, ...sameCategory]).slice(0, 4);
-}
-
-function buildRetailAlternatives(product: Product, askingPrice: number, mode: LinkAnalysisMode) {
-  const closeNewBenchmark: ListingAlternative[] =
-    mode === "resale" && product.msrp <= askingPrice * 1.15
-      ? [
-          {
-            productId: product.id,
-            title: productTitle(product),
-            price: product.msrp,
-            priceLabel: "Original MSRP",
-            sourceType: "retail",
-            actionLabel: "Check the new-price gap before buying used",
-            outcome: "If new is close, warranty and returns may be worth more than the discount.",
-            reason: `New MSRP is close enough to this used price that buying new may be worth comparing.`
-          }
-        ]
-      : [];
-
-  const sameCategory = mockProducts
-    .filter((candidate) => candidate.category === product.category && candidate.id !== product.id)
-    .filter((candidate) => candidate.msrp <= askingPrice * 0.95)
-    .sort((a, b) => a.msrp - b.msrp)
-    .slice(0, 3)
-    .map<ListingAlternative>((candidate) => ({
-      productId: candidate.id,
-      title: productTitle(candidate),
-      price: candidate.msrp,
-      priceLabel: "Original MSRP",
-      sourceType: "retail",
-      actionLabel: "Compare buying this new",
-      outcome: "This gives you a retail fallback if the pasted deal is weak.",
-      reason: `${formatCurrency(candidate.msrp)} MSRP is lower than this link price in the current BuyWise benchmarks.`
-    }));
-
-  return uniqueAlternatives([...closeNewBenchmark, ...sameCategory]).slice(0, 4);
-}
-
 export function buildListingAnalysisContext({
-  product,
+  productName,
   askingPrice,
   mode,
   listingUrl,
   marketplace,
   sellerLocation,
-  productMatchConfidence,
-  productMatchExplanation,
   priceConfidence,
   priceSource,
   priceExplanation,
   extractionConfidence,
   matchCandidates
 }: {
-  product: Product;
+  productName: string;
   askingPrice: number;
   mode: LinkAnalysisMode;
   listingUrl?: string;
   marketplace: MarketplaceSource;
   sellerLocation?: string;
-  productMatchConfidence?: number;
-  productMatchExplanation?: string;
   priceConfidence?: number;
   priceSource?: string;
   priceExplanation?: string;
@@ -253,8 +156,8 @@ export function buildListingAnalysisContext({
   const dataSources = [
     listingUrl ? `${sourceLabel} page metadata and visible text` : "",
     priceSource ? priceSource : "",
-    mode === "retail" ? "Retail MSRP benchmark" : "Used fair-value benchmark",
-    "BuyWise internal product benchmarks"
+    "User-confirmed price and listing details",
+    "Text-based risk and trust-signal checks"
   ].filter(Boolean);
 
   return {
@@ -265,17 +168,15 @@ export function buildListingAnalysisContext({
     marketplace,
     sellerLocation: sellerLocation?.trim() || undefined,
     askingPrice,
-    benchmarkLabel: mode === "retail" ? "Retail MSRP benchmark" : "Used fair-value benchmark",
-    matchedProductName: productTitle(product),
-    productMatchConfidence,
-    productMatchExplanation,
+    marketPriceLabel: undefined,
+    matchedProductName: productName.trim() || "Unconfirmed product",
     priceConfidence,
     priceSource,
     priceExplanation,
     extractionConfidence,
     matchCandidates,
     dataSources,
-    resaleAlternatives: buildResaleAlternatives(product, askingPrice),
-    retailAlternatives: buildRetailAlternatives(product, askingPrice, mode)
+    resaleAlternatives: [],
+    retailAlternatives: []
   };
 }
