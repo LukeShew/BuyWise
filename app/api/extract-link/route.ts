@@ -8,6 +8,7 @@ import {
   inferAnalysisModeFromUrl,
   inferMarketplaceFromUrl
 } from "@/lib/linkAnalysis";
+import { liveOfferToExtraction, lookupLiveOfferByUrl } from "@/services/liveOfferService";
 import type { LinkExtractionResult } from "@/types";
 
 export const runtime = "nodejs";
@@ -701,6 +702,33 @@ export async function POST(request: Request) {
     );
   }
 
+  const providerLookup = await lookupLiveOfferByUrl(normalizedUrl);
+  if (providerLookup.offer?.price) {
+    const extraction = liveOfferToExtraction(providerLookup.offer);
+    return buildResponse({
+      ok: true,
+      manualRequired: false,
+      url: providerLookup.offer.url,
+      sourceLabel: extraction.sourceLabel,
+      sourceDomain: extraction.sourceDomain,
+      mode: extraction.mode,
+      marketplace: marketplace,
+      title: extraction.title,
+      description: extraction.description,
+      price: extraction.price,
+      priceConfidence: extraction.priceConfidence,
+      priceSource: extraction.priceSource,
+      priceExplanation: extraction.priceExplanation,
+      productName: extraction.productName,
+      matchCandidates: [],
+      liveOffer: providerLookup.offer,
+      providerStatuses: providerLookup.providerStatuses,
+      confidence: extraction.confidence,
+      message: "Pulled product and price details from an official provider API.",
+      warnings: providerLookup.offer.warnings
+    });
+  }
+
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
@@ -726,6 +754,7 @@ export async function POST(request: Request) {
         sourceDomain,
         mode,
         marketplace,
+        providerStatuses: providerLookup.providerStatuses,
         confidence: 20,
         message: "This site did not return a readable product page. Add the key details manually."
       });
@@ -771,6 +800,8 @@ export async function POST(request: Request) {
       priceExplanation: price.explanation,
       productName: title || undefined,
       matchCandidates: [],
+      liveOffer: providerLookup.offer,
+      providerStatuses: providerLookup.providerStatuses,
       confidence: Math.min(confidence, 90),
       message:
         price.price && title
@@ -789,6 +820,7 @@ export async function POST(request: Request) {
       sourceDomain,
       mode,
       marketplace,
+      providerStatuses: providerLookup.providerStatuses,
       confidence: 15,
       message: "This site blocked or timed out during link reading. Paste the listing details manually."
     });

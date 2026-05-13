@@ -137,7 +137,9 @@ export function buildListingAnalysisContext({
   priceSource,
   priceExplanation,
   extractionConfidence,
-  matchCandidates
+  matchCandidates,
+  resaleAlternatives = [],
+  retailAlternatives = []
 }: {
   productName: string;
   askingPrice: number;
@@ -150,6 +152,8 @@ export function buildListingAnalysisContext({
   priceExplanation?: string;
   extractionConfidence?: number;
   matchCandidates?: ListingAnalysisContext["matchCandidates"];
+  resaleAlternatives?: ListingAnalysisContext["resaleAlternatives"];
+  retailAlternatives?: ListingAnalysisContext["retailAlternatives"];
 }): ListingAnalysisContext {
   const sourceLabel = getSourceLabel(listingUrl, mode === "retail" ? "Retail link" : marketplace);
   const sourceDomain = getSourceDomain(listingUrl);
@@ -176,7 +180,7 @@ export function buildListingAnalysisContext({
     extractionConfidence,
     matchCandidates,
     dataSources,
-    resaleAlternatives: [],
-    retailAlternatives: []
+    resaleAlternatives,
+    retailAlternatives
   };
 }

@@ -129,7 +129,18 @@ function AlternativePanel({
               <div className="mt-3 rounded-lg bg-white p-3 ring-1 ring-stone-200">
                 <p className="text-xs font-bold text-stone-500">Recommended action</p>
                 <p className="mt-1 text-sm font-bold text-ink">{alternative.actionLabel}</p>
-                <p className="mt-1 text-sm leading-6 text-stone-600">{alternative.outcome}</p>
+                {alternative.outcome.startsWith("http") ? (
+                  <a
+                    href={alternative.outcome}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-1 inline-flex text-sm font-semibold text-mint hover:text-ink"
+                  >
+                    Open live offer
+                  </a>
+                ) : (
+                  <p className="mt-1 text-sm leading-6 text-stone-600">{alternative.outcome}</p>
+                )}
               </div>
             </div>
           ))}

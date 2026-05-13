@@ -2,6 +2,7 @@ import Link from "next/link";
 import { AuthStatus } from "@/components/AuthStatus";
 
 const links = [
+  { href: "/search", label: "Search" },
   { href: "/", label: "Analyze Listing" },
   { href: "/saved", label: "Saved" }
 ];

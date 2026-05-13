@@ -28,7 +28,10 @@ import type {
   DealQualityResult,
   LinkAnalysisMode,
   LinkExtractionResult,
+  ListingAlternative,
   ListingAnalysisContext,
+  LiveOffer,
+  LiveOfferSearchResponse,
   MarketplaceSource,
   Product
 } from "@/types";
@@ -71,6 +74,49 @@ function buildExtractedDetails(data: LinkExtractionResult) {
   ]
     .filter(Boolean)
     .join("\n");
+}
+
+function liveOfferToAlternative(offer: LiveOffer): ListingAlternative | null {
+  if (typeof offer.price !== "number" || !Number.isFinite(offer.price)) {
+    return null;
+  }
+
+  return {
+    productId: offer.id,
+    title: offer.title,
+    price: offer.price,
+    priceLabel: offer.sourceLabel,
+    sourceType: offer.sourceType,
+    actionLabel: offer.sourceType === "retail" ? "Compare retail offer" : "Check resale offer",
+    outcome: offer.url,
+    reason: offer.explanation
+  };
+}
+
+async function getLiveAlternatives(productName: string, currentUrl: string) {
+  const trimmed = productName.trim();
+  if (!trimmed) {
+    return { resaleAlternatives: [], retailAlternatives: [] };
+  }
+
+  try {
+    const response = await fetch(`/api/search-offers?q=${encodeURIComponent(trimmed)}&limit=8`, {
+      headers: { accept: "application/json" }
+    });
+    const data = (await response.json()) as LiveOfferSearchResponse;
+    const normalizedCurrentUrl = currentUrl.trim();
+    const alternatives = data.offers
+      .filter((offer) => !normalizedCurrentUrl || offer.url !== normalizedCurrentUrl)
+      .map(liveOfferToAlternative)
+      .filter((offer): offer is ListingAlternative => Boolean(offer));
+
+    return {
+      resaleAlternatives: alternatives.filter((offer) => offer.sourceType === "resale").slice(0, 2),
+      retailAlternatives: alternatives.filter((offer) => offer.sourceType === "retail").slice(0, 2)
+    };
+  } catch {
+    return { resaleAlternatives: [], retailAlternatives: [] };
+  }
 }
 
 function AnalyzerEmptyState() {
@@ -269,6 +315,7 @@ export function ListingAnalyzerForm({
 
       const listingText = [values.description, values.sellerNotes, values.marketplace, values.location].filter(Boolean).join(" ");
       const conditionText = [values.condition, values.description, values.sellerNotes].join(" ");
+      const alternatives = await getLiveAlternatives(values.productName, values.listingUrl);
 
       const nextResult = calculateDealQuality({
         askingPrice: parsedPrice,
@@ -294,7 +341,9 @@ export function ListingAnalyzerForm({
         priceSource: values.priceSource ?? "Manual price confirmation",
         priceExplanation: values.priceExplanation,
         extractionConfidence: values.extractionConfidence,
-        matchCandidates: []
+        matchCandidates: [],
+        resaleAlternatives: alternatives.resaleAlternatives,
+        retailAlternatives: alternatives.retailAlternatives
       });
 
       setResult(nextResult);

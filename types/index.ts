@@ -26,6 +26,16 @@ export type MarketplaceSource =
 
 export type LinkAnalysisMode = "resale" | "retail";
 
+export type OfferSourceMethod =
+  | "official_api"
+  | "affiliate_api"
+  | "metadata"
+  | "html"
+  | "headless"
+  | "manual";
+
+export type OfferProviderStatusType = "configured" | "missing_config" | "error" | "skipped";
+
 export type Severity = "low" | "medium" | "high";
 
 export type ConfidenceLevel = "High" | "Medium" | "Low";
@@ -149,6 +159,43 @@ export interface ListingAlternative {
   reason: string;
 }
 
+export interface OfferProviderStatus {
+  provider: string;
+  label: string;
+  status: OfferProviderStatusType;
+  message: string;
+}
+
+export interface LiveOffer {
+  id: string;
+  title: string;
+  url: string;
+  canonicalUrl?: string;
+  sourceLabel: string;
+  sourceDomain?: string;
+  sourceType: LinkAnalysisMode;
+  sourceMethod: OfferSourceMethod;
+  price?: number;
+  currency?: string;
+  condition?: string;
+  imageUrl?: string;
+  merchantName?: string;
+  availability?: string;
+  confidence: number;
+  priceConfidence?: number;
+  explanation: string;
+  warnings: string[];
+  fetchedAt: string;
+}
+
+export interface LiveOfferSearchResponse {
+  ok: boolean;
+  query: string;
+  offers: LiveOffer[];
+  providerStatuses: OfferProviderStatus[];
+  message: string;
+}
+
 export interface ListingAnalysisContext {
   mode: LinkAnalysisMode;
   listingUrl?: string;
@@ -185,6 +232,8 @@ export interface LinkExtractionResult {
   priceExplanation?: string;
   productName?: string;
   matchCandidates?: ProductMatchCandidate[];
+  liveOffer?: LiveOffer;
+  providerStatuses?: OfferProviderStatus[];
   confidence: number;
   message: string;
   warnings?: string[];
